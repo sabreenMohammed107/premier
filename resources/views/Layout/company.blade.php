@@ -2,7 +2,7 @@
 
 <body>
 
-    @include('Layout.header')
+    @include('Layout.companyHeader')
 
     <!-- container -->
 
