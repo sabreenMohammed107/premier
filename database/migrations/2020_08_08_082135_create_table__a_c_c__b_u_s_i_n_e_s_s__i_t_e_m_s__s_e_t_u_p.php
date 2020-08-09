@@ -13,16 +13,12 @@ class CreateTableACCBUSINESSITEMSSETUP extends Migration
      */
     public function up()
     {
-        Schema::create('BUSINESS_ITEMS_SETUP', function (Blueprint $table) {
-            $table->bigIncrements('ITEM_ID');
-            $table->string('ITEM_NAME',150)->nullable();
-            $table->float('ITEM_VALUE',10,2)->nullable();
-            // $table->unsignedBigInteger('ITEM_CASE_ID')->nullable();    
-            // $table->foreign('ITEM_CASE_ID')->references('ITEM_CASE_ID')->on('BUSINESS_ITEMS_SETUP_CASES');
-            // $table->unsignedBigInteger('GUIDED_ITEM_ID')->nullable();    
-            // $table->foreign('GUIDED_ITEM_ID')->references('GUIDED_ITEM_ID')->on('GUIDED_ITEMS');
-            $table->tinyInteger('ACTIVE')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('business_items_setup', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('item_name',150)->nullable();
+            $table->float('item_value',10,2)->nullable();
+            $table->tinyInteger('active')->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateTableACCBUSINESSITEMSSETUP extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BUSINESS_ITEMS_SETUP');
+        Schema::dropIfExists('business_items_setup');
     }
 }

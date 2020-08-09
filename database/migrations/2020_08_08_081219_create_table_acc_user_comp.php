@@ -13,12 +13,8 @@ class CreateTableAccUserComp extends Migration
      */
     public function up()
     {
-        Schema::create('USER_COMPANIES', function (Blueprint $table) {
-            $table->bigIncrements('USER_COMPANY_ID');
-            // $table->unsignedBigInteger('USER_ID');    
-            // $table->foreign('USER_ID')->references('USER_ID')->on('USERS');
-            // $table->unsignedBigInteger('COMPANY_ID');    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
+        Schema::create('user_companies', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->timestamps();
         });
     }
@@ -30,7 +26,7 @@ class CreateTableAccUserComp extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
 
         Schema::dropIfExists('USER_COMPANIES');
     }

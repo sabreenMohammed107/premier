@@ -13,29 +13,23 @@ class CreateTableACCCHEQUES extends Migration
      */
     public function up()
     {
-        Schema::create('CHEQUES', function (Blueprint $table) {
-            $table->bigIncrements('CHEQUE_ID');
-            $table->datetime('TRANSACTION_DATE')->nullable();
-            $table->string('CHEQUE_NO',150)->nullable();
-            $table->datetime('DUE_DATE')->nullable();
-            $table->datetime('RELEASE_DATE')->nullable();
-            // $table->unsignedBigInteger('PERSON_ID')->nullable();    
-            // $table->foreign('PERSON_ID')->references('PERSON_ID')->on('PERSONS');
-            $table->string('PERSON_NAME',150)->nullable();
-            // $table->unsignedBigInteger('BANK_ID')->nullable();    
-            // $table->foreign('BANK_ID')->references('BANK_ID')->on('BANKS');
-            $table->string('BANK_NAME',150)->nullable();
-            $table->tinyInteger('TRANS_TYPE')->nullable();
-            $table->decimal('AMOUNT',12,2)->nullable();
-            // $table->unsignedBigInteger('CA')->nullable();    
-            // $table->foreign('CA')->references('CA')->on('FINAN_TRANSACTIONS_TYPES');
-            $table->text('CHEQUE_IMAGE')->nullable();
-            $table->string('NOTES',300)->nullable();
-            $table->tinyInteger('RETURN_BACK_CHEQUE')->nullable();
-            $table->datetime('RETURN_BACK_DATE')->nullable();
-            $table->string('RETURN_BACK_NOTES',150)->nullable();
-            $table->integer('CHEQUE_SERIAL')->nullable();
-            $table->integer('COMPANY_ID')->nullable();
+        Schema::create('cheques', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->datetime('transaction_date')->nullable();
+            $table->string('cheque_no',150)->nullable();
+            $table->datetime('due_date')->nullable();
+            $table->datetime('release_date')->nullable();
+            $table->string('person_name',150)->nullable();
+            $table->string('bank_name',150)->nullable();
+            $table->tinyInteger('trans_type')->nullable();
+            $table->decimal('amount',12,2)->nullable();
+            $table->text('cheque_image')->nullable();
+            $table->string('notes',300)->nullable();
+            $table->tinyInteger('return_back_cheque')->nullable();
+            $table->datetime('return_back_date')->nullable();
+            $table->string('return_back_notes',150)->nullable();
+            $table->integer('cheque_serial')->nullable();
+            $table->integer('company_id')->nullable();
             $table->timestamps();
         });
     }
@@ -47,6 +41,6 @@ class CreateTableACCCHEQUES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CHEQUES');
+        Schema::dropIfExists('cheques');
     }
 }

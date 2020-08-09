@@ -13,18 +13,16 @@ class CreateTableACCITEMS extends Migration
      */
     public function up()
     {
-        Schema::create('ITEMS', function (Blueprint $table) {
-            $table->bigIncrements('ITEM_ID');
-            $table->string('ITEM_CODE',150)->nullable();
-            $table->string('ITEM_ARABIC_NAME',150)->nullable();
-            $table->string('ITEM_ENGLISH_NAME',150)->nullable();
-            // $table->unsignedBigInteger('COMPANY_ID')->nullable();    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            $table->datetime('BALANCE_START_DATE')->nullable();
-            $table->decimal('TOTAL_OPEN_BALANCE_QTY',12,2)->nullable();
-            $table->decimal('TOTAL_OPEN_BALANCE_COST',12,2)->nullable();
-            $table->integer('OPEN_ITEM_PRICE')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('item_code',150)->nullable();
+            $table->string('item_arabic_name',150)->nullable();
+            $table->string('item_english_name',150)->nullable();
+            $table->datetime('balance_start_date')->nullable();
+            $table->decimal('total_open_balance_qty',12,2)->nullable();
+            $table->decimal('total_open_balance_cost',12,2)->nullable();
+            $table->integer('open_item_price')->nullable();
+            $table->string('notes',300)->nullable();
             $table->string('item_image',250)->nullable();
 
             $table->timestamps();
@@ -38,6 +36,6 @@ class CreateTableACCITEMS extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ITEMS');
+        Schema::dropIfExists('items');
     }
 }

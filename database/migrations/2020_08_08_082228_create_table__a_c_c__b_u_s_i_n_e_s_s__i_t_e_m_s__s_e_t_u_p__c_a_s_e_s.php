@@ -13,10 +13,10 @@ class CreateTableACCBUSINESSITEMSSETUPCASES extends Migration
      */
     public function up()
     {
-        Schema::create('BUSINESS_ITEMS_SETUP_CASES', function (Blueprint $table) {
-            $table->bigIncrements('ITEM_CASE_ID');
-            $table->string('ITEM_CASE_NAME',150)->nullable();
-            $table->string('NOTES',150)->nullable();
+        Schema::create('business_items_setup_cases', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('item_case_name',150)->nullable();
+            $table->string('notes',150)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTableACCBUSINESSITEMSSETUPCASES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BUSINESS_ITEMS_SETUP_CASES');
+        Schema::dropIfExists('business_items_setup_cases');
     }
 }

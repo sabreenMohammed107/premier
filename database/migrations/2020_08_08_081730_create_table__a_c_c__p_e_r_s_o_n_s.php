@@ -13,33 +13,29 @@ class CreateTableACCPERSONS extends Migration
      */
     public function up()
     {
-        Schema::create('PERSONS', function (Blueprint $table) {
-            $table->bigIncrements('PERSON_ID');
-            $table->string('PERSON_NAME',150)->nullable(); 
-            $table->string('PERSON_NICK_NAME',150)->nullable(); 
-            // $table->unsignedBigInteger('PERSON_TYPE_ID')->nullable(); 
-            // $table->foreign('PERSON_TYPE_ID')->references('PERSON_TYPE_ID')->on('PERSON_TYPES'); 
-            $table->string('LEGAL_ENTITY',150)->nullable(); 
-            $table->string('ADDRESS',150)->nullable(); 
-            $table->string('PHONE1',50)->nullable(); 
-            $table->string('PHONE2',50)->nullable(); 
-            $table->string('FAX',50)->nullable(); 
-            $table->string('CONTACT_PERSON_NAME',150)->nullable(); 
-            $table->string('CONTACT_PERSON_MOBILE',50)->nullable(); 
-            $table->string('CHAIRMAN_PERSON_NAME',150)->nullable(); 
-            $table->string('EMAIL',150)->nullable(); 
-            $table->string('WEB_SITE',150)->nullable(); 
-            $table->string('TAX_AUTHORITY',150)->nullable(); 
-            $table->string('REGISTERATION_NO',150)->nullable(); 
-            $table->string('COMMERCIAL_REGISTER',150)->nullable(); 
-            $table->string('TAX_CARD',150)->nullable(); 
-            $table->decimal('OPEN_BALANCE',12,2)->nullable(); 
-            $table->datetime('BALANCE_START_DATE')->nullable(); 
-            // $table->unsignedBigInteger('COMPANY_ID')->nullable();    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            $table->tinyInteger('Taxable')->nullable(); 
-            $table->tinyInteger('ACTIVE')->nullable(); 
-            $table->string('NOTES',300)->nullable(); 
+        Schema::create('persons', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('person_name',150)->nullable(); 
+            $table->string('person_nick_name',150)->nullable(); 
+            $table->string('legal_entity',150)->nullable(); 
+            $table->string('address',150)->nullable(); 
+            $table->string('phone1',50)->nullable(); 
+            $table->string('phone2',50)->nullable(); 
+            $table->string('fax',50)->nullable(); 
+            $table->string('contact_person_name',150)->nullable(); 
+            $table->string('contact_person_mobile',50)->nullable(); 
+            $table->string('chairman_person_name',150)->nullable(); 
+            $table->string('email',150)->nullable(); 
+            $table->string('website',150)->nullable(); 
+            $table->string('tax_authority',150)->nullable(); 
+            $table->string('registeration_no',150)->nullable(); 
+            $table->string('commercial_register',150)->nullable(); 
+            $table->string('tax_card',150)->nullable(); 
+            $table->decimal('open_balance',12,2)->nullable(); 
+            $table->datetime('balance_start_date')->nullable(); 
+            $table->tinyInteger('taxable')->nullable(); 
+            $table->tinyInteger('active')->nullable(); 
+            $table->string('notes',300)->nullable(); 
             $table->timestamps();
         });
     }
@@ -51,6 +47,6 @@ class CreateTableACCPERSONS extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PERSONS');
+        Schema::dropIfExists('persons');
     }
 }

@@ -13,18 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('USERS', function (Blueprint $table) {
-            $table->bigIncrements('USER_ID');
-            $table->string('USER_NAME',150)->nullable();
-            $table->string('USER_FULL_NAME',150)->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('USER_PASSWORD',150);
-            $table->string('NOTES',300)->nullable();
-            $table->tinyInteger('ACTIVE')->nullable();
-            // $table->unsignedBigInteger('COMPANY_ID');
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            // $table->unsignedBigInteger('ROLE_ID')->nullable();
-            // $table->foreign('ROLE_ID')->references('ROLE_ID')->on('ROLES');
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('user_name',150)->nullable();
+            $table->string('user_full_name',150)->nullable();
+            //email column is not defined in the ERD
+            // $table->string('email',150)->nullable();
+            // $table->timestamp('email_verified_at')->nullable();
+            $table->string('password',150);
+            $table->string('notes',300)->nullable();
+            $table->tinyInteger('active')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,8 +35,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('USERS');
+        Schema::dropIfExists('users');
     }
 }

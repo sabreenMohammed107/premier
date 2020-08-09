@@ -13,10 +13,10 @@ class CreateTableAccRoles extends Migration
      */
     public function up()
     {
-        Schema::create('ROLES', function (Blueprint $table) {
-            $table->bigIncrements('ROLE_ID');
-            $table->string('ROLE_NAME', 250)->nullable();
-            $table->string('ROLE_DESCRIPTION', 1000)->nullable();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('role_name', 250)->nullable();
+            $table->string('role_description', 1000)->nullable();
             $table->timestamps();
         });
     }
@@ -28,7 +28,7 @@ class CreateTableAccRoles extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('ROLES');
+        // Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('roles');
     }
 }

@@ -13,11 +13,11 @@ class CreateTableACCPURCHASINGTYPES extends Migration
      */
     public function up()
     {
-        Schema::create('PURCHASING_TYPES', function (Blueprint $table) {
-            $table->bigIncrements('PURCHASING_TYPE_ID');
-            $table->string('PURCHASING_TYPES_NAME',150)->nullable();
-            $table->tinyInteger('SYSTEM_LOCKUP')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('purchasing_types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('purchasing_types_name',150)->nullable();
+            $table->tinyInteger('system_lockup')->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableACCPURCHASINGTYPES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PURCHASING_TYPES');
+        Schema::dropIfExists('purchasing_types');
     }
 }

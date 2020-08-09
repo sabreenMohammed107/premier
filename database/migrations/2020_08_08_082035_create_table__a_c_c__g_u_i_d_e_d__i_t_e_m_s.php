@@ -13,11 +13,11 @@ class CreateTableACCGUIDEDITEMS extends Migration
      */
     public function up()
     {
-        Schema::create('GUIDED_ITEMS', function (Blueprint $table) {
-            $table->bigIncrements('GUIDED_ITEM_ID');
-            $table->string('GUIDED_ITEM_NAME',150)->nullable();
-            $table->string('GUIDED_ITEM_CODE',150)->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('guided_items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('guided_item_name',150)->nullable();
+            $table->string('guided_item_code',150)->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableACCGUIDEDITEMS extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('GUIDED_ITEMS');
+        Schema::dropIfExists('guided_items');
     }
 }

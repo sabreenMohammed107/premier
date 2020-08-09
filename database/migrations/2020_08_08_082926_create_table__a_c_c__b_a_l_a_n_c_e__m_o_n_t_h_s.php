@@ -13,19 +13,17 @@ class CreateTableACCBALANCEMONTHS extends Migration
      */
     public function up()
     {
-        Schema::create('BALANCE_MONTHS', function (Blueprint $table) {
-            $table->bigIncrements('MONTH_ID');
-            $table->smallInteger('YEAR')->nullable();
-            $table->tinyInteger('MONTH_NO')->nullable();
-            $table->datetime('PERIOD_FROM_DATE')->nullable();
-            $table->datetime('PERIOD_END_DATE')->nullable();
-            // $table->unsignedBigInteger('COMPANY_ID')->nullable();    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            $table->tinyInteger('MONTH_TYPE')->nullable();
-            $table->datetime('PERIOD_OPEN_DATE')->nullable();
-            $table->datetime('PERIOD_CLOSED_DATE')->nullable();
-            $table->string('NOTES',4000)->nullable();
-            $table->tinyInteger('CAN_CHANGE')->nullable();
+        Schema::create('balance_months', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->smallInteger('year')->nullable();
+            $table->tinyInteger('month_no')->nullable();
+            $table->datetime('period_from_date')->nullable();
+            $table->datetime('period_end_date')->nullable();
+            $table->tinyInteger('month_type')->nullable();
+            $table->datetime('period_open_date')->nullable();
+            $table->datetime('period_closed_date')->nullable();
+            $table->string('notes',4000)->nullable();
+            $table->tinyInteger('can_change')->nullable();
             $table->timestamps();
         });
     }
@@ -37,6 +35,6 @@ class CreateTableACCBALANCEMONTHS extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BALANCE_MONTHS');
+        Schema::dropIfExists('balance_months');
     }
 }

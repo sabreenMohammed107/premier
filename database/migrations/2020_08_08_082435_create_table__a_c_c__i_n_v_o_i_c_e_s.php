@@ -13,34 +13,24 @@ class CreateTableACCINVOICES extends Migration
      */
     public function up()
     {
-        Schema::create('INVOICES', function (Blueprint $table) {
-            $table->bigIncrements('INV_ID');
-            $table->datetime('INV_DATE')->nullable();
-            $table->tinyInteger('APPROVED')->nullable();
-            $table->integer('INVOICE_NO')->nullable();
-            $table->integer('SERIAL')->nullable();
-            // $table->unsignedBigInteger('PERSON_ID')->nullable();    
-            // $table->foreign('PERSON_ID')->references('PERSON_ID')->on('PERSONS');
-            $table->string('PERSON_NAME')->nullable();
-            // $table->unsignedBigInteger('COMPANY_ID')->nullable();    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            // $table->unsignedBigInteger('OUTGOING_TYPE_ID')->nullable();    
-            // $table->foreign('OUTGOING_TYPE_ID')->references('OUTGOING_TYPE_ID')->on('OUTGOING_TYPES');
-            // $table->unsignedBigInteger('PURCHASING_TYPE_ID')->nullable();    
-            // $table->foreign('PURCHASING_TYPE_ID')->references('PURCHASING_TYPE_ID')->on('PURCHASING_TYPES');
-            // $table->unsignedBigInteger('SERVICE_TYPE_ID')->nullable();    
-            // $table->foreign('SERVICE_TYPE_ID')->references('SERVICE_TYPE_ID')->on('SERVICES_TYPES');
-            $table->decimal('TOTAL_ITEMS_PRICE',12,2)->nullable();
-            $table->decimal('TOTAL_ITEMS_DISCOUNT',12,2)->nullable();
-            $table->decimal('TOTAL_PRICE_POST_DISCOUNTS',12,2)->nullable();
-            $table->decimal('TOTAL_VAT')->nullable();
-            $table->decimal('TOTAL_COMM_INDUSTR_TAX',12,2)->nullable();
-            $table->integer('DISCOUNT_NOTICE_SERIAL')->nullable();
-            $table->decimal('NET_INVOICE',12,2);
-            $table->tinyinteger('RETURN_BACK_INVOICE')->nullable();
-            $table->datetime('RETURN_BACK_DATE')->nullable();
-            $table->string('RETURN_BACK_NOTES',300)->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('invoices', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->datetime('inv_date')->nullable();
+            $table->tinyInteger('approved')->nullable();
+            $table->integer('invoice_no')->nullable();
+            $table->integer('serial')->nullable();
+            $table->string('person_name')->nullable();
+            $table->decimal('total_items_price',12,2)->nullable();
+            $table->decimal('total_items_discount',12,2)->nullable();
+            $table->decimal('total_price_post_discounts',12,2)->nullable();
+            $table->decimal('total_vat')->nullable();
+            $table->decimal('total_comm_industr_tax',12,2)->nullable();
+            $table->integer('discount_notice_serial')->nullable();
+            $table->decimal('net_invoice',12,2);
+            $table->tinyinteger('return_back_invoice')->nullable();
+            $table->datetime('return_back_date')->nullable();
+            $table->string('return_back_notes',300)->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -52,6 +42,6 @@ class CreateTableACCINVOICES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('INVOICES');
+        Schema::dropIfExists('invoices');
     }
 }

@@ -13,17 +13,15 @@ class CreateTableACCBALANCEYEAR extends Migration
      */
     public function up()
     {
-        Schema::create('BALANCE_YEARS', function (Blueprint $table) {
-            $table->bigIncrements('YEAR_ID');
-            $table->smallInteger('YEAR')->nullable();
-            $table->datetime('PERIOD_FROM_DATE')->nullable();
-            $table->datetime('PERIOD_TO_DATE')->nullable();
-            // $table->unsignedBigInteger('COMPANY_ID')->nullable();    
-            // $table->foreign('COMPANY_ID')->references('COMPANY_ID')->on('COMPANY');
-            $table->tinyInteger('YEAR_TYPE')->nullable();
-            $table->datetime('PERIOD_OPEN_DATE')->nullable();
-            $table->datetime('PERIOD_CLOSED_DATE')->nullable();
-            $table->string('NOTES',4000)->nullable();
+        Schema::create('balance_years', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->smallInteger('year')->nullable();
+            $table->datetime('period_from_date')->nullable();
+            $table->datetime('period_to_date')->nullable();
+            $table->tinyInteger('year_type')->nullable();
+            $table->datetime('period_open_date')->nullable();
+            $table->datetime('period_closed_date')->nullable();
+            $table->string('notes',4000)->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ class CreateTableACCBALANCEYEAR extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('BALANCE_YEARS');
+        Schema::dropIfExists('balance_years');
     }
 }

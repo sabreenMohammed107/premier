@@ -13,11 +13,11 @@ class CreateTableACCOUTGOINGTYPES extends Migration
      */
     public function up()
     {
-        Schema::create('OUTGOING_TYPES', function (Blueprint $table) {
-            $table->bigIncrements('OUTGOING_TYPE_ID');
-            $table->string('OUTGOING_TYPE_NAME',150)->nullable();
-            $table->tinyInteger('SYSTEM_LOCKUP')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('outgoing_types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('outgoing_type_name',150)->nullable();
+            $table->tinyInteger('system_lockup')->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableACCOUTGOINGTYPES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('OUTGOING_TYPES');
+        Schema::dropIfExists('outgoing_types');
     }
 }

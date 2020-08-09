@@ -13,11 +13,11 @@ class CreateTableACCSERVICESTYPES extends Migration
      */
     public function up()
     {
-        Schema::create('SERVICES_TYPES', function (Blueprint $table) {
-            $table->bigIncrements('SERVICE_TYPE_ID');
-            $table->string('SERVICE_TYPE',150)->nullable();
-            $table->tinyInteger('SYSTEM_LOCKUP')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('services_types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('service_type',150)->nullable();
+            $table->tinyInteger('system_lockup')->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableACCSERVICESTYPES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('SERVICES_TYPES');
+        Schema::dropIfExists('services_types');
     }
 }

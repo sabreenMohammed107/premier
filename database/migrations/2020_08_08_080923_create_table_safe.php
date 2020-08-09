@@ -13,7 +13,7 @@ class CreateTableSafe extends Migration
      */
     public function up()
     {
-        Schema::create('SAFE', function (Blueprint $table) {
+        Schema::create('safes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('safe_name',250);
             $table->string('safe_location',1000)->nullable();
@@ -32,6 +32,6 @@ class CreateTableSafe extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('SAFE');
+        Schema::dropIfExists('safes');
     }
 }

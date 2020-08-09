@@ -13,33 +13,29 @@ class CreateTableACCCOMPANY extends Migration
      */
     public function up()
     {
-        Schema::create('COMPANY', function (Blueprint $table) {
-            $table->bigIncrements('COMPANY_ID');
-            $table->string('COMPANY_OFFICIAL_NAME',150)->nullable();
-            $table->string('COMPANY_NICK_NAME',150)->nullable();
-            $table->string('LEGAL_ENTITY',150)->nullable();
-            $table->string('ADDRESS',300)->nullable();
-            $table->string('PHONE1',50)->nullable();
-            $table->string('PHONE2',50)->nullable();
-            $table->string('FAX',50)->nullable();
-            $table->string('CONTACT_PERSON_NAME',150)->nullable();
-            $table->string('CONTACT_PERSON_MOBILE',50)->nullable();
-            $table->string('CHAIRMAN_PERSON_NAME',150)->nullable();
-            $table->string('EMAIL',150)->nullable();
-            $table->string('WEB_SITE',150)->nullable();
-            $table->string('TAX_AUTHORITY',150)->nullable();
-            $table->string('REGISTERATION_NO',150)->nullable();
-            $table->string('COMMERCIAL_REGISTER',150)->nullable();
-            $table->string('TAX_CARD',150)->nullable();
-            $table->string('COMPANY_LOGO',250)->nullable();
-            $table->integer('EQUITY_CAPTIAL')->nullable();
-            // $table->unsignedBigInteger('BANK_ID')->nullable();    
-            // $table->foreign('BANK_ID')->references('BANK_ID')->on('BANKS');
-            // $table->unsignedBigInteger('SAFE_ID')->nullable();    
-            // $table->foreign('SAFE_ID')->references('SAFE_ID')->on('SAFE');
-            $table->tinyInteger('TAXABLE')->nullable();
-            $table->tinyInteger('ACTIVE')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('companies', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('company_official_name',150)->nullable();
+            $table->string('company_nick_name',150)->nullable();
+            $table->string('legal_entity',150)->nullable();
+            $table->string('address',300)->nullable();
+            $table->string('phone1',50)->nullable();
+            $table->string('phone2',50)->nullable();
+            $table->string('fax',50)->nullable();
+            $table->string('contact_person_name',150)->nullable();
+            $table->string('contact_person_mobile',50)->nullable();
+            $table->string('chairman_person_name',150)->nullable();
+            $table->string('email',150)->nullable();
+            $table->string('website',150)->nullable();
+            $table->string('tax_authority',150)->nullable();
+            $table->string('registeration_no',150)->nullable();
+            $table->string('commercial_register',150)->nullable();
+            $table->string('tax_card',150)->nullable();
+            $table->string('company_logo',250)->nullable();
+            $table->integer('equity_capital')->nullable();
+            $table->tinyInteger('taxable')->nullable();
+            $table->tinyInteger('active')->nullable();
+            $table->string('notes',300)->nullable();
 
             $table->timestamps();
         });
@@ -52,7 +48,7 @@ class CreateTableACCCOMPANY extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('COMPANY');
+        // Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('companies');
     }
 }

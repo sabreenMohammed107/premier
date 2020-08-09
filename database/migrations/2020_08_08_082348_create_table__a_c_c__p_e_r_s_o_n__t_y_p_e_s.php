@@ -13,10 +13,10 @@ class CreateTableACCPERSONTYPES extends Migration
      */
     public function up()
     {
-        Schema::create('PERSON_TYPES', function (Blueprint $table) {
-            $table->bigIncrements('PERSON_TYPE_ID');
-            $table->string('PERSON_TYPE_NAME',150)->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('person_types', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('person_type_name',150)->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTableACCPERSONTYPES extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PERSON_TYPES');
+        Schema::dropIfExists('person_types');
     }
 }

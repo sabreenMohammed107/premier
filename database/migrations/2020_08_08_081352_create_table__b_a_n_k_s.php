@@ -13,14 +13,14 @@ class CreateTableBANKS extends Migration
      */
     public function up()
     {
-        Schema::create('BANKS', function (Blueprint $table) {
-            $table->bigIncrements('BANK_ID');
-            $table->string('BANK_NAME',150);
-            $table->string('BANK_BRANCH_NAME',150)->nullable();
-            $table->string('BANK_ACCOUNT_NO',150)->nullable();
-            $table->float('OPEN_BALANCE',12,2)->nullable();
-            $table->date('BALANCE_START_DATE')->nullable();
-            $table->string('NOTES',300)->nullable();
+        Schema::create('banks', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('bank_name',150);
+            $table->string('bank_branch_name',150)->nullable();
+            $table->string('bank_account_no',150)->nullable();
+            $table->float('open_balance',12,2)->nullable();
+            $table->date('balance_start_date')->nullable();
+            $table->string('notes',300)->nullable();
             $table->timestamps();
         });
     }
