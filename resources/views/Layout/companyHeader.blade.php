@@ -128,8 +128,8 @@
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
                                                     <a href="#" class="dropdown-item">تفاصيل الشركة</a>
-												<a href="#" class="dropdown-item">إضافة خزنة</a>
-												<a href="#" class="dropdown-item">إضافة بنك</a>
+												<!-- <a href="#" class="dropdown-item">إضافة خزنة</a>
+												<a href="#" class="dropdown-item">إضافة بنك</a> -->
 													</div>
 												</li>
 											</ul>
@@ -153,8 +153,8 @@
 											<a data-toggle="collapse" data-target="#Charts" href="#">بيانات أساسية <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul class="collapse dropdown-header-top">
 												<li><a href="#" class="dropdown-item">تفاصيل الشركة</a></li>
-												<li><a href="#" class="dropdown-item">إضافة خزنة</a></li>
-												<li><a href="#" class="dropdown-item">إضافة بنك</a></li>
+												<!--<li><a href="#" class="dropdown-item">إضافة خزنة</a></li>
+												<li><a href="#" class="dropdown-item">إضافة بنك</a></li>-->
 											</ul>
 										</li>
 										<li>

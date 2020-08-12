@@ -32,7 +32,7 @@
 												<li class="nav-item">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 														<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-														<span class="admin-name">Admin</span>
+														<span class="admin-name">{{ Auth::user()->user_name }}</span>
 														<img src="img/product/pro4.jpg" alt="" />
 													</a>
 													<ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
@@ -49,7 +49,14 @@
 															<a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
 														</li>
 														<li>
-															<a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+														<a  href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                <span class="edu-icon edu-settings author-log-ic"> Logout</span>
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
 														</li>
 													</ul>
 												</li>
@@ -109,7 +116,7 @@
 														<a href="#" class="dropdown-item">قواعد العمل</a>
 														<a href="#" class="dropdown-item">تسوية أرصدة</a>
 														<a href="#" class="dropdown-item">بنود التوجية</a>
-														<a href="#" class="dropdown-item">المستخدمين</a>
+														<a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a>
 													</div>
 												</li>
 											</ul>

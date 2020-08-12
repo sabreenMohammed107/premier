@@ -4728,15 +4728,16 @@ div#sparklinehome canvas {
     border-color: #65b12d;
 	outline:none;
 }
-.info-md a{
+.info-md a , .info-md button{
 	background-color: #20B2AA;
     border-color: #20B2AA;
 }
-.warning-md a{
+
+.warning-md a, .warning-md button{
 	background-color: #65b12d;
     border-color: #65b12d;
 }
-.danger-md a{
+.danger-md a,.danger-md button{
 	background-color: #D80027;
     border-color: #D80027;
 }

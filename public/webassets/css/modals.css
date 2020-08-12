@@ -237,3 +237,15 @@
 .modal-footer a:hover{
 	color:#fff;
 }
+
+.modal-footer button{
+    font-size: 14px;
+    color: #fff;
+    background: #006DF0;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.modal-footer button:hover{
+	color:#fff;
+}
