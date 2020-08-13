@@ -97,4 +97,37 @@
         animation: 'fade'
 	}); 	
 	   
+
+
+
 })(jQuery); 
+
+$(window).on('load', function(){
+	 /*
+  * upload image
+  */
+ $('#img-upload .upload').on('change', function(e){
+	console.log(e);
+	readURL(this, '.img-upload img');
+  })
+  $('#uploadOne .upload').on('change', function(e){
+	console.log(e);
+	readURL(this, '#uploadOne img');
+  })
+  
+  $('#uploadTwo .upload').on('change', function(e){
+	console.log(e);
+	readURL(this, '#uploadTwo img');
+  })
+  function readURL(input,imgSelector) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+  
+		reader.onload = function (e) {
+			$(imgSelector).attr('src', e.target.result);
+		}
+  
+		reader.readAsDataURL(input.files[0]);
+	}
+  }
+});

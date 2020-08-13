@@ -101,8 +101,7 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-														<a href="#" class="dropdown-item">كشف الشركات</a>
-														<a href="#" class="dropdown-item">بيانات الشركة</a>
+														<a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a>
 														<a href="#" class="dropdown-item">مدفوعات نقدية</a>
 														<a href="#" class="dropdown-item">مقبوضات نقدية</a>
 														<a href="#" class="dropdown-item">مبيعات</a>
@@ -142,14 +141,13 @@
 												<li><a href="#" class="dropdown-item">قواعد العمل</a></li>
 												<li><a href="#" class="dropdown-item">تسوية أرصدة</a></li>
 												<li><a href="#" class="dropdown-item">بنود التوجية</a></li>
-												<li><a href="#" class="dropdown-item">المستخدمين</a></li>
+												<li><a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a></li>
 											</ul>
 										</li>
 										<li>
 											<a data-toggle="collapse" data-target="#demoevent" href="#">الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demoevent" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">كشف الشركات</a></li>
-												<li><a href="#" class="dropdown-item">بيانات الشركة</a></li>
+												<li><a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a></li>
 												<li><a href="#" class="dropdown-item">مدفوعات نقدية</a></li>
 												<li><a href="#" class="dropdown-item">مقبوضات نقدية</a></li>
 												<li><a href="#" class="dropdown-item">مبيعات</a></li>

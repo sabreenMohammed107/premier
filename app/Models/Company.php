@@ -34,4 +34,14 @@ class Company extends Model
         'active',
         'notes',
     ];
+
+
+    public function safe()
+    {
+        return $this->belongsTo('App\Models\Safe', 'safe_id');
+    }
+    public function bank()
+    {
+        return $this->belongsTo('App\Models\Bank', 'bank_id');
+    }
 }
