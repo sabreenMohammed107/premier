@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Person;
+use Illuminate\Database\QueryException;
 
 use Illuminate\Http\Request;
 use DB;
@@ -306,5 +307,53 @@ class AllCompaniesController extends Controller
            }
             }
 
-           
+            function search_emp(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            $input=$request->input('searchEmp');
+            
+             $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)
+             ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
+      
+        
+              return view($this->viewName.'employee', compact('employees'));
+            
+           }
+            }    
+
+
+            function search_client(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            $input=$request->input('searchClient');
+            
+             $clients=Person::where('person_type_id',100)->where('company_id',$id)->where('active',1)
+             ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
+      
+        
+              return view($this->viewName.'client', compact('clients'));
+            
+           }
+            }    
+
+
+            function search_sup(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            $input=$request->input('searchSup');
+            
+             $suppliers=Person::where('person_type_id',101)->where('company_id',$id)->where('active',1)
+             ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
+      
+        
+              return view($this->viewName.'supplier', compact('suppliers'));
+            
+           }
+            }    
 }
