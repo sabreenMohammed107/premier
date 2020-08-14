@@ -114,7 +114,7 @@
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="#" class="dropdown-item">قواعد العمل</a>
 														<a href="#" class="dropdown-item">تسوية أرصدة</a>
-														<a href="#" class="dropdown-item">بنود التوجية</a>
+														<a href="{{ route('guid-item.index') }}" class="dropdown-item">بنود التوجية</a>
 														<a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a>
 													</div>
 												</li>
@@ -140,7 +140,7 @@
 											<ul class="collapse dropdown-header-top">
 												<li><a href="#" class="dropdown-item">قواعد العمل</a></li>
 												<li><a href="#" class="dropdown-item">تسوية أرصدة</a></li>
-												<li><a href="#" class="dropdown-item">بنود التوجية</a></li>
+												<li><a href="{{ route('guid-item.index') }}" class="dropdown-item">بنود التوجية</a></li>
 												<li><a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a></li>
 											</ul>
 										</li>

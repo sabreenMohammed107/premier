@@ -180,6 +180,57 @@
 
 @section('scripts')
 <script>
+    function empSearch(){
+        event.preventDefault();
+        var text=$('#searchEmp').val();
+        $.ajax({
+                data: {
+                    searchEmp: $('#searchEmp').val(),
+                    company_id: $('#company_id').val(),
+                },
+                url: "{{ route('search_emp') }}" ,
+                success: function(data) {
+
+                    $('#description').html(data);
+                    $('#searchEmp').val(text);
+                }
+            });
+    }
+
+    function clientSearch(){
+        event.preventDefault();
+        var text=$('#searchClient').val();
+        $.ajax({
+                data: {
+                    searchClient: $('#searchClient').val(),
+                    company_id: $('#company_id').val(),
+                },
+                url: "{{ route('search_client') }}" ,
+                success: function(data) {
+
+                    $('#INFORMATION').html(data);
+                    $('#searchClient').val(text);
+                }
+            });
+    }
+
+    function supplierSearch(){
+        event.preventDefault();
+        var text=$('#searchSup').val();
+        $.ajax({
+                data: {
+                    searchSup: $('#searchSup').val(),
+                    company_id: $('#company_id').val(),
+                },
+                url: "{{ route('search_sup') }}" ,
+                success: function(data) {
+
+                    $('#reviews').html(data);
+                    $('#searchSup').val(text);
+                }
+            });
+    }
+
     $(document).ready(function() {
 
         $(document).on('click', '#emp .pagination a', function(event) {

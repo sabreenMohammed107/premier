@@ -93,25 +93,7 @@
 
 @section('modal')
 <!--Modal-->
-<!--Edit Customer-->
-<div id="edt" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header header-color-modal bg-color-2">
-                <h4 class="modal-title" style="text-align:right">تعديل بيانات المستخدم</h4>
-                <div class="modal-close-area modal-close-df">
-                    <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                </div>
-            </div>
-            <div class="modal-body">
 
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<!--/Edit Customer-->
 
 <!--/Modal-->
 
