@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BANKS extends Model
+class Bank extends Model
 {
     //main settings
     protected $table = 'banks';
@@ -17,4 +17,10 @@ class BANKS extends Model
         'balance_start_date',
         'notes',
     ];
+
+    //relation with company
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
 }

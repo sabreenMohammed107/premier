@@ -3,7 +3,7 @@
 		<nav id="sidebar" class="">
 			<div class="sidebar-header">
 				<a href="index.html"><img class="main-logo" src="{{ asset('webassets/img/logo/logo.png')}}" alt="" /></a>
-				<strong><a href="index.html"><img src="img/logo/logosn.png" alt="" /></a></strong>
+				<strong><a href="index.html"><img src="" alt="" /></a></strong>
 			</div>
 		</nav>
 	</div>
@@ -117,7 +117,7 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="#" class="dropdown-item">تفاصيل الشركة</a>
+                                                    <a href="{{ url('/Company') }}" class="dropdown-item">تفاصيل الشركة</a>
 												<a href="#" class="dropdown-item">الأصناف</a>
 												<a href="#" class="dropdown-item">كشف العملاء</a>
 												<a href="#" class="dropdown-item">كشف الموردين </a>
@@ -127,7 +127,7 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="#" class="dropdown-item">تفاصيل الشركة</a>
+                                                    <a href="{{ url('/Company') }}" class="dropdown-item">تفاصيل الشركة</a>
 												<!-- <a href="#" class="dropdown-item">إضافة خزنة</a>
 												<a href="#" class="dropdown-item">إضافة بنك</a> -->
 													</div>

@@ -33,7 +33,7 @@ class AddingConstraints extends Migration
             $table->unsignedBigInteger('bank_id')->after('equity_capital')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks');
             $table->unsignedBigInteger('safe_id')->after('bank_id')->nullable();
-            $table->foreign('safe_id')->references('id')->on('safe');
+            $table->foreign('safe_id')->references('id')->on('safes');
         });
         Schema::table('cash_master', function (Blueprint $table) {
             $table->unsignedBigInteger('person_id')->after('statement')->nullable();

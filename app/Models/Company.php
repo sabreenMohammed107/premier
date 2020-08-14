@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Bank;
+use App\Models\Safe;
 
 class Company extends Model
 {
@@ -34,4 +36,17 @@ class Company extends Model
         'active',
         'notes',
     ];
+
+
+    //(Company - Bank)  Relation
+    public function bank()
+    {
+        return $this->hasOne('App\Models\Bank', 'id','bank_id');
+    }
+
+    //(Company - Safe)  Relation
+    public function safe()
+    {
+        return $this->hasOne('App\Models\Safe', 'id','safe_id');
+    }
 }

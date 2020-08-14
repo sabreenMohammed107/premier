@@ -39,6 +39,9 @@
     <script src="{{ asset('webassets/js/calendar/moment.min.js')}}"></script>
     <script src="{{ asset('webassets/js/calendar/fullcalendar.min.js')}}"></script>
     <script src="{{ asset('webassets/js/calendar/fullcalendar-active.js')}}"></script>
+        <!-- tab JS
+		============================================ -->
+        <script src="js/tab.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="{{ asset('webassets/js/plugins.js')}}"></script>

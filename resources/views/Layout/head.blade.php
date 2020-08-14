@@ -62,6 +62,9 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/responsive.css')}}">
+        <!-- forms CSS
+		============================================ -->
+        <link rel="stylesheet" href="{{ asset('webassets/css/form/all-type-forms.css')}}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css
 ">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css
