@@ -38,6 +38,7 @@ class Company extends Model
     ];
 
 
+
     //(Company - Bank)  Relation
     public function bank()
     {
@@ -49,4 +50,3 @@ class Company extends Model
     {
         return $this->hasOne('App\Models\Safe', 'id','safe_id');
     }
-}

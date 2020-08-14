@@ -4756,3 +4756,33 @@ div#sparklinehome canvas {
 	color:#fff;
 	text-decoration:none;
 }
+.img-upload {
+    position: relative;
+}
+.img-upload .upload-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    bottom: 0;
+    right: 0;
+    background-color: #eee;
+    padding: 3px 3px 0 0;
+}
+.upload-icon input {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
+.img-upload .upload-icon input {
+    z-index: 3;
+    opacity: 0;
+}

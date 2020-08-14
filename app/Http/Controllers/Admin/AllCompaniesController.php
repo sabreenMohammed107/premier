@@ -3,10 +3,31 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Company;
+use App\Models\Person;
 
+use Illuminate\Http\Request;
+use DB;
+use Log;
+use File;
 class AllCompaniesController extends Controller
 {
+    protected $object;
+    protected $viewName;
+    protected $routeName;
+    protected $message;
+    protected $errormessage;
+
+    public function __construct(Company $object)
+    {
+
+        $this->middleware('auth');
+        $this->object = $object;
+        $this->viewName = 'Admin.home.';
+        $this->routeName = 'home.';
+
+        $this->message = 'تم حفظ البيانات';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +35,16 @@ class AllCompaniesController extends Controller
      */
     public function index()
     {
-        //
+        $rows = Company::where('active', 1)->paginate(8);
+
+        return view($this->viewName . 'index', compact('rows'));
+    }
+
+    public function home()
+    {
+        $rows = Company::where('active', 1)->paginate(8);
+
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -24,7 +54,8 @@ class AllCompaniesController extends Controller
      */
     public function create()
     {
-        //
+
+        return view($this->viewName . 'add');
     }
 
     /**
@@ -35,7 +66,48 @@ class AllCompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=[
+            'company_official_name'=>$request->input('company_official_name'),
+            'company_nick_name'=>$request->input('company_nick_name'),
+            'email'=>$request->input('email'),
+            'website'=>$request->input('website'),
+            'tax_authority'=>$request->input('tax_authority'),
+            'registeration_no'=>$request->input('registeration_no'),
+            'commercial_register'=>$request->input('commercial_register'),
+            'tax_card'=>$request->input('tax_card'),
+            'equity_capital'=>$request->input('equity_capital'),
+            'legal_entity'=>$request->input('legal_entity'),
+
+            'chairman_person_name'=>$request->input('chairman_person_name'),
+            'contact_person_name'=>$request->input('contact_person_name'),
+            'fax'=>$request->input('fax'),
+
+            'phone2'=>$request->input('phone2'),
+            'phone1'=>$request->input('phone1'),
+            'address'=>$request->input('address'),
+
+
+            'notes'=>$request->input('notes'),
+            'active'=>$request->input('active'),
+            'taxable'=>$request->input('taxable'),
+
+                        ];
+
+                         if($request->hasFile('company_logo'))
+                         {
+                            $company_logo=$request->file('company_logo');
+                   
+                            $data['company_logo'] = $this->UplaodImage($company_logo);
+            
+                         }
+                        
+          
+           
+     
+
+        $this->object::create($data);
+                    
+        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -46,7 +118,13 @@ class AllCompaniesController extends Controller
      */
     public function show($id)
     {
-        //
+        $clients=Person::where('person_type_id',100)->where('company_id',$id)->where('active',1)->paginate(8);
+        $suppliers=Person::where('person_type_id',101)->where('company_id',$id)->where('active',1)->paginate(8);
+        $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)->paginate(8);
+
+        $companyrow=Company::where('id','=',$id)->first();
+      
+        return view($this->viewName.'view', compact('companyrow','clients','suppliers','employees'));
     }
 
     /**
@@ -57,7 +135,9 @@ class AllCompaniesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $row=Company::where('id','=',$id)->first();
+      
+        return view($this->viewName.'edit', compact('row'));
     }
 
     /**
@@ -69,7 +149,48 @@ class AllCompaniesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=[
+            'company_official_name'=>$request->input('company_official_name'),
+            'company_nick_name'=>$request->input('company_nick_name'),
+            'email'=>$request->input('email'),
+            'website'=>$request->input('website'),
+            'tax_authority'=>$request->input('tax_authority'),
+            'registeration_no'=>$request->input('registeration_no'),
+            'commercial_register'=>$request->input('commercial_register'),
+            'tax_card'=>$request->input('tax_card'),
+            'equity_capital'=>$request->input('equity_capital'),
+            'legal_entity'=>$request->input('legal_entity'),
+
+            'chairman_person_name'=>$request->input('chairman_person_name'),
+            'contact_person_name'=>$request->input('contact_person_name'),
+            'fax'=>$request->input('fax'),
+
+            'phone2'=>$request->input('phone2'),
+            'phone1'=>$request->input('phone1'),
+            'address'=>$request->input('address'),
+
+
+            'notes'=>$request->input('notes'),
+            'active'=>$request->input('active'),
+            'taxable'=>$request->input('taxable'),
+
+                        ];
+
+                         if($request->hasFile('company_logo'))
+                         {
+                            $company_logo=$request->file('company_logo');
+                   
+                            $data['company_logo'] = $this->UplaodImage($company_logo);
+            
+                         }
+                        
+          
+           
+     
+
+                         $this->object::findOrFail($id)->update($data);
+                    
+        return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -80,6 +201,110 @@ class AllCompaniesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $row = Company::where('id', '=', $id)->first();
+        // Delete File ..
+
+        $file = $row->company_logo;
+
+        $file_name = public_path('uploads/companies/' . $file);
+
+
+        //  }   
+        try {
+            $row->delete();
+            File::delete($file_name);
+        } catch (QueryException $q) {
+
+            return redirect()->back()->with('flash_danger', 'هذا الجدول مرتبط ببيانات أخرى');
+        }
+        return redirect()->route($this->routeName . 'index')->with('flash_success', 'تم الحذف بنجاح !');
     }
+
+
+
+    /**
+     * uplaud image
+     */
+    public function UplaodImage($file_request)
+    {
+        //  This is Image Info..
+        $file = $file_request;
+        $name = $file->getClientOriginalName();
+        $ext  = $file->getClientOriginalExtension();
+        $size = $file->getSize();
+        $path = $file->getRealPath();
+        $mime = $file->getMimeType();
+
+
+        // Rename The Image ..
+        $imageName = $name;
+        $uploadPath = public_path('uploads/companies');
+
+        // Move The image..
+        $file->move($uploadPath, $imageName);
+
+        return $imageName;
+    }
+
+    /**
+             * Make pagination on employee and return with ajax
+             */
+              
+            
+            function fetch_emp(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            
+            
+             $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)->paginate(8);
+      
+            
+              return view($this->viewName.'employee', compact('employees'));
+            
+           }
+            }
+
+             /**
+             * Make pagination on client and return with ajax
+             */
+              
+            
+            function fetch_client(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            
+            
+             $clients=Person::where('person_type_id',100)->where('company_id',$id)->where('active',1)->paginate(8);
+      
+            
+              return view($this->viewName.'client', compact('clients'));
+            
+           }
+            }
+
+            /**
+             * Make pagination on supplier and return with ajax
+             */
+              
+            
+            function fetch_supplier(Request $request)
+            {
+             if($request->ajax())
+             {
+                 $id=$request->input('company_id');
+            
+            
+             $suppliers=Person::where('person_type_id',101)->where('company_id',$id)->where('active',1)->paginate(8);
+      
+            
+              return view($this->viewName.'supplier', compact('suppliers'));
+            
+           }
+            }
+
+           
 }

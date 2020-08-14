@@ -53,7 +53,7 @@
 
 										@endif
 									</td>
-									<td>{{$row->role->role_name}}</td>
+									<td>{{$row->role->role_name ?? ''}}</td>
 									<td>
 										<div class="product-buttons">
 											<a data-toggle="tooltip" title="View" href="{{ route('users.show',$row->id) }}" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
@@ -107,81 +107,6 @@
 @section('modal')
 
 
-<!--View-->
-<div id="vw" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header header-color-modal bg-color-2">
-				<h4 class="modal-title" style="text-align:right">عرض بيانات المستخدم</h4>
-				<div class="modal-close-area modal-close-df">
-					<a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-				</div>
-			</div>
-			<div class="modal-body">
-				<span class="educate-icon educate-info modal-check-pro information-icon-pro"> </span>
-				<h2>شركة تكنوكيم لتجارة وتوريد الكيماويات</h2>
-				<h4>شركة مساهمة مصرية</h4>
-				<br />
-				<div class="message-content" style="text-align:right">
-					<table class="table table-bordered table-edu">
-						<thead>
-							<tr>
-								<th COLSPAN="2" class="code-edu-center" style="text-align:center">بيانات المستخدم</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<span>شركة تكنوكيم لتجارة وتوريد الكيماويات</span>
-								</td>
-								<td class="code-edu-center">
-									<span class="pie"><b>الشركة</b></span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span> محمد عبد الرحمن</span>
-								</td>
-								<td class="code-edu-center">
-									<span class="pie"><b>المستخدم</b></span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span>أمين المخزن</span>
-								</td>-
-								<td class="code-edu-center">
-									<span class="pie"><b>الصلاحية</b></span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span>---</span>
-								</td>
-								<td class="code-edu-center">
-									<span class="pie"><b>ملاحظات</b></span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span>010123456789</span>
-								</td>
-								<td class="code-edu-center">
-									<span class="pie"><b>موبايل </b></span>
-								</td>
-							</tr>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="modal-footer info-md">
-				<a data-dismiss="modal" href="#">إلغــاء</a>
-			</div>
-		</div>
-	</div>
-</div>
-<!--/View-->
-<!--/Modal-->
 
 @endsection

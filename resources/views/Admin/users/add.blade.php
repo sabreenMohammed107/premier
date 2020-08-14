@@ -36,28 +36,25 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">كلمة المرور</label>
-                                                    <input id="myInput" name="password" type="password" class="form-control" placeholder="كلمة المرور">
+                                                    <input id="myInput" name="password" type="password" required class="form-control" placeholder="كلمة المرور">
                                                     <input type="checkbox" onclick="myFunction()">Show Password
 
                                                 </div>
+                                               
                                                 <div class="form-group">
-                                                    <label class="">الصلاحيات</label>
-                                                    <select name="role_id" class="form-control">
-                                                        <option value="none" selected="" disabled="">الصلاحيات</option>
-                                                        @foreach($roles as $role)
-                                                        <option value="{{$role->id}}">{{$role->role_name}}</option>
+                                                    <label class="">الشركات</label>
+                                                    <select name="company_id"  class="form-control  dynamic" required  data-dependent="sub">
+                                                    <option value=""> الشركة</option>
+                                                        @foreach($companies as $company)
+                                                        <option value="{{$company->id}}">{{$company->company_official_name}}</option>
                                                        
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="">الشركات</label>
-                                                    <select name="company_id" class="form-control">
-                                                        <option value="none"  selected="" disabled="">الشركة</option>
-                                                        @foreach($companies as $company)
-                                                        <option value="{{$company->id}}">{{$company->company_official_name}}</option>
+                                                    <label class="">الصلاحيات</label>
+                                                    <select name="role_id" class="form-control"  data-dependent="city" data-show-subtext="true" data-live-search="true" id="sub">
                                                        
-                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -130,6 +127,30 @@ function myFunction() {
     x.type = "password";
   }
 }
+
+
+$(document).ready(function() {
+
+$('.dynamic').change(function() {
+
+    if ($(this).val() != '') {
+        var select = $(this).attr("id");
+        var value = $(this).val();
+        $.ajax({
+            url: "{{route('dynamicdependentCat.fetch')}}",
+            method: "get",
+            data: {
+                value: value,
+            },
+            success: function(result) {
+
+                $('#sub').html(result);
+            }
+
+        })
+    }
+});
+});
 </script>
 
 @endsection

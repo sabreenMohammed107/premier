@@ -203,4 +203,26 @@ $company_id=0;
 
 
     }
+
+   
+    function fetchCat(Request $request)
+    {
+
+        $value = $request->get('value');
+
+        $data = Role::whereNotIn('id',[100,101,1])->get();
+
+        if($value==100){
+            $data = Role::whereIn('id',[100,101,1])->get();
+
+        }
+    
+            $output = '<option value="" selected="" disabled="">الصلاحيات</option>';
+            foreach ($data as $row) {
+
+                $output .= '<option value="' . $row->id . '">' . $row->role_name . '</option>';
+            }
+        
+        echo $output;
+    }
 }

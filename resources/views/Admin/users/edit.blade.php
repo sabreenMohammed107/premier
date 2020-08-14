@@ -43,18 +43,8 @@
                                                     <input type="checkbox" onclick="myFunction()">Show Password
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="">الصلاحيات</label>
-                                                    <select name="role_id" class="form-control">
-                                                        <option value="none" selected="" disabled="">الصلاحيات</option>
-                                                        @foreach($roles as $role)
-                                                        <option value="{{$role->id}}" {{ $role->id == $row->role_id ? 'selected' : '' }}>{{$role->role_name}}</option>
-
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
                                                     <label class="">الشركات</label>
-                                                    <select name="company_id" class="form-control">
+                                                    <select name="company_id" class="form-control dynamic" required data-show-subtext="true" data-live-search="true" id="country" data-dependent="sub">
                                                         <option value="none" selected="" disabled="">{{$row->company[0]->company_official_name ?? 'الشركة'}}</option>
                                                         @foreach($companies as $company)
                                                         <option value="{{$company->id}}" >{{$company->company_official_name}}</option>
@@ -62,6 +52,14 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="">الصلاحيات</label>
+                                                    <select name="role_id" class="form-control" data-dependent="city" data-show-subtext="true" data-live-search="true" id="sub">
+                                                        <option value="none" selected="" disabled="">{{$row->role->role_name ?? ''}}</option>
+                                                   
+                                                    </select>
+                                                </div>
+                                               
                                                 <div class="form-group">
                                                     <label class="">الإسم بالكامل</label>
                                                     <input name="user_full_name" value="{{$row->user_full_name}}" type="text" class="form-control" placeholder="الاسم بالكامل">
@@ -135,6 +133,29 @@ function myFunction() {
     x.type = "password";
   }
 }
+
+$(document).ready(function() {
+
+$('.dynamic').change(function() {
+
+    if ($(this).val() != '') {
+        var select = $(this).attr("id");
+        var value = $(this).val();
+        $.ajax({
+            url: "{{route('dynamicdependentCat.fetch')}}",
+            method: "get",
+            data: {
+                value: value,
+            },
+            success: function(result) {
+
+                $('#sub').html(result);
+            }
+
+        })
+    }
+});
+});
 </script>
 
 @endsection
