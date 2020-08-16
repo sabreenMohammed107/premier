@@ -29,4 +29,19 @@ class FinanTransaction extends Model
         'item_id',
         'inv_item_id',
     ];
+
+    public function safe()
+    {
+        return $this->hasMany('App\Models\Safe', 'safe_id','id');
+    }
+
+    public function person()
+    {
+        return $this->hasMany('App\Models\Person', 'safe_id','id');
+    }
+
+    public function item()
+    {
+        return $this->hasMany('App\Models\Item', 'item_id','id');
+    }
 }

@@ -83,7 +83,7 @@ class AddingConstraints extends Migration
             $table->unsignedBigInteger('transaction_type_id')->after('id')->nullable();
             $table->foreign('transaction_type_id')->references('id')->on('finan_transactions_types');
             $table->unsignedBigInteger('person_id')->after('invoice_no')->nullable();
-            $table->foreign('person_id')->references('id')->on('persons');
+            $table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');;
             $table->unsignedBigInteger('person_type_id')->after('person_name')->nullable();
             $table->foreign('person_type_id')->references('id')->on('person_types');
             $table->unsignedBigInteger('safe_id')->after('person_type_id')->nullable();
@@ -97,7 +97,7 @@ class AddingConstraints extends Migration
             $table->unsignedBigInteger('inv_id')->after('cash_id')->nullable();
             $table->foreign('inv_id')->references('id')->on('invoices');
             $table->unsignedBigInteger('item_id')->after('inv_id')->nullable();
-            $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');;
             $table->unsignedBigInteger('inv_item_id')->after('item_id')->nullable();
             $table->foreign('inv_item_id')->references('id')->on('invoices_items');
         });

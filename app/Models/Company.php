@@ -50,3 +50,10 @@ class Company extends Model
     {
         return $this->hasOne('App\Models\Safe', 'id','safe_id');
     }
+
+    //relation with persons
+    public function person()
+    {
+        return $this->belongsTo('App\Models\Person');
+    }
+}

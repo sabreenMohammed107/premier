@@ -1,4 +1,7 @@
-	<!-- Start Left menu area -->
+    @php
+        $company_id = session('company_id');
+    @endphp
+    <!-- Start Left menu area -->
 	<div class="left-sidebar-pro">
 		<nav id="sidebar" class="">
 			<div class="sidebar-header">
@@ -14,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="{{ asset('webassets/img/logo/logo.png')}}" alt="" /></a>
+                        <a href="#"><img class="main-logo" src="{{ asset('webassets/img/logo/logo.png')}}" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -49,7 +52,11 @@
 															<a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
 														</li> -->
 														<li>
-															<a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                @csrf
+                                                            </form>
 														</li>
 													</ul>
 												</li>
@@ -117,17 +124,17 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="{{ url('/Company') }}" class="dropdown-item">تفاصيل الشركة</a>
-												<a href="#" class="dropdown-item">الأصناف</a>
-												<a href="#" class="dropdown-item">كشف العملاء</a>
-												<a href="#" class="dropdown-item">كشف الموردين </a>
-												<a href="#" class="dropdown-item">كشف الموظفين</a>
+                                                    <a href="{{ url("/Company/$company_id") }}" class="dropdown-item">تفاصيل الشركة</a>
+												<a href="{{ url("/Company/$company_id/Items")}}" class="dropdown-item">الأصناف</a>
+												<a href="{{ url("/Company/$company_id/Clients")}}" class="dropdown-item">كشف العملاء</a>
+												<a href="{{ url("/Company/$company_id/Suppliers")}}" class="dropdown-item">كشف الموردين </a>
+                                                    <a href="{{ url("/Company/$company_id/Employees")}}" class="dropdown-item">كشف الموظفين</a>
 													</div>
 												</li>
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="{{ url('/Company') }}" class="dropdown-item">تفاصيل الشركة</a>
+                                                    <a href="{{ url("/Company/$company_id") }}" class="dropdown-item">تفاصيل الشركة</a>
 												<!-- <a href="#" class="dropdown-item">إضافة خزنة</a>
 												<a href="#" class="dropdown-item">إضافة بنك</a> -->
 													</div>

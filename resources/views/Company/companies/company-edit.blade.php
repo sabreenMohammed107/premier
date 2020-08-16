@@ -100,7 +100,8 @@
                                                                             <input type="text" id="prepend-big-btn" placeholder="">
                                                                         </div>
                                                                     </div>
-																</div>
+                                                                </div>
+
 
 															</div>
 															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"style="direction:rtl">
@@ -166,19 +167,50 @@
                                 <div class="product-tab-list tab-pane fade" id="reviews">
                                     <div class="row">
                                         @php
+                                            //Check for an already registered safe
                                             if($Safe){
                                                 $type = "Edit";
                                                 $safe_name = $Safe->safe_name;
                                                 $safe_location = $Safe->safe_location;
                                                 $open_balance = $Safe->open_balance;
                                                 $balance_start_date = $Safe->balance_start_date;
+                                                if($Sopen == 1){
+                                                    $Sdisable = 'disabled';
+                                                }else{
+                                                    $Sdisable = '';
+                                                }
                                             }else{
                                                 $type = "Add";
                                                 $safe_name = "";
                                                 $safe_location = "";
                                                 $open_balance = "";
                                                 $balance_start_date = "";
+                                                $Sdisable = '';
                                             }
+
+                                            //Check for an already registered bank
+                                            if($Bank){
+                                                $Btype = "Edit";
+                                                $bank_name =$Bank->bank_name;
+                                                $bank_branch_name=$Bank->bank_branch_name;
+                                                $bank_account_no=$Bank->bank_account_no;
+                                                $Bbalance_start_date=$Bank->balance_start_date;
+                                                $Bopen_balance=$Bank->open_balance;
+                                                if($Bopen == 1){
+                                                    $Bdisable = 'disabled';
+                                                }else{
+                                                    $Bdisable = '';
+                                                }
+                                            }else{
+                                                $Btype = "Add";
+                                                $bank_name ="";
+                                                $bank_branch_name="";
+                                                $bank_account_no="";
+                                                $Bbalance_start_date="";
+                                                $Bopen_balance="";
+                                                $Bdisable = '';
+                                            }
+
 
                                         @endphp
                                         <form action="/Company/{{$Company->id}}/{{$type}}/Safe" method="POST">
@@ -198,15 +230,15 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="">تاريخ بداية الترصيد</label>
-                                                                <input type="date" name="balance_start_date" value="{{$balance_start_date}}" class="form-control" placeholder="تاريخ بداية الترصيد"style="text-align:right">
+                                                                <input type="date" {{$Sdisable}} name="balance_start_date" value="{{$balance_start_date}}" class="form-control" placeholder="تاريخ بداية الترصيد"style="text-align:right">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="">الرصيد الإفتتاحي</label>
-                                                                <input type="number" name="open_balance" value="{{$open_balance}}" class="form-control" placeholder="الرصيد الإفتتاحي">
+                                                                <input type="number" {{$Sdisable}} name="open_balance" value="{{$open_balance}}" class="form-control" placeholder="الرصيد الإفتتاحي">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label class="">رصيد الخزينه الحالى</label>
-                                                                    <input type="number" class="form-control" disabled placeholder="رصيد الخزينه الحالى">
+                                                                <input type="number" value="{{$SafeTotal}}" class="form-control" disabled placeholder="رصيد الخزينه الحالى">
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary waves-effect waves-light">حفظ الخزينة</button>
                                                             </div>
@@ -219,29 +251,44 @@
                                 </div>
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                     <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl">
-                                            <div class="review-content-section">
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="devit-card-custom">
-															<div class="form-group">
-																<label class="">تاريخ بداية الترصيد</label>
-																<input type="date" class="form-control" placeholder="تاريخ بداية الترصيد" style="text-align:right">
-															</div>
-															<div class="form-group">
-																<label class="">الرصيد الإفتتاحي</label>
-																<input type="number" class="form-control" placeholder="الرصيد الإفتتاحي">
-															</div>
-															<div class="form-group">
-																<label class="">رصيد البنك الحالى</label>
-																<input type="number" class="form-control" placeholder="رصيد البنك الحالى">
-															</div>
-															<a href="#" class="btn btn-primary waves-effect waves-light">حفظ البنك</a>
-														</div>
-													</div>
-												</div>
+                                        <form action="/Company/{{$Company->id}}/{{$Btype}}/Bank" method="POST">
+                                            {{ csrf_field() }}
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl">
+                                                <div class="review-content-section">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="devit-card-custom">
+                                                                <div class="form-group">
+                                                                    <label class="">اسم البنك</label>
+                                                                <input type="text" name="bank_name" value="{{$bank_name}}" class="form-control" placeholder="اسم البنك"style="text-align:right">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">فرع البنك</label>
+                                                                <input type="text" name="bank_branch_name" value="{{$bank_branch_name}}" class="form-control" placeholder="فرع البنك"style="text-align:right">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">رقم الحساب البنكي</label>
+                                                                <input type="text" name="bank_account_no" value="{{$bank_account_no}}" class="form-control" placeholder="رقم الحساب البنكي"style="text-align:right">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">تاريخ بداية الترصيد</label>
+                                                                <input type="date" {{$Bdisable}} name="balance_start_date" value="{{$Bbalance_start_date}}" class="form-control" placeholder="تاريخ بداية الترصيد" style="text-align:right">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">الرصيد الإفتتاحي</label>
+                                                                <input type="number" {{$Bdisable}} name="open_balance" value="{{$Bopen_balance}}" class="form-control" placeholder="الرصيد الإفتتاحي">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="">رصيد البنك الحالى</label>
+                                                                <input type="number" value="{{$BankTotal}}" disabled name="" class="form-control" placeholder="رصيد البنك الحالى">
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary waves-effect waves-light">حفظ البنك</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
 
                                     </div>
                                 </div>

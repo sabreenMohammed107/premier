@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserCompany;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 class LoginController extends Controller
 {
     /*
@@ -43,17 +46,23 @@ class LoginController extends Controller
     }
     //to login without inception
     protected function attemptLogin(Request $request)
-
     {
+
         $user = User::where('user_name', $request->user_name)
             ->where('password', $request->password)
             ->first();
-
         if (!isset($user)) {
             return false;
         }
 
+        $UserCompany = DB::table('users')
+        ->join('user_companies','user_companies.user_id','=','users.id')
+        ->where('users.id','=',$user->id)->first();
+
+        Session::put('company_id', $UserCompany->company_id);
         \Auth::login($user);
+
+
 
         return true;
     }

@@ -21,4 +21,9 @@ class Item extends Model
         'notes',
         'item_image',
     ];
+
+    public function finan_transaction()
+    {
+        return $this->belongsTo('App\Models\FinanTransaction');
+    }
 }

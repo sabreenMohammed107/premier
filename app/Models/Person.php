@@ -30,8 +30,20 @@ class Person extends Model
         'open_balance',
         'balance_start_date',
         'company_id',
+        'person_logo',
         'taxable',
         'active',
         'notes',
     ];
+
+    //(Company - Person)  Relation
+    public function company()
+    {
+        return $this->hasOne('App\Models\Company', 'id','company_id');
+    }
+
+    public function finan_transaction()
+    {
+        return $this->belongsTo('App\Models\FinanTransaction');
+    }
 }

@@ -16,4 +16,15 @@ class Safe extends Model
         'balance_start_date',
         'notes',
     ];
+
+    //relation with company
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
+    public function finan_transaction()
+    {
+        return $this->belongsTo('App\Models\FinanTransaction');
+    }
 }
