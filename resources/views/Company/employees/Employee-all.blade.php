@@ -102,7 +102,7 @@
                             تعديل البيانات
                         @endslot
                         @slot('action')
-                            {{ url("/Company/Employee/$Employee->id/Update") }}
+                            {{ url("/Company/$CompanyId/Employee/$Employee->id/Update") }}
                         @endslot
                         @slot('person')
                             {{$Employee->id}}

@@ -67,7 +67,7 @@ class CompaniesController extends Controller
             ['persons.person_type_id','=',101],
             ['company_id','=',$id]
         ])
-        ->groupBy(['persons.id'])
+        ->groupBy(['persons.id','persons.person_name','person_logo','phone1','phone2','registeration_no','contact_person_name','active','persons.person_type_id'])
         ->paginate(6,'','suppliers_page');
 
         //Employees Data belongs to the same company
@@ -77,7 +77,8 @@ class CompaniesController extends Controller
         ->where([
             ['persons.person_type_id','=',102],
             ['company_id','=',$id]
-        ])->groupBy(['persons.id'])
+        ])
+        ->groupBy(['persons.id','persons.person_name','person_logo','phone1','phone2','registeration_no','contact_person_name','active','persons.person_type_id'])
         ->paginate(6,'','employees_page');
 
         //Clients Data belongs to the same company
@@ -87,7 +88,8 @@ class CompaniesController extends Controller
         ->where([
             ['persons.person_type_id','=',100],
             ['company_id','=',$id]
-        ])->groupBy(['persons.id'])
+        ])
+        ->groupBy(['persons.id','persons.person_name','person_logo','phone1','phone2','registeration_no','contact_person_name','active','persons.person_type_id'])
         ->paginate(6,'','clients_page');
 
 
