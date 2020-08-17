@@ -112,7 +112,7 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-														<a href="#" class="dropdown-item">قواعد العمل</a>
+														<a href="{{ route('work-role.index') }}" class="dropdown-item">قواعد العمل</a>
 														<a href="#" class="dropdown-item">تسوية أرصدة</a>
 														<a href="{{ route('guid-item.index') }}" class="dropdown-item">بنود التوجية</a>
 														<a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a>
@@ -138,7 +138,7 @@
 										<li>
 											<a data-toggle="collapse" data-target="#Charts" href="#">بيانات أساسية <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">قواعد العمل</a></li>
+												<li><a href="{{ route('work-role.index') }}" class="dropdown-item">قواعد العمل</a></li>
 												<li><a href="#" class="dropdown-item">تسوية أرصدة</a></li>
 												<li><a href="{{ route('guid-item.index') }}" class="dropdown-item">بنود التوجية</a></li>
 												<li><a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a></li>

@@ -17,4 +17,9 @@ class BusinessItemsSetup extends Model
         'active',
         'notes',
     ];
+    public function guided()
+    {
+        return $this->belongsTo('App\Models\GuidedItem', 'guided_item_id');
+    }
+    
 }

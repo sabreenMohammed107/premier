@@ -29,6 +29,13 @@ Route::namespace('Admin')->group(function () {
 Route::resource('/guid-item', 'GuideItemController');
 /*********************==WorkRoleController==******************* */
 Route::resource('/work-role', 'WorkRoleController');
+Route::post('/saveCase1', 'WorkRoleController@saveCase1')->name('saveCase1');
+Route::post('/saveCase2', 'WorkRoleController@saveCase2')->name('saveCase2');
+Route::post('/saveCase3', 'WorkRoleController@saveCase3')->name('saveCase3');
+Route::post('/saveCase4', 'WorkRoleController@saveCase4')->name('saveCase4');
+
+
+
 
 
 });

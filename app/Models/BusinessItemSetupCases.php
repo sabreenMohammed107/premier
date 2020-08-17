@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessItemSetupSases extends Model
+class BusinessItemSetupCases extends Model
 {
     //main settings
     protected $table = 'business_items_setup_cases';
