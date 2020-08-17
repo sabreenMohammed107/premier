@@ -19,7 +19,7 @@ class ItemsController extends Controller
         ->select(DB::raw('sum(additive - subtractive) current_total,items.id,item_image,item_english_name,item_code,balance_start_date,total_open_balance_cost,item_arabic_name'))
         ->join('finan_transactions','finan_transactions.item_id','=','items.id')
         ->where('company_id','=',$id)
-        ->groupBy(['items.id'])->paginate(12);
+        ->groupBy(['items.id','items.item_image','item_english_name','item_code','balance_start_date','total_open_balance_cost','item_arabic_name'])->paginate(12);
 
         return view('Company.items.Items',[
             'Items'=>$Items,

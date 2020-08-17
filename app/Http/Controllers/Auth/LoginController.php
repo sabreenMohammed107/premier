@@ -61,9 +61,6 @@ class LoginController extends Controller
 
         Session::put('company_id', $UserCompany->company_id);
         \Auth::login($user);
-
-
-
         return true;
     }
 
