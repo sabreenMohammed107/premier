@@ -558,7 +558,7 @@
 
         $.ajax({
             type:'GET',
-            url:'/Company/Employee/Search',
+            url:"{{url('/Company/Employee/Search')}}",
             data:{
             id : CompanyId,
             data : data,
@@ -613,7 +613,7 @@
 
         $.ajax({
             type:'GET',
-            url:'/Company/Supplier/Search',
+            url:"{{url('/Company/Supplier/Search')}}",
             data:{
             id : CompanyId,
             data : data,
@@ -667,7 +667,7 @@
     function searchClient(data) {
 $.ajax({
     type:'GET',
-    url:'/Company/Client/Search',
+    url:"{{url('/Company/Client/Search')}}",
     data:{
     id : CompanyId,
     data : data,

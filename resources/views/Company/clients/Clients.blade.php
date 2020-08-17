@@ -108,7 +108,7 @@
             </div>
             <div class="modal-footer info-md">
                 <a data-dismiss="modal" href="#">إلغــاء</a>
-            <a href="{{ url("/Company/$id/Client/$ClientModal->id/Delete")}}">حـذف</a>
+            <a href="{{ url("/Company/Client/$ClientModal->id/Delete")}}">حـذف</a>
             </div>
         </div>
     </div>
