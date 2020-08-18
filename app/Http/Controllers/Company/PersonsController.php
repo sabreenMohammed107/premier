@@ -811,6 +811,7 @@ class PersonsController extends Controller
     {
         //person to delete
         $Person = Person::find($id);
+
         //Transactions check for open_balance
         $Transactions = DB::table('finan_transactions')
         ->where([['transaction_type_id','<>',110],['person_id','=',$Person->id],['person_type_id','=',100]])->count();
