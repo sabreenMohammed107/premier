@@ -10,6 +10,7 @@ class CashMaster extends Model
     protected $table = 'cash_master';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'cash_master_type',
         'cash_date',
         'approved',
         'exit_permission_code',
