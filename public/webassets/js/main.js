@@ -115,6 +115,7 @@ $(window).on('load', function(){
 	readURL(this, '#uploadOne img');
   })
   
+  
   $('#uploadTwo .upload').on('change', function(e){
 	console.log(e);
 	readURL(this, '#uploadTwo img');

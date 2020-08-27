@@ -825,7 +825,7 @@ class PersonsController extends Controller
 
             } catch (\Throwable $th) {
                 DB::rollBack();
-                // throw $th;
+                //  throw $th;
                 return redirect("/Company/$Person->company_id/Clients")->with('flash_danger', "لم يتم حذف العميل: $Person->person_name لوجود خطأ ما");
             }
         }else{

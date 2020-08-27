@@ -35,6 +35,9 @@ Route::post('/saveCase3', 'WorkRoleController@saveCase3')->name('saveCase3');
 Route::post('/saveCase4', 'WorkRoleController@saveCase4')->name('saveCase4');
 
 
+/*********************==cash-purch==******************* */
+Route::resource('/cash-purch', 'CashPurchasingController');
+Route::post('/cc', 'CashPurchasingController@cc')->name('cc');
 
 
 
