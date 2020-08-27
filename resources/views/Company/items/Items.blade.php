@@ -96,7 +96,7 @@
 function searchItem(data) {
 $.ajax({
     type:'GET',
-    url:'/Company/Item/Search',
+    url:"{{ url('/Company/Item/Search')}}",
     data:{
     id : CompanyId,
     data : data,

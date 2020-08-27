@@ -10,6 +10,7 @@ class Invoice extends Model
     protected $table = 'invoices';
     protected $primaryKey = 'id';
     protected $fillable = [
+        'invoice_type',
         'inv_date',
         'approved',
         'invoice_no',
@@ -31,6 +32,6 @@ class Invoice extends Model
         'return_back_date',
         'return_back_notes',
         'notes',
-        
+
     ];
 }
