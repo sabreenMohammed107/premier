@@ -16,133 +16,75 @@
 @endsection
 
 @section('content')
-<!-- Static Table Start -->
 <style>
-    .pagination-info {
-        display: none !important;
-    }
+		.pagination-info{
+			display:none !important;
+		}
+		.page-list{
+			display:none !important;
+		}
+		.pagination ul li{
+			float:right !important;
+		}
+		.search input:-ms-input-placeholder{
+			color:white !important;
+		}
+		#table td,th{
+			text-align:right
+		}
+	</style>
+ <!-- Static Table Start -->
+ <div class="data-table-area mg-b-15">
+			<div class="container-fluid">
+				<div class="row">
+                    <input type="hidden" value="{{csrf_token()}}" id="csrf-token" >
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="sparkline13-list">
+							<div class="sparkline13-hd">
+								<div class="main-sparkline13-hd">
+									<h1 style="direction:rtl">مدفوعات نقدية</h1>
+								</div>
+							</div>
+							<div class="sparkline13-graph">
+								<div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+									<div class="chosen-select-single mg-b-20" style="direction:rtl;">
+										<label>الشركة</label>
+										<select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="chosen-select" tabindex="-1" style="display: none;">
+											<option value="">إختار الشركة</option>
+                                            @foreach($companies as $company)
+                                            <option value="{{$company->id}}">{{$company->company_official_name}} </option>
 
-    .page-list {
-        display: none !important;
-    }
-
-    .pagination ul li {
-        float: right !important;
-    }
-
-    .search input:-ms-input-placeholder {
-        color: white !important;
-    }
-
-    #table td,
-    th {
-        text-align: right
-    }
-
-    .fixed-table-loading {
-        display: none !important;
-    }
-</style>
-<div class="product-status mg-b-15">
-
-    <div class="data-table-area mg-b-15">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="sparkline13-list">
-                        <div class="sparkline13-hd">
-                            <div class="main-sparkline13-hd">
-                                <h1 style="direction:rtl">مدفوعات نقدية</h1>
-                            </div>
-                        </div>
-                        <div class="sparkline13-graph">
-                            <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-                                <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                    <label>الشركة</label>
-                                    <select data-placeholder="Choose a Country..." class="chosen-select" tabindex="-1" style="display: none;">
-                                        <option value="">إختار الشركة</option>
-                                        <option value="United States">وينرز اكتوبر</option>
-                                        <option value="United Kingdom">ارت شادو</option>
-                                        <option value="Afghanistan">عباد المعين</option>
-                                        <option value="Aland Islands">وينرز مدكور</option>
-                                        <option value="Albania">شركة بيولا</option>
-                                        <option value="Algeria">Algeria</option>
-                                        <option value="American Samoa">انتربلوك النميسى</option>
-                                        <option value="Andorra">ثينك تكنولوجي</option>
-                                        <option value="Angola">شركة انترنايل</option>
-                                    </select>
-                                </div>
-                                <form id="form" action="{{route('cc')}}" method="post">
-                                    <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
-
-                                        <thead>
-                                            <tr>
-                                                <th data-field="state" data-checkbox="true"></th>
-                                                <th data-field="id">#</th>
-                                                <th data-field="name" data-editable="false">التاريخ</th>
-                                                <th data-field="email" data-editable="false">البيان</th>
-                                                <th data-field="phone" data-editable="false">إذن إستلام</th>
-
-                                                <th data-field="Application_ids" data-editable="true">معيار تفصيلى </th>
-                                                <th data-field="task" data-editable="false">بند توجيه</th>
-                                                <th data-field="number" data-editable="true">معتمد</th>
-                                                <th data-field="price" data-editable="false">المبلغ</th>
-                                                <th data-field="action">خيارات</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-
-
-
-
-
-
-                                            @foreach($rows as $index=>$row)
-                                            <td></td>
-                                            <td>{{$row->id}}
-                                                <input type="hidden" name="ids[]" value="{{$row->id}}">
-
-                                            </td>
-                                            <?php
-                                            $date = null;
-                                            if ($row->created_at) {
-                                                $date = date_create($row->created_at);
-                                            }
-                                            ?>
-                                            <td>@if($date){{ date_format($date,"d-m-Y")  }}@endif</td>
-                                            <td>{{$row->company_official_name ?? ''}}</td>
-                                            <td>{{$row->registeration_no}}</td>
-                                            <td data-id="{{$row->id}}" data-type="text" data-name="tax_authority" data-value="{{$row->tax_authority}}"  class="name" data-pk="{{$row->id}}"> {{$row->tax_authority}}</td>
-
-
-                                            <td>مقبوضات نقدية
-
-                                            </td>
-                                            <td>{{$row->active}}</td>
-                                            <td>4300</td>
-                                            <td>
-                                                <div class="product-buttons">
-
-                                                    <button data-toggle="modal" data-target="#vw" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></button>
-                                                    <button data-toggle="modal" data-target="#del" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                </div>
-                                            </td>
-                                            </tr>
                                             @endforeach
-                                            <tr>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+										</select>
+                                    </div>
+                                   
+<table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+    <thead>
+        <tr>
+            <th data-field="id">#</th>
+            <th data-field="name" >التاريخ</th>
+            <th data-field="email" >البيان</th>
+            <th data-field="phone" >إذن إستلام</th>
+            <th>معيار تفصيلى </th>
+            <th>بند توجيه</th>
+            <th>معتمد</th>
+            <th data-field="price" >المبلغ</th>
+            <th data-field="action">خيارات</th>
+        </tr>
+    </thead>
+    <tbody id="indexTable">
+                                @include('Admin.cash-purch.indexTable')
+                                </tbody>
+</table>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <!-- Static Table End -->
 
     <!--Delete-->
     <div id="del" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
@@ -173,7 +115,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header header-color-modal bg-color-2">
-                    <h4 class="modal-title" style="text-align:right">عرض بيانات المقبوضات النقدية</h4>
+                    <h4 class="modal-title" style="text-align:right">عرض بيانات المدفوعات النقدية</h4>
                     <div class="modal-close-area modal-close-df">
                         <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                     </div>
@@ -274,57 +216,101 @@
 </div>
 @endsection
 @section('scripts')
-<!-- data table JS
-		============================================ -->
-<script src="{{ asset('webassets/js/data-table/bootstrap-table.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/tableExport.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/data-table-active.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/bootstrap-table-editable.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/bootstrap-editable.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/bootstrap-table-resizable.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/colResizable-1.5.source.js')}}"></script>
-<script src="{{ asset('webassets/js/data-table/bootstrap-table-export.js')}}"></script>
-<!--  editable JS
-		============================================ -->
-<script src="{{ asset('webassets/js/editable/jquery.mockjax.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/mock-active.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/select2.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/moment.min.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/bootstrap-datetimepicker.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/bootstrap-editable.js')}}"></script>
-<script src="{{ asset('webassets/js/editable/xediable-active.js')}}"></script>
+
+
+
 <script>
     $(document).ready(function() {
-                //toggle `popup` / `inline` mode
-                $.fn.editable.defaults.mode = 'inline';
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('#csrf-token').val()
-                    }
-                });
+        $('select[name="select_company"]').on('change', function() {
+			var company = $(this).val();
 
+          
+			
+				$.ajax({
+					url: "{{route('dynamicCompany.fetch')}}",
+					method: "get",
+					data: {
+						company_id: company,
 
-                id = $(this).data('pk');
+					},
+					success: function(result) {
 
-                url = $('#form').attr('action');
-
-
-                //make username editable
-                $('.name').editable({
-                        url: url,
-                        pk: id,
-
-                        type: "text",
-                        validate: function(value) {
-                            if ($.trim(value) === '') {
-                                return 'This field is required';
-                            }
-                        },
-                        success: function(result) {
-                        },
-
-
-                });
+						$('#indexTable').html(result);
+                       
+					}
+				});
+			
+		});
+       
+ 
     });
+    function fillForm(id){
+      
+        var criterion = $('input[name=detailed_criterion'+id+']').val();
+          
+				$.ajax({
+					url: "{{route('update.criterion')}}",
+					method: "Post",
+					data: {
+						criterion: criterion,
+                        _token:$('#csrf-token').val(),
+                        id:id,
+                        company_id:$('#select_company').val(),
+
+					},
+					success: function(result) {
+						$('#indexTable').html(result);
+					}
+				});
+			
+    }
+    function fillSelect(id){
+      
+      var guided_item_id = $('select[name=guided_item_id'+id+']').val();
+       
+              $.ajax({
+                  url: "{{route('update.guided')}}",
+                  method: "Post",
+                  data: {
+                    guided_item_id: guided_item_id,
+                      _token:$('#csrf-token').val(),
+                      id:id,
+                      company_id:$('#select_company').val(),
+
+                  },
+                  success: function(result) {
+                      $('#indexTable').html(result);
+                  }
+              });
+          
+  }
+  function fillCheck(id){
+      var confirmed= 0;
+   
+        if($('input[name=confirmed'+id+']').prop('checked')){
+           
+            confirmed= 1;
+        }else{
+            confirmed= 0;
+        }
+  
+              $.ajax({
+                  url: "{{route('update.confirmed')}}",
+                  method: "Post",
+                  data: {
+                    confirmed: confirmed,
+                      _token:$('#csrf-token').val(),
+                      id:id,
+                      company_id:$('#select_company').val(),
+
+                  },
+                  success: function(result) {
+                      $('#indexTable').html(result);
+                  }
+              });
+          
+  }
+
+  
 </script>
 @endsection

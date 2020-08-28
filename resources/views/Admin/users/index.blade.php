@@ -26,8 +26,8 @@
 						<a href="{{route('users.create')}}" style="direction:ltr">إضافة مستخدم</a>
 					</div>
 					<div class="asset-inner">
-						<table id="example" class="display responsive nowrap" style="width:100%">
-							<thead>
+					<table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
+										   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">							<thead>
 								<tr>
 									<th>#</th>
 									<th>الشركة</th>

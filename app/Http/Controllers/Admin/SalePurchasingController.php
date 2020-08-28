@@ -9,7 +9,7 @@ use App\Models\GuidedItem;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
-class CashPurchasingController extends Controller
+class SalePurchasingController extends Controller
 {
     protected $object;
     protected $viewName;
@@ -22,23 +22,20 @@ class CashPurchasingController extends Controller
 
         $this->middleware('auth');
         $this->object = $object;
-        $this->viewName = 'Admin.cash-purch.';
-        $this->routeName = 'cash-purch.';
+        $this->viewName = 'Admin.cash-sale.';
+        $this->routeName = 'cash-sale.';
 
         $this->message = 'تم حفظ البيانات';
     }
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      
+        $rows = array();
         $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
-        $company_id=0;
-        $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
-
         return view($this->viewName . 'index', compact('rows', 'companies'));
     }
     /**
@@ -48,13 +45,10 @@ class CashPurchasingController extends Controller
      */
     public function companyFetch(Request $request)
     {
-      
         $company_id=$request->input('company_id');
+        $rows=CashMaster::where('cash_master_type',1)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
         $guided_items=GuidedItem::all();
-        $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
-        
-         return view($this->viewName .'indexTable', compact('rows','guided_items'))->render();
-
+        return view($this->viewName . 'indexTable', compact('rows','guided_items'))->render();
     }
     /**
      * Show the form for updateCriterion.
@@ -69,7 +63,7 @@ class CashPurchasingController extends Controller
         $guided_items=GuidedItem::all();
         $row=CashMaster::where('id',$id)->first();
         $row->update(['detailed_criterion' => $criterion]);
-        $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
+        $rows=CashMaster::where('cash_master_type',1)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'indexTable', compact('rows','guided_items'));
     }
@@ -86,7 +80,7 @@ class CashPurchasingController extends Controller
         $guided_items=GuidedItem::all();
         $row=CashMaster::where('id',$id)->first();
         $row->update(['guided_item_id' => $guided_item_id]);
-        $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
+        $rows=CashMaster::where('cash_master_type',1)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'indexTable', compact('rows','guided_items'));
     }
@@ -103,10 +97,11 @@ class CashPurchasingController extends Controller
         $guided_items=GuidedItem::all();
         $row=CashMaster::where('id',$id)->first();
         $row->update(['confirm' => $confirmed]);
-        $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
+        $rows=CashMaster::where('cash_master_type',1)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
 
         return view($this->viewName . 'indexTable', compact('rows','guided_items'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -125,25 +120,9 @@ class CashPurchasingController extends Controller
      */
     public function store(Request $request)
     {
-       
+        //
     }
-    public function cc(Request $request)
-    {
-        $id = $request->input('pk');
-        $field = $request->input('name');
-        $value = $request->input('value');
 
-        try {
-
-
-            $test = Company::findOrFail($id);
-            $test->{$field} = $value;
-            $test->update();
-        } catch (\Exception $e) {
-            // return response($e->intl_get_error_message(), 400);
-        }
-        return response('', 200);
-    }
     /**
      * Display the specified resource.
      *
@@ -175,13 +154,7 @@ class CashPurchasingController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
-        // $input['tax_authority'] =  $request->input('Application_ids');
-        // $row=Company::find($id);
-
-        //     $row->update($input);
-
+        //
     }
 
     /**

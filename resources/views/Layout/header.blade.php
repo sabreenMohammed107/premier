@@ -103,7 +103,7 @@
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a>
 														<a href="{{route('cash-purch.index')}}" class="dropdown-item">مدفوعات نقدية</a>
-														<a href="#" class="dropdown-item">مقبوضات نقدية</a>
+														<a href="{{route('cash-sale.index')}}" class="dropdown-item">مقبوضات نقدية</a>
 														<a href="#" class="dropdown-item">مبيعات</a>
 														<a href="#" class="dropdown-item">مشتريات</a>
 														<a href="#" class="dropdown-item">قيود ألية</a>

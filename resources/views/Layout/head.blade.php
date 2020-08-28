@@ -10,6 +10,8 @@
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="{{ asset('webassets/image/x-icon')}}" href="img/favicon.ico">
+  
+
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -53,23 +55,31 @@
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.print.min.css')}}">
+    <!-- x-editor CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{ asset('webassets/css/editor/select2.css')}}">
+    <link rel="stylesheet" href="{{ asset('webassets/css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{ asset('webassets/css/editor/bootstrap-editable.css')}}">
+    <link rel="stylesheet" href="{{ asset('webassets/css/editor/x-editor-style.css')}}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{ asset('webassets/css/data-table/bootstrap-table.css')}}">
+    <link rel="stylesheet" href="{{ asset('webassets/css/data-table/bootstrap-editable.css')}}">
+	<!-- select2 CSS
+		============================================ -->
+	<link rel="stylesheet" href="{{ asset('webassets/css/select2/select2.min.css')}}">
+	<!-- chosen CSS
+		============================================ -->
+	<link rel="stylesheet" href="{{ asset('webassets/css/chosen/bootstrap-chosen.css')}}">
 	<!-- modals CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/modals.css')}}">
-    <!-- style CSS
+	<!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/style.css')}}">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/responsive.css')}}">
-        <!-- forms CSS
-		============================================ -->
-        <link rel="stylesheet" href="{{ asset('webassets/css/form/all-type-forms.css')}}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css
-">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css
-">
-
     <!-- modernizr JS
 		============================================ -->
     <script src="{{ asset('webassets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
