@@ -10,7 +10,7 @@
         <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/$CompanyId/Employees")}}">الموظفين</a> <span class="bread-slash"> / </span>
+        <a href="{{ url("/Company/Employees")}}">الموظفين</a> <span class="bread-slash"> / </span>
     </li>
     <li>
     <span class="bread-blod">
@@ -27,7 +27,7 @@
 		<!-- Single pro tab review Start-->
 		<div class="single-pro-review-area mt-t-30 mg-b-15">
 			<div class="container-fluid">
-                <a href="{{ url("/Company/$CompanyId/Employees")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
+                <a href="{{ url("/Company/Employees")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
             @component('/Company/components/EmployeeForm')
             @slot('image')
             @isset($Employee->person_logo)
@@ -102,7 +102,7 @@
                             تعديل البيانات
                         @endslot
                         @slot('action')
-                            {{ url("/Company/$CompanyId/Employee/$Employee->id/Update") }}
+                            {{ url("/Company/Employee/$Employee->id/Update") }}
                         @endslot
                         @slot('person')
                             {{$Employee->id}}
@@ -121,7 +121,7 @@
                             أضافة الموظف
                 @endslot
                 @slot('action')
-                    {{ url("/Company/$CompanyId/Employee/Create") }}
+                    {{ url("/Company/Employee/Create") }}
                 @endslot
             @endif
             <strong>حدث خطأ ما!</strong> حاول مره أخرى!

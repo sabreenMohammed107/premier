@@ -53,6 +53,21 @@
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.print.min.css')}}">
+        <!-- x-editor CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{{asset('webassets/css/editor/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('webassets/css/editor/datetimepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('webassets/css/editor/bootstrap-editable.css')}}">
+    <link rel="stylesheet" href="{{asset('webassets/css/editor/x-editor-style.css')}}"><!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{{asset('webassets/css/data-table/bootstrap-table.css')}}">
+    <link rel="stylesheet" href="{{asset('webassets/css/data-table/bootstrap-editable.css')}}">
+	<!-- select2 CSS
+		============================================ -->
+	<link rel="stylesheet" href="{{asset('webassets/css/select2/select2.min.css')}}">
+    	<!-- chosen CSS
+		============================================ -->
+	<link rel="stylesheet" href="{{asset('webassets/css/chosen/bootstrap-chosen.css')}}">
 	<!-- modals CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/modals.css')}}">
@@ -69,6 +84,7 @@
 ">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css
 ">
+
 
     <!-- modernizr JS
 		============================================ -->

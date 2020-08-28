@@ -18,7 +18,7 @@
 
 <div class="product-status mg-b-15">
     <div class="container-fluid">
-        <a href="{{ url("/Company/$id/Suppliers/Add") }}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة مورد</a>
+        <a href="{{ url("/Company/Suppliers/Add") }}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة مورد</a>
         <div class="row"style="direction:rtl;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
@@ -60,8 +60,8 @@
                                 <td>{{$Supplier->balance_start_date}}</td>
                                 <td>
                                     <div class="product-buttons">
-                                        <a href="{{ url("/Company/$id/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/$id/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#Del{{$Supplier->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                                     </div>
                                 </td>

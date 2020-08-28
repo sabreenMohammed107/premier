@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\DB;
 class ItemsController extends Controller
 {
     //Company->Items
-    public function Items(int $id)
+    public function Items()
     {
+        $id = session('company_id');
         //Items data
         $Items = DB::table('items')
         ->select(DB::raw('sum(additive - subtractive) current_total,items.id,item_image,item_english_name,item_code,balance_start_date,total_open_balance_cost,item_arabic_name'))
@@ -28,8 +29,10 @@ class ItemsController extends Controller
     }
 
     //Add Item
-    public function AddItems(int $compid)
+    public function AddItems()
     {
+        $compid = session('company_id');
+
         //Company details
         $Company = Company::find($compid);
 
@@ -41,8 +44,10 @@ class ItemsController extends Controller
     }
 
     //(Edit - View) Item
-    public function ItemsData(int $compid, int $id, string $type)
+    public function ItemsData(int $id, string $type)
     {
+        $compid = session('company_id');
+
         //Company details
         $Company = Company::find($compid);
         //check for open balance availability
@@ -114,14 +119,14 @@ class ItemsController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company/$request->company_id/Items")->with('flash_success', "تم اضافة المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_success', "تم اضافة المنتج : $request->item_arabic_name");
 
 
         } catch (\Throwable $th) {
 
             DB::rollBack();
             throw $th;
-            return redirect("/Company/$request->company_id/Items")->with('flash_danger', "لم يتم اضافة المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_danger', "لم يتم اضافة المنتج : $request->item_arabic_name");
         }
     }
 
@@ -165,16 +170,16 @@ class ItemsController extends Controller
 
 
                 DB::commit();
-                return redirect("/Company/$request->company_id/Items")->with('flash_success', "تم تعديل بيانات المنتج : $request->item_arabic_name ");
+                return redirect("/Company/Items")->with('flash_success', "تم تعديل بيانات المنتج : $request->item_arabic_name ");
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/$request->company_id/Items")->with('flash_danger', "لم يتم تعديل بيانات المنتج : $request->item_arabic_name بسبب خطأ ما حاول مره أخرى");
+                return redirect("/Company/Items")->with('flash_danger', "لم يتم تعديل بيانات المنتج : $request->item_arabic_name بسبب خطأ ما حاول مره أخرى");
             }
         }else{
             //update a record of person from received request
             $Item->update($request->except(['logo','id','balance_start_date','total_open_balance_qty','total_open_balance_cost','open_item_price']));
-            return redirect("/Company/$request->company_id/Items")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المنتج : $request->item_arabic_name");
 
         }
 
@@ -195,15 +200,15 @@ class ItemsController extends Controller
                 $Item->delete();
 
                 DB::commit();
-                return redirect("/Company/$Item->company_id/Items")->with('flash_success', "تم حذف بيانات المنتج : $Item->item_arabic_name ");
+                return redirect("/Company/Items")->with('flash_success', "تم حذف بيانات المنتج : $Item->item_arabic_name ");
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company/$Item->company_id/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود خطأ ما");
+                return redirect("/Company/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود خطأ ما");
             }
         }else{
-            return redirect("/Company/$Item->company_id/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود حركات تمت عليه");
+            return redirect("/Company/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود حركات تمت عليه");
         }
     }
 }

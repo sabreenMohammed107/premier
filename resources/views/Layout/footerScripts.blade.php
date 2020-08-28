@@ -53,11 +53,34 @@
     <!-- <script src="{{ asset('webassets/js/tawk-chat.js')}}"></script> -->
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-
+    <!--  editable JS
+		============================================ -->
+    <script src="{{asset('webassets/js/editable/jquery.mockjax.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/mock-active.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/select2.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/moment.min.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/bootstrap-datetimepicker.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/bootstrap-editable.js')}}"></script>
+    <script src="{{asset('webassets/js/editable/xediable-active.js')}}"></script>
+    <!-- data table JS
+		============================================ -->
+        <script src="{{asset('webassets/js/data-table/bootstrap-table.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/tableExport.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/data-table-active.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-editable.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-editable.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-resizable.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/colResizable-1.5.source.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-export.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-ar-SA.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-filter-control.min.js')}}"></script>
+        <script src="{{asset('webassets/js/data-table/bootstrap-table-filter.min.js')}}"></script>
+        <script src="{{asset('webassets/js/customDataTable.js')}}"></script>
     <script>
     $(document).ready(function() {
     $('#example').DataTable();
 } );
+
 </script>
 @yield('scripts')
 

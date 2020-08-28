@@ -33,7 +33,7 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div id="dropzone1" class="pro-ad addcoursepro">
-                                                    <form method="POST" action="{{ url("/Company/$Company->id")}}" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" enctype="multipart/form-data">
+                                                    <form method="POST" action="{{ url("/Company")}}" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload" enctype="multipart/form-data">
                                                         {{ method_field('PUT') }}
                                                         {{ csrf_field() }}
                                                         <div class="row">
@@ -213,7 +213,7 @@
 
 
                                         @endphp
-                                        <form action="/Company/{{$Company->id}}/{{$type}}/Safe" method="POST">
+                                        <form action="{{url("/Company/$type/Safe")}}" method="POST">
                                             {{ csrf_field() }}
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="review-content-section">
@@ -251,7 +251,7 @@
                                 </div>
                                 <div class="product-tab-list tab-pane fade" id="INFORMATION">
                                     <div class="row">
-                                        <form action="/Company/{{$Company->id}}/{{$Btype}}/Bank" method="POST">
+                                    <form action="{{url("/Company/$Btype/Bank")}}" method="POST">
                                             {{ csrf_field() }}
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl">
                                                 <div class="review-content-section">

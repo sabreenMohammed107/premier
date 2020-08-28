@@ -73,4 +73,4 @@
     @include('Layout.footer')
 
     @include('Layout.footerScripts')
-    @yield('scripts')
+    {{-- @yield('scripts') --}}

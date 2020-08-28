@@ -10,7 +10,7 @@
         <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/$CompanyId/Suppliers")}}">الموردين</a> <span class="bread-slash"> / </span>
+        <a href="{{ url("/Company/Suppliers")}}">الموردين</a> <span class="bread-slash"> / </span>
     </li>
     <li>
     <span class="bread-blod">
@@ -29,7 +29,7 @@
 		<!-- Single pro tab review Start-->
 		<div class="single-pro-review-area mt-t-30 mg-b-15">
 			<div class="container-fluid">
-                <a href="{{ url("/Company/$CompanyId/Suppliers")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
+                <a href="{{ url("/Company/Suppliers")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
             @component('/Company/components/SupplierForm')
             @slot('image')
             @isset($Supplier->person_logo)
@@ -118,7 +118,7 @@
                             تعديل البيانات
                         @endslot
                         @slot('action')
-                            {{ url("/Company/$CompanyId/Supplier/$Supplier->id/Update") }}
+                            {{ url("/Company/Supplier/$Supplier->id/Update") }}
                         @endslot
                         @slot('person')
                             {{$Supplier->id}}
@@ -137,7 +137,7 @@
                             أضافة المورد
                 @endslot
                 @slot('action')
-                    {{ url("/Company/$CompanyId/Supplier/Create") }}
+                    {{ url("/Company/Supplier/Create") }}
                 @endslot
             @endif
             <strong>حدث خطأ ما!</strong> حاول مره أخرى!

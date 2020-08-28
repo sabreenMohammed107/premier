@@ -42,6 +42,11 @@ class Person extends Model
         return $this->hasOne('App\Models\Company', 'id','company_id');
     }
 
+    public function invoices()
+    {
+        return $this->belongsTo('App\Models\Invoice');
+    }
+
     public function finan_transaction()
     {
         return $this->belongsTo('App\Models\FinanTransaction');

@@ -97,17 +97,17 @@ class AllCompaniesController extends Controller
                          if($request->hasFile('company_logo'))
                          {
                             $company_logo=$request->file('company_logo');
-                   
+
                             $data['company_logo'] = $this->UplaodImage($company_logo);
-            
+
                          }
-                        
-          
-           
-     
+
+
+
+
 
         $this->object::create($data);
-                    
+
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
 
@@ -124,7 +124,7 @@ class AllCompaniesController extends Controller
         $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)->paginate(8);
 
         $companyrow=Company::where('id','=',$id)->first();
-      
+
         return view($this->viewName.'view', compact('companyrow','clients','suppliers','employees'));
     }
 
@@ -137,7 +137,7 @@ class AllCompaniesController extends Controller
     public function edit($id)
     {
         $row=Company::where('id','=',$id)->first();
-      
+
         return view($this->viewName.'edit', compact('row'));
     }
 
@@ -180,17 +180,17 @@ class AllCompaniesController extends Controller
                          if($request->hasFile('company_logo'))
                          {
                             $company_logo=$request->file('company_logo');
-                   
+
                             $data['company_logo'] = $this->UplaodImage($company_logo);
-            
+
                          }
-                        
-          
-           
-     
+
+
+
+
 
                          $this->object::findOrFail($id)->update($data);
-                    
+
         return redirect()->route($this->routeName.'index')->with('flash_success', $this->message);
     }
 
@@ -210,7 +210,7 @@ class AllCompaniesController extends Controller
         $file_name = public_path('uploads/companies/' . $file);
 
 
-        //  }   
+        //  }
         try {
             $row->delete();
             File::delete($file_name);
@@ -250,60 +250,60 @@ class AllCompaniesController extends Controller
     /**
              * Make pagination on employee and return with ajax
              */
-              
-            
+
+
             function fetch_emp(Request $request)
             {
              if($request->ajax())
              {
                  $id=$request->input('company_id');
-            
-            
-             $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)->paginate(8);
-      
-            
-              return view($this->viewName.'employee', compact('employees'));
-            
+
+
+                $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)->paginate(8);
+
+
+                return view($this->viewName.'employee', compact('employees'));
+
            }
             }
 
              /**
              * Make pagination on client and return with ajax
              */
-              
-            
+
+
             function fetch_client(Request $request)
             {
              if($request->ajax())
              {
                  $id=$request->input('company_id');
-            
-            
+
+
              $clients=Person::where('person_type_id',100)->where('company_id',$id)->where('active',1)->paginate(8);
-      
-            
+
+
               return view($this->viewName.'client', compact('clients'));
-            
+
            }
             }
 
             /**
              * Make pagination on supplier and return with ajax
              */
-              
-            
+
+
             function fetch_supplier(Request $request)
             {
              if($request->ajax())
              {
                  $id=$request->input('company_id');
-            
-            
+
+
              $suppliers=Person::where('person_type_id',101)->where('company_id',$id)->where('active',1)->paginate(8);
-      
-            
+
+
               return view($this->viewName.'supplier', compact('suppliers'));
-            
+
            }
             }
 
@@ -313,15 +313,15 @@ class AllCompaniesController extends Controller
              {
                  $id=$request->input('company_id');
             $input=$request->input('searchEmp');
-            
+
              $employees=Person::where('person_type_id',102)->where('company_id',$id)->where('active',1)
              ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
-      
-        
+
+
               return view($this->viewName.'employee', compact('employees'));
-            
+
            }
-            }    
+            }
 
 
             function search_client(Request $request)
@@ -330,15 +330,15 @@ class AllCompaniesController extends Controller
              {
                  $id=$request->input('company_id');
             $input=$request->input('searchClient');
-            
+
              $clients=Person::where('person_type_id',100)->where('company_id',$id)->where('active',1)
              ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
-      
-        
+
+
               return view($this->viewName.'client', compact('clients'));
-            
+
            }
-            }    
+            }
 
 
             function search_sup(Request $request)
@@ -347,13 +347,13 @@ class AllCompaniesController extends Controller
              {
                  $id=$request->input('company_id');
             $input=$request->input('searchSup');
-            
+
              $suppliers=Person::where('person_type_id',101)->where('company_id',$id)->where('active',1)
              ->where('person_name', 'LIKE', '%' . $input . '%')->orWhere('person_nick_name', 'LIKE', '%' . $input . '%')->paginate(8);
-      
-        
+
+
               return view($this->viewName.'supplier', compact('suppliers'));
-            
+
            }
-            }    
+            }
 }

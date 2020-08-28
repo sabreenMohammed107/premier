@@ -34,4 +34,17 @@ class Invoice extends Model
         'notes',
 
     ];
+
+
+    public function invoice_items()
+    {
+        return $this->hasMany('App\Models\InvoiceItem', 'inv_id','id');
+    }
+
+    public function person()
+    {
+        return $this->hasOne('App\Models\Person', 'id','person_id');
+    }
+
+
 }

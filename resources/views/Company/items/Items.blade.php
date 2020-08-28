@@ -25,7 +25,7 @@
 {{-- Items content --}}
 <div class="courses-area">
     <div class="container-fluid">
-    <a href="{{url("/Company/$id/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة صنف</a>
+    <a href="{{url("/Company/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة صنف</a>
         <div class="row mg-b-15" id="item">
             @foreach ($Items as $Item)
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;">
@@ -46,8 +46,8 @@
                         <p><span><i class="fa fa-clock"></i></span> <b>رصيد المخزن الحالى:</b> {{$Item->current_total}}</p>
                     </div>
                     <div class="product-buttons">
-                    <a href="{{url("/Company/$id/Items/$Item->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="{{url("/Company/$id/Items/$Item->id/Edit")}}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="{{url("/Company/Items/$Item->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="{{url("/Company/Items/$Item->id/Edit")}}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     <a href="#" data-toggle="modal" data-target="#del{{$Item->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </div>
                 </div>
@@ -105,10 +105,10 @@ $.ajax({
 
         $('#item').empty();
                         data.forEach(Item => {
-                            var viewUrl = '{{url("/Company/:compid/Items/:id/View")}}';
-                            viewUrl = viewUrl.replace(':id', Item.id).replace(':compid', Item.company_id);
-                            var editUrl = '{{url("/Company/:compid/Items/:id/Edit")}}';
-                            editUrl = editUrl.replace(':id', Item.id).replace(':compid', Item.company_id);
+                            var viewUrl = '{{url("/Company/Items/:id/View")}}';
+                            viewUrl = viewUrl.replace(':id', Item.id);
+                            var editUrl = '{{url("/Company/Items/:id/Edit")}}';
+                            editUrl = editUrl.replace(':id', Item.id);
                             var card = '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;">' +
                 '<div class="courses-inner res-mg-b-30">' +
                     '<div style="text-align: center;">' +

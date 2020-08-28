@@ -18,7 +18,7 @@
 
 <div class="product-status mg-b-15">
     <div class="container-fluid">
-        <a href="{{ url("/Company/$id/Employees/Add") }}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة موظف</a>
+        <a href="{{ url("/Company/Employees/Add") }}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة موظف</a>
         <div class="row"style="direction:rtl;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
@@ -60,8 +60,8 @@
                                 <td>{{$Employee->address}}</td>
                                 <td>
                                     <div class="product-buttons">
-                                        <a href="{{ url("/Company/$id/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/$id/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         <a href="#" data-toggle="modal" data-target="#Del{{$Employee->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                                     </div>
                                 </td>

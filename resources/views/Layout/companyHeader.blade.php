@@ -1,6 +1,6 @@
-    @php
+    {{-- @php
         $company_id = session('company_id');
-    @endphp
+    @endphp --}}
     <!-- Start Left menu area -->
 	<div class="left-sidebar-pro">
 		<nav id="sidebar" class="">
@@ -124,17 +124,17 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="{{ url("/Company/$company_id") }}" class="dropdown-item">تفاصيل الشركة</a>
-												<a href="{{ url("/Company/$company_id/Items")}}" class="dropdown-item">الأصناف</a>
-												<a href="{{ url("/Company/$company_id/Clients")}}" class="dropdown-item">كشف العملاء</a>
-												<a href="{{ url("/Company/$company_id/Suppliers")}}" class="dropdown-item">كشف الموردين </a>
-                                                    <a href="{{ url("/Company/$company_id/Employees")}}" class="dropdown-item">كشف الموظفين</a>
+                                                    <a href="{{ url("/Company") }}" class="dropdown-item">تفاصيل الشركة</a>
+												<a href="{{ url("/Company/Items")}}" class="dropdown-item">الأصناف</a>
+												<a href="{{ url("/Company/Clients")}}" class="dropdown-item">كشف العملاء</a>
+												<a href="{{ url("/Company/Suppliers")}}" class="dropdown-item">كشف الموردين </a>
+                                                    <a href="{{ url("/Company/Employees")}}" class="dropdown-item">كشف الموظفين</a>
 													</div>
 												</li>
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="{{ url("/Company/$company_id") }}" class="dropdown-item">تفاصيل الشركة</a>
+                                                    <a href="{{ url("/Company") }}" class="dropdown-item">تفاصيل الشركة</a>
 												<!-- <a href="#" class="dropdown-item">إضافة خزنة</a>
 												<a href="#" class="dropdown-item">إضافة بنك</a> -->
 													</div>

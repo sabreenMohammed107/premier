@@ -15,8 +15,9 @@ class PersonsController extends Controller
     Employee functions
     */
     //View employees->all()
-    public function Employees(int $id)
+    public function Employees()
     {
+        $id = session('company_id');
         $Employees = DB::table('persons')
         ->where([['company_id','=',$id],['person_type_id','=',102]])->get();
         // return $Employees;
@@ -27,8 +28,9 @@ class PersonsController extends Controller
     }
 
     //Add Employee
-    public function AddEmployees(int $compid, string $type)
+    public function AddEmployees(string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
 
@@ -40,8 +42,9 @@ class PersonsController extends Controller
     }
 
     //(Edit - View) Employee
-    public function EmployeesData(int $compid, int $id, string $type)
+    public function EmployeesData(int $id, string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
         //check for open balance availability
@@ -144,13 +147,13 @@ class PersonsController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company/$request->company_id/Employees")->with('flash_success', "تم اضافة الموظف : $request->person_name");
+            return redirect("/Company/Employees")->with('flash_success', "تم اضافة الموظف : $request->person_name");
 
 
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Company/$request->company_id/Employees")->with('flash_danger', "لم يتم اضافة الموظف : $request->person_name");
+            return redirect("/Company/Employees")->with('flash_danger', "لم يتم اضافة الموظف : $request->person_name");
         }
     }
 
@@ -217,11 +220,11 @@ class PersonsController extends Controller
 
 
                 DB::commit();
-                return redirect("/Company/$request->company_id/Employees")->with('flash_success', "تم تعديل بيانات الموظف : $request->person_name بسبب خطأ ما حاول مره أخرى");
+                return redirect("/Company/Employees")->with('flash_success', "تم تعديل بيانات الموظف : $request->person_name بسبب خطأ ما حاول مره أخرى");
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/$request->company_id/Employees")->with('flash_danger', "لم يتم تعديل بيانات الموظف : $request->person_name");
+                return redirect("/Company/Employees")->with('flash_danger', "لم يتم تعديل بيانات الموظف : $request->person_name");
             }
         }else{
             //Configure
@@ -237,7 +240,7 @@ class PersonsController extends Controller
             }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
-            return redirect("/Company/$request->company_id/Employees")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على الموظف : $request->person_name");
+            return redirect("/Company/Employees")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على الموظف : $request->person_name");
 
         }
 
@@ -259,15 +262,15 @@ class PersonsController extends Controller
                 $Person->delete();
 
                 DB::commit();
-                return redirect("/Company/$Person->company_id/Employees")->with('flash_success', "تم حذف بيانات الموظف : $Person->person_name ");
+                return redirect("/Company/Employees")->with('flash_success', "تم حذف بيانات الموظف : $Person->person_name ");
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 throw $th;
-                return redirect("/Company/$Person->company_id/Employees")->with('flash_danger', "لم يتم حذف الموظف: $Person->person_name لوجود خطأ ما");
+                return redirect("/Company/Employees")->with('flash_danger', "لم يتم حذف الموظف: $Person->person_name لوجود خطأ ما");
             }
         }else{
-            return redirect("/Company/$Person->company_id/Employees")->with('flash_danger', "لم يتم حذف الموظف: $Person->person_name لوجود حركات تمت عليه");
+            return redirect("/Company/Employees")->with('flash_danger', "لم يتم حذف الموظف: $Person->person_name لوجود حركات تمت عليه");
         }
     }
 
@@ -275,8 +278,9 @@ class PersonsController extends Controller
     Supplier functions
     */
     //View suppliers->all()
-    public function Suppliers(int $id)
+    public function Suppliers()
     {
+        $id = session('company_id');
         //All Company suppliers
         $Suppliers = DB::table('persons')
         ->where([['company_id','=',$id],['person_type_id','=',101]])->get();
@@ -288,8 +292,9 @@ class PersonsController extends Controller
     }
 
     //Add Supplier
-    public function AddSuppliers(int $compid, string $type)
+    public function AddSuppliers(string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
 
@@ -301,8 +306,9 @@ class PersonsController extends Controller
     }
 
     //(Edit - View) Supplier
-    public function SuppliersData(int $compid, int $id, string $type)
+    public function SuppliersData(int $id, string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
         //check for open balance availability
@@ -413,13 +419,13 @@ class PersonsController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company/$request->company_id/Suppliers")->with('flash_success', "تم اضافة المورد : $request->person_name");
+            return redirect("/Company/Suppliers")->with('flash_success', "تم اضافة المورد : $request->person_name");
 
 
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Company/$request->company_id/Suppliers")->with('flash_danger', "لم يتم اضافة الموظف : $request->person_name بسبب خطأ ما حاول مرة أخرى");
+            return redirect("/Company/Suppliers")->with('flash_danger', "لم يتم اضافة الموظف : $request->person_name بسبب خطأ ما حاول مرة أخرى");
         }
     }
 
@@ -494,12 +500,12 @@ class PersonsController extends Controller
                 }
 
                 DB::commit();
-                return redirect("/Company/$request->company_id/Suppliers")->with('flash_success', "تم تعديل بيانات المررد : $request->person_name");
+                return redirect("/Compa/Suppliers")->with('flash_success', "تم تعديل بيانات المررد : $request->person_name");
 
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/$request->company_id/Suppliers")->with('flash_danger', "لم يتم تعديل بيانات المورد : $request->person_name");
+                return redirect("/Compa/Suppliers")->with('flash_danger', "لم يتم تعديل بيانات المورد : $request->person_name");
 
 
             }
@@ -517,7 +523,7 @@ class PersonsController extends Controller
             }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
-            return redirect("/Company/$request->company_id/Suppliers")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المورد : $request->person_name");
+            return redirect("/Compan/Suppliers")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المورد : $request->person_name");
         }
 
 
@@ -540,15 +546,15 @@ class PersonsController extends Controller
                 $Person->delete();
 
                 DB::commit();
-                return redirect("/Company/$Person->company_id/Suppliers")->with('flash_success', "تم حذف بيانات المورد : $Person->person_name ");
+                return redirect("/Company/Suppliers")->with('flash_success', "تم حذف بيانات المورد : $Person->person_name ");
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company/$Person->company_id/Suppliers")->with('flash_danger', "لم يتم حذف المورد: $Person->person_name لوجود خطأ ما");
+                return redirect("/Company/Suppliers")->with('flash_danger', "لم يتم حذف المورد: $Person->person_name لوجود خطأ ما");
             }
         }else{
-            return redirect("/Company/$Person->company_id/Suppliers")->with('flash_danger', "لم يتم حذف المورد: $Person->person_name لوجود حركات تمت عليه");
+            return redirect("/Company/Suppliers")->with('flash_danger', "لم يتم حذف المورد: $Person->person_name لوجود حركات تمت عليه");
         }
     }
 
@@ -556,8 +562,9 @@ class PersonsController extends Controller
     Client functions
     */
     //View clients->all()
-    public function Clients(int $id)
+    public function Clients()
     {
+        $id = session('company_id');
         //All Company suppliers
         $Clients = DB::table('persons')
         ->where([['company_id','=',$id],['person_type_id','=',100]])->get();
@@ -569,8 +576,9 @@ class PersonsController extends Controller
     }
 
     //Add Client
-    public function AddClients(int $compid, string $type)
+    public function AddClients(string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
 
@@ -582,8 +590,9 @@ class PersonsController extends Controller
     }
 
     //(Edit - View) Client
-    public function ClientsData(int $compid, int $id, string $type)
+    public function ClientsData(int $id, string $type)
     {
+        $compid = session('company_id');
         //Company details
         $Company = Company::find($compid);
         //check for open balance availability
@@ -695,13 +704,13 @@ class PersonsController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company/$request->company_id/Clients")->with('flash_success', "تم اضافة العميل : $request->person_name");
+            return redirect("/Company/Clients")->with('flash_success', "تم اضافة العميل : $request->person_name");
 
 
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Company/$request->company_id/Clients")->with('flash_danger', "لم يتم اضافة العميل : $request->person_name بسبب خطأ ما حاول مرة أخرى");
+            return redirect("/Company/Clients")->with('flash_danger', "لم يتم اضافة العميل : $request->person_name بسبب خطأ ما حاول مرة أخرى");
         }
     }
 
@@ -775,12 +784,12 @@ class PersonsController extends Controller
                 //update a record of person from received request
                 $Person->update($request->except(['logo','role_name','id']));
                 DB::commit();
-                return redirect("/Company/$request->company_id/Clients")->with('flash_success', "تم تعديل بيانات العميل : $request->person_name");
+                return redirect("/Compan/Clients")->with('flash_success', "تم تعديل بيانات العميل : $request->person_name");
 
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/$request->company_id/Clients")->with('flash_danger', "لم يتم تعديل بيانات العميل : $request->person_name");
+                return redirect("/Compan/Clients")->with('flash_danger', "لم يتم تعديل بيانات العميل : $request->person_name");
 
 
             }
@@ -798,7 +807,7 @@ class PersonsController extends Controller
             }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
-            return redirect("/Company/$request->company_id/Clients")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على العميل : $request->person_name");
+            return redirect("/Compan/Clients")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على العميل : $request->person_name");
         }
 
 
@@ -822,15 +831,15 @@ class PersonsController extends Controller
                 $Person->delete();
 
                 DB::commit();
-                return redirect("/Company/$Person->company_id/Clients")->with('flash_success', "تم حذف بيانات العميل : $Person->person_name ");
+                return redirect("/Company/Clients")->with('flash_success', "تم حذف بيانات العميل : $Person->person_name ");
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company/$Person->company_id/Clients")->with('flash_danger', "لم يتم حذف العميل: $Person->person_name لوجود خطأ ما");
+                return redirect("/Company/Clients")->with('flash_danger', "لم يتم حذف العميل: $Person->person_name لوجود خطأ ما");
             }
         }else{
-            return redirect("/Company/$Person->company_id/Clients")->with('flash_danger', "لم يتم حذف العميل: $Person->person_name لوجود حركات تمت عليه");
+            return redirect("/Company/Clients")->with('flash_danger', "لم يتم حذف العميل: $Person->person_name لوجود حركات تمت عليه");
         }
     }
 }

@@ -26,4 +26,10 @@ class InvoiceItem extends Model
         'taxt_percentage',
         'notes',
     ];
+
+    //relation with persons
+    public function invoice()
+    {
+        return $this->belongsTo('App\Models\Invoice');
+    }
 }

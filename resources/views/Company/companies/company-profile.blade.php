@@ -289,7 +289,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="skill-title">
-                                                <a href="{{ url("/Company/$Company->id/edit")}}" class="btn btn-primary waves-effect waves-light mg-b-15" style="display: block;">تعديل بيانات الشركة</a>
+                                                <a href="{{ url("/Company/edit")}}" class="btn btn-primary waves-effect waves-light mg-b-15" style="display: block;">تعديل بيانات الشركة</a>
                                                     <h2>
                                                         البيانات الأساسية
                                                     </h2>
