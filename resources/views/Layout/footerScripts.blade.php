@@ -1,6 +1,6 @@
-    <!-- jquery
+ <!-- jquery
 		============================================ -->
-		<script src="{{ asset('webassets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+    <script src="{{ asset('webassets/js/vendor/jquery-1.12.4.min.js')}}"></script>
     <!-- bootstrap JS
 		============================================ -->
     <script src="{{ asset('webassets/js/bootstrap.min.js')}}"></script>
@@ -30,18 +30,40 @@
 		============================================ -->
     <script src="{{ asset('webassets/js/metisMenu/metisMenu.min.js')}}"></script>
     <script src="{{ asset('webassets/js/metisMenu/metisMenu-active.js')}}"></script>
-    <!-- morrisjs JS
+    <!-- data table JS
 		============================================ -->
-    <script src="{{ asset('webassets/js/sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{ asset('webassets/js/sparkline/jquery.charts-sparkline.js')}}"></script>
-    <!-- calendar JS
+    <script src="{{ asset('webassets/js/data-table/bootstrap-table.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/tableExport.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/data-table-active.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/bootstrap-table-editable.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/bootstrap-editable.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/bootstrap-table-resizable.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/colResizable-1.5.source.js')}}"></script>
+    <script src="{{ asset('webassets/js/data-table/bootstrap-table-export.js')}}"></script>
+    <!--  editable JS
 		============================================ -->
-    <script src="{{ asset('webassets/js/calendar/moment.min.js')}}"></script>
-    <script src="{{ asset('webassets/js/calendar/fullcalendar.min.js')}}"></script>
-    <script src="{{ asset('webassets/js/calendar/fullcalendar-active.js')}}"></script>
-        <!-- tab JS
+    <script src="{{ asset('webassets/js/editable/jquery.mockjax.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/mock-active.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/select2.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/moment.min.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/bootstrap-datetimepicker.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/bootstrap-editable.js')}}"></script>
+    <script src="{{ asset('webassets/js/editable/xediable-active.js')}}"></script>
+    <!-- Chart JS
 		============================================ -->
-        <script src="js/tab.js"></script>
+    <script src="{{ asset('webassets/js/chart/jquery.peity.min.js')}}"></script>
+    <script src="{{ asset('webassets/js/peity/peity-active.js')}}"></script>
+	<!-- chosen JS
+		============================================ -->
+	<script src="{{ asset('webassets/js/chosen/chosen.jquery.js')}}"></script>
+	<script src="{{ asset('webassets/js/chosen/chosen-active.js')}}"></script>
+	<!-- select2 JS
+		============================================ -->
+	<script src="{{ asset('webassets/js/select2/select2.full.min.js')}}"></script>
+	<script src="{{ asset('webassets/js/select2/select2-active.js')}}"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="{{ asset('webassets/js/tab.js')}}"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="{{ asset('webassets/js/plugins.js')}}"></script>
@@ -51,6 +73,7 @@
     <!-- tawk chat JS
 		============================================ -->
     <!-- <script src="{{ asset('webassets/js/tawk-chat.js')}}"></script> -->
+<<<<<<< HEAD
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <!--  editable JS
@@ -82,6 +105,8 @@
 } );
 
 </script>
+=======
+>>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a
 @yield('scripts')
 
 </body>

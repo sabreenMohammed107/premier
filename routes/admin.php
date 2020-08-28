@@ -35,6 +35,22 @@ Route::post('/saveCase3', 'WorkRoleController@saveCase3')->name('saveCase3');
 Route::post('/saveCase4', 'WorkRoleController@saveCase4')->name('saveCase4');
 
 
+/*********************==cash-purch==******************* */
+Route::resource('/cash-purch', 'CashPurchasingController');
+Route::get('/dynamicCompany.fetch', 'CashPurchasingController@companyFetch')->name('dynamicCompany.fetch');
+Route::post('/update.criterion', 'CashPurchasingController@updateCriterion')->name('update.criterion');
+Route::post('/update.guided', 'CashPurchasingController@updateGuided')->name('update.guided');
+Route::post('/update.confirmed', 'CashPurchasingController@updateConfirmed')->name('update.confirmed');
+/*********************==sale-purch==******************* */
+Route::resource('/cash-sale', 'SalePurchasingController');
+Route::get('/dynamicCompany.salefetch', 'SalePurchasingController@companyFetch')->name('dynamicCompany.salefetch');
+Route::post('/update.salecriterion', 'SalePurchasingController@updateCriterion')->name('update.salecriterion');
+Route::post('/update.saleguided', 'SalePurchasingController@updateGuided')->name('update.saleguided');
+Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')->name('update.saleconfirmed');
+
+
+
+
 
 
 

@@ -102,8 +102,8 @@
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a>
-														<a href="#" class="dropdown-item">مدفوعات نقدية</a>
-														<a href="#" class="dropdown-item">مقبوضات نقدية</a>
+														<a href="{{route('cash-purch.index')}}" class="dropdown-item">مدفوعات نقدية</a>
+														<a href="{{route('cash-sale.index')}}" class="dropdown-item">مقبوضات نقدية</a>
 														<a href="#" class="dropdown-item">مبيعات</a>
 														<a href="#" class="dropdown-item">مشتريات</a>
 														<a href="#" class="dropdown-item">قيود ألية</a>
@@ -148,7 +148,7 @@
 											<a data-toggle="collapse" data-target="#demoevent" href="#">الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demoevent" class="collapse dropdown-header-top">
 												<li><a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a></li>
-												<li><a href="#" class="dropdown-item">مدفوعات نقدية</a></li>
+												<li><a href="{{route('cash-purch.index')}}" class="dropdown-item">مدفوعات نقدية</a></li>
 												<li><a href="#" class="dropdown-item">مقبوضات نقدية</a></li>
 												<li><a href="#" class="dropdown-item">مبيعات</a></li>
 												<li><a href="#" class="dropdown-item">مشتريات</a></li>

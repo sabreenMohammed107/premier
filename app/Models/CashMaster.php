@@ -32,4 +32,14 @@ class CashMaster extends Model
         'confirm',
         'notes',
     ];
+    
+    public function guided()
+    {
+        return $this->belongsTo('App\Models\GuidedItem','guided_item_id');
+    }
+    public function service()
+    {
+        return $this->belongsTo('App\Models\ServiceType','service_type_id');
+    }
+    
 }
