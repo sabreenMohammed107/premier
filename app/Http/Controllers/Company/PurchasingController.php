@@ -50,10 +50,14 @@ class PurchasingController extends Controller
         $CIT_Items = BusinessItemsSetup::find(101);
         $CIT_Services = BusinessItemsSetup::find(102);
 
+        $Items = DB::table('items')
+            ->where('company_id','=',$id)->get();
+
         return view('Company.invoices.purchasing.create',[
             'Company'   => $Company,
             'Suppliers' => $Suplliers,
             'VAT'=>$VAT,
+            'Items'=>$Items,
             'CIT_Items'=>$CIT_Items,
             'CIT_Services'=>$CIT_Services,
 
@@ -197,12 +201,32 @@ class PurchasingController extends Controller
         }
     }
 
-    public function DeleteInvoiceItem(int $inv_id, int $id)
+    public function DeleteInvoiceItem(Request $req)
     {
-        $Item = InvoiceItem::find($id);
-        $Item->delete();
+        if ($req->ajax()) {
+            $Item = InvoiceItem::find($req->id);
+            $Item->delete();
+            $rowCount = $req->rowCount;
 
-        return redirect("/Invoices/Purchasing/$inv_id/Edit")->with('flash_success', "تم مسح المنتج $Item->item_text بنجاح");
+            $Invoice_Items = DB::table('invoice_items')
+            ->where('inv_id','=',$Item->inv_id)->get();
+
+            $Items = DB::table('items')
+            ->where('company_id','=',$req->compid)->orderBy('id', 'desc')->get();
+
+
+            $ajaxComponent = view('Company.components.ajax.PurchasingRowUpdate',[
+                'rowCount'=>$rowCount,
+                'Items'=>$Items,
+                'Invoice_Items'=>$Invoice_Items,
+            ]);
+
+
+            return $ajaxComponent->render();
+        }
+
+
+        // return redirect("/Invoices/Purchasing/$inv_id/Edit")->with('flash_success', "تم مسح المنتج $Item->item_text بنجاح");
     }
 
     public function UpdateInvoice(Request $request)

@@ -17,7 +17,7 @@
     $d_none_inp = 'style=display:inline-block;';
  }
 @endphp
-<tr data-id="{{$counter}}">
+<tr id="Item{{$InvItem->id}}" data-id="{{$counter}}">
 <td>{{$counter}}</td>
     <td >
         <div class="bt-df-checkbox">
@@ -103,10 +103,11 @@
                 <span class="educate-icon educate-danger modal-check-pro information-icon-pro"> </span>
                 <h2>{{$InvItem->item_text}}</h2>
                 <h4>هل تريد حذف جميع بيانات الصنف ؟  </h4>
+                <h4>سيتم حذف المنتجات التي لم يتم حفظ تدوينها</h4>
             </div>
             <div class="modal-footer info-md">
                 <a data-dismiss="modal" href="#">إلغــاء</a>
-            <a href="{{url("/Invoices/Purchasing/$InvItem->inv_id/Remove/$InvItem->id")}}" onclick="headCalculations();">حـذف</a>
+            <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}});">حـذف</a>
             </div>
         </div>
     </div>
@@ -117,6 +118,7 @@
 
 <script>
     var id = "{{$counter}}";
+
     $("input[type=radio][name=optionsRadios{{$counter}}]").change(function() {
         // alert('checked');
         var parent = $("#outitem{{$counter}}");
@@ -234,6 +236,32 @@
         }
         headCalculations();
     })
+
+    function DeleteInvoiceItem(id) {
+        $("#del{{$counter}}").modal('hide');
+        $('.modal-backdrop.fade.in').remove();
+        $('.modal-open').css('overflow-y','scroll');
+        $.ajax({
+            type:'GET',
+            url:"{{url('/Invoices/Purchasing/Remove/Item')}}",
+            data:{
+                id : id,
+                rowCount : "{{$counter}}",
+                compid : $('#compid').val(),
+            },
+            success:function(data) {
+                $('#rows').empty();
+                // alert(data);
+                $('#rows').prepend(data)
+                $('#puchasetable #optionsRadios'+rowCount).focus();
+                $('.chosen-select').select2();
+                headCalculations();
+            },
+            error: function (request, status, error) {
+                console.log(request.responseText);
+            }
+        });
+    }
 
 
 

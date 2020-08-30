@@ -290,7 +290,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             }
                             </style>
                             <h3 style="text-align:right">الأصناف</h3>
-                            <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button>
+                            {{-- <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button> --}}
                             <table class="table-striped" id="puchasetable"
                                 data-locale="ar-SA"
                                 data-pagination="true"

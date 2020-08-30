@@ -10,7 +10,7 @@
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="{{ asset('webassets/image/x-icon')}}" href="img/favicon.ico">
-  
+
 
     <!-- Google Fonts
 		============================================ -->
@@ -55,23 +55,7 @@
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{ asset('webassets/css/calendar/fullcalendar.print.min.css')}}">
-<<<<<<< HEAD
-        <!-- x-editor CSS
-    ============================================ -->
-    <link rel="stylesheet" href="{{asset('webassets/css/editor/select2.css')}}">
-    <link rel="stylesheet" href="{{asset('webassets/css/editor/datetimepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('webassets/css/editor/bootstrap-editable.css')}}">
-    <link rel="stylesheet" href="{{asset('webassets/css/editor/x-editor-style.css')}}"><!-- normalize CSS
-		============================================ -->
-    <link rel="stylesheet" href="{{asset('webassets/css/data-table/bootstrap-table.css')}}">
-    <link rel="stylesheet" href="{{asset('webassets/css/data-table/bootstrap-editable.css')}}">
-	<!-- select2 CSS
-		============================================ -->
-	<link rel="stylesheet" href="{{asset('webassets/css/select2/select2.min.css')}}">
-    	<!-- chosen CSS
-		============================================ -->
-	<link rel="stylesheet" href="{{asset('webassets/css/chosen/bootstrap-chosen.css')}}">
-=======
+
     <!-- x-editor CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/editor/select2.css')}}">
@@ -88,7 +72,7 @@
 	<!-- chosen CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/chosen/bootstrap-chosen.css')}}">
->>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a
+{{-- >>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a --}}
 	<!-- modals CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/modals.css')}}">
@@ -98,7 +82,7 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/responsive.css')}}">
-<<<<<<< HEAD
+
         <!-- forms CSS
 		============================================ -->
         <link rel="stylesheet" href="{{ asset('webassets/css/form/all-type-forms.css')}}">
@@ -108,8 +92,7 @@
 ">
 
 
-=======
->>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a
+{{-- >>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a --}}
     <!-- modernizr JS
 		============================================ -->
     <script src="{{ asset('webassets/js/vendor/modernizr-2.8.3.min.js')}}"></script>

@@ -27,6 +27,7 @@ function ajax_row(url) {
             $('#rows').prepend(data)
             $('#puchasetable #optionsRadios'+rowCount).focus();
             $('.chosen-select').select2();
+            // addcustomrow();
     },
     error: function (request, status, error) {
         console.log(request.responseText);

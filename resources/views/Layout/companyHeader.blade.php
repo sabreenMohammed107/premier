@@ -110,8 +110,8 @@
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الفواتير </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-													<a href="#" class="dropdown-item">  مشتريات</a>
-												<a href="#" class="dropdown-item"> مبيعات </a>
+													<a href="{{url('Invoices/Purchasing')}}" class="dropdown-item">  مشتريات</a>
+												    <a href="{{url('Invoices/Sales')}}" class="dropdown-item"> مبيعات </a>
 													</div>
 												</li>
 												<li class="nav-item dropdown res-dis-nn">
@@ -186,8 +186,8 @@
                                         <li>
 											<a data-toggle="collapse" data-target="#demopro" href="#">الفواتير <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demopro" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">  مشتريات</a></li>
-												<li><a href="#" class="dropdown-item"> مبيعات </a></li>
+                                            <li><a href="{{url('/Invoices/Purchasing')}}" class="dropdown-item">  مشتريات</a></li>
+												<li><a href="{{url('/Invoices/Sales')}}" class="dropdown-item"> مبيعات </a></li>
 											</ul>
                                         </li>
                                         <li>

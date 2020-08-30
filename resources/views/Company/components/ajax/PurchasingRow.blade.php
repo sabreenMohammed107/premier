@@ -22,24 +22,24 @@
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-            <input type="number" id="itemprice{{$rowCount}}" class="form-control item_price" placeholder="">
+            <input type="number" id="itemprice{{$rowCount}}" value="0" class="form-control item_price" placeholder="">
         </div>
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-            <input type="number"  id="qty{{$rowCount}}" class="form-control item_quantity" placeholder="">
+            <input type="number"  id="qty{{$rowCount}}" value="0" class="form-control item_quantity" placeholder="">
         </div>
     </td>
     <td id="total{{$rowCount}}" class="total_item_price">
-
+        0
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-            <input type="number" id="discount{{$rowCount}}" class="form-control item_discount" placeholder="">
+            <input type="number" id="discount{{$rowCount}}" value="0" class="form-control item_discount" placeholder="">
         </div>
     </td>
     <td id="totalafterdiscount{{$rowCount}}" class="total_after_discounts">
-
+0
     </td>
     <td>
     <div class="bt-df-checkbox">
@@ -65,6 +65,7 @@
 </tr>
 
 <script>
+
             var id = "{{$rowCount}}";
             $("input[type=radio][name=optionsRadios{{$rowCount}}]").change(function() {
                 // alert(checked);

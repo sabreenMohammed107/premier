@@ -99,7 +99,7 @@ Route::namespace('Company')->group(function () {
     //(Edit - View) an invoice
     Route::get('/Invoices/Purchasing/{inv_id}/Edit','PurchasingController@EditInvoice');
     Route::get('/Invoices/Purchasing/FetchItems','PurchasingController@FetchItems');
-    Route::get('/Invoices/Purchasing/{inv_id}/Remove/{id}','PurchasingController@DeleteInvoiceItem');
+    Route::get('/Invoices/Purchasing/Remove/Item','PurchasingController@DeleteInvoiceItem');
     Route::post('/Invoices/Purchasing/Update','PurchasingController@UpdateInvoice');
     Route::get('/Invoices/Sales/{inv_id}/Edit','SalesController@EditInvoice');
     Route::get('/Invoices/Sales/{inv_id}/Remove/{id}','SalesController@DeleteInvoiceItem');

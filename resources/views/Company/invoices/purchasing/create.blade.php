@@ -352,6 +352,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
         @endsection
         @section('scripts')
         <script>
+            headCalculations();
             function headCalculations() {
                     var total = 0;
                     var total_after_discounts = 0;

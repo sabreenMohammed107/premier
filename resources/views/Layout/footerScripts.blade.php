@@ -73,7 +73,7 @@
     <!-- tawk chat JS
 		============================================ -->
     <!-- <script src="{{ asset('webassets/js/tawk-chat.js')}}"></script> -->
-<<<<<<< HEAD
+
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <!--  editable JS
@@ -105,8 +105,7 @@
 } );
 
 </script>
-=======
->>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a
+
 @yield('scripts')
 
 </body>

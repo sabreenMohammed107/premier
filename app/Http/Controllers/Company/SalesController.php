@@ -160,7 +160,7 @@ class SalesController extends Controller
         $Item = InvoiceItem::find($id);
         $Item->delete();
 
-        return redirect("/Invoices/Sales/$inv_id/Edit")->with('flash_success', "تم مسح المنتج $Item->item_text بنجاح");
+        // return redirect("/Invoices/Sales/$inv_id/Edit")->with('flash_success', "تم مسح المنتج $Item->item_text بنجاح");
     }
 
     public function UpdateInvoice(Request $request)
