@@ -38,8 +38,8 @@ class CashPurchasingController extends Controller
         $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $company_id=0;
         $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
-
-        return view($this->viewName . 'index', compact('rows', 'companies'));
+        $guided_items=GuidedItem::all();
+        return view($this->viewName . 'index', compact('rows', 'companies','guided_items'));
     }
     /**
      * Show the form for get all with company.
@@ -52,8 +52,11 @@ class CashPurchasingController extends Controller
         $company_id=$request->input('company_id');
         $guided_items=GuidedItem::all();
         $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
-        
-         return view($this->viewName .'indexTable', compact('rows','guided_items'))->render();
+        // return response()->json([
+        //     'count' => count($rows),
+        //     'data' => $rows // or whatever
+        // ]);
+          return view($this->viewName .'indexTable', compact('rows','guided_items'))->render();
 
     }
     /**

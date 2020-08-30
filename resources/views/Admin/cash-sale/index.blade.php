@@ -236,7 +236,9 @@
 
                 },
                 success: function(result) {
+                    $('#table').bootstrapTable('destroy');
                     $('#indexTable').html(result);
+                    $('#table').bootstrapTable()
 
                 }
             });
@@ -261,7 +263,9 @@
 
             },
             success: function(result) {
+                $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
+                $('#table').bootstrapTable()
             }
         });
 
@@ -282,7 +286,9 @@
 
             },
             success: function(result) {
+                $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
+                $('#table').bootstrapTable()
             }
         });
 
@@ -309,7 +315,9 @@
 
             },
             success: function(result) {
+                $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
+                $('#table').bootstrapTable()
             }
         });
 
