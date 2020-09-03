@@ -1,8 +1,10 @@
 
 $(function() {
-    $('#puchasetable').bootstrapTable()
+    debugger;
+    $('#puchasetable').bootstrapTable();
+    var focus = $('#puchasetable > tbody  > tr').length;
+    $('#puchasetable #optionsRadios').focus();
     $('.no-records-found').remove();
-    $('.chosen-select').select2();
   })
 
 var table = $('#puchasetable')
@@ -20,14 +22,18 @@ function ajax_row(url) {
                 compid : $('#compid').val()
     },
         success:function(data) {
+            debugger;
             rows.push(data);
             ++rowCount;
+            var trs = $('#puchasetable > tbody').html();
+            console.log(trs);
+            $('#puchasetable').bootstrapTable('destroy');
             $('.no-records-found').remove();
-
-            $('#rows').prepend(data)
+            $('#rows').html(trs);
+            $('#rows').prepend(data);
+            // $('.chosen-select').select2();
+            $('#puchasetable').bootstrapTable();
             $('#puchasetable #optionsRadios'+rowCount).focus();
-            $('.chosen-select').select2();
-            // addcustomrow();
     },
     error: function (request, status, error) {
         console.log(request.responseText);
@@ -46,6 +52,7 @@ function fetch_items(url) {
                 compid : $('#compid').val()
     },
         success:function(data) {
+            $('#puchasetable').bootstrapTable('destroy');
             rows.push(data);
             ++rowCount;
             $('.no-records-found').remove();
@@ -53,6 +60,7 @@ function fetch_items(url) {
             $('#rows').prepend(data)
             $('#puchasetable #optionsRadios'+rowCount).focus();
             $('.chosen-select').select2();
+            $('#puchasetable').bootstrapTable();
     },
     error: function (request, status, error) {
         console.log(request.responseText);

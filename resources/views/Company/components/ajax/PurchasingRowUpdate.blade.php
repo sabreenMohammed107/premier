@@ -23,22 +23,22 @@
         <div class="bt-df-checkbox">
         <input id="inv_type{{$counter}}" type="hidden" name="" class="inv_type" value="update">
         <input id="id{{$counter}}" type="hidden" name="" class="id" value="{{$InvItem->id}}">
-        <input class="isStored" {{$checked_no ?? ''}} type="radio" value="no" id="optionsRadios{{$counter}}" name="optionsRadios{{$counter}}">
+        <input class="isStored" {{$checked_no ?? ''}} onclick="editRadioStored({{$counter}})" type="radio" value="no" id="optionsRadios{{$counter}}" name="optionsRadios{{$counter}}">
             <label><b> لا </b></label>
-            <input class="radio-checked isStored" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$counter}}sec" name="optionsRadios{{$counter}}">
+            <input class="radio-checked isStored" onclick="editRadioStored({{$counter}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$counter}}sec" name="optionsRadios{{$counter}}">
             <label><b> نعم </b></label>
         </div>
     </td>
     <td>
         <div id="outitem{{$counter}}"  class="input-mark-inner mg-b-22 outitem">
-        <input type="text" {{$d_none_inp ?? ''}} class="item_arabic_name{{$counter}}" id="item_arabic_name{{$counter}}" value="{{$InvItem->item_text}}" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
+        <input type="text" {{$d_none_inp ?? ''}} oninput="editVal({{$counter}})" class="item_arabic_name{{$counter}}" id="item_arabic_name{{$counter}}" value="{{$InvItem->item_text}}" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
 
         </div>
-    <select id="select{{$counter}}" {{$d_none_sel ?? ''}} class="form-control try item_id" placeholder="أختر المنتج">
+    <select id="select{{$counter}}" {{$d_none_sel ?? ''}} onchange="editSelectVal({{$counter}})" class="form-control try item_id" placeholder="أختر المنتج">
             @foreach ($Items as $Item)
             <option
             @if ($InvItem->item_id == $Item->id)
-                selected
+                selected="selected"
             @endif
             value="{{$Item->id}}">{{$Item->item_arabic_name}}</option>
             @endforeach
@@ -46,12 +46,12 @@
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" id="itemprice{{$counter}}" value="{{$InvItem->item_price}}" class="form-control item_price" placeholder="">
+        <input type="number" oninput="itemPrice({{$counter}})" id="itemprice{{$counter}}" value="{{$InvItem->item_price}}" class="form-control item_price" placeholder="">
         </div>
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" id="qty{{$counter}}" value="{{$InvItem->item_quantity}}" class="form-control item_quantity" placeholder="">
+        <input type="number" oninput="itemQty({{$counter}})" id="qty{{$counter}}" value="{{$InvItem->item_quantity}}" class="form-control item_quantity" placeholder="">
         </div>
     </td>
     <td id="total{{$counter}}" class="total_item_price">
@@ -59,7 +59,7 @@
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" id="discount{{$counter}}" value="{{$InvItem->item_discount}}" class="form-control item_discount" placeholder="">
+        <input type="number" oninput="itemDiscount({{$counter}})" id="discount{{$counter}}" value="{{$InvItem->item_discount}}" class="form-control item_discount" placeholder="">
         </div>
     </td>
     <td id="totalafterdiscount{{$counter}}" class="total_after_discounts">
@@ -71,7 +71,7 @@
         @if ($InvItem->tax_exemption == 1)
             checked
         @endif
-        type="checkbox" id="optionsRadioscheck{{$counter}}" name="optionsRadioscheck{{$counter}}">
+        type="checkbox" onkeypress="enterForRow(event,{{$counter}})" onchange="taxExemptionCheck({{$counter}})" id="optionsRadioscheck{{$counter}}" name="optionsRadioscheck{{$counter}}">
     </div>
     </td>
     <td id="totalvat{{$counter}}" class="input-mark-inner mg-b-22 vat_tax_value">
@@ -107,7 +107,7 @@
             </div>
             <div class="modal-footer info-md">
                 <a data-dismiss="modal" href="#">إلغــاء</a>
-            <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}});">حـذف</a>
+                <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}},{{$counter}});">حـذف</a>
             </div>
         </div>
     </div>
@@ -116,156 +116,6 @@
     </td>
 </tr>
 
-<script>
-    var id = "{{$counter}}";
-
-    $("input[type=radio][name=optionsRadios{{$counter}}]").change(function() {
-        // alert('checked');
-        var parent = $("#outitem{{$counter}}");
-        var select = $("#select{{$counter}}");
-
-        if(this.value == 'no'){
-            // $(parent).html('<input type="text" name="item_arabic_name" class="form-control" placeholder="اسم المنتج">')
-            $("#item_arabic_name{{$counter}}").css('display','inline-block').attr('disabled',false);
-            $(select).css('display','none').attr('disabled','disabled');
-        }else{
-            // $(parent).empty();
-            $("#item_arabic_name{{$counter}}").css('display','none').attr('disabled','disabled');
-
-            $(select).css('display','inline-block').attr('disabled',false);
-        }
-    })
-    $(document).on('keypress',function(e) {
-        if(e.which == 13 && $("input[name=optionsRadioscheck{{$counter}}]").is(':focus')) {
-            ajax_row('{{url('Invoice/Purchasing/AddRow')}}');
-        }
-    });
-
-    // $("#del{{$counter}}").click(function() {
-    //     $('tr[data-id={{$counter}}]').remove();
-    // })
-
-    $("input[name=optionsRadioscheck{{$counter}}]").change(function() {
-        var price = $("#itemprice{{$counter}}").val();
-        var qty = $("#qty{{$counter}}").val();
-        var discount = $("#discount{{$counter}}").val();
-        var cit = $('#cit').val()
-        var vat = $('#vat').val();
-        var totalAfterDiscount = ((price * qty) - discount);
-        if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("input[name=optionsRadioscheck{{$counter}}]").is(':checked') == false){
-            $("#totalvat{{$counter}}").text((totalAfterDiscount*(vat/100)).toFixed(2));
-            $("#totalcit{{$counter}}").text((totalAfterDiscount*(cit/100)).toFixed(2));
-            $("#nettotal{{$counter}}").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-        }else{
-            $("#totalvat{{$counter}}").text(0);
-            $("#totalcit{{$counter}}").text(0);
-            $("#nettotal{{$counter}}").text((totalAfterDiscount));
-
-        }
-        headCalculations();
-    })
-
-    $("#itemprice{{$counter}}").on('input',function() {
-        var price = $("#itemprice{{$counter}}").val();
-        var qty = $("#qty{{$counter}}").val();
-        // total(price, qty);
-        $("#total{{$counter}}").text(price * qty);
-        var discount = $("#discount{{$counter}}").val();
-        $("#totalafterdiscount{{$counter}}").text(((price * qty) - discount));
-        var cit = $('#cit').val();
-        var vat = $('#vat').val();
-        var totalAfterDiscount = ((price * qty) - discount);
-        if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("input[name=optionsRadioscheck{{$counter}}]").is(':checked') == false){
-            $("#totalvat{{$counter}}").text((totalAfterDiscount*(vat/100)).toFixed(2));
-            $("#totalcit{{$counter}}").text((totalAfterDiscount*(cit/100)).toFixed(2));
-            $("#nettotal{{$counter}}").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-
-        }else{
-            $("#totalvat{{$counter}}").text(0);
-            $("#totalcit{{$counter}}").text(0);
-            $('input[name=optionsRadioscheck{{$counter}}]').attr('checked',true);
-            $("#nettotal{{$counter}}").text((totalAfterDiscount));
-        }
-        headCalculations();
-    })
-
-    $("#qty{{$counter}}").on('input',function() {
-        var price = $("#itemprice{{$counter}}").val();
-        var qty = $("#qty{{$counter}}").val();
-        var discount = $("#discount{{$counter}}").val();
-        var cit = $('#cit').val();
-        var vat = $('#vat').val();
-        $("#total{{$counter}}").text(price * qty);
-        $("#totalafterdiscount{{$counter}}").text(((price * qty) - discount));
-        var totalAfterDiscount = ((price * qty) - discount);
-        // alert($('input[type=radio][name=optionsRadios10]:checked').val());
-        if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("input[name=optionsRadioscheck{{$counter}}]").is(':checked') == false){
-            $("#totalvat{{$counter}}").text((totalAfterDiscount*(vat/100)).toFixed(2));
-            $("#totalcit{{$counter}}").text((totalAfterDiscount*(cit/100)).toFixed(2));
-            $("#nettotal{{$counter}}").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-
-        }else{
-            $("#totalvat{{$counter}}").text(0);
-            $("#totalcit{{$counter}}").text(0);
-            $('input[name=optionsRadioscheck{{$counter}}]').attr('checked',true);
-            $("#nettotal{{$counter}}").text((totalAfterDiscount));
-        }
-        headCalculations();
-    })
-
-    $('#discount'+id).on('input',function() {
-        var price = $("#itemprice{{$counter}}").val();
-        var qty = $("#qty{{$counter}}").val();
-        var discount = $("#discount{{$counter}}").val();
-        var cit = $('#cit').val();
-        var vat = $('#vat').val();
-        $("#total{{$counter}}").text(price * qty);
-        $("#totalafterdiscount{{$counter}}").text(((price * qty) - discount));
-        var totalAfterDiscount = ((price * qty) - discount);
-        // alert($('input[type=radio][name=optionsRadios10]:checked').val());
-        if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("input[name=optionsRadioscheck{{$counter}}]").is(':checked') == false){
-            $("#totalvat{{$counter}}").text((totalAfterDiscount*(vat/100)).toFixed(2));
-            $("#totalcit{{$counter}}").text((totalAfterDiscount*(cit/100)).toFixed(2));
-            $("#nettotal{{$counter}}").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-
-        }else{
-            $("#totalvat{{$counter}}").text(0);
-            $("#totalcit{{$counter}}").text(0);
-            $('input[name=optionsRadioscheck{{$counter}}]').attr('checked',true);
-            $("#nettotal{{$counter}}").text((totalAfterDiscount));
-        }
-        headCalculations();
-    })
-
-    function DeleteInvoiceItem(id) {
-        $("#del{{$counter}}").modal('hide');
-        $('.modal-backdrop.fade.in').remove();
-        $('.modal-open').css('overflow-y','scroll');
-        $.ajax({
-            type:'GET',
-            url:"{{url('/Invoices/Purchasing/Remove/Item')}}",
-            data:{
-                id : id,
-                rowCount : "{{$counter}}",
-                compid : $('#compid').val(),
-            },
-            success:function(data) {
-                $('#rows').empty();
-                // alert(data);
-                $('#rows').prepend(data)
-                $('#puchasetable #optionsRadios'+rowCount).focus();
-                $('.chosen-select').select2();
-                headCalculations();
-            },
-            error: function (request, status, error) {
-                console.log(request.responseText);
-            }
-        });
-    }
-
-
-
-</script>
 @php
     --$counter;
 @endphp
