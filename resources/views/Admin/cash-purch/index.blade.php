@@ -17,13 +17,7 @@
 
 @section('content')
 <style>
-    .pagination-info {
-        display: none !important;
-    }
-
-    .page-list {
-        display: none !important;
-    }
+  
 
     .pagination ul li {
         float: right !important;
@@ -63,12 +57,9 @@
                                 </select>
                             </div>
 
-                            <table class="table-striped" id="table" data-toggle="table"   data-pagination="true"
-                             data-search="true" data-show-columns="true" data-show-pagination-switch="true" 
-                             data-show-refresh="true" data-key-events="true" data-resizable="true" 
-                             data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" 
-                             data-click-to-select="true" data-toolbar="#toolbar">
-                                <thead>
+                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
+                                           data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">						
+                                           	<thead>
                                     <tr>
                                         <th data-field="id" data-sortable="true">#</th>
                                         <th data-field="name" data-sortable="true">التاريخ</th>
@@ -84,15 +75,17 @@
                                 <tbody id="indexTable">
                                     @include('Admin.cash-purch.indexTable')
                                 </tbody>
+                            
                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 </div>
+
 <!-- Static Table End -->
 
 <!--Delete-->

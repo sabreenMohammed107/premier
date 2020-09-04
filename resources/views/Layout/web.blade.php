@@ -31,14 +31,14 @@
 			</div>
 		</div>
     @if(Session::has('flash_success'))
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="direction: rtl;">
                     <div class="alert alert-success">
                         <strong><i class="fa fa-check-circle"></i> {!! session('flash_success') !!}</strong>
                     </div>
                 </div>
             @endif
             @if(Session::has('flash_danger'))
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="direction: rtl;">
                     <div class="alert alert-danger">
                         <strong><i class="fa fa-info-circle"></i> {!! session('flash_danger') !!}</strong>
                     </div>

@@ -50,6 +50,26 @@ Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')
 
 
 
+/*********************==BalanceAdjust==******************* */
+Route::get('/balance-adjust', 'BalanceAdjustController@index')->name('balance-adjust');
+Route::get('dynamicPerson/fetch', 'BalanceAdjustController@fetchPerson')->name('dynamicPerson.fetch');
+Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
+Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
+
+
+/*********************==MonthBalanceController==******************* */
+Route::get('/month-balance', 'MonthBalanceController@index')->name('month-balance');
+Route::get('dynamicMonth/fetch', 'MonthBalanceController@fetchMonth')->name('dynamicMonth.fetch');
+Route::get('dynamicMonthClose/fetch', 'MonthBalanceController@monthClose')->name('dynamicMonthClose.fetch');
+Route::get('dynamicMonthOpen/fetch', 'MonthBalanceController@monthOpen')->name('dynamicMonthOpen.fetch');
+/*********************==YearBalanceController==******************* */
+Route::get('/year-balance', 'YearBalanceController@index')->name('year-balance');
+Route::get('dynamicYear/fetch', 'YearBalanceController@fetchYear')->name('dynamicYear.fetch');
+Route::get('dynamicYearClose/fetch', 'YearBalanceController@yearClose')->name('dynamicYearClose.fetch');
+Route::get('dynamicYearOpen/fetch', 'YearBalanceController@yearOpen')->name('dynamicYearOpen.fetch');
+
+
+
 
 
 

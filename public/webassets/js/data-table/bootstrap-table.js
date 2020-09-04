@@ -293,7 +293,7 @@
         dataField: 'rows',
         method: 'get',
         url: undefined,
-        ajax: 'undefined',
+        ajax: undefined,
         cache: true,
         contentType: 'application/json',
         dataType: 'json',

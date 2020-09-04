@@ -17,14 +17,7 @@
 
 @section('content')
 <style>
-    .pagination-info {
-        display: none !important;
-    }
-
-    .page-list {
-        display: none !important;
-    }
-
+   
     .pagination ul li {
         float: right !important;
     }
