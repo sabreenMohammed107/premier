@@ -59,8 +59,8 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                     <div class="">
                         <!--<div class="btn-back">
                             <a href="#">حــفـظ</a>
-                        </div>-->
-                        <button class="btn btn-primary waves-effect waves-light">إلغاء</button>
+                        </div>-->                    <a href="{{url('/Invoices/Sales')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
+
                         {{-- <button class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button> --}}
                         <!--<div class="btn-cancel">
                             <a href="#">إلــغاء</a>
@@ -292,33 +292,45 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             <h3 style="text-align:right">الأصناف</h3>
                             {{-- <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button> --}}
                             <table class="table-striped" id="puchasetable"
-                                data-locale="ar-SA"
-                                data-pagination="true"
-                                data-pagination-pre-text="السابق"
-                                data-pagination-next-text="التالي"
-                                data-show-export="true"
-                                data-minimum-count-columns="2"
+                            data-locale="ar-SA"
+                            data-pagination="true"
+                            data-pagination-pre-text="السابق"
+                            data-pagination-next-text="التالي"
+                            data-show-export="true"
+                            data-minimum-count-columns="2"
+                            data-page-list="[10, 25, 50, 100, all]"
+                            data-sort-name="index"
+                            data-sort-order="desc"
+                            data-search="true"
+                            style="direction:rtl"
+                            data-toggle="table"
+                                data-show-columns="true"
+                                data-show-pagination-switch="true"
+                                data-show-refresh="true"
+                                data-key-events="true"
                                 data-resizable="true"
-                                data-page-list="[10, 25, 50, 100, all]"
-                                data-sort-name="index"
-                                data-sort-order="desc"
-                                style="direction:rtl">
-                                <thead>
-                                    <tr>
-                                        <th data-field="index">#</th>
-                                        <th data-field="storeItem">مخزون</th>
-                                        <th data-field="item">البيان</th>
-                                        <th data-field="price">سعر الوحدة</th>
-                                        <th data-field="qty">الكمية</th>
-                                        <th data-field="total">الاجمالى</th>
-                                        <th data-field="discount">الخصومات</th>
-                                        <th data-field="totalAfterDiscount">اجمالى بعد الخصم</th>
-                                        <th data-field="exemption">اعفاء ضريبى</th>
-                                        <th data-field="vat">ض.القيمه المضافه</th>
-                                        <th data-field="cit">ض.أ.ت.ص</th>
-                                        <th data-field="net">صافى القيمه</th>
-                                    </tr>
-                                </thead>
+                                data-cookie="true"
+                                data-toolbar="#toolbar"
+                                data-show-toggle="true"
+                                data-show-fullscreen="true"
+                                data-show-columns-toggle-all="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="index" data-sortable="true">#</th>
+                                    <th data-field="storeItem" data-sortable="true">مخزون</th>
+                                    <th data-field="item" data-sortable="true">البيان</th>
+                                    <th data-field="price" data-sortable="true">سعر الوحدة</th>
+                                    <th data-field="qty" data-sortable="true">الكمية</th>
+                                    <th data-field="total" data-sortable="true">الاجمالى</th>
+                                    <th data-field="discount" data-sortable="true">الخصومات</th>
+                                    <th data-field="totalAfterDiscount" data-sortable="true">اجمالى بعد الخصم</th>
+                                    <th data-field="exemption" data-sortable="true">اعفاء ضريبى</th>
+                                    <th data-field="vat" data-sortable="true">ض.القيمه المضافه</th>
+                                    <th data-field="cit" data-sortable="true">ض.أ.ت.ص</th>
+                                    <th data-field="net" data-sortable="true">صافى القيمه</th>
+                                    <th data-field="del" data-sortable="true">حذف</th>
+                                </tr>
+                            </thead>
                                 <tbody id="rows">
                                     @php
                                         $rowCount = count($InvoiceItems);

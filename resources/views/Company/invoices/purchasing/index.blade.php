@@ -40,6 +40,8 @@
                             <table class="table-striped" id="table"
                                     data-toggle="table"
                                     data-pagination="true"
+                                    data-pagination-pre-text="السابق"
+                                    data-pagination-next-text="التالي"
                                     data-search="true"
                                     data-show-columns="true"
                                     data-show-pagination-switch="true"
@@ -52,9 +54,7 @@
                                     data-show-fullscreen="true"
                                     data-show-columns-toggle-all="true"
                                     data-show-export="true"
-                                    data-minimum-count-columns="2"
-                                    data-page-list="[10, 25, 50, 100, all]"
-                                    data-click-to-select="true" >
+                                    data-minimum-count-columns="2" >
                                 <thead>
                                     <tr>
                                         <th data-field="hash" data-sortable="true">#</th>

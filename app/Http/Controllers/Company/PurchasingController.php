@@ -204,25 +204,41 @@ class PurchasingController extends Controller
     public function DeleteInvoiceItem(Request $req)
     {
         if ($req->ajax()) {
-            $Item = InvoiceItem::find($req->id);
-            $Item->delete();
-            $rowCount = $req->rowCount;
+            DB::beginTransaction();
+            try {
+                $Item = InvoiceItem::find($req->id);
+                $Invoice = Invoice::find($Item->inv_id);
+                $Invoice->total_items_price = ($Invoice->total_items_price - $Item->total_item_price);
+                $Invoice->total_items_discount = ($Invoice->total_items_discount - $Item->item_discount);
+                $Invoice->total_price_post_discounts = ($Invoice->total_price_post_discounts - $Item->total_after_discounts);
+                $Invoice->total_vat = ($Invoice->total_vat - $Item->vat_tax_value);
+                $Invoice->total_comm_industr_tax = ($Invoice->total_comm_industr_tax - $Item->comm_industr_tax);
+                $Invoice->net_invoice = ($Invoice->net_invoice - $Item->net_value);
+                $Invoice->save();
+                $Item->delete();
+                $rowCount = $req->rowCount;
 
-            $Invoice_Items = DB::table('invoice_items')
-            ->where('inv_id','=',$Item->inv_id)->get();
+                $Invoice_Items = DB::table('invoice_items')
+                ->where('inv_id','=',$Item->inv_id)->get();
 
-            $Items = DB::table('items')
-            ->where('company_id','=',$req->compid)->orderBy('id', 'desc')->get();
-
-
-            $ajaxComponent = view('Company.components.ajax.PurchasingRowUpdate',[
-                'rowCount'=>$rowCount,
-                'Items'=>$Items,
-                'Invoice_Items'=>$Invoice_Items,
-            ]);
+                $Items = DB::table('items')
+                ->where('company_id','=',$req->compid)->orderBy('id', 'desc')->get();
 
 
-            return $ajaxComponent->render();
+                $ajaxComponent = view('Company.components.ajax.PurchasingRowUpdate',[
+                    'rowCount'=>$rowCount,
+                    'Items'=>$Items,
+                    'Invoice_Items'=>$Invoice_Items,
+                ]);
+
+                DB::commit();
+                return $ajaxComponent->render();
+
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                throw $th;
+            }
+
         }
 
 

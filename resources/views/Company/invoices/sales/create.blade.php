@@ -60,7 +60,8 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         <!--<div class="btn-back">
                             <a href="#">حــفـظ</a>
                         </div>-->
-                        <button class="btn btn-primary waves-effect waves-light">إلغاء</button>
+                    <a href="{{url('/Invoices/Sales')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
+
                         <button class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button>
                         <!--<div class="btn-cancel">
                             <a href="#">إلــغاء</a>
@@ -304,33 +305,45 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             <h3 style="text-align:right">الأصناف</h3>
                             <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button>
                             <table class="table-striped" id="puchasetable"
-                                data-locale="ar-SA"
-                                data-pagination="true"
-                                data-pagination-pre-text="السابق"
-                                data-pagination-next-text="التالي"
-                                data-show-export="true"
-                                data-minimum-count-columns="2"
-                                data-page-list="[10, 25, 50, 100, all]"
-                                data-sort-name="index"
-                                data-sort-order="desc"
-                                style="direction:rtl">
-                                <thead>
-                                    <tr>
-                                        <th data-field="index">#</th>
-                                        <th data-field="storeItem">مخزون</th>
-                                        <th data-field="item">البيان</th>
-                                        <th data-field="price">سعر الوحدة</th>
-                                        <th data-field="qty">الكمية</th>
-                                        <th data-field="total">الاجمالى</th>
-                                        <th data-field="discount">الخصومات</th>
-                                        <th data-field="totalAfterDiscount">اجمالى بعد الخصم</th>
-                                        <th data-field="exemption">اعفاء ضريبى</th>
-                                        <th data-field="vat">ض.القيمه المضافه</th>
-                                        <th data-field="cit">ض.أ.ت.ص</th>
-                                        <th data-field="net">صافى القيمه</th>
-                                        <th data-field="del">حذف</th>
-                                    </tr>
-                                </thead>
+                            data-locale="ar-SA"
+                            data-pagination="true"
+                            data-pagination-pre-text="السابق"
+                            data-pagination-next-text="التالي"
+                            data-show-export="true"
+                            data-minimum-count-columns="2"
+                            data-page-list="[10, 25, 50, 100, all]"
+                            data-sort-name="index"
+                            data-sort-order="desc"
+                            data-search="true"
+                            style="direction:rtl"
+                            data-toggle="table"
+                                data-show-columns="true"
+                                data-show-pagination-switch="true"
+                                data-show-refresh="true"
+                                data-key-events="true"
+                                data-resizable="true"
+                                data-cookie="true"
+                                data-toolbar="#toolbar"
+                                data-show-toggle="true"
+                                data-show-fullscreen="true"
+                                data-show-columns-toggle-all="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="index" data-sortable="true">#</th>
+                                    <th data-field="storeItem" data-sortable="true">مخزون</th>
+                                    <th data-field="item" data-sortable="true">البيان</th>
+                                    <th data-field="price" data-sortable="true">سعر الوحدة</th>
+                                    <th data-field="qty" data-sortable="true">الكمية</th>
+                                    <th data-field="total" data-sortable="true">الاجمالى</th>
+                                    <th data-field="discount" data-sortable="true">الخصومات</th>
+                                    <th data-field="totalAfterDiscount" data-sortable="true">اجمالى بعد الخصم</th>
+                                    <th data-field="exemption" data-sortable="true">اعفاء ضريبى</th>
+                                    <th data-field="vat" data-sortable="true">ض.القيمه المضافه</th>
+                                    <th data-field="cit" data-sortable="true">ض.أ.ت.ص</th>
+                                    <th data-field="net" data-sortable="true">صافى القيمه</th>
+                                    <th data-field="del" data-sortable="true">حذف</th>
+                                </tr>
+                            </thead>
                                 <tbody id="rows">
                                 </tbody>
                             </table>
@@ -352,30 +365,180 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
         @endsection
         @section('scripts')
         <script>
-            headCalculations();
-            function headCalculations() {
+            //Start row functions
+            function editSelectVal(index) {
+                debugger;
+                var select_value = $('#select'+index+' option:selected').val();
+                $('#select'+index+' option:selected').siblings().attr('selected',false);
+                $('#select'+index+' option:selected').attr('selected','selected');
+            }
+            function editVal(index){
+                debugger;
+                var input_value = $("#item_arabic_name"+index).val();
+                $("#item_arabic_name"+index).attr('value',input_value);
+            }
+            function editRadioStored(index) {
+                debugger;
+                // alert(checked);
+                var parent = $("#item_arabic_name"+index);
+                var select = $("#select"+index);
+
+                if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
+                    $(parent).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
+                    $(select).css('display','none').attr('disabled','disabled');
+                }else{
+                    $(parent).css('display','none').attr('disabled','disabled');
+                    $(select).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
+                }
+                $("input[type=radio][name=optionsRadios"+index+"]:checked").siblings().attr('checked',false);
+                $("input[type=radio][name=optionsRadios"+index+"]:checked").attr('checked','checked');
+            }
+            function enterForRow(e, index) {
+                if(e.keyCode == 13) {
+                    ajax_row('{{url('Invoice/Purchasing/AddRow')}}');
+                }
+            }
+            function deleteRow(index) {
+                $('tr[data-id='+index+']').remove();
+                var trs = $('#puchasetable > tbody').html();
+                $('#puchasetable').bootstrapTable('destroy');
+                $('#rows').html(trs);
+                $('#puchasetable').bootstrapTable();
+                headCalculations(index);
+            }
+            function taxExemptionCheck(index) {
+                debugger;
+                var price = $("#itemprice"+index+"").val();
+                var qty = $("#qty"+index+"").val();
+                var discount = $("#discount"+index+"").val();
+                var cit = $('#cit').val()
+                var vat = $('#vat').val();
+                var totalAfterDiscount = ((price * qty) - discount);
+                if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("#optionsRadioscheck"+index).is(':checked') == false){
+                    $("#totalvat"+index).text((totalAfterDiscount*(vat/100)).toFixed(2));
+                    $("#totalcit"+index).text((totalAfterDiscount*(cit/100)).toFixed(2));
+                    $("#nettotal"+index).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+                }else{
+                    $("#totalvat"+index+"").text(0);
+                    $("#totalcit"+index+"").text(0);
+                    $("#nettotal"+index+"").text(totalAfterDiscount);
+
+                }
+                if($("#optionsRadioscheck"+index).is(':checked') == true){
+                    $("#optionsRadioscheck"+index).attr('checked','checked');
+                }else{
+                    $("#optionsRadioscheck"+index).attr('checked',false);
+                }
+
+                headCalculations(index);
+            }
+            function itemPrice(index) {
+                var price = $("#itemprice"+index+"").val();
+                var qty = $("#qty"+index+"").val();
+                // total(price, qty);
+                $("#total"+index+"").text(price * qty);
+                var discount = $("#discount"+index+"").val();
+                $("#totalafterdiscount"+index+"").text(((price * qty) - discount));
+                var cit = $('#cit').val();
+                var vat = $('#vat').val();
+                var totalAfterDiscount = ((price * qty) - discount);
+                if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("#optionsRadioscheck"+index).is(':checked') == false){
+                    $("#totalvat"+index+"").text((totalAfterDiscount*(vat/100)).toFixed(2));
+                    $("#totalcit"+index+"").text((totalAfterDiscount*(cit/100)).toFixed(2));
+                    $("#nettotal"+index+"").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+
+                }else{
+                    $("#totalvat"+index+"").text(0);
+                    $("#totalcit"+index+"").text(0);
+                    $("#optionsRadioscheck"+index).attr('checked',true);
+                    $("#nettotal"+index+"").text((totalAfterDiscount));
+                }
+                headCalculations(index);
+                $("#itemprice"+index).attr('value',price);
+            }
+            function itemQty(index) {
+                var price = $("#itemprice"+index+"").val();
+                var qty = $("#qty"+index+"").val();
+                var discount = $("#discount"+index+"").val();
+                var cit = $('#cit').val();
+                var vat = $('#vat').val();
+                $("#total"+index+"").text(price * qty);
+                $("#totalafterdiscount"+index+"").text(((price * qty) - discount));
+                var totalAfterDiscount = ((price * qty) - discount);
+                // alert($('input[type=radio][name=optionsRadios10]:checked').val());
+                if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("#optionsRadioscheck"+index).is(':checked') == false){
+                    $("#totalvat"+index+"").text((totalAfterDiscount*(vat/100)).toFixed(2));
+                    $("#totalcit"+index+"").text((totalAfterDiscount*(cit/100)).toFixed(2));
+                    $("#nettotal"+index+"").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+
+                }else{
+                    $("#totalvat"+index+"").text(0);
+                    $("#totalcit"+index+"").text(0);
+                    $("#optionsRadioscheck"+index).attr('checked',true);
+                    $("#nettotal"+index+"").text((totalAfterDiscount));
+                }
+                headCalculations(index);
+                $("#qty"+index).attr('value',qty);
+            }
+            function itemDiscount(index) {
+                var price = $("#itemprice"+index+"").val();
+                var qty = $("#qty"+index+"").val();
+                var discount = $("#discount"+index+"").val();
+                var cit = $('#cit').val();
+                var vat = $('#vat').val();
+                $("#total"+index+"").text(price * qty);
+                $("#totalafterdiscount"+index+"").text(((price * qty) - discount));
+                var totalAfterDiscount = ((price * qty) - discount);
+                // alert($('input[type=radio][name=optionsRadios10]:checked').val());
+                if($('input[type=radio][name=optionsRadios10]:checked').val() == 1 && $("#optionsRadioscheck"+index).is(':checked') == false){
+                    $("#totalvat"+index+"").text((totalAfterDiscount*(vat/100)).toFixed(2));
+                    $("#totalcit"+index+"").text((totalAfterDiscount*(cit/100)).toFixed(2));
+                    $("#nettotal"+index+"").text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+
+                }else{
+                    $("#totalvat"+index+"").text(0);
+                    $("#totalcit"+index+"").text(0);
+                    $("#optionsRadioscheck"+index).attr('checked',true);
+                    $("#nettotal"+index+"").text((totalAfterDiscount));
+                }
+                headCalculations(index);
+                $("#discount"+index).attr('value',discount);
+            }
+            //End or row functions
+            // headCalculations(index);
+            function headCalculations(index) {
+                    index = $('#puchasetable > tbody > tr').length;
                     var total = 0;
                     var total_after_discounts = 0;
                     var vat_tax_value = 0;
                     var comm_industr_tax = 0;
                     var net_value = 0;
                     var total_discount = 0;
-                $('#puchasetable > tbody  > tr').each(function(index) {
-                    total += parseFloat($(this).children('.total_item_price').text());
-                    total_after_discounts += parseFloat($(this).children('.total_after_discounts').text());
-                    vat_tax_value += parseFloat($(this).children('.vat_tax_value').text());
-                    comm_industr_tax += parseFloat($(this).children('.comm_industr_tax').text());
-                    net_value += parseFloat($(this).find('.net_value').text());
-                    total_discount += parseFloat($(this).find('.item_discount').val());
+                $('#puchasetable > tbody  > tr').each(function() {
+                    debugger;
+                    total += parseFloat($('#total'+index).text());
+                    total_after_discounts += parseFloat($('#totalafterdiscount'+index).text());
+                    vat_tax_value += parseFloat($('#totalvat'+index).text());
+                    comm_industr_tax += parseFloat($('#totalcit'+index).text());
+                    net_value += parseFloat($('#nettotal'+index).text());
+                    total_discount += parseFloat($('#discount'+index).val());
+                    console.log(total);
+                    console.log(total_after_discounts);
+                    console.log(vat_tax_value);
+                    console.log(comm_industr_tax);
+                    console.log(net_value);
+                    console.log(total_discount);
+                    --index;
                 })
                 console.log(total_discount);
-                $('#total_items_price').val(total);
-                $('#total_items_discount').val(total_discount);
-                $('#total_vat').val(vat_tax_value);
-                $('#total_comm_industr_tax').val(comm_industr_tax);
-                $('#total_price_post_discounts').val(total_after_discounts);
-                $('#net_invoice_total').val(net_value);
+                $('#total_items_price').val(total.toFixed(2));
+                $('#total_items_discount').val(total_discount.toFixed(2));
+                $('#total_vat').val(vat_tax_value.toFixed(2));
+                $('#total_comm_industr_tax').val(comm_industr_tax.toFixed(2));
+                $('#total_price_post_discounts').val(total_after_discounts.toFixed(2));
+                $('#net_invoice_total').val(net_value.toFixed(2));
             }
+            //--------------------
             function saveInvoice() {
                 var person_type = $('input[type=radio][name=person]:checked').val();
                 if (person_type == 'other') {
