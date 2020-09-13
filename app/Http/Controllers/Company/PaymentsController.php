@@ -39,8 +39,11 @@ class PaymentsController extends Controller
 
         $maxCashPurchase = DB::table('cash_master')
         ->where([['company_id','=',$id],['cash_master_type','=',0]])->orderBy('exit_permission_code','DESC')->first();
-
-        $followingExitCode = ($maxCashPurchase->exit_permission_code + 1);
+        if($maxCashPurchase){
+            $followingExitCode = ($maxCashPurchase->exit_permission_code + 1);
+        }else{
+            $followingExitCode = 1;
+        }
 
         $VAT = BusinessItemsSetup::find(100);
         $CIT_Items = BusinessItemsSetup::find(101);

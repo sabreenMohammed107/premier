@@ -34,8 +34,11 @@ class ChequesController extends Controller
 
         $LastCheque = DB::table('cheques')
         ->where('company_id','=',$id)->orderBy('cheque_serial','DESC')->first();
-
-        $FollowingCode = ($LastCheque->cheque_serial + 1);
+        if($LastCheque){
+            $FollowingCode = ($LastCheque->cheque_serial + 1);
+        }else{
+            $FollowingCode = 1;
+        }
 
         return view('Company.cheques.add',[
             'Company'=>$Company,

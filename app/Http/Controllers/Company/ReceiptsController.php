@@ -39,8 +39,11 @@ class ReceiptsController extends Controller
 
         $maxCashSales = DB::table('cash_master')
         ->where([['company_id','=',$id],['cash_master_type','=',1]])->orderBy('cash_receipt_note','DESC')->first();
-
-        $followingExitCode = ($maxCashSales->cash_receipt_note + 1);
+        if($maxCashSales){
+            $followingExitCode = ($maxCashSales->cash_receipt_note + 1);
+        }else{
+            $followingExitCode = 1;
+        }
 
         return view('Company.cashSales.add',[
             'Clients'=>$Clients,
