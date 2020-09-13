@@ -56,4 +56,9 @@ class Company extends Model
     {
         return $this->belongsTo('App\Models\Person');
     }
+
+    public function comLast()
+    {
+    return $this->hasOne('App\Models\BalanceYear')->latest();
+    }
 }

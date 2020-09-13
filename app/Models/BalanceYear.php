@@ -19,4 +19,10 @@ class BalanceYear extends Model
         'period_closed_date',
         'notes',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
 }

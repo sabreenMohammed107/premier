@@ -43,7 +43,7 @@
                                                
                                                 <div class="form-group">
                                                     <label class="">الشركات</label>
-                                                    <select name="company_id"  class="form-control  dynamic" required  data-dependent="sub">
+                                                    <select data-placeholder="Choose a Country..." class="chosen-select dynamic" tabindex="-1" id="country" data-dependent="sub">
                                                     <option value=""> الشركة</option>
                                                         @foreach($companies as $company)
                                                         <option value="{{$company->id}}">{{$company->company_official_name}}</option>

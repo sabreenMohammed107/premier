@@ -17,6 +17,9 @@
 
 @section('content')
 <style>
+<<<<<<< HEAD
+  
+=======
     .pagination-info {
         display: none !important;
     }
@@ -24,6 +27,7 @@
     .page-list {
         display: none !important;
     }
+>>>>>>> eab59ecc2e75781d6d07a984d14add819a31340d
 
     .pagination ul li {
         float: right !important;
@@ -63,12 +67,18 @@
                                 </select>
                             </div>
 
+<<<<<<< HEAD
+                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
+                                           data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">						
+                                           	<thead>
+=======
                             <table class="table-striped" id="table" data-toggle="table"   data-pagination="true"
                              data-search="true" data-show-columns="true" data-show-pagination-switch="true" 
                              data-show-refresh="true" data-key-events="true" data-resizable="true" 
                              data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" 
                              data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
+>>>>>>> eab59ecc2e75781d6d07a984d14add819a31340d
                                     <tr>
                                         <th data-field="id" data-sortable="true">#</th>
                                         <th data-field="name" data-sortable="true">التاريخ</th>
@@ -84,6 +94,19 @@
                                 <tbody id="indexTable">
                                     @include('Admin.cash-purch.indexTable')
                                 </tbody>
+<<<<<<< HEAD
+                            
+                            </table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+=======
                             </table>
                         </div>
                     </div>
@@ -93,6 +116,7 @@
     </div>
 </div>
 </div>
+>>>>>>> eab59ecc2e75781d6d07a984d14add819a31340d
 <!-- Static Table End -->
 
 <!--Delete-->
@@ -182,6 +206,25 @@
                                             <div class="form-group">
                                                 <label class="">السيولة</label>
                                                 <input name="" type="text" class="form-control" placeholder="الخزينة" disabled>
+<<<<<<< HEAD
+=======
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="">نوع إذن إستلام</label>
+                                                <input name="" type="text" class="form-control" placeholder="خدمة" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="">ض.القيمه المضافه</label>
+                                                <input name="" type="number" class="form-control" placeholder="14%" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="">صافى القيمه</label>
+                                                <input name="" type="text" class="form-control" placeholder="10000" disabled>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="">معيار تفصيلى</label>
+                                                <input name="" type="text" class="form-control" placeholder="معيار تفصيلى" disabled>
+>>>>>>> eab59ecc2e75781d6d07a984d14add819a31340d
                                             </div>
                                             <div class="form-group">
                                                 <label class="">نوع إذن إستلام</label>
@@ -207,6 +250,16 @@
                                             </div>
 
                                         </div>
+<<<<<<< HEAD
+=======
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl">
+                                            <div class="form-group">
+                                                <label class="">ملاحظات</label>
+                                                <textarea name="" placeholder="ملاحظات" style="max-height:100px" disabled></textarea>
+                                            </div>
+
+                                        </div>
+>>>>>>> eab59ecc2e75781d6d07a984d14add819a31340d
                                     </div>
                                 </form>
                             </div>

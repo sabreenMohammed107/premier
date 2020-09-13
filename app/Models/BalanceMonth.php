@@ -21,4 +21,12 @@ class BalanceMonth extends Model
         'notes',
         'can_change'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo('App\Models\Company');
+    }
+
+   
 }
+
