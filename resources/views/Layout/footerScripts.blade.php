@@ -85,6 +85,9 @@
     <script src="{{asset('webassets/js/editable/bootstrap-datetimepicker.js')}}"></script>
     <script src="{{asset('webassets/js/editable/bootstrap-editable.js')}}"></script>
     <script src="{{asset('webassets/js/editable/xediable-active.js')}}"></script>
+    <!-- bootstrap-select JS
+        ============================================ -->
+    <script src="{{asset('webassets/js/bootstrap-select/bootstrap-select.min.js')}}"></script>
     <!-- data table JS
 		============================================ -->
         <script src="{{asset('webassets/js/data-table/bootstrap-table.js')}}"></script>

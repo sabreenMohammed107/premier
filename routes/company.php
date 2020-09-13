@@ -67,6 +67,7 @@ Route::namespace('Company')->group(function () {
 
     //Company edit route (special case -> sec needs)
     Route::get('/Company/edit','CompaniesController@edit');
+    Route::post('/Company/edit','CompaniesController@edit');
     //Company resource routes
     Route::resource('/Company', 'CompaniesController');
 
@@ -107,4 +108,40 @@ Route::namespace('Company')->group(function () {
     Route::get('/Invoices/{type}/{id}/Delete','PurchasingController@DeleteInvoice');
     Route::get('/Invoices/Purchasing/{inv_id}/View','PurchasingController@ViewInvoice');
     Route::get('/Invoices/Sales/{inv_id}/View','SalesController@ViewInvoice');
+
+
+    /*
+    |*********************** Cash Partition ****************************|
+    |**************|Purchasing Partition| - |Sales Partition|***************|
+    */
+    //--|Purchasing Partition|--
+    Route::get('/Cash/Purchasing','PaymentsController@Index');
+    Route::get('/Cash/Purchasing/Add','PaymentsController@Add');
+    Route::get('/Cash/Purchasing/Edit/{cash_id}','PaymentsController@Edit');
+    Route::get('/Cash/Purchasing/View/{cash_id}','PaymentsController@View');
+    Route::post('/Cash/Purchasing/Create','PaymentsController@Create');
+    Route::post('/Cash/Purchasing/{cash_id}/Update','PaymentsController@Update');
+    Route::get('/Cash/Purchasing/{cash_id}/Delete','PaymentsController@Delete');
+    //--|Sales Partition|--
+    Route::get('/Cash/Sales','ReceiptsController@Index');
+    Route::get('/Cash/Sales/Add','ReceiptsController@Add');
+    Route::get('/Cash/Sales/Edit/{cash_id}','ReceiptsController@Edit');
+    Route::get('/Cash/Sales/View/{cash_id}','ReceiptsController@View');
+    Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
+    Route::post('/Cash/Sales/{cash_id}/Update','ReceiptsController@Update');
+    Route::get('/Cash/Sales/{cash_id}/Delete','ReceiptsController@Delete');
+
+
+    /*
+    |*********************** Cheques Partition ****************************|
+    */
+
+    Route::get('/Cheques','ChequesController@index');
+    Route::get('/Cheques/Add','ChequesController@Add');
+    Route::get('/Cheques/{cash_id}/Edit','ChequesController@Edit');
+    Route::get('/Cheques/{cash_id}/View','ChequesController@View');
+    Route::get('/Cheques/{cash_id}/Delete','ChequesController@Delete');
+    Route::post('/Cheques/Create','ChequesController@Create');
+    Route::post('/Cheques/Update','ChequesController@Update');
+
 });

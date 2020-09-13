@@ -13,4 +13,9 @@ class PersonType extends Model
         'person_type_name',
         'notes',
     ];
+
+    public function person()
+    {
+        return $this->belongsTo('App\Models\Person');
+    }
 }

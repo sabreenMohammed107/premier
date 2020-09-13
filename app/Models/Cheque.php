@@ -28,4 +28,9 @@ class Cheque extends Model
         'cheque_serial',
         'company_id',
     ];
+
+    public function person()
+    {
+        return $this->hasOne('App\Models\Person', 'id','person_id');
+    }
 }

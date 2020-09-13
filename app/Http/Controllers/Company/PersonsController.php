@@ -90,7 +90,8 @@ class PersonsController extends Controller
             if($request->hasFile('logo')){
                 $extension = $request->logo->extension();
                 $filename = time() . '.' . $extension;
-                $request->file('logo')->move('uploads/person',$filename);
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'person_logo' => $filename,
                 ]);
@@ -172,7 +173,8 @@ class PersonsController extends Controller
                 if($request->hasFile('logo')){
                     $extension = $request->logo->extension();
                     $filename = time() . '.' . $extension;
-                    $request->file('logo')->move('uploads/person',$filename);
+                    $path = public_path('uploads/person');
+                    $request->file('logo')->move($path,$filename);
                     $request->merge([
                         'person_logo' => $filename,
                     ]);
@@ -354,7 +356,8 @@ class PersonsController extends Controller
             if($request->hasFile('logo')){
                 $extension = $request->logo->extension();
                 $filename = time() . '.' . $extension;
-                $request->file('logo')->move('uploads/person',$filename);
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'person_logo' => $filename,
                 ]);
@@ -446,7 +449,8 @@ class PersonsController extends Controller
                 if($request->hasFile('logo')){
                     $extension = $request->logo->extension();
                     $filename = time() . '.' . $extension;
-                    $request->file('logo')->move('uploads/person',$filename);
+                    $path = public_path('uploads/person');
+                    $request->file('logo')->move($path,$filename);
                     $request->merge([
                         'person_logo' => $filename,
                     ]);
@@ -500,12 +504,12 @@ class PersonsController extends Controller
                 }
 
                 DB::commit();
-                return redirect("/Compa/Suppliers")->with('flash_success', "تم تعديل بيانات المررد : $request->person_name");
+                return redirect("/Company/Suppliers")->with('flash_success', "تم تعديل بيانات المررد : $request->person_name");
 
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Compa/Suppliers")->with('flash_danger', "لم يتم تعديل بيانات المورد : $request->person_name");
+                return redirect("/Company/Suppliers")->with('flash_danger', "لم يتم تعديل بيانات المورد : $request->person_name");
 
 
             }
@@ -523,7 +527,7 @@ class PersonsController extends Controller
             }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
-            return redirect("/Compan/Suppliers")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المورد : $request->person_name");
+            return redirect("/Company/Suppliers")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المورد : $request->person_name");
         }
 
 
@@ -639,7 +643,8 @@ class PersonsController extends Controller
             if($request->hasFile('logo')){
                 $extension = $request->logo->extension();
                 $filename = time() . '.' . $extension;
-                $request->file('logo')->move('uploads/person',$filename);
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'person_logo' => $filename,
                 ]);
@@ -729,7 +734,8 @@ class PersonsController extends Controller
                 if($request->hasFile('logo')){
                     $extension = $request->logo->extension();
                     $filename = time() . '.' . $extension;
-                    $request->file('logo')->move('uploads/person',$filename);
+                    $path = public_path('uploads/person');
+                    $request->file('logo')->move($path,$filename);
                     $request->merge([
                         'person_logo' => $filename,
                     ]);
@@ -784,12 +790,12 @@ class PersonsController extends Controller
                 //update a record of person from received request
                 $Person->update($request->except(['logo','role_name','id']));
                 DB::commit();
-                return redirect("/Compan/Clients")->with('flash_success', "تم تعديل بيانات العميل : $request->person_name");
+                return redirect("/Company/Clients")->with('flash_success', "تم تعديل بيانات العميل : $request->person_name");
 
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Compan/Clients")->with('flash_danger', "لم يتم تعديل بيانات العميل : $request->person_name");
+                return redirect("/Company/Clients")->with('flash_danger', "لم يتم تعديل بيانات العميل : $request->person_name");
 
 
             }

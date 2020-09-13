@@ -229,7 +229,8 @@ class CompaniesController extends Controller
                 if($request->hasFile('company_logo')){
                     $extension = $request->company_logo->extension();
                     $filename = time() . '.' . $extension;
-                    $request->file('company_logo')->move('uploads/companies',$filename);
+                    $path = public_path('uploads/companies');
+                    $request->file('company_logo')->move($path,$filename);
                     // return $filename;
                     $Company->company_logo = $filename;
                     $Company->save();

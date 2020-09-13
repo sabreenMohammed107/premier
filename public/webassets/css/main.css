@@ -278,3 +278,25 @@ textarea {
         page-break-after: avoid;
     }
 }
+/*
+Table design
+*/
+.fresh-table.toolbar-color-azure .fixed-table-toolbar {
+    background: radial-gradient(ellipse at center, #20B2AA 0%, #00e2d5 100%);
+}
+/* Adds */
+a.btn, button.btn{
+    color:#fff;
+}
+.btn-warning{
+    background-color: #ED8D00;
+}
+.btn-warning:hover{
+    background-color: #ED8D00;
+}
+a.btn:hover, button.btn:hover{
+    color:#fff;
+}
+a.btn-tools:hover, button.btn-tools:hover{
+    color:#222;
+}

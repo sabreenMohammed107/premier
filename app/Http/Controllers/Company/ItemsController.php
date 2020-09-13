@@ -93,7 +93,8 @@ class ItemsController extends Controller
             if($request->hasFile('logo')){
                 $extension = $request->logo->extension();
                 $filename = time() . '.' . $extension;
-                $request->file('logo')->move('uploads/item',$filename);
+                $path = public_path('uploads/item');
+                $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'item_image' => $filename,
                 ]);
@@ -145,7 +146,8 @@ class ItemsController extends Controller
                 if($request->hasFile('logo')){
                     $extension = $request->logo->extension();
                     $filename = time() . '.' . $extension;
-                    $request->file('logo')->move('uploads/item',$filename);
+                    $path = public_path('uploads/item');
+                    $request->file('logo')->move($path,$filename);
                     $request->merge([
                         'item_image' => $filename,
                     ]);

@@ -38,6 +38,9 @@
                     {{$CompanyId}}
                 @endslot
             @if($type == 'View' || $type == 'Edit')
+            @slot('image_path')
+                {{ asset("/uploads/person/$Employee->person_logo") }}
+            @endslot
             @slot('name')
                 {{$Employee->person_name}}
             @endslot

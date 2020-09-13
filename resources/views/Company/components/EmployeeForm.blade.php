@@ -4,7 +4,6 @@
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <div class="profile-info-inner">
             <div class="profile-img">
-                <img src="{{ asset("/uploads/person/$image") }}" alt="" />
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -12,15 +11,12 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl"">
                                 <div class="file-upload-inner ts-forms mg-b-15">
-                                    <div class="input prepend-big-btn">
-                                        <label class="icon-right" for="prepend-big-btn">
-                                            <i class="fa fa-download"></i>
-                                        </label>
-                                        <div class="file-button">
-                                             تحميل صورة
-                                            <input type="file" name="logo" {{$disabled ?? ''}} onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                    <div id="uploadOne" class="img-upload">
+                                        <img src="{{$image_path ?? asset('webassets/img/default.png')}}" alt="" style="width: 100%;border: 1px dashed #CCC;">
+                                        <div class="upload-icon">
+                                            <input type="file" tabindex="11" name="company_logo" class="upload">
+                                            <i class="fa fa-camera"></i>
                                         </div>
-                                        <input type="text" id="prepend-big-btn" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -49,8 +45,7 @@
                     <div class="product-status-wrap drp-lst">
                         <h4 style="text-align:right">{{$title ?? ''}}</h4>
                     </div>
-                    <button type="button" onclick="customReset()" {{$disabled ?? ''}} class="btn btn-primary waves-effect waves-light mg-b-15">تفريغ البيانات</button>
-                    <a href="" onclick="location.reload(true);" class="btn btn-primary waves-effect waves-light mg-b-15">الغاء</a>
+                    {{-- <button type="button" onclick="customReset()" {{$disabled ?? ''}} class="btn btn-primary waves-effect waves-light mg-b-15">تفريغ البيانات</button> --}}
 
                     <div class="product-payment-inner-st" style="padding-top:0px">
                         <div class="row mg-b-15">
@@ -126,6 +121,7 @@
                                                     </div>
                                             </div>
                                         <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" style="{{$style ?? ""}}">{{$button ?? ''}}</button>
+                                        <a href="{{url('/Company/Employees')}}" class="btn btn-warning mg-b-15">إلغاء</a>
                                     </div>
                                 </div>
                             </div>

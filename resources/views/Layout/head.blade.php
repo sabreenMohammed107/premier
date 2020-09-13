@@ -18,6 +18,9 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/bootstrap.min.css')}}">
+    <!-- fresh b-table CSS
+		============================================ -->
+        <link rel="stylesheet" href="{{ asset('webassets/css/fresh-bootstrap-table.css')}}">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/font-awesome.min.css')}}">
@@ -26,6 +29,9 @@
     <link rel="stylesheet" href="{{ asset('webassets/css/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{ asset('webassets/css/owl.theme.css')}}">
     <link rel="stylesheet" href="{{ asset('webassets/css/owl.transitions.css')}}">
+    <!-- bootstrap-select CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{{asset('webassets/css/bootstrap-select/bootstrap-select.min.css')}}">
     <!-- animate CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/animate.css')}}">
