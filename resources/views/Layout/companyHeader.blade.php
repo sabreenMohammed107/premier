@@ -103,7 +103,7 @@
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشيكات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="#" class="dropdown-item">  حركة الشيكات</a>
+                                                    <a href="{{url('/Cheques')}}" class="dropdown-item">  حركة الشيكات</a>
 
 													</div>
 												</li>
@@ -117,8 +117,8 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الخزينة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-													<a href="#" class="dropdown-item"> مدفوعات نقدية</a>
-												<a href="#" class="dropdown-item">مقبوضات نقدية </a>
+													<a href="{{url('/Cash/Purchasing')}}" class="dropdown-item"> مدفوعات نقدية</a>
+												<a href="{{url('/Cash/Sales')}}" class="dropdown-item">مقبوضات نقدية </a>
 													</div>
 												</li>
 												<li class="nav-item dropdown res-dis-nn">
