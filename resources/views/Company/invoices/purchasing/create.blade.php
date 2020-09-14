@@ -171,10 +171,10 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         </div>
 
                                         <div class="row">
-                                            <div id="type" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-
-                                                <select data-placeholder="Choose a supplier..." class="chosen-select" id="person_id" tabindex="-1">
-                                                    <option disabled selected>أختر المورد</option>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <input type="text" disabled name="person_name" id="other_text" class="form-control" style="display: none;" placeholder="">
+                                                <select data-width="100%" name="person_id" class="selectpicker" data-live-search="true" tabindex="-1">
+                                                    <option value="">أختر</option>
                                                     @foreach ($Suppliers as $Supplier)
                                                         <option value="{{$Supplier->id}}">{{$Supplier->person_name}}</option>
                                                     @endforeach
@@ -313,7 +313,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             data-minimum-count-columns="2"
                             data-page-list="[10, 25, 50, 100, all]"
                             data-sort-name="index"
-                            data-sort-order="desc"
+                            data-sort-order="asc"
                             data-search="true"
                             style="direction:rtl"
                             data-toggle="table"
@@ -571,17 +571,17 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 var i = $('#puchasetable > tbody  > tr').length;
                 $('#puchasetable > tbody  > tr').each(function(index) {
                     ++index;
-                    // alert($('input[type=radio][name=optionsRadios'+i+']:checked').val());
-                    // alert($('#item_arabic_name'+i+'').val());
+                    // alert($('input[type=radio][name=optionsRadios'+index+']:checked').val());
+                    // alert($('#item_arabic_name'+index+'').val());
                     debugger
-                    if($('input[type=radio][name=optionsRadios'+i+']:checked').val() == 'no'){
-                        var item_arabic_name = $('#item_arabic_name'+i+'').val();
+                    if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
+                        var item_arabic_name = $('#item_arabic_name'+index+'').val();
                         var item_id = null;
                     }else{
-                        var item_arabic_name = $('#select'+i+' option:selected').text();
-                        var item_id = $('#select'+i+' option:selected').val();
+                        var item_arabic_name = $('#select'+index+' option:selected').text();
+                        var item_id = $('#select'+index+' option:selected').val();
                     }
-                    if($("#optionsRadioscheck"+i+"").is(':checked') == true){
+                    if($("#optionsRadioscheck"+index+"").is(':checked') == true){
                         var tax_exemption = 1;
                     }else{
                         var tax_exemption = 0;
@@ -595,7 +595,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         comm_industr_tax : parseFloat($(this).children('.comm_industr_tax').text()),
                         net_value : parseFloat($(this).find('.net_value').text()),
                         item_discount : parseFloat($(this).find('.item_discount').val()),
-                        is_stored : $('input[type=radio][name=optionsRadios'+i+']:checked').val(),
+                        is_stored : $('input[type=radio][name=optionsRadios'+index+']:checked').val(),
                         item_text : item_arabic_name,
                         item_id : item_id,
                         item_price : $(this).find('.item_price').val(),
@@ -650,23 +650,21 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
                 });
             })
-            $('input[type=radio][name=person]').change(function() {
-                    var compid = $('#compid').val();
-                    var url = "";
-                    if (this.value == '102') {
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/Employees')}}";
-                        fetchPersons(url, compid)
-                    }
-                    else if (this.value == '101') {
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/Suppliers')}}";
-                        fetchPersons(url, compid)
-                    }else{
-                        // $('#type').html('<input type="text" name="person_name" class="form-control" placeholder="">')
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/Other')}}";
-                        fetchPersons(url, compid)
-                    }
-
-            });
+            $('input[name=person]').change(function() {
+                // alert($('input[name=person_type]:checked').val());
+                if($('input[name=person]:checked').val() == 100){
+                    fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                }else if($('input[name=person]:checked').val() == 101){
+                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                }else if($('input[name=person]:checked').val() == 102){
+                    fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                }else{
+                    $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
+                    $('.selectpicker').attr('disabled','disabled');
+                    //fetchPersons("{{url('/Cash/Sales/Others')}}","{{session('company_id')}}");
+                    $('#other_text').css({'display':'block'}).attr('disabled',false);
+                }
+            })
 
         $('input[type=radio][name=optionsRadiosser1]').change(function(){
                 if(this.value == 101){
@@ -699,21 +697,24 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
                 });
             })
-        function fetchPersons(url, compid) {
-            $.ajax({
-                type:'GET',
-                url:url,
-                data:{
-                    compid : compid
-                },
-                    success:function(data) {
-                        $('#type').html(data);
-                        $('.chosen-select').select2();
-                },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                }
-                });
-        }
+            function fetchPersons(url, compid) {
+                $.ajax({
+                    type:'GET',
+                    url:url,
+                    data:{
+                        compid : compid
+                    },
+                        success:function(data) {
+                            $('#other_text').css({'display':'none'}).attr('disabled','disabled');
+                            $('.dropdown.bootstrap-select.bs3').css({'display':'block'});
+                            $('.selectpicker').attr('disabled',false);
+                            $('.selectpicker').html(data);
+                            $('.selectpicker').selectpicker('refresh');
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+                    });
+            }
         </script>
         @endsection

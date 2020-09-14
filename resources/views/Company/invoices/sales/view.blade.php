@@ -300,7 +300,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             data-minimum-count-columns="2"
                             data-page-list="[10, 25, 50, 100, all]"
                             data-sort-name="index"
-                            data-sort-order="desc"
+                            data-sort-order="asc"
                             data-search="true"
                             style="direction:rtl"
                             data-toggle="table"

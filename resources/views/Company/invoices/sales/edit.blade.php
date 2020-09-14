@@ -73,7 +73,11 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
     }else{
         $local = 'checked="checked"';
     }
-    if ($Person->person_type_id == 101) {
+    if($Person->person_type_id == 100){
+        $client = 'checked="checked"';
+        $type = 'عميل';
+    }
+    elseif ($Person->person_type_id == 101) {
         $supplier = 'checked="checked"';
         $type = 'مورد';
     }elseif($Person->person_type_id == 102){
@@ -204,14 +208,21 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 <label class="login2">المدفوعات</label>
                                             </div>
                                         </div>
-
                                         <div class="row">
-                                            <div id="type" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                @if ($type == 'أخرى')
-                                            <input type="text" name="person_name" value="{{$Person->person_name}}" id="other_text" class="form-control" placeholder="">
-                                                @else
-                                                    <select data-placeholder="Choose a supplier..." class="chosen-select" id="person_id" tabindex="-1">
-                                                        <option disabled selected>أختر {{$type ?? ''}}</option>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                            <input type="text" value="{{$Person->person_name}}" name="person_name" id="other_text" class="form-control"
+                                                @if ($Person->person_type_id != 'other')
+                                                style="display: none;"
+                                                disabled
+                                                @endif
+                                                placeholder="">
+                                                <select data-width="100%" name="person_id" class="selectpicker"
+                                                @if ($Person->person_type_id == 'other')
+                                                style="display: none;"
+                                                disabled
+                                                @endif
+                                                data-live-search="true" tabindex="-1">
+                                                    <option disabled selected>أختر {{$type ?? ''}}</option>
                                                         @foreach ($Persons as $InvPerson)
                                                             <option
                                                             @if ($Invoice->person_id == $InvPerson->id)
@@ -219,21 +230,20 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                             @endif
                                                             value="{{$InvPerson->id}}">{{$InvPerson->person_name}}</option>
                                                         @endforeach
-                                                    </select>
-                                                @endif
-
+                                                </select>
 
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox">
-                                                    <input class="radio-checked" {{$supplier ?? ''}} type="radio" checked="" value="101" id="optionsRadios1 person_type_id" name="person">
-                                                    <label><b> موردين </b></label>
-                                                    <input class="" type="radio" value="102" {{$employee ?? ''}} id="optionsRadios2" name="person">
+                                                    <input class="radio-checked" {{$client ?? ''}} type="radio" checked="" value="100" id="optionsRadios1 person_type_id" name="person">
+                                                    <label><b> عملاء </b></label>
+                                                    <input class="" type="radio" {{$employee ?? ''}} value="102" id="optionsRadios2" name="person">
                                                     <label><b> موظفين </b></label>
-                                                    <input class="" type="radio" value="other" {{$other ?? ''}} id="optionsRadios2" name="person">
+                                                    <input class="" type="radio" {{$other ?? ''}} value="other" id="optionsRadios2" name="person">
                                                     <label><b> أخري </b></label>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15">
@@ -356,7 +366,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             data-minimum-count-columns="2"
                             data-page-list="[10, 25, 50, 100, all]"
                             data-sort-name="index"
-                            data-sort-order="desc"
+                            data-sort-order="asc"
                             data-search="true"
                             style="direction:rtl"
                             data-toggle="table"
@@ -408,6 +418,15 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
         @endsection
         @section('scripts')
+        @if ($Person->person_type_id == 'other')
+            <script>
+                $('.selectpicker').selectpicker('refresh');
+                $(document).ready(function(){
+
+                    $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
+                })
+            </script>
+        @endif
         <script>
             if ($('input[type=radio][name=optionsRadiosser1]:checked').val() == 101) {
                 $('#cit').val("{{$CIT_Items->item_value}}")
@@ -453,15 +472,15 @@ $('#cit').val("{{$CIT_Services->item_value}}")
                 $('#puchasetable > tbody  > tr').each(function(index) {
                     debugger;
                     ++index;
-                    // alert($('input[type=radio][name=optionsRadios'+i+']:checked').val());
-                    if($('input[type=radio][name=optionsRadios'+i+']:checked').val() == 'no'){
-                        var item_arabic_name = $('#item_arabic_name'+i+'').val();
+                    // alert($('input[type=radio][name=optionsRadios'+index+']:checked').val());
+                    if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
+                        var item_arabic_name = $('#item_arabic_name'+index+'').val();
                         var item_id = null;
                     }else{
-                        var item_arabic_name = $('#select'+i+' option:selected').text();
-                        var item_id = $('#select'+i+' option:selected').val();
+                        var item_arabic_name = $('#select'+index+' option:selected').text();
+                        var item_id = $('#select'+index+' option:selected').val();
                     }
-                    if($("#optionsRadioscheck"+i+"").is(':checked') == true){
+                    if($("#optionsRadioscheck"+index+"").is(':checked') == true){
                         var tax_exemption = 1;
                     }else{
                         var tax_exemption = 0;
@@ -475,7 +494,7 @@ $('#cit').val("{{$CIT_Services->item_value}}")
                         comm_industr_tax : parseFloat($(this).children('.comm_industr_tax').text()),
                         net_value : parseFloat($(this).find('.net_value').text()),
                         item_discount : parseFloat($(this).find('.item_discount').val()),
-                        is_stored : $('input[type=radio][name=optionsRadios'+i+']:checked').val(),
+                        is_stored : $('input[type=radio][name=optionsRadios'+index+']:checked').val(),
                         item_text : item_arabic_name,
                         item_id : item_id,
                         item_price : $(this).find('.item_price').val(),
@@ -738,23 +757,21 @@ $('#cit').val("{{$CIT_Services->item_value}}")
 
                 });
             })
-            $('input[type=radio][name=person]').change(function() {
-                    var compid = $('#compid').val();
-                    var url = "";
-                    if (this.value == '102') {
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/Employees')}}";
-                        fetchPersons(url, compid)
-                    }
-                    else if (this.value == '101') {
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/Suppliers')}}";
-                        fetchPersons(url, compid)
-                    }else{
-                        url = "{{url('/Invoice/Purchasing/Add/fetch/other')}}";
-                        fetchPersons(url, compid)
-                        // $('#type').html('<input type="text" name="person_name" class="form-control" placeholder="">')
-                    }
-
-        });
+           $('input[name=person]').change(function() {
+                // alert($('input[name=person_type]:checked').val());
+                if($('input[name=person]:checked').val() == 100){
+                    fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                }else if($('input[name=person]:checked').val() == 101){
+                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                }else if($('input[name=person]:checked').val() == 102){
+                    fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                }else{
+                    $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
+                    $('.selectpicker').attr('disabled','disabled');
+                    //fetchPersons("{{url('/Cash/Sales/Others')}}","{{session('company_id')}}");
+                    $('#other_text').css({'display':'block'}).attr('disabled',false);
+                }
+            })
 
         $('input[type=radio][name=optionsRadiosser1]').change(function(){
                 if(this.value == 101){
@@ -788,21 +805,24 @@ $('#cit').val("{{$CIT_Services->item_value}}")
                 });
             })
         function fetchPersons(url, compid) {
-            $.ajax({
-                type:'GET',
-                url:url,
-                data:{
-                    compid : compid
-                },
-                    success:function(data) {
-                        $('#type').html(data);
-                        $('.chosen-select').select2();
-                },
-                error: function (request, status, error) {
-                    console.log(request.responseText);
-                }
-                });
-        }
+                $.ajax({
+                    type:'GET',
+                    url:url,
+                    data:{
+                        compid : compid
+                    },
+                        success:function(data) {
+                            $('#other_text').css({'display':'none'}).attr('disabled','disabled');
+                            $('.dropdown.bootstrap-select.bs3').css({'display':'block'});
+                            $('.selectpicker').attr('disabled',false);
+                            $('.selectpicker').html(data);
+                            $('.selectpicker').selectpicker('refresh');
+                    },
+                    error: function (request, status, error) {
+                        console.log(request.responseText);
+                    }
+                    });
+            }
         </script>
                             {{-- @foreach ($Invoice->invoice_items as $i => $inv_item_script)
                             @php

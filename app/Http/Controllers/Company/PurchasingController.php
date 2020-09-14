@@ -185,10 +185,11 @@ class PurchasingController extends Controller
             $inv_id = $req->inv_id;
 
             $Invoice_Items = DB::table('invoice_items')
-            ->where('inv_id','=',$inv_id)->get();
+            ->where('inv_id','=',$inv_id)
+            ->orderBy('id', 'Desc')->get();
 
             $Items = DB::table('items')
-            ->where('company_id','=',$req->compid)->orderBy('id', 'desc')->get();
+            ->where('company_id','=',$req->compid)->orderBy('id', 'ASC')->get();
 
             $ajaxComponent = view('Company.components.ajax.PurchasingRowUpdate',[
                 'rowCount'=>$rowCount,

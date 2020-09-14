@@ -128,6 +128,7 @@ Route::namespace('Company')->group(function () {
     Route::get('/Cash/Sales/Edit/{cash_id}','ReceiptsController@Edit');
     Route::get('/Cash/Sales/View/{cash_id}','ReceiptsController@View');
     Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
+    Route::post('/Cash/Sales/Create','ReceiptsController@Create');
     Route::post('/Cash/Sales/{cash_id}/Update','ReceiptsController@Update');
     Route::get('/Cash/Sales/{cash_id}/Delete','ReceiptsController@Delete');
 

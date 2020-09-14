@@ -1,10 +1,11 @@
 @php
-    $counter = count($Invoice_Items);
+    $i = 0;
 @endphp
 @foreach ($Invoice_Items as $i => $InvItem)
+
 @php
 
-
+++$i;
  if($InvItem->store_item == 1){
     $checked_yes = 'checked="checked"';
     $checked_no = '';
@@ -17,24 +18,24 @@
     $d_none_inp = 'style=display:inline-block;';
  }
 @endphp
-<tr id="Item{{$InvItem->id}}" data-id="{{$counter}}">
-<td>{{$counter}}</td>
+<tr id="Item{{$InvItem->id}}" data-id="{{$i}}">
+<td>{{$i}}</td>
     <td >
         <div class="bt-df-checkbox">
-        <input id="inv_type{{$counter}}" type="hidden" name="" class="inv_type" value="update">
-        <input id="id{{$counter}}" type="hidden" name="" class="id" value="{{$InvItem->id}}">
-        <input class="isStored" {{$checked_no ?? ''}} onclick="editRadioStored({{$counter}})" type="radio" value="no" id="optionsRadios{{$counter}}" name="optionsRadios{{$counter}}">
+        <input id="inv_type{{$i}}" type="hidden" name="" class="inv_type" value="update">
+        <input id="id{{$i}}" type="hidden" name="" class="id" value="{{$InvItem->id}}">
+        <input class="isStored" {{$checked_no ?? ''}} onclick="editRadioStored({{$i}})" type="radio" value="no" id="optionsRadios{{$i}}" name="optionsRadios{{$i}}">
             <label><b> لا </b></label>
-            <input class="radio-checked isStored" onclick="editRadioStored({{$counter}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$counter}}sec" name="optionsRadios{{$counter}}">
+            <input class="radio-checked isStored" onclick="editRadioStored({{$i}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$i}}sec" name="optionsRadios{{$i}}">
             <label><b> نعم </b></label>
         </div>
     </td>
     <td>
-        <div id="outitem{{$counter}}"  class="input-mark-inner mg-b-22 outitem">
-        <input type="text" {{$d_none_inp ?? ''}} oninput="editVal({{$counter}})" class="item_arabic_name{{$counter}}" id="item_arabic_name{{$counter}}" value="{{$InvItem->item_text}}" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
+        <div id="outitem{{$i}}"  class="input-mark-inner mg-b-22 outitem">
+        <input type="text" {{$d_none_inp ?? ''}} oninput="editVal({{$i}})" class="item_arabic_name{{$i}}" id="item_arabic_name{{$i}}" value="{{$InvItem->item_text}}" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
 
         </div>
-    <select id="select{{$counter}}" {{$d_none_sel ?? ''}} onchange="editSelectVal({{$counter}})" class="form-control try item_id" placeholder="أختر المنتج">
+    <select id="select{{$i}}" {{$d_none_sel ?? ''}} onchange="editSelectVal({{$i}})" class="form-control try item_id" placeholder="أختر المنتج">
             @foreach ($Items as $Item)
             <option
             @if ($InvItem->item_id == $Item->id)
@@ -46,23 +47,23 @@
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" oninput="itemPrice({{$counter}})" id="itemprice{{$counter}}" value="{{$InvItem->item_price}}" class="form-control item_price" placeholder="">
+        <input type="number" oninput="itemPrice({{$i}})" id="itemprice{{$i}}" value="{{$InvItem->item_price}}" class="form-control item_price" placeholder="">
         </div>
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" oninput="itemQty({{$counter}})" id="qty{{$counter}}" value="{{$InvItem->item_quantity}}" class="form-control item_quantity" placeholder="">
+        <input type="number" oninput="itemQty({{$i}})" id="qty{{$i}}" value="{{$InvItem->item_quantity}}" class="form-control item_quantity" placeholder="">
         </div>
     </td>
-    <td id="total{{$counter}}" class="total_item_price">
+    <td id="total{{$i}}" class="total_item_price">
         {{$InvItem->total_item_price}}
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
-        <input type="number" oninput="itemDiscount({{$counter}})" id="discount{{$counter}}" value="{{$InvItem->item_discount}}" class="form-control item_discount" placeholder="">
+        <input type="number" oninput="itemDiscount({{$i}})" id="discount{{$i}}" value="{{$InvItem->item_discount}}" class="form-control item_discount" placeholder="">
         </div>
     </td>
-    <td id="totalafterdiscount{{$counter}}" class="total_after_discounts">
+    <td id="totalafterdiscount{{$i}}" class="total_after_discounts">
         {{$InvItem->total_after_discounts}}
     </td>
     <td>
@@ -71,26 +72,26 @@
         @if ($InvItem->tax_exemption == 1)
             checked
         @endif
-        type="checkbox" onkeypress="enterForRow(event,{{$counter}})" onchange="taxExemptionCheck({{$counter}})" id="optionsRadioscheck{{$counter}}" name="optionsRadioscheck{{$counter}}">
+        type="checkbox" onkeypress="enterForRow(event,{{$i}})" onchange="taxExemptionCheck({{$i}})" id="optionsRadioscheck{{$i}}" name="optionsRadioscheck{{$i}}">
     </div>
     </td>
-    <td id="totalvat{{$counter}}" class="input-mark-inner mg-b-22 vat_tax_value">
+    <td id="totalvat{{$i}}" class="input-mark-inner mg-b-22 vat_tax_value">
         {{$InvItem->vat_tax_value}}
     </td>
-    <td  id="totalcit{{$counter}}" class="input-mark-inner mg-b-22 comm_industr_tax">
+    <td  id="totalcit{{$i}}" class="input-mark-inner mg-b-22 comm_industr_tax">
         {{$InvItem->comm_industr_tax}}
     </td>
     <td>
-    <div id="nettotal{{$counter}}" class="input-mark-inner mg-b-22 net_value">
+    <div id="nettotal{{$i}}" class="input-mark-inner mg-b-22 net_value">
             {{$InvItem->net_value}}
         </div>
     </td>
     <td>
         <div class="product-buttons">
-        <button data-toggle="modal" data-target="#del{{$counter}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        <button data-toggle="modal" data-target="#del{{$i}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
         </div>
         <!--Delete-->
-<div id="del{{$counter}}" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
+<div id="del{{$i}}" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-color-modal bg-color-2">
@@ -107,7 +108,7 @@
             </div>
             <div class="modal-footer info-md">
                 <a data-dismiss="modal" href="#">إلغــاء</a>
-                <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}},{{$counter}});">حـذف</a>
+                <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}},{{$i}});">حـذف</a>
             </div>
         </div>
     </div>
@@ -116,7 +117,7 @@
     </td>
 </tr>
 
-@php
-    --$counter;
-@endphp
+{{-- @php
+    ++$i;
+@endphp --}}
 @endforeach

@@ -30,7 +30,7 @@ function ajax_row(url) {
             $('#puchasetable').bootstrapTable('destroy');
             $('.no-records-found').remove();
             $('#rows').html(trs);
-            $('#rows').prepend(data);
+            $('#rows').append(data);
             // $('.chosen-select').select2();
             $('#puchasetable').bootstrapTable();
             $('#puchasetable #optionsRadios'+rowCount).focus();
