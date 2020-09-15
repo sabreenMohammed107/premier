@@ -60,7 +60,8 @@ class LoginController extends Controller
         ->where('users.id','=',$user->id)->first();
 
         Session::put('company_id', $UserCompany->company_id);
-        \Auth::login($user);
+        Auth::login($user);
+
         return true;
     }
 

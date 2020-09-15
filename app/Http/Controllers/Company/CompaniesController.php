@@ -10,6 +10,7 @@ use App\Models\Bank;
 use App\Models\FinanTransaction;
 use App\Models\Safe;
 use App\Models\Person;
+use Illuminate\Support\Facades\Auth;
 
 class CompaniesController extends Controller
 {

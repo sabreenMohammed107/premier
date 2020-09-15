@@ -5,12 +5,35 @@
 | Admin Routes
 |--------------------------------------------------------------------------
 |
-| 
+|
 |   \Admin
 */
-Route::namespace('Admin')->group(function () {
+Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
+    //البيانات الاساسية
+    Route::middleware(['HasBasicInfo'])->group(function () {
+        /*********************==user==******************* */
+        Route::resource('/users', 'RegisterUsersController');
+        Route::get('dynamicdependentCat/fetch', 'RegisterUsersController@fetchCat')->name('dynamicdependentCat.fetch');
 
-    Route::get('/', 'AllCompaniesController@home'); 
+        /*********************==guid==******************* */
+        Route::resource('/guid-item', 'GuideItemController');
+
+        /*********************==WorkRoleController==******************* */
+        Route::resource('/work-role', 'WorkRoleController');
+        Route::post('/saveCase1', 'WorkRoleController@saveCase1')->name('saveCase1');
+        Route::post('/saveCase2', 'WorkRoleController@saveCase2')->name('saveCase2');
+        Route::post('/saveCase3', 'WorkRoleController@saveCase3')->name('saveCase3');
+        Route::post('/saveCase4', 'WorkRoleController@saveCase4')->name('saveCase4');
+
+        /*********************==BalanceAdjust==******************* */
+        Route::get('/balance-adjust', 'BalanceAdjustController@index')->name('balance-adjust');
+        Route::get('dynamicPerson/fetch', 'BalanceAdjustController@fetchPerson')->name('dynamicPerson.fetch');
+        Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
+        Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
+
+    });
+
+    Route::get('/', 'AllCompaniesController@home');
 /*********************==home==******************* */
        Route::resource('/home', 'AllCompaniesController');
        Route::get('/fetch_emp', 'AllCompaniesController@fetch_emp')->name('fetch_emp');
@@ -19,21 +42,6 @@ Route::namespace('Admin')->group(function () {
        Route::get('/search_emp', 'AllCompaniesController@search_emp')->name('search_emp');
        Route::get('/search_client', 'AllCompaniesController@search_client')->name('search_client');
        Route::get('/search_sup', 'AllCompaniesController@search_sup')->name('search_sup');
-
-
-/*********************==user==******************* */
-    Route::resource('/users', 'RegisterUsersController');
-    Route::get('dynamicdependentCat/fetch', 'RegisterUsersController@fetchCat')->name('dynamicdependentCat.fetch');
-
-/*********************==guid==******************* */
-Route::resource('/guid-item', 'GuideItemController');
-/*********************==WorkRoleController==******************* */
-Route::resource('/work-role', 'WorkRoleController');
-Route::post('/saveCase1', 'WorkRoleController@saveCase1')->name('saveCase1');
-Route::post('/saveCase2', 'WorkRoleController@saveCase2')->name('saveCase2');
-Route::post('/saveCase3', 'WorkRoleController@saveCase3')->name('saveCase3');
-Route::post('/saveCase4', 'WorkRoleController@saveCase4')->name('saveCase4');
-
 
 /*********************==cash-purch==******************* */
 Route::resource('/cash-purch', 'CashPurchasingController');
@@ -48,30 +56,17 @@ Route::post('/update.salecriterion', 'SalePurchasingController@updateCriterion')
 Route::post('/update.saleguided', 'SalePurchasingController@updateGuided')->name('update.saleguided');
 Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')->name('update.saleconfirmed');
 
-
-
-/*********************==BalanceAdjust==******************* */
-Route::get('/balance-adjust', 'BalanceAdjustController@index')->name('balance-adjust');
-Route::get('dynamicPerson/fetch', 'BalanceAdjustController@fetchPerson')->name('dynamicPerson.fetch');
-Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
-Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
-
-
-/*********************==MonthBalanceController==******************* */
-Route::get('/month-balance', 'MonthBalanceController@index')->name('month-balance');
-Route::get('dynamicMonth/fetch', 'MonthBalanceController@fetchMonth')->name('dynamicMonth.fetch');
-Route::get('dynamicMonthClose/fetch', 'MonthBalanceController@monthClose')->name('dynamicMonthClose.fetch');
-Route::get('dynamicMonthOpen/fetch', 'MonthBalanceController@monthOpen')->name('dynamicMonthOpen.fetch');
-/*********************==YearBalanceController==******************* */
-Route::get('/year-balance', 'YearBalanceController@index')->name('year-balance');
-Route::get('dynamicYear/fetch', 'YearBalanceController@fetchYear')->name('dynamicYear.fetch');
-Route::get('dynamicYearClose/fetch', 'YearBalanceController@yearClose')->name('dynamicYearClose.fetch');
-Route::get('dynamicYearOpen/fetch', 'YearBalanceController@yearOpen')->name('dynamicYearOpen.fetch');
-
-
-
-
-
-
-
+//الترصيد
+Route::middleware(['HasBalance'])->group(function () {
+    /*********************==MonthBalanceController==******************* */
+    Route::get('/month-balance', 'MonthBalanceController@index')->name('month-balance');
+    Route::get('dynamicMonth/fetch', 'MonthBalanceController@fetchMonth')->name('dynamicMonth.fetch');
+    Route::get('dynamicMonthClose/fetch', 'MonthBalanceController@monthClose')->name('dynamicMonthClose.fetch');
+    Route::get('dynamicMonthOpen/fetch', 'MonthBalanceController@monthOpen')->name('dynamicMonthOpen.fetch');
+    /*********************==YearBalanceController==******************* */
+    Route::get('/year-balance', 'YearBalanceController@index')->name('year-balance');
+    Route::get('dynamicYear/fetch', 'YearBalanceController@fetchYear')->name('dynamicYear.fetch');
+    Route::get('dynamicYearClose/fetch', 'YearBalanceController@yearClose')->name('dynamicYearClose.fetch');
+    Route::get('dynamicYearOpen/fetch', 'YearBalanceController@yearOpen')->name('dynamicYearOpen.fetch');
+});
 });

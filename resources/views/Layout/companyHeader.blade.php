@@ -35,7 +35,7 @@
 												<li class="nav-item">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 														<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
-														<span class="admin-name">User</span>
+														<span class="admin-name">{{Auth::user()->user_name}}</span>
 														<img src="img/product/pro4.jpg" alt="" />
 													</a>
 													<ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
@@ -92,45 +92,56 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الشركة  </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                   <a href="#" class="dropdown-item">تقرير حركة العميل</a>
-												<a href="#" class="dropdown-item">تقرير حركة المورد</a>
-												<a href="#" class="dropdown-item">تقرير حركة موظف</a>
-											<a href="#" class="dropdown-item">تقرير حركة بنك</a>
-												<a href="#" class="dropdown-item">تقرير حركة خزينة </a>
-												<a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
+                                                    <a href="#" class="dropdown-item">تقرير حركة العميل</a>
+                                                    <a href="#" class="dropdown-item">تقرير حركة المورد</a>
+                                                    <a href="#" class="dropdown-item">تقرير حركة موظف</a>
+                                                    <a href="#" class="dropdown-item">تقرير حركة بنك</a>
+                                                    <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
+                                                    <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
 													</div>
                                                 </li>
+                                                @if (Auth::user()->role_id == 102)
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشيكات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
                                                     <a href="{{url('/Cheques')}}" class="dropdown-item">  حركة الشيكات</a>
 
 													</div>
-												</li>
+                                                </li>
+                                                @endif
+                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الفواتير </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
 													<a href="{{url('Invoices/Purchasing')}}" class="dropdown-item">  مشتريات</a>
 												    <a href="{{url('Invoices/Sales')}}" class="dropdown-item"> مبيعات </a>
 													</div>
-												</li>
-												<li class="nav-item dropdown res-dis-nn">
+                                                </li>
+                                                @endif
+
+                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الخزينة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
 													<a href="{{url('/Cash/Purchasing')}}" class="dropdown-item"> مدفوعات نقدية</a>
 												<a href="{{url('/Cash/Sales')}}" class="dropdown-item">مقبوضات نقدية </a>
 													</div>
-												</li>
-												<li class="nav-item dropdown res-dis-nn">
-													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
-													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="{{ url("/Company") }}" class="dropdown-item">تفاصيل الشركة</a>
-												<a href="{{ url("/Company/Items")}}" class="dropdown-item">الأصناف</a>
-												<a href="{{ url("/Company/Clients")}}" class="dropdown-item">كشف العملاء</a>
-												<a href="{{ url("/Company/Suppliers")}}" class="dropdown-item">كشف الموردين </a>
-                                                    <a href="{{ url("/Company/Employees")}}" class="dropdown-item">كشف الموظفين</a>
-													</div>
-												</li>
+                                                </li>
+                                                @endif
+
+                                                @if (Auth::user()->role_id == 103)
+                                                    <li class="nav-item dropdown res-dis-nn">
+                                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
+                                                        <div role="menu" class="dropdown-menu animated zoomIn">
+                                                        {{-- <a href="{{ url("/Company") }}" class="dropdown-item">تفاصيل الشركة</a> --}}
+                                                        <a href="{{ url("/Company/Items")}}" class="dropdown-item">الأصناف</a>
+                                                        <a href="{{ url("/Company/Clients")}}" class="dropdown-item">كشف العملاء</a>
+                                                        <a href="{{ url("/Company/Suppliers")}}" class="dropdown-item">كشف الموردين </a>
+                                                        <a href="{{ url("/Company/Employees")}}" class="dropdown-item">كشف الموظفين</a>
+                                                        </div>
+                                                    </li>
+                                                @endif
+
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">

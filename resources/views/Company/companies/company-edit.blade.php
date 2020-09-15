@@ -24,8 +24,10 @@
                         <div class="product-payment-inner-st">
                             <ul id="myTabedu1" class="tab-review-design"style="direction:rtl">
                                 <li class="active"><a href="#description">البيانات الأساسية للشركة</a></li>
+                                @if (Auth::user()->role_id != 103)
                                 <li><a href="#reviews"> الخزينة </a></li>
                                 <li><a href="#INFORMATION"> البنك </a></li>
+                                @endif
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
@@ -179,6 +181,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if (Auth::user()->role_id != 103)
                                 <div class="product-tab-list tab-pane fade" id="reviews">
                                     <div class="row">
                                         @php
@@ -311,6 +315,7 @@
 
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

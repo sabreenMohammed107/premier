@@ -91,13 +91,15 @@
 														<a href="#" class="dropdown-item">تقرير إذن الصرف</a>
 													</div>
 												</li>
-												<li class="nav-item dropdown res-dis-nn">
+												@if (Auth::user()->role_id == 100)
+                                                <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الترصيد </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="{{route('year-balance')}}" class="dropdown-item">ترصيد سنوي</a>
 														<a href="{{route('month-balance')}}" class="dropdown-item">ترصيد شهري</a>
 													</div>
 												</li>
+                                                @endif
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
@@ -109,7 +111,8 @@
 														<a href="#" class="dropdown-item">قيود ألية</a>
 													</div>
 												</li>
-												<li class="nav-item dropdown res-dis-nn">
+												@if (Auth::user()->role_id == 100)
+                                                <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="{{ route('work-role.index') }}" class="dropdown-item">قواعد العمل</a>
@@ -118,6 +121,7 @@
 														<a href="{{ route('users.index') }}" class="dropdown-item">المستخدمين</a>
 													</div>
 												</li>
+                                                @endif
 											</ul>
 										</div>
 									</div>
