@@ -54,12 +54,14 @@ class LoginController extends Controller
         if (!isset($user)) {
             return false;
         }
+        if($user->role_id != 100 || $user->rol_id != 101){
+            $UserCompany = DB::table('users')
+            ->join('user_companies','user_companies.user_id','=','users.id')
+            ->where('users.id','=',$user->id)->first();
 
-        $UserCompany = DB::table('users')
-        ->join('user_companies','user_companies.user_id','=','users.id')
-        ->where('users.id','=',$user->id)->first();
+            Session::put('company_id', $UserCompany->company_id);
+        }
 
-        Session::put('company_id', $UserCompany->company_id);
         Auth::login($user);
 
         return true;
