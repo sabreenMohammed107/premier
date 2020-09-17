@@ -34,7 +34,18 @@ class Invoice extends Model
         'notes',
 
     ];
-
+    public function service_type()
+    {
+        return $this->belongsTo('App\Models\ServiceType', 'service_type_id');
+    }
+    public function purchasing_type()
+    {
+        return $this->belongsTo('App\Models\PurchasingType', 'purchasing_type_id');
+    }
+    public function outgoing()
+    {
+        return $this->belongsTo('App\Models\OutgoingType', 'outgoing_type_id');
+    }
 
     public function invoice_items()
     {

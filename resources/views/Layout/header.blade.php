@@ -106,8 +106,8 @@
 														<a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a>
 														<a href="{{route('cash-purch.index')}}" class="dropdown-item">مدفوعات نقدية</a>
 														<a href="{{route('cash-sale.index')}}" class="dropdown-item">مقبوضات نقدية</a>
-														<a href="#" class="dropdown-item">مبيعات</a>
-														<a href="#" class="dropdown-item">مشتريات</a>
+														<a href="{{route('invoice-sale')}}" class="dropdown-item">مبيعات</a>
+														<a href="{{route('invoice-cash')}}" class="dropdown-item">مشتريات</a>
 														<a href="#" class="dropdown-item">قيود ألية</a>
 													</div>
 												</li>
@@ -153,9 +153,9 @@
 											<ul id="demoevent" class="collapse dropdown-header-top">
 												<li><a href="{{ route('home.index') }}" class="dropdown-item">كشف الشركات</a></li>
 												<li><a href="{{route('cash-purch.index')}}" class="dropdown-item">مدفوعات نقدية</a></li>
-												<li><a href="#" class="dropdown-item">مقبوضات نقدية</a></li>
-												<li><a href="#" class="dropdown-item">مبيعات</a></li>
-												<li><a href="#" class="dropdown-item">مشتريات</a></li>
+												<li><a href="{{route('cash-sale.index')}}" class="dropdown-item">مقبوضات نقدية</a></li>
+												<li><a href="{{route('invoice-sale')}}" class="dropdown-item">مبيعات</a></li>
+												<li><a href="{{route('invoice-cash')}}" class="dropdown-item">مشتريات</a></li>
 												<li><a href="#" class="dropdown-item">قيود ألية</a></li>
 											</ul>
 										</li>

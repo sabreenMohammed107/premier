@@ -55,6 +55,18 @@ Route::get('/dynamicCompany.salefetch', 'SalePurchasingController@companyFetch')
 Route::post('/update.salecriterion', 'SalePurchasingController@updateCriterion')->name('update.salecriterion');
 Route::post('/update.saleguided', 'SalePurchasingController@updateGuided')->name('update.saleguided');
 Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')->name('update.saleconfirmed');
+/*********************==invoice Purch==******************* */
+Route::get('/invoice-cash', 'InvoiceSalePurchController@indexPurch')->name('invoice-cash');
+Route::get('/invoice-purch-select', 'InvoiceSalePurchController@purchSelect')->name('invoice-purch-select');
+Route::get('/invoicePurch-show/{id}', 'InvoiceSalePurchController@invoicePurchShow')->name('invoicePurch-show');
+
+/*********************==invoice Sale==******************* */
+Route::get('/invoice-sale', 'InvoiceSalePurchController@indexSale')->name('invoice-sale');
+Route::get('/invoice-sale-select', 'InvoiceSalePurchController@saleSelect')->name('invoice-sale-select');
+Route::get('/invoiceSale-show/{id}', 'InvoiceSalePurchController@invoiceSaleShow')->name('invoiceSale-show');
+
+
+
 
 //الترصيد
 Route::middleware(['HasBalance'])->group(function () {
