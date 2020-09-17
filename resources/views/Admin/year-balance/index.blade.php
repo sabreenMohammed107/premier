@@ -134,12 +134,12 @@
 
                 })
             }
-            
+
         });
     });
 
     function closeYear(id) {
-        alert(id);
+    
         $.ajax({
             url: "{{route('dynamicYearClose.fetch')}}",
             method: "get",
@@ -148,7 +148,7 @@
             },
             success: function(result) {
 
-                alert(result);
+            
                 $('#tableData').html(result);
 
 
@@ -158,7 +158,7 @@
     }
 
     function openYear(id) {
-        alert(id);
+      
         $.ajax({
             url: "{{route('dynamicYearOpen.fetch')}}",
             method: "get",
@@ -167,7 +167,7 @@
             },
             success: function(result) {
 
-                alert(result);
+              
                 $('#tableData').html(result);
 
 
@@ -175,5 +175,43 @@
 
         })
     }
+    
+    function openYearBalance(id) {
+      
+      $.ajax({
+          url: "{{route('openYearBalance.fetch')}}",
+          method: "get",
+          data: {
+              id: id,
+          },
+          success: function(result) {
+
+            
+              $('#tableData').html(result);
+
+
+          }
+
+      })
+  }
+
+  function cancelBalance(id) {
+      
+      $.ajax({
+          url: "{{route('cancelBalance.fetch')}}",
+          method: "get",
+          data: {
+              id: id,
+          },
+          success: function(result) {
+
+            
+              $('#tableData').html(result);
+
+
+          }
+
+      })
+  }
 </script>
 @endsection

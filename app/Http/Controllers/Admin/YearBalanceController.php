@@ -7,7 +7,8 @@ use App\Models\BalanceMonth;
 use App\Models\BalanceYear;
 use Illuminate\Http\Request;
 use App\Models\Company;
-
+use Carbon\Carbon;
+use DB;
 class YearBalanceController extends Controller
 {
     protected $viewName;
@@ -31,7 +32,9 @@ class YearBalanceController extends Controller
         $company = new Company();
         return view($this->viewName . 'index', compact('companies', 'years', 'company'));
     }
-
+/**
+ * Get data After Ajax 
+ */
 
     public function fetchYear(Request $request)
     {
@@ -44,7 +47,9 @@ class YearBalanceController extends Controller
         }
         return view($this->viewName . 'tableData', compact('years', 'company'))->render();
     }
-
+/**
+ * Closing Year
+ */
 
     public function yearClose(Request $request)
     {
@@ -85,7 +90,9 @@ class YearBalanceController extends Controller
     }
   
     }
-
+/**
+ * Cancel Close Year
+ */
     public function yearOpen(Request $request)
     {
         $id = $request->get('id');
@@ -126,4 +133,107 @@ class YearBalanceController extends Controller
 
    
 }
+/***
+ * opening new Year
+ */
+
+public function openYearBalance(Request $request){
+    $id = $request->get('id');
+    $yearNow = BalanceYear::where('id', $id)->first();
+    $companyf = BalanceYear::where('company_id', $yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
+    $xx=count(BalanceYear::where('company_id', $companyf->id)->whereIn('year_type',[1,2])->get());
+  
+    DB::beginTransaction();
+    try {
+    if($xx==0){
+        $yy = date("Y");
+     
+        $yearData = [
+            'year' => $yy,
+            'company_id' =>$yearNow->company_id,
+            'period_from_date' => Carbon::create("$yy-01-01"),
+            'period_to_date' => Carbon::create("$yy-12-31"),
+            'year_type' => 1,
+            'period_open_date' => Carbon::create("$yy-01-01"),
+            'period_closed_date' => Carbon::create("$yy-12-31"),
+            'notes' => "سنه مفتوحة"
+        ];
+    $lastMonth=BalanceMonth::where('Company_id',$yearNow->company_id)->where('year',$yearNow->year)->where("month_no", 12)->first();
+         $lastMonth->month_type = 1;
+
+         $lastMonth->update();
+     
+        $year = BalanceYear::create($yearData);
+
+        for ($i = 1; $i <= 12; $i++) {
+            $monthData = new BalanceMonth();
+            $monthData->year = date("Y");
+            $monthData->company_id =$yearNow->company_id;
+            $monthData->month_no = $i;
+            $monthData->period_from_date = Carbon::create("$yy-$i-01");
+            $monthData->period_open_date = Carbon::create("$yy-$i-01");
+            $monthData->notes = "شهر مفتوح";
+            if ($i == 1) {
+                $monthData->can_change = 1;
+            } else {
+                $monthData->can_change = 2;
+            }
+            $monthData->period_end_date = date("$yy-$i-t", strtotime("$yy-$i-1"));
+            $monthData->period_closed_date = date("$yy-$i-t", strtotime("$yy-$i-1"));
+            $monthData->save();
+        }
+     
+       
+    }
+     DB::commit();
+    $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
+    $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
+
+    return view($this->viewName . 'tableData', compact('years', 'company'))->render();
+} catch (\Throwable $th) {
+    //throw $th;
+    DB::rollBack();
+    $strr=' هناك شهور لم تغلق !';
+    $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
+    $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
+    return view($this->viewName . 'tableData', compact('years', 'company','strr'))->render();
+}
+
+}
+/**
+ * Cancel Opening New Year
+ */
+public function cancelBalance(Request $request){
+    $id = $request->get('id');
+    $yearNow = BalanceYear::where('id', $id)->first();
+
+   
+   
+        $month = BalanceMonth::where('company_id', '=',$yearNow->company_id)->where('year', '=', $yearNow->year)->orderBy("id", "Desc")->first();
+        if ($month->can_change==1) {
+            DB::beginTransaction();
+            try {
+        $yearNow->delete();
+        BalanceMonth::where('Company_id',$yearNow->company_id)->where('year',$yearNow->year)->delete();
+        
+        DB::commit();
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+          
+        }
+    }else{
+        $strr=' هناك شهور مغلقة لا يمكن إلغاء الترصيد !';
+        $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
+        $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
+        return view($this->viewName . 'tableData', compact('years', 'company','strr'))->render();
+    }
+        $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
+        $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
+    
+        return view($this->viewName . 'tableData', compact('years', 'company'))->render();
+
+}
+
 }

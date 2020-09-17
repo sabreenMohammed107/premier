@@ -33,9 +33,10 @@ class MonthBalanceController extends Controller
     {
         $value = $request->get('value');
 
-        $months = $months = BalanceMonth::where('company_id', $value)->WhereHas('company', function ($q)  {
+        $months = BalanceMonth::where('company_id', $value)->WhereHas('company', function ($q)  {
             $q->with('comLast');
-        })->with('company')->get();
+        })->orderBy("created_at", "Desc")->limit(12)
+        ->get();
 
         return view($this->viewName . 'tableData', compact('months'))->render();
     }
@@ -48,6 +49,7 @@ class MonthBalanceController extends Controller
         $month1 = BalanceMonth::where('id', '<', $id)->orderBy("id", "Desc")->first();
         if ($month) {
             $month->can_change = 0;
+
             $month->update();
         }
         if ($month1) {
@@ -66,7 +68,8 @@ class MonthBalanceController extends Controller
 
         $months = $months = BalanceMonth::where('company_id', $month->company_id)->WhereHas('company', function ($q)  {
             $q->with('comLast');
-        })->with('company')->get();
+        })->with('company')->orderBy("created_at", "Desc")->limit(12)
+        ->get();
 
         return view($this->viewName . 'tableData', compact('months'))->render();
     }
@@ -98,7 +101,8 @@ class MonthBalanceController extends Controller
 
         $months = BalanceMonth::where('company_id', $month->company_id)->WhereHas('company', function ($q)  {
             $q->with('comLast');
-        })->with('company')->get();
+        })->with('company')->orderBy("created_at", "Desc")->limit(12)
+        ->get();
         // dd($months);
          return view($this->viewName .'tableData', compact('months'))->render();
     }

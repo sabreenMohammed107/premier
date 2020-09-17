@@ -107,8 +107,8 @@ class AllCompaniesController extends Controller
 
 
 
-        // DB::beginTransaction();
-        // try {
+        DB::beginTransaction();
+        try {
             $company = $this->object::create($data);
             $yy = date("Y");
          
@@ -144,14 +144,14 @@ class AllCompaniesController extends Controller
                 $monthData->period_closed_date = date("$yy-$i-t", strtotime("$yy-$i-1"));
                 $monthData->save();
             }
-         
+            DB::commit();
 
             return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
-        // } catch (\Throwable $th) {
-        //     //throw $th;
-        //     DB::rollBack();
-        //     return redirect()->back()->with('flash_danger', "لم يتم حفظها بسبب خطأ ما حاول مرة أخرى و تأكد من البيانات المدخله");
-        // }
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect()->back()->with('flash_danger', "لم يتم حفظها بسبب خطأ ما حاول مرة أخرى و تأكد من البيانات المدخله");
+        }
     }
 
     /**

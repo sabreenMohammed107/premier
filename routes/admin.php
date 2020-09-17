@@ -68,5 +68,9 @@ Route::middleware(['HasBalance'])->group(function () {
     Route::get('dynamicYear/fetch', 'YearBalanceController@fetchYear')->name('dynamicYear.fetch');
     Route::get('dynamicYearClose/fetch', 'YearBalanceController@yearClose')->name('dynamicYearClose.fetch');
     Route::get('dynamicYearOpen/fetch', 'YearBalanceController@yearOpen')->name('dynamicYearOpen.fetch');
+    Route::get('openYearBalance/fetch', 'YearBalanceController@openYearBalance')->name('openYearBalance.fetch');
+    Route::get('cancelBalance/fetch', 'YearBalanceController@cancelBalance')->name('cancelBalance.fetch');
+
+
 });
 });

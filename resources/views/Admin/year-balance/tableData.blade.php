@@ -69,8 +69,8 @@
 
     <button {{ !($company->year_type==0) ? '' : 'disabled' }} onclick="closeYear({{$company->id}})"   class="btn btn-primary waves-effect waves-light">إغلاق السنة الحالية</button>
     <button   {{ !($company->year_type==2 ||$company->year_type==1) ? '' : 'disabled' }} onclick="openYear({{$company->id}})" class="btn btn-primary waves-effect waves-light" >إلغاء إغلاق السنة</button>
-    <button  {{ !($company->year_type==2 ||$company->year_type==1) ? '' : 'disabled' }} class="btn btn-primary waves-effect waves-light">فتح + ترصيد جديد</button>
-    <button {{ !($company->year_type==2 ||$company->year_type==1) ? '' : 'disabled' }} class="btn btn-primary waves-effect waves-light">إلغاء ترصيد السنة</button>
+    <button  {{ !($company->year_type==2 ||$company->year_type==1) ? '' : 'disabled' }} onclick="openYearBalance({{$company->id}})" class="btn btn-primary waves-effect waves-light">فتح + ترصيد جديد</button>
+    <button {{ !($company->year_type==2 ) ? '' : 'disabled' }} onclick="cancelBalance({{$company->id}})" class="btn btn-primary waves-effect waves-light">إلغاء ترصيد السنة</button>
 </div>
 <table class="table" id="table"  style="direction:rtl">
     <thead>
@@ -79,7 +79,7 @@
             <th>الترصيد السنوي</th>
             <th>الفترة من</th>
             <th>الفترة إلي</th>
-            <th>إلغاء الإغلاق</th>
+            <th> النوع</th>
         </tr>
     </thead>
     <tbody>
@@ -94,9 +94,8 @@
                 $date = date_create($row->period_to_date) ?>
                 {{ date_format($date,"d-m-Y") }}</td>
             <td>
-                <div class="product-buttons">
-                    <button data-toggle="modal" data-target="#del" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                </div>
+            @if($row->year_type==2)إفتتاحية @elseif( $row->year_type==1)مفتوحة @elseif( $row->year_type==0)مغلقة @else  @endif
+
             </td>
         </tr>
 
