@@ -300,6 +300,7 @@ class CompaniesController extends Controller
                  'transaction_date' => new \DateTime(),
                  'safe_id' => $Safe->id,
                  'additive' => $request->open_balance,
+                 'purch_sales_statement'=>'رصيد افتتاحي',
                 ]
             );
 

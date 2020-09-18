@@ -14,7 +14,7 @@
                                     <div id="uploadOne" class="img-upload">
                                         <img src="{{$image_path ?? asset('webassets/img/default.png')}}" alt="" style="width: 100%;border: 1px dashed #CCC;">
                                         <div class="upload-icon">
-                                            <input type="file" tabindex="11" name="company_logo" class="upload">
+                                            <input type="file" tabindex="11" name="logo" class="upload">
                                             <i class="fa fa-camera"></i>
                                         </div>
                                     </div>

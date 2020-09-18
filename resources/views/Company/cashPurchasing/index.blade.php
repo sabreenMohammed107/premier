@@ -35,7 +35,6 @@
                                 <h3>الشركة</h3>
                                 <h3>{{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3>
                             </div>
-                            <div class="fresh-table toolbar-color-azure">
 
                             <table class="table-striped table" id="table fresh-table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
                                    data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
@@ -79,16 +78,15 @@
                                         <td>{{$Cash->net_value}}</td>
                                         <td>
                                             <div class="product-buttons">
-                                            <a href="{{url("/Cash/Purchasing/View/$Cash->id")}}" title="View" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                                <a href="{{url("/Cash/Purchasing/Edit/$Cash->id")}}" title="Edit" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#del{{$Cash->id}}" title="Trash" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <a href="{{url("/Cash/Purchasing/View/$Cash->id")}}" title="View" class="pd-setting-ed btn  btn-tools"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                                <a href="{{url("/Cash/Purchasing/Edit/$Cash->id")}}" title="Edit" class="pd-setting-ed btn-tools"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#" data-toggle="modal" data-target="#del{{$Cash->id}}" title="Trash" class="pd-setting-ed btn  btn-tools"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            </div>
                         </div>
                     </div>
                 </div>

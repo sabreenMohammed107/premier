@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset('webassets/css/bootstrap.min.css')}}">
     <!-- fresh b-table CSS
 		============================================ -->
-        <link rel="stylesheet" href="{{ asset('webassets/css/fresh-bootstrap-table.css')}}">
+        {{-- <link rel="stylesheet" href="{{ asset('webassets/css/fresh-bootstrap-table.css')}}"> --}}
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('webassets/css/font-awesome.min.css')}}">

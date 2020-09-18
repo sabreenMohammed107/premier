@@ -212,7 +212,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                     disabled
                                                     @endif
                                                     placeholder="">
-                                                    <select data-width="100%" name="person_id" class="selectpicker"
+                                                    <select data-width="100%" id="person_id" name="person_id" class="selectpicker"
                                                     @if ($Person->person_type_id == 'other')
                                                     style="display: none;"
                                                     disabled
@@ -413,6 +413,14 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
         @endsection
         @section('scripts')
+        @if ($Person->person_type_id == 'other')
+            <script>
+                $(document).ready(function(){
+                    $('#person_id').selectpicker('refresh');
+                    $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
+                })
+            </script>
+        @endif
         <script>
             if ($('input[type=radio][name=optionsRadiosser1]:checked').val() == 101) {
                 $('#cit').val("{{$CIT_Items->item_value}}")
@@ -424,6 +432,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
 
             function saveInvoice() {
+                debugger;
                 var person_type = $('input[type=radio][name=person]:checked').val();
                 if (person_type == 'other') {
                     var person_id = null;
@@ -454,7 +463,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                     }
                     var newDetails = [];
                     var oldDetails = [];
-                    var i = $('#puchasetable > tbody  > tr').length;
+                    // var i = $('#puchasetable > tbody  > tr').length;
                 $('#puchasetable > tbody  > tr').each(function(index) {
                     debugger;
                     ++index;
@@ -488,16 +497,16 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         tax_exemption : tax_exemption,
                         inv_id : $('#inv_id').val(),
                     }
-                    if($('#inv_type'+i).val() == 'update'){
+                    if($('#inv_type'+index).val() == 'update'){
                         detail.type = 'update';
                         // detail.inv_id = $('#inv_id').val();
-                        detail.id = $('#id'+i).val();
+                        detail.id = $('#id'+index).val();
                         oldDetails.push(detail);
                     }else{
                         detail.type = 'new';
                         newDetails.push(detail);
                     }
-                    --i;
+                    // --i;
                 });
 
                 console.table(master);
@@ -744,16 +753,16 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 });
             })
             $('input[name=person]').change(function() {
-                // alert($('input[name=person_type]:checked').val());
+                // alert($('input[name=person]:checked').val());
                 if($('input[name=person]:checked').val() == 100){
-                    fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Clients')}}","{{session('company_id')}}");
                 }else if($('input[name=person]:checked').val() == 101){
-                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Suppliers')}}","{{session('company_id')}}");
                 }else if($('input[name=person]:checked').val() == 102){
-                    fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Employees')}}","{{session('company_id')}}");
                 }else{
                     $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
-                    $('.selectpicker').attr('disabled','disabled');
+                    $('#person_id').attr('disabled','disabled');
                     //fetchPersons("{{url('/Cash/Sales/Others')}}","{{session('company_id')}}");
                     $('#other_text').css({'display':'block'}).attr('disabled',false);
                 }

@@ -173,7 +173,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <input type="text" disabled name="person_name" id="other_text" class="form-control" style="display: none;" placeholder="">
-                                                <select data-width="100%" name="person_id" class="selectpicker" data-live-search="true" tabindex="-1">
+                                                <select data-width="100%" id="person_id" name="person_id" class="selectpicker pperson" data-live-search="true" tabindex="-1">
                                                     <option value="">أختر</option>
                                                     @foreach ($Suppliers as $Supplier)
                                                         <option value="{{$Supplier->id}}">{{$Supplier->person_name}}</option>
@@ -617,6 +617,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 },
                 success:function(data) {
                     window.location.href = data;
+                   // console.log(data);
                 },
                 error: function (request, status, error) {
                     console.log(request.responseText);
@@ -651,16 +652,16 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 });
             })
             $('input[name=person]').change(function() {
-                // alert($('input[name=person_type]:checked').val());
+                // alert($('input[name=person]:checked').val());
                 if($('input[name=person]:checked').val() == 100){
-                    fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Clients')}}","{{session('company_id')}}");
                 }else if($('input[name=person]:checked').val() == 101){
-                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Suppliers')}}","{{session('company_id')}}");
                 }else if($('input[name=person]:checked').val() == 102){
-                    fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Invoice/Purchasing/Add/fetch/Employees')}}","{{session('company_id')}}");
                 }else{
                     $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
-                    $('.selectpicker').attr('disabled','disabled');
+                    $('#person_id').attr('disabled','disabled');
                     //fetchPersons("{{url('/Cash/Sales/Others')}}","{{session('company_id')}}");
                     $('#other_text').css({'display':'block'}).attr('disabled',false);
                 }
@@ -698,6 +699,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 });
             })
             function fetchPersons(url, compid) {
+                // alert('Fetching');
                 $.ajax({
                     type:'GET',
                     url:url,
@@ -705,11 +707,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         compid : compid
                     },
                         success:function(data) {
+                            debugger;
+                            // alert(url);
                             $('#other_text').css({'display':'none'}).attr('disabled','disabled');
                             $('.dropdown.bootstrap-select.bs3').css({'display':'block'});
-                            $('.selectpicker').attr('disabled',false);
-                            $('.selectpicker').html(data);
-                            $('.selectpicker').selectpicker('refresh');
+                            $('#person_id').attr('disabled',false);
+                            $('#person_id').html(data);
+                            $('#person_id').selectpicker('refresh');
                     },
                     error: function (request, status, error) {
                         console.log(request.responseText);

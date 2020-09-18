@@ -112,6 +112,7 @@ class ItemsController extends Controller
                     'transaction_date' => new \DateTime(),
                     'item_id' => $Item->id,
                     'additive' => $TotalCost,
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
 

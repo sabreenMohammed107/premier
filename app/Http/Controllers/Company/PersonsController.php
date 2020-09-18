@@ -120,6 +120,7 @@ class PersonsController extends Controller
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '102',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }elseif($request->open_balance < 0){
@@ -130,6 +131,7 @@ class PersonsController extends Controller
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '102',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }else{
@@ -139,6 +141,7 @@ class PersonsController extends Controller
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '102',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }
@@ -179,10 +182,10 @@ class PersonsController extends Controller
                         'person_logo' => $filename,
                     ]);
                 }
-                ////open balance sign
-                $request->merge([
-                    'open_balance' => abs($request->open_balance),
-                ]);
+                // ////open balance sign
+                // $request->merge([
+                //     'open_balance' => abs($request->open_balance),
+                // ]);
                 //configure checkbox
                 if ($request->active == "on") {
                     $request->merge([
@@ -219,14 +222,12 @@ class PersonsController extends Controller
                         'subtractive' => 0,
                     ]);
                 }
-
-
                 DB::commit();
-                return redirect("/Company/Employees")->with('flash_success', "تم تعديل بيانات الموظف : $request->person_name بسبب خطأ ما حاول مره أخرى");
+                return redirect("/Company/Employees")->with('flash_success', "تم تعديل بيانات الموظف : $request->person_name ");
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/Employees")->with('flash_danger', "لم يتم تعديل بيانات الموظف : $request->person_name");
+                return redirect("/Company/Employees")->with('flash_danger', "لم يتم تعديل بيانات الموظف : $request->person_name بسبب خطأ ما حاول مره أخرى");
             }
         }else{
             //Configure
@@ -395,6 +396,7 @@ class PersonsController extends Controller
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '101',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }elseif($request->open_balance < 0){
@@ -405,6 +407,7 @@ class PersonsController extends Controller
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '101',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }else{
@@ -414,6 +417,7 @@ class PersonsController extends Controller
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '101',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }
@@ -681,6 +685,7 @@ class PersonsController extends Controller
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '100',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }elseif($request->open_balance < 0){
@@ -691,6 +696,7 @@ class PersonsController extends Controller
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '100',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }else{
@@ -700,6 +706,7 @@ class PersonsController extends Controller
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '100',
+                    'purch_sales_statement'=>'رصيد افتتاحي',
                     ]
                 );
             }
