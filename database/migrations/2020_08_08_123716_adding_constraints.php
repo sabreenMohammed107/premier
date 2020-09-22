@@ -87,7 +87,7 @@ class AddingConstraints extends Migration
             $table->unsignedBigInteger('person_type_id')->after('person_name')->nullable();
             $table->foreign('person_type_id')->references('id')->on('person_types');
             $table->unsignedBigInteger('safe_id')->after('person_type_id')->nullable();
-            $table->foreign('safe_id')->references('id')->on('safe');
+            $table->foreign('safe_id')->references('id')->on('safes');
             $table->unsignedBigInteger('bank_id')->after('safe_id')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks');
             $table->unsignedBigInteger('cheque_id')->after('bank_id')->nullable();

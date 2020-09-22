@@ -143,7 +143,7 @@ class SalesController extends Controller
                 DB::commit();
                 return url('/Invoices/Sales');
             } catch (\Throwable $th) {
-                // throw $th;
+                throw $th;
                 DB::rollBack();
                 $request->session()->flash('flash_danger', "حدث خطأ ما يرجي اعادة المحاولة");
                 return url('/Invoices/Sales');

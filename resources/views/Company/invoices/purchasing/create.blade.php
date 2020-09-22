@@ -365,6 +365,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
         @endsection
         @section('scripts')
         <script>
+
              //Start row functions
              function editSelectVal(index) {
                 debugger;
@@ -506,6 +507,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
             }
             //End or row functions
             // headCalculations(index);
+
             function headCalculations(index) {
                     index = $('#puchasetable > tbody > tr').length;
                     var total = 0;
@@ -516,19 +518,20 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                     var total_discount = 0;
                 $('#puchasetable > tbody  > tr').each(function() {
                     debugger;
-                    total += parseFloat($('#total'+index).text());
-                    total_after_discounts += parseFloat($('#totalafterdiscount'+index).text());
-                    vat_tax_value += parseFloat($('#totalvat'+index).text());
-                    comm_industr_tax += parseFloat($('#totalcit'+index).text());
-                    net_value += parseFloat($('#nettotal'+index).text());
-                    total_discount += parseFloat($('#discount'+index).val());
+                    var row_num = $(this).attr('data-id');
+                    total += parseFloat($('#total'+row_num).text());
+                    total_after_discounts += parseFloat($('#totalafterdiscount'+row_num).text());
+                    vat_tax_value += parseFloat($('#totalvat'+row_num).text());
+                    comm_industr_tax += parseFloat($('#totalcit'+row_num).text());
+                    net_value += parseFloat($('#nettotal'+row_num).text());
+                    total_discount += parseFloat($('#discount'+row_num).val());
                     console.log(total);
                     console.log(total_after_discounts);
                     console.log(vat_tax_value);
                     console.log(comm_industr_tax);
                     console.log(net_value);
                     console.log(total_discount);
-                    --index;
+                    // --index;
                 })
                 console.log(total_discount);
                 $('#total_items_price').val(total.toFixed(2));
@@ -570,18 +573,19 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 var details = [];
                 var i = $('#puchasetable > tbody  > tr').length;
                 $('#puchasetable > tbody  > tr').each(function(index) {
+                    var row_num = $(this).attr('data-id');
                     ++index;
                     // alert($('input[type=radio][name=optionsRadios'+index+']:checked').val());
                     // alert($('#item_arabic_name'+index+'').val());
                     debugger
-                    if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
-                        var item_arabic_name = $('#item_arabic_name'+index+'').val();
+                    if($('input[type=radio][name=optionsRadios'+row_num+']:checked').val() == 'no'){
+                        var item_arabic_name = $('#item_arabic_name'+row_num+'').val();
                         var item_id = null;
                     }else{
-                        var item_arabic_name = $('#select'+index+' option:selected').text();
-                        var item_id = $('#select'+index+' option:selected').val();
+                        var item_arabic_name = $('#select'+row_num+' option:selected').text();
+                        var item_id = $('#select'+row_num+' option:selected').val();
                     }
-                    if($("#optionsRadioscheck"+index+"").is(':checked') == true){
+                    if($("#optionsRadioscheck"+row_num+"").is(':checked') == true){
                         var tax_exemption = 1;
                     }else{
                         var tax_exemption = 0;
@@ -595,7 +599,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         comm_industr_tax : parseFloat($(this).children('.comm_industr_tax').text()),
                         net_value : parseFloat($(this).find('.net_value').text()),
                         item_discount : parseFloat($(this).find('.item_discount').val()),
-                        is_stored : $('input[type=radio][name=optionsRadios'+index+']:checked').val(),
+                        is_stored : $('input[type=radio][name=optionsRadios'+row_num+']:checked').val(),
                         item_text : item_arabic_name,
                         item_id : item_id,
                         item_price : $(this).find('.item_price').val(),
@@ -627,11 +631,12 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
             $('input[type=radio][name=optionsRadios10]').on('change',function(){
                 $('#puchasetable > tbody  > tr').each(function(index) {
-                    ++index;
-                    var price = $('#itemprice'+index).val();
-                    var qty = $('#qty'+index).val();
+                    var row_num = $(this).attr('data-id');
+                    // alert(row_num);
+                    var price = $('#itemprice'+row_num).val();
+                    var qty = $('#qty'+row_num).val();
 
-                    var discount = $('#discount'+index).val();
+                    var discount = $('#discount'+row_num).val();
 
                     var cit = $('#cit').val();
                     var vat = $('#vat').val();
@@ -640,13 +645,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         cit =0;
                         vat = 0;
                     }
-                    if($("input[name=optionsRadioscheck"+index+"]").is(':checked') == true){
+                    if($("input[name=optionsRadioscheck"+row_num+"]").is(':checked') == true){
                         cit =0;
                         vat = 0;
                     }
-                        $('#totalvat'+index).text((totalAfterDiscount*(vat/100)).toFixed(2));
-                        $('#totalcit'+index).text((totalAfterDiscount*(cit/100)).toFixed(2));
-                        $('#nettotal'+index).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+                        $('#totalvat'+row_num).text((totalAfterDiscount*(vat/100)).toFixed(2));
+                        $('#totalcit'+row_num).text((totalAfterDiscount*(cit/100)).toFixed(2));
+                        $('#nettotal'+row_num).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
                         headCalculations();
 
                 });
@@ -668,17 +673,19 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
             })
 
         $('input[type=radio][name=optionsRadiosser1]').change(function(){
+
                 if(this.value == 101){
                     $('#cit').val("{{$CIT_Items->item_value}}")
                 }else{
                     $('#cit').val("{{$CIT_Services->item_value}}")
                 }
                 $('#puchasetable > tbody  > tr').each(function(index) {
+                    var row_num = $(this).attr('data-id');
                     ++index;
-                    var price = $('#itemprice'+index).val();
-                    var qty = $('#qty'+index).val();
+                    var price = $('#itemprice'+row_num).val();
+                    var qty = $('#qty'+row_num).val();
 
-                    var discount = $('#discount'+index).val();
+                    var discount = $('#discount'+row_num).val();
 
                     var cit = $('#cit').val();
                     var vat = $('#vat').val();
@@ -687,13 +694,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         cit =0;
                         vat = 0;
                     }
-                    if($("input[name=optionsRadioscheck"+index+"]").is(':checked') == true){
+                    if($("input[name=optionsRadioscheck"+row_num+"]").is(':checked') == true){
                         cit =0;
                         vat = 0;
                     }
-                        $('#totalvat'+index).text((totalAfterDiscount*(vat/100)).toFixed(2));
-                        $('#totalcit'+index).text((totalAfterDiscount*(cit/100)).toFixed(2));
-                        $('#nettotal'+index).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
+                        $('#totalvat'+row_num).text((totalAfterDiscount*(vat/100)).toFixed(2));
+                        $('#totalcit'+row_num).text((totalAfterDiscount*(cit/100)).toFixed(2));
+                        $('#nettotal'+row_num).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
                         headCalculations();
 
                 });

@@ -123,8 +123,9 @@ class PaymentsController extends Controller
                     'person_type_id'=> $Person->person_type_id,
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$CashPurch->id,
+                    'permission_code'=>$request->exit_permission_code,
                     'subtractive'=>$request->net_value,
-                    'purch_sales_statement'=>"بيان مدفوعات",
+                    'purch_sales_statement'=>$request->statement,
                     ]
                 );
             }else{
@@ -135,7 +136,8 @@ class PaymentsController extends Controller
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$CashPurch->id,
                     'subtractive'=>$request->net_value,
-                    'purch_sales_statement'=>"بيان مدفوعات",
+                    'permission_code'=>$request->exit_permission_code,
+                    'purch_sales_statement'=>$request->statement,
                     ]
                 );
             }
@@ -184,7 +186,7 @@ class PaymentsController extends Controller
                     'person_type_id'=> $Person->person_type_id,
                     'safe_id'=>$Company->safe_id,
                     'subtractive'=>$request->net_value,
-                    'purch_sales_statement'=>"بيان مدفوعات",
+                    'purch_sales_statement'=>$request->statement,
                     ]
                 );
             }else{
@@ -197,7 +199,7 @@ class PaymentsController extends Controller
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$cash_id,
                     'subtractive'=>$request->net_value,
-                    'purch_sales_statement'=>"بيان مدفوعات",
+                    'purch_sales_statement'=>$request->statement,
                     ]
                 );
             }
