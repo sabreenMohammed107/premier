@@ -3,18 +3,18 @@
     <td >
         <div class="bt-df-checkbox">
         <input type="hidden" name="" class="inv_type" value="new">
-        <input class="isStored" onclick="editRadioStored({{$rowCount}})" checked="" type="radio" value="no" id="optionsRadios{{$rowCount}}" name="optionsRadios{{$rowCount}}">
+        <input class="isStored" onclick="editRadioStored({{$rowCount}})" type="radio" value="no" id="optionsRadios{{$rowCount}}" name="optionsRadios{{$rowCount}}">
             <label><b> لا </b></label>
-            <input class="radio-checked isStored" onclick="editRadioStored({{$rowCount}})" type="radio"  value="yes" id="optionsRadios{{$rowCount}}sec" name="optionsRadios{{$rowCount}}">
+            <input class="radio-checked isStored" checked="" onclick="editRadioStored({{$rowCount}})" type="radio"  value="yes" id="optionsRadios{{$rowCount}}sec" name="optionsRadios{{$rowCount}}">
             <label><b> نعم </b></label>
         </div>
     </td>
     <td>
         <div id="outitem{{$rowCount}}" class="input-mark-inner mg-b-22 outitem">
-        <input type="text" class="item_arabic_name" id="item_arabic_name{{$rowCount}}" oninput="editVal({{$rowCount}})" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
+        <input type="text" class="item_arabic_name" id="item_arabic_name{{$rowCount}}" disabled style="display: none" oninput="editVal({{$rowCount}})" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
 
         </div>
-    <select id="select{{$rowCount}}" onchange="editSelectVal({{$rowCount}})" disabled style="display: none" class="form-control try item_id" placeholder="أختر المنتج">
+    <select id="select{{$rowCount}}" onchange="editSelectVal({{$rowCount}})" class="chosen-select try item_id"  tabindex="-1" placeholder="أختر المنتج">
             @foreach ($Items as $Item)
                 <option value="{{$Item->id}}">{{$Item->item_arabic_name}}</option>
             @endforeach

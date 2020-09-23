@@ -383,13 +383,17 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 // alert(checked);
                 var parent = $("#item_arabic_name"+index);
                 var select = $("#select"+index);
+                var design_select = $('#s2id_select'+index);
 
                 if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
                     $(parent).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
                     $(select).css('display','none').attr('disabled','disabled');
+                    $(design_select).css('display','none').attr('disabled','disabled');
+
                 }else{
                     $(parent).css('display','none').attr('disabled','disabled');
-                    $(select).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
+                    $(select).attr('disabled',false).removeClass('select2-offscreen');
+                    $(design_select).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
                 }
                 $("input[type=radio][name=optionsRadios"+index+"]:checked").siblings().attr('checked',false);
                 $("input[type=radio][name=optionsRadios"+index+"]:checked").attr('checked','checked');

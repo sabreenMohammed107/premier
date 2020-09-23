@@ -12,13 +12,26 @@ var table = $('#puchasetable')
 
 
 function ajax_row(url) {
-    var rowCount = $('#puchasetable tbody tr').length;
+    var rowCount = 0;
+    function getLastNum(rowCount) {
+        $('#puchasetable > tbody  > tr').each(function(index) {
+            debugger;
+            // var isLastElement = index == $('#puchasetable > tbody  > tr').length -1;
+            if (index == ($('#puchasetable > tbody  > tr').length - 1)) {
+                rowCount =  $(this).attr('data-id');
+            }
+
+        });
+        return ++rowCount;
+    }
+
+    // var rowCount = $('#puchasetable tbody tr').length;
     var rows = [];
     $.ajax({
             type:'GET',
             url:url,
             data:{
-                rowCount:rowCount + 1,
+                rowCount:getLastNum(rowCount),
                 compid : $('#compid').val()
     },
         success:function(data) {
@@ -34,6 +47,16 @@ function ajax_row(url) {
             // $('.chosen-select').select2();
             $('#puchasetable').bootstrapTable();
             $('#puchasetable #optionsRadios'+rowCount).focus();
+            // alert($('#puchasetable > tbody  > tr').length);
+            $('#puchasetable > tbody  > tr').each(function(index) {
+                // var isLastElement = index == $('#puchasetable > tbody  > tr').length -1;
+                if (index == ($('#puchasetable > tbody  > tr').length - 1)) {
+                    x =  $(this).attr('data-id');
+                    $('#select' + x).select2();
+                }
+            });
+
+
     },
     error: function (request, status, error) {
         console.log(request.responseText);
