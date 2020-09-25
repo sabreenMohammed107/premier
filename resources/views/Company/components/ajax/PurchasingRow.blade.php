@@ -1,12 +1,15 @@
 <tr data-id="{{$rowCount}}">
-    <td>{{$rowCount}}</td>
+<td id="hashed{{$rowCount}}">{{$rowCount}}</td>
     <td >
         <div class="bt-df-checkbox">
         <input type="hidden" name="" class="inv_type" value="new">
-        <input class="isStored" onclick="editRadioStored({{$rowCount}})" type="radio" value="no" id="optionsRadios{{$rowCount}}" name="optionsRadios{{$rowCount}}">
-            <label><b> لا </b></label>
-            <input class="radio-checked isStored" checked="" onclick="editRadioStored({{$rowCount}})" type="radio"  value="yes" id="optionsRadios{{$rowCount}}sec" name="optionsRadios{{$rowCount}}">
+        <input class="radio-checked isStored" checked="" onclick="editRadioStored({{$rowCount}});" type="radio"  value="yes" id="optionsRadios{{$rowCount}}sec" name="optionsRadios{{$rowCount}}">
             <label><b> نعم </b></label>
+            <br>
+        <input class="isStored" onclick="editRadioStored({{$rowCount}});" type="radio" value="no" id="optionsRadios{{$rowCount}}" name="optionsRadios{{$rowCount}}">
+            <label><b> لا </b></label>
+
+
         </div>
     </td>
     <td>
@@ -14,11 +17,12 @@
         <input type="text" class="item_arabic_name" id="item_arabic_name{{$rowCount}}" disabled style="display: none" oninput="editVal({{$rowCount}})" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
 
         </div>
-    <select id="select{{$rowCount}}" onchange="editSelectVal({{$rowCount}})" class="chosen-select try item_id"  tabindex="-1" placeholder="أختر المنتج">
+    <select id="select{{$rowCount}}" onchange="editSelectVal({{$rowCount}});" class="chosen-select try item_id"  tabindex="-1" placeholder="أختر المنتج">
             @foreach ($Items as $Item)
                 <option value="{{$Item->id}}">{{$Item->item_arabic_name}}</option>
             @endforeach
         </select>
+    <span id="item_val{{$rowCount}}" style="display:none;">{{$Items[0]->item_arabic_name}}</span>
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">
@@ -43,7 +47,7 @@
     </td>
     <td>
     <div class="bt-df-checkbox">
-    <input class="radio-checked tax_exemption" onkeypress="enterForRow(event,{{$rowCount}})" onchange="taxExemptionCheck({{$rowCount}})" checked type="checkbox" id="optionsRadioscheck{{$rowCount}}" name="optionsRadioscheck{{$rowCount}}">
+    <input class="radio-checked tax_exemption" onkeypress="enterForRow(event,{{$rowCount}})" onchange="taxExemptionCheck({{$rowCount}});" checked type="checkbox" id="optionsRadioscheck{{$rowCount}}" name="optionsRadioscheck{{$rowCount}}">
     </div>
     </td>
     <td id="totalvat{{$rowCount}}" class="input-mark-inner mg-b-22 vat_tax_value">
@@ -57,6 +61,7 @@
 0
         </div>
     </td>
+
     <td>
         <div class="product-buttons">
         <button id="del{{$rowCount}}" onclick="deleteRow({{$rowCount}})" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>

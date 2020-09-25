@@ -60,6 +60,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         <!--<div class="btn-back">
                             <a href="#">حــفـظ</a>
                         </div>-->
+
                     <a href="{{url('/Invoices/Purchasing')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
 
                         <button class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button>
@@ -174,7 +175,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <input type="text" disabled name="person_name" id="other_text" class="form-control" style="display: none;" placeholder="">
                                                 <select data-width="100%" id="person_id" name="person_id" class="selectpicker pperson" data-live-search="true" tabindex="-1">
-                                                    <option value="">أختر</option>
+                                                    <option value=""> أختر المورد</option>
                                                     @foreach ($Suppliers as $Supplier)
                                                         <option value="{{$Supplier->id}}">{{$Supplier->person_name}}</option>
                                                     @endforeach
@@ -303,7 +304,10 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             }
                             </style>
                             <h3 style="text-align:right">الأصناف</h3>
-                            <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button>
+                            <div style="direction:rtl;text-align:right;"><input type="text" id="search" class="form-control" style="display: inline-block;width:200px" placeholder="بحث">
+
+                            <button id="add" style="float: left;" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button></div>
+                            <br>
                             <table class="table-striped" id="puchasetable"
                             data-locale="ar-SA"
                             data-pagination="true"
@@ -314,19 +318,14 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             data-page-list="[10, 25, 50, 100, all]"
                             data-sort-name="index"
                             data-sort-order="asc"
-                            data-search="true"
                             style="direction:rtl"
                             data-toggle="table"
-                                data-show-columns="true"
-                                data-show-pagination-switch="true"
-                                data-show-refresh="true"
                                 data-key-events="true"
                                 data-resizable="true"
                                 data-cookie="true"
                                 data-toolbar="#toolbar"
-                                data-show-toggle="true"
                                 data-show-fullscreen="true"
-                                data-show-columns-toggle-all="true">
+                                >
                             <thead>
                                 <tr>
                                     <th data-field="index" data-sortable="true">#</th>
@@ -370,13 +369,17 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
              function editSelectVal(index) {
                 debugger;
                 var select_value = $('#select'+index+' option:selected').val();
+                var select_text = $('#select'+index+' option:selected').text();
                 $('#select'+index+' option:selected').siblings().attr('selected',false);
                 $('#select'+index+' option:selected').attr('selected','selected');
+                $('#select'+index).attr('value',select_value);
+                $('#item_val'+index).text(select_text);
             }
             function editVal(index){
                 debugger;
                 var input_value = $("#item_arabic_name"+index).val();
                 $("#item_arabic_name"+index).attr('value',input_value);
+                $('#item_val'+index).text(input_value);
             }
             function editRadioStored(index) {
                 debugger;
@@ -386,22 +389,25 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 var design_select = $('#s2id_select'+index);
 
                 if($('input[type=radio][name=optionsRadios'+index+']:checked').val() == 'no'){
-                    $(parent).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
-                    $(select).css('display','none').attr('disabled','disabled');
+                    $(parent).css('display','inline-block').attr('disabled',false);
+                    $(select).attr('disabled','disabled');
                     $(design_select).css('display','none').attr('disabled','disabled');
-
                 }else{
                     $(parent).css('display','none').attr('disabled','disabled');
-                    $(select).attr('disabled',false).removeClass('select2-offscreen');
-                    $(design_select).css('display','inline-block').attr('disabled',false).removeClass('select2-offscreen');
+                    $(select).attr('disabled',false).addClass('select2-offscreen');
+                    $(design_select).css('display','inline-block').attr('disabled',false);
                 }
-                $("input[type=radio][name=optionsRadios"+index+"]:checked").siblings().attr('checked',false);
-                $("input[type=radio][name=optionsRadios"+index+"]:checked").attr('checked','checked');
+                $('input[type=radio][name=optionsRadios'+index+']:checked').siblings().attr('checked',false);
+                $('input[type=radio][name=optionsRadios'+index+']:checked').attr('checked','checked');
             }
             function enterForRow(e, index) {
                 if(e.keyCode == 13) {
                     ajax_row('{{url('Invoice/Purchasing/AddRow')}}');
                 }
+            }
+            function updateTxtVal(index) {
+                var txt = $('#item_arabic_name'+index).val();
+                $('#item_arabic_name'+index).attr('value',txt);
             }
             function deleteRow(index) {
                 $('tr[data-id='+index+']').remove();
@@ -410,6 +416,28 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 $('#rows').html(trs);
                 $('#puchasetable').bootstrapTable();
                 headCalculations(index);
+                $('#puchasetable > tbody  > tr').each(function(index) {
+                    var row_num = $(this).attr('data-id');
+                    $('#hashed'+row_num).text(++index);
+                    debugger;
+                    // var isLastElement = index == $('#puchasetable > tbody  > tr').length -1;
+                    if ($('#select' + row_num).hasClass("select2-offscreen")) {
+                        // Select2 has been initialized
+                        $('#s2id_select' + row_num).remove();
+                        var _select = '#select' + row_num;
+                        $(_select).select2();
+                    }
+                    else{
+                        $('#select' + row_num).select2();
+                    }
+                    if (index == ($('#puchasetable > tbody  > tr').length)) {
+                        $("#optionsRadios"+row_num+"sec").focus();
+                    }
+                    if($('input[type=radio][name=optionsRadios'+row_num+']:checked').val() == 'no'){
+                        var design_select = $('#s2id_select'+row_num);
+                        $(design_select).css('display','none').attr('disabled','disabled');
+                    }
+                });
             }
             function taxExemptionCheck(index) {
                 debugger;
@@ -578,7 +606,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 var i = $('#puchasetable > tbody  > tr').length;
                 $('#puchasetable > tbody  > tr').each(function(index) {
                     var row_num = $(this).attr('data-id');
-                    ++index;
+                    // ++index;
                     // alert($('input[type=radio][name=optionsRadios'+index+']:checked').val());
                     // alert($('#item_arabic_name'+index+'').val());
                     debugger
@@ -611,10 +639,10 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         tax_exemption : tax_exemption,
                     }
                     details.push(detail);
-                    --i;
+                    // --i;
                 });
-                console.table(master);
-                console.table(details);
+                // console.table(master);
+                // console.table(details);
                 $.ajax({
                 type:'POST',
                 url:"{{url('/Invoices/Purchasing/Create')}}",
@@ -656,7 +684,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         $('#totalvat'+row_num).text((totalAfterDiscount*(vat/100)).toFixed(2));
                         $('#totalcit'+row_num).text((totalAfterDiscount*(cit/100)).toFixed(2));
                         $('#nettotal'+row_num).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-                        headCalculations();
+                        headCalculations(index);
 
                 });
             })
@@ -677,7 +705,6 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
             })
 
         $('input[type=radio][name=optionsRadiosser1]').change(function(){
-
                 if(this.value == 101){
                     $('#cit').val("{{$CIT_Items->item_value}}")
                 }else{
@@ -705,7 +732,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         $('#totalvat'+row_num).text((totalAfterDiscount*(vat/100)).toFixed(2));
                         $('#totalcit'+row_num).text((totalAfterDiscount*(cit/100)).toFixed(2));
                         $('#nettotal'+row_num).text((totalAfterDiscount + totalAfterDiscount*((vat-cit)/100)).toFixed(2));
-                        headCalculations();
+                        headCalculations(index);
 
                 });
             })

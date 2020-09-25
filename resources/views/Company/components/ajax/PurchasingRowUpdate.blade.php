@@ -19,15 +19,16 @@
  }
 @endphp
 <tr id="Item{{$InvItem->id}}" data-id="{{$i}}">
-<td>{{$i}}</td>
+<td id="hashed{{$i}}">{{$i}}</td>
     <td >
         <div class="bt-df-checkbox">
         <input id="inv_type{{$i}}" type="hidden" name="" class="inv_type" value="update">
         <input id="id{{$i}}" type="hidden" name="" class="id" value="{{$InvItem->id}}">
+        <input class="radio-checked isStored" onclick="editRadioStored({{$i}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$i}}sec" name="optionsRadios{{$i}}">
+            <label><b> نعم </b></label><br>
         <input class="isStored" {{$checked_no ?? ''}} onclick="editRadioStored({{$i}})" type="radio" value="no" id="optionsRadios{{$i}}" name="optionsRadios{{$i}}">
             <label><b> لا </b></label>
-            <input class="radio-checked isStored" onclick="editRadioStored({{$i}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$i}}sec" name="optionsRadios{{$i}}">
-            <label><b> نعم </b></label>
+
         </div>
     </td>
     <td>
@@ -35,15 +36,19 @@
         <input type="text" {{$d_none_inp ?? ''}} oninput="editVal({{$i}})" class="item_arabic_name{{$i}}" id="item_arabic_name{{$i}}" value="{{$InvItem->item_text}}" name="item_arabic_name" class="form-control item_text" placeholder="اسم المنتج">
 
         </div>
-    <select id="select{{$i}}" {{$d_none_sel ?? ''}} onchange="editSelectVal({{$i}})" class="form-control try item_id" placeholder="أختر المنتج">
+    <select id="select{{$i}}" {{$d_none_sel ?? ''}} onchange="editSelectVal({{$i}})" class="chosen-select try item_id"  tabindex="-1" placeholder="أختر المنتج">
             @foreach ($Items as $Item)
             <option
             @if ($InvItem->item_id == $Item->id)
                 selected="selected"
+                @php
+
+                @endphp
             @endif
             value="{{$Item->id}}">{{$Item->item_arabic_name}}</option>
             @endforeach
         </select>
+        <span id="item_val{{$i}}" style="display:none;">{{$item_arabic_name ?? ''}}</span>
     </td>
     <td>
         <div class="input-mark-inner mg-b-22">

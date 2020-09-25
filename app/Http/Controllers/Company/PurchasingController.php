@@ -261,7 +261,10 @@ class PurchasingController extends Controller
                 $Invoice->net_invoice = ($Invoice->net_invoice - $Item->net_value);
                 $Invoice->save();
                 $Item->delete();
-                $Inv_item_transaction->delete();
+                if($Inv_item_transaction){
+                    $Inv_item_transaction->delete();
+                }
+
                 if($Invoice->invoice_type == 0){
                     $Inv_transaction->update(
                         [
