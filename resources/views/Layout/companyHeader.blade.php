@@ -97,6 +97,7 @@
                                                     <a href="#" class="dropdown-item">تقرير حركة موظف</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة بنك</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
+                                                    <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
 													</div>
                                                 </li>
