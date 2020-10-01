@@ -84,7 +84,7 @@
 														<a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
 														<a href="#" class="dropdown-item">تقرير المدفوعات النقدية</a>
 														<a href="#" class="dropdown-item">تقرير المشتريات</a>
-														<a href="#" class="dropdown-item">تقرير المقبوضات النقدية</a>
+														<a href="{{url('/Admin/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير المقبوضات النقدية</a>
 														<a href="#" class="dropdown-item">تقرير المبيعات</a>
 														<a href="#" class="dropdown-item">تقرير إذونات إستلام النقدية</a>
 														<a href="#" class="dropdown-item">إشعارات الخصم</a>
