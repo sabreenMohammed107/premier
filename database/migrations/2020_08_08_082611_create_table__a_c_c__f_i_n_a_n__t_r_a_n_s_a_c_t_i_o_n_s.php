@@ -19,8 +19,8 @@ class CreateTableACCFINANTRANSACTIONS extends Migration
             $table->integer('permission_code')->nullable();
             $table->integer('invoice_no')->nullable();
             $table->string('person_name',150)->nullable();
-            $table->decimal('additive',12,2)->nullable();
-            $table->decimal('subtractive',12,2)->nullable();
+            $table->decimal('additive',12,2)->default('0')->nullable();
+            $table->decimal('subtractive',12,2)->default('0')->nullable();
             $table->string('notes',4000)->nullable();
             $table->string('purch_sales_statement',4000)->nullable();
             $table->timestamps();

@@ -36,7 +36,7 @@
                                 <h3>الشركة</h3>
                                 <h3>{{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3>
                             </div>
-                            <div class="fresh-table toolbar-color-azure" id="table-new-color">
+
                             <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
                                    data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
@@ -78,16 +78,15 @@
                                         <td>{{$Cheque->person_name ?? 'لخزينة الشركة'}}</td>
                                         <td>
                                             <div class="product-buttons">
-                                                <a href="{{url("/Cheques/$Cheque->id/View")}}" title="View" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                                <a href="{{url("/Cheques/$Cheque->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#del{{$Cheque->id}}" title="Trash" class="pd-setting-ed btn btn-info btn-tools"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                <a href="{{url("/Cheques/$Cheque->id/View")}}" title="View" class="pd-setting-ed btn btn-tools"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                                <a href="{{url("/Cheques/$Cheque->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-tools"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#" data-toggle="modal" data-target="#del{{$Cheque->id}}" title="Trash" class="pd-setting-ed btn btn-tools"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            </div>
                         </div>
                     </div>
                 </div>

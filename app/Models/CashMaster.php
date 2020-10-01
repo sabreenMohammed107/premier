@@ -32,7 +32,7 @@ class CashMaster extends Model
         'confirm',
         'notes',
     ];
-    
+
     public function guided()
     {
         return $this->belongsTo('App\Models\GuidedItem','guided_item_id');
@@ -41,5 +41,9 @@ class CashMaster extends Model
     {
         return $this->belongsTo('App\Models\ServiceType','service_type_id');
     }
-    
+    public function persons()
+    {
+        return $this->hasOne('App\Models\Person', 'id','person_id');
+    }
+
 }

@@ -20,7 +20,7 @@ class CreateTableACCCASHMASTER extends Migration
             $table->integer('exit_permission_code')->nullable();
             $table->string('statement',4000)->nullable();
             $table->string('person_name',150)->nullable();
-            $table->tinyInteger('fund_source')->nullable();
+            $table->tinyInteger('fund_source')->default('0')->nullable();
             $table->decimal('cash_amount',12,2)->nullable();
             $table->integer('cash_receipt_note')->nullable();
             $table->decimal('comm_industr_prof_tax', 12, 2)->nullable();

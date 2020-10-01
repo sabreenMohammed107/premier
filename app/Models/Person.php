@@ -52,6 +52,11 @@ class Person extends Model
         return $this->belongsTo('App\Models\Invoice');
     }
 
+    public function cash_master()
+    {
+        return $this->belongsTo('App\Models\CashMaster');
+    }
+
     public function finan_transaction()
     {
         return $this->belongsTo('App\Models\FinanTransaction');

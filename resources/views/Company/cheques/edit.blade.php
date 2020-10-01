@@ -47,13 +47,13 @@
                                                     @if ($Person->person_type_id != 0)
                                                         checked="checked"
                                                     @endif
-                                                    value="person" id="optionsRadios1" name="optionsRadios0">
+                                                    value="person" disabled id="optionsRadios1" name="optionsRadios0">
                                                     <label><b> شخص </b></label>
                                                     <input class=""
                                                     @if ($Person->person_type_id == 0)
                                                         checked="checked"
                                                     @endif
-                                                    type="radio" value="safe" id="optionsRadios2" name="optionsRadios0">
+                                                    type="radio" disabled value="safe" id="optionsRadios2" name="optionsRadios0">
                                                     <label><b> الخزينة </b></label>
                                                 </div>
                                             </div>
@@ -67,7 +67,7 @@
                                         @endif
                                         >
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <select data-width="100%" name="person_id" class="selectpicker" data-live-search="true" tabindex="-1">
+                                                <select disabled data-width="100%" name="person_id" class="selectpicker" data-live-search="true" tabindex="-1">
                                                     <option value="">أختر</option>
                                                     @foreach ($Persons as $customPerson)
                                                         <option
@@ -85,15 +85,15 @@
                                                     @if ($Person->person_type_id == 101)
                                                         checked="checked"
                                                     @endif
-                                                    value="101" id="optionsRadios1" name="person_type">
+                                                    value="101" disabled id="optionsRadios1" name="person_type">
                                                     <label><b> موردين </b></label>
-                                                    <input class="" type="radio" value="102"
+                                                    <input class="" type="radio" value="102" disabled
                                                     @if ($Person->person_type_id == 102)
                                                         checked="checked"
                                                     @endif
                                                     id="optionsRadios2" name="person_type">
                                                     <label><b> موظفين </b></label>
-                                                    <input class="" type="radio" value="100"
+                                                    <input class="" type="radio" value="100" disabled
                                                     @if ($Person->person_type_id == 100)
                                                         checked="checked"
                                                     @endif
@@ -115,7 +115,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
-                                                    <input type="number" disabled class="form-control" placeholder="">
+                                                    <input type="number" disabled disabled class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -136,9 +136,9 @@
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox" style="margin-right:-10px;">
-                                                    <input class="radio-checked" type="radio" checked="" value="current" id="optionsRadios1" name="optionsRadios2">
+                                                    <input class="radio-checked" type="radio" disabled checked="" value="current" id="optionsRadios1" name="optionsRadios2">
                                                     <label><b> بنك </b></label>
-                                                    <input class="" type="radio" value="other" id="optionsRadios2" name="optionsRadios2">
+                                                    <input class="" type="radio" value="other" disabled id="optionsRadios2" name="optionsRadios2">
                                                     <label><b> أخري </b></label>
                                                 </div>
                                             </div>
@@ -163,13 +163,13 @@
                                                     @if ($Cheque->trans_type == 0)
                                                         checked="checked"
                                                     @endif
-                                                    value="0" id="optionsRadios1" name="trans_type">
+                                                    value="0" disabled id="optionsRadios1" name="trans_type">
                                                     <label><b> صرف شيك مشتريات </b></label>
                                                     <input class="" type="radio"
                                                     @if ($Cheque->trans_type == 1)
                                                         checked="checked"
                                                     @endif
-                                                    value="1" id="1aaa" name="trans_type">
+                                                    value="1" disabled id="1aaa" name="trans_type">
                                                     <label><b> ايداع شيك مبيعات </b></label>
                                                 </div>
                                             </div>
@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                            <input type="number" name="amount" value="{{$Cheque->amount}}" class="form-control" placeholder="">
+                                            <input type="number" disabled name="amount" value="{{$Cheque->amount}}" class="form-control" placeholder="">
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label class="login2"><b>القيمة</b></label>
@@ -195,7 +195,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
-                                                    <input type="date" name="release_date" value="{{date('Y-m-d', strtotime($Cheque->release_date))}}" class="form-control" placeholder="">
+                                                    <input type="date" disabled name="release_date" value="{{date('Y-m-d', strtotime($Cheque->release_date))}}" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -205,7 +205,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
-                                                    <input type="date" name="due_date" value="{{date('Y-m-d', strtotime($Cheque->due_date))}}" class="form-control" placeholder="">
+                                                    <input type="date" disabled name="due_date" value="{{date('Y-m-d', strtotime($Cheque->due_date))}}" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">

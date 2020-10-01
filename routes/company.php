@@ -136,6 +136,15 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::post('/Cash/Sales/Create','ReceiptsController@Create');
         Route::post('/Cash/Sales/{cash_id}/Update','ReceiptsController@Update');
         Route::get('/Cash/Sales/{cash_id}/Delete','ReceiptsController@Delete');
+
+        /**
+         *
+         * Cash Reports for Company
+         *
+         */
+        Route::get('/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
+        Route::post('/Cash/Sales/Report/Fetch','CashReportsController@FetchReceiptReport');
+
     });
 
 

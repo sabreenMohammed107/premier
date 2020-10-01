@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\CompanyUser;
+use App\Models\Bank;
 use App\Models\CashMaster;
 use App\Models\Cheque;
 use App\Models\Company;
+use App\Models\FinanTransaction;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,51 +102,161 @@ class ChequesController extends Controller
 
     public function Create(Request $request)
     {
-        $id = session('company_id');
-        if($request->optionsRadios0 == 'person'){
-            $Person = Person::find($request->person_id);
+        DB::beginTransaction();
+        try {
+            $id = session('company_id');
+            $Company = Company::find($id);
             $request->merge([
-                'person_name' => $Person->person_name,
+                'company_id' => $id,
             ]);
+            if($request->optionsRadios0 == 'person'){
+                $Person = Person::find($request->person_id);
+                $request->merge([
+                    'person_name' => $Person->person_name,
+                ]);
+                $Cheque = Cheque::create($request->except(['optionsRadios0','optionsRadios2','person_type']));
+
+                if($request->optionsRadios2 == 'current'){
+                    if($request->trans_type == 0){
+                        DB::table('finan_transactions')->insert(
+                            ['transaction_type_id' => '109',
+                            'transaction_date' => $request->transaction_date,
+                            'person_id'=>$request->person_id,
+                            'person_name'=>$request->person_name,
+                            'person_type_id'=>$request->person_type,
+                            'bank_id'=>$request->bank_id,
+                            'cheque_id'=>$Cheque->id,
+                            'subtractive'=>$request->amount,
+                            'purch_sales_statement'=>' حركة ايداع بنك '.$request->notes,
+                            ]
+                        );
+                    }else{
+                        DB::table('finan_transactions')->insert(
+                            ['transaction_type_id' => '108',
+                            'transaction_date' => $request->transaction_date,
+                            'person_id'=>$request->person_id,
+                            'person_name'=>$request->person_name,
+                            'person_type_id'=>$request->person_type,
+                            'bank_id'=>$request->bank_id,
+                            'cheque_id'=>$Cheque->id,
+                            'additive'=>$request->amount,
+                            'purch_sales_statement'=>'حركة ايداع بنك '.$request->notes,
+                            ]
+                        );
+                    }
+
+                }
+            }else{
+                $Cheque = Cheque::create($request->except(['optionsRadios0','optionsRadios2','person_type']));
+                if($request->optionsRadios2 == 'current'){
+                    DB::table('finan_transactions')->insert(
+                        ['transaction_type_id' => '108',
+                            'transaction_date' => $request->transaction_date,
+                            'bank_id'=>$request->bank_id,
+                            'cheque_id'=>$Cheque->id,
+                            'additive'=>$request->amount,
+                            'purch_sales_statement'=>'حركة ايداع بنك '.$request->notes,
+                        ]
+                    );
+                    DB::table('finan_transactions')->insert(
+                        ['transaction_type_id' => '108',
+                            'transaction_date' => $request->transaction_date,
+                            'safe_id'=>$Company->safe_id,
+                            'cheque_id'=>$Cheque->id,
+                            'subtractive'=>$request->amount,
+                            'purch_sales_statement'=>'حركة ايداع بنك '.$request->notes,
+                        ]
+                    );
+
+                }
+
+
+
+            }
+            DB::commit();
+
+            return redirect("/Cheques")->with('flash_success', "تم اضافة الشيك بنجاح");
+        } catch (\Throwable $th) {
+            throw $th;
+            DB::rollBack();
+            return redirect("/Cheques")->with('flash_danger', "لم تتم اضافة الشيك ");
         }
-        $request->merge([
-            'company_id' => $id,
-        ]);
-
-        $Cheque = Cheque::create($request->except(['optionsRadios0','optionsRadios2','person_type']));
-
-        return redirect("/Cheques")->with('flash_success', "تم اضافة الشيك بنجاح");
     }
 
     public function Update(Request $request)
     {
-        $Cheque = Cheque::find($request->id);
-        $id = session('company_id');
-        if($request->optionsRadios0 == 'person'){
-            $Person = Person::find($request->person_id);
+       DB::beginTransaction();
+       try {
+            $Cheque = Cheque::find($request->id);
+            $id = session('company_id');
             $request->merge([
-                'person_name' => $Person->person_name,
+                'company_id' => $id,
             ]);
-        }else{
-            $request->merge([
-                'person_name' => null,
-                'person_id'=>null,
-            ]);
-        }
-        $request->merge([
-            'company_id' => $id,
-        ]);
+            if($request->optionsRadios0 == 'person'){
+                $Person = Person::find($request->person_id);
+                $request->merge([
+                    'person_name' => $Person->person_name,
+                ]);
+                $Transaction = FinanTransaction::where('cheque_id','=',$request->id)->first();
+                if($Cheque->trans_type == 0){
+                    $Transaction->Update([
+                    'transaction_date' => $request->transaction_date,
+                    'purch_sales_statement'=>'حركة صرف بنك '.$request->notes,
+                    ]);
+                }else{
+                    $Transaction->Update([
+                    'transaction_date' => $request->transaction_date,
+                    'purch_sales_statement'=>'حركة ايداع بنك '.$request->notes,
+                    ]);
+                }
 
-        $Cheque->update($request->except(['optionsRadios0','optionsRadios2','person_type']));
+            }else{
+                $request->merge([
+                    'person_name' => null,
+                    'person_id'=>null,
+                ]);
+                $Transactions = FinanTransaction::where('cheque_id','=',$request->id)->get();
+                foreach ($Transactions as $key => $Transaction) {
+                    if($Cheque->trans_type == 0){
+                        $Transaction->Update([
+                        'transaction_date' => $request->transaction_date,
+                        'purch_sales_statement'=>'حركة صرف بنك '.$request->notes,
+                        ]);
+                    }else{
+                        $Transaction->Update([
+                        'transaction_date' => $request->transaction_date,
+                        'purch_sales_statement'=>'حركة ايداع بنك '.$request->notes,
+                        ]);
+                    }
+                }
 
-        return redirect("/Cheques")->with('flash_success', "تم تعديل بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+            }
+            $Cheque->update($request->except(['optionsRadios0','optionsRadios2','person_type']));
+            DB::commit();
+            return redirect("/Cheques")->with('flash_success', "تم تعديل بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+       } catch (\Throwable $th) {
+           throw $th;
+           DB::rollback();
+           return redirect("/Cheques")->with('flash_danger', "لم يتم تعديل بيانات الشيك رقم $Cheque->cheque_no ");
+
+       }
     }
 
     public function Delete(int $cash_id)
     {
-        $Cheque = Cheque::find($cash_id);
-        $Cheque->delete();
-
-        return redirect("/Cheques")->with('flash_success', "تم حذف بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+        DB::beginTransaction();
+        try {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            $Cheque = Cheque::find($cash_id);
+            $Cheque->delete();
+            $Transactions = FinanTransaction::where('cheque_id','=',$cash_id)->delete();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            DB::commit();
+            return redirect("/Cheques")->with('flash_success', "تم حذف بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+        } catch (\Throwable $th) {
+            throw $th;
+            DB::rollback();
+            return redirect("/Cheques")->with('flash_danger', "لم يتم حذف بيانات الشيك رقم $Cheque->cheque_no ");
+        }
     }
 }

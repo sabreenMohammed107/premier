@@ -105,10 +105,8 @@
     <script>
     $(document).ready(function() {
     $('#example').DataTable();
-    
-} );
-
-</script>
+    });
+    </script>
 
 @yield('scripts')
 

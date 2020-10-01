@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BusinessItemsSetup;
 use App\Models\CashMaster;
 use App\Models\Company;
+use App\Models\FinanTransaction;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -88,20 +89,56 @@ class ReceiptsController extends Controller
 
     public function Create(Request $request)
     {
-        $id = session('company_id');
-        if($request->person_type != null){
-            $Person = Person::find($request->person_id);
+        DB::beginTransaction();
+        try {
+            $id = session('company_id');
+            $Company = Company::find($id);
             $request->merge([
-                'person_name' => $Person->person_name,
+                'company_id' => $id,
             ]);
+            if($request->person_type != null){
+                $Person = Person::find($request->person_id);
+                $request->merge([
+                    'person_name' => $Person->person_name,
+                ]);
+            }
+
+            $CashSales = CashMaster::create($request->all());
+            if($request->person_type != null){
+                DB::table('finan_transactions')->insert(
+                    ['transaction_type_id' => '104',
+                    'transaction_date' => new \DateTime(),
+                    'person_id' => $Person->id,
+                    'person_name'=>$Person->person_name,
+                    'person_type_id'=> $Person->person_type_id,
+                    'safe_id'=>$Company->safe_id,
+                    'cash_id'=>$CashSales->id,
+                    'permission_code'=>$request->cash_receipt_note,
+                    'additive'=>$request->cash_amount,
+                    'purch_sales_statement'=>$request->statement,
+                    ]
+                );
+            }else{
+                DB::table('finan_transactions')->insert(
+                    ['transaction_type_id' => '104',
+                    'transaction_date' => new \DateTime(),
+                    'person_name'=>$request->person_name,
+                    'safe_id'=>$Company->safe_id,
+                    'cash_id'=>$CashSales->id,
+                    'additive'=>$request->cash_amount,
+                    'permission_code'=>$request->cash_receipt_note,
+                    'purch_sales_statement'=>$request->statement,
+                    ]
+                );
+            }
+            DB::commit();
+            return redirect("/Cash/Sales")->with('flash_success', "تم اضافة المقبوضات بنجاح");
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect("/Cash/Sales")->with('flash_danger', "لم تتم اضافة المقبوضات ");
+
         }
-        $request->merge([
-            'company_id' => $id,
-        ]);
-
-        $CashSales = CashMaster::create($request->all());
-
-        return redirect("/Cash/Sales")->with('flash_success', "تم اضافة المقبوضات بنجاح");
 
     }
 
@@ -134,34 +171,85 @@ class ReceiptsController extends Controller
 
     public function Update(Request $request, int $cash_id)
     {
-        $Cash = CashMaster::find($cash_id);
-        $id = session('company_id');
-        if($request->person_type != null){
-            $Person = Person::find($request->person_id);
+        DB::beginTransaction();
+        try {
+            $Cash = CashMaster::find($cash_id);
+            $id = session('company_id');
+            $Company = Company::find($id);
             $request->merge([
-                'person_name' => $Person->person_name,
+                'company_id' => $id,
             ]);
-        }else{
-            $request->merge([
-                'person_id' => null,
-            ]);
+            if($request->person_type != null){
+                $Person = Person::find($request->person_id);
+                $request->merge([
+                    'person_name' => $Person->person_name,
+                ]);
+            }else{
+                $request->merge([
+                    'person_id' => null,
+                ]);
+            }
+
+            $CashPurch = $Cash->update($request->except('id'));
+            $Transaction = FinanTransaction::where('cash_id','=',$cash_id)->first();
+            if($request->person_type != null){
+                $Transaction->update(
+                    ['transaction_type_id' => '104',
+                    'transaction_date' => new \DateTime(),
+                    'person_id' => $Person->id,
+                    'person_name'=>$Person->person_name,
+                    'cash_id'=>$cash_id,
+                    'person_type_id'=> $Person->person_type_id,
+                    'safe_id'=>$Company->safe_id,
+                    'additive'=>$request->cash_amount,
+                    'purch_sales_statement'=>$request->statement,
+                    ]
+                );
+            }else{
+                $Transaction->update(
+                    ['transaction_type_id' => '104',
+                    'transaction_date' => new \DateTime(),
+                    'person_name'=>$request->person_name,
+                    'person_id'=>null,
+                    'person_type_id'=>null,
+                    'safe_id'=>$Company->safe_id,
+                    'cash_id'=>$cash_id,
+                    'additive'=>$request->cash_amount,
+                    'purch_sales_statement'=>$request->statement,
+                    ]
+                );
+            }
+            DB::commit();
+
+            return redirect("/Cash/Sales")->with('flash_success', "تم تعديل بيانات المقبوضات بنجاح");
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم تعديل بيانات المقبوضات ");
+
         }
-        $request->merge([
-            'company_id' => $id,
-        ]);
-
-        $CashPurch = $Cash->update($request->except('id'));
-
-        return redirect("/Cash/Sales")->with('flash_success', "تم تعديل بيانات المقبوضات بنجاح");
 
     }
 
     public function Delete(int $cash_id)
     {
-        $Cash = CashMaster::find($cash_id);
-        $Cash->delete();
+        DB::beginTransaction();
+        try {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            $Cash = CashMaster::find($cash_id);
+            $Transaction = FinanTransaction::where('cash_id','=',$cash_id)->first();
 
-        return redirect("/Cash/Sales")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
+            $Cash->delete();
+            $Transaction->delete();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            DB::commit();
+            return redirect("/Cash/Sales")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
+        } catch (\Throwable $th) {
+            throw $th;
+            DB::rollBack();
+            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم حذف بيانات المدفوعات ");
+
+        }
     }
 
     public function View(int $cash_id)
