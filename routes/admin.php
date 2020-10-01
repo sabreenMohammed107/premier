@@ -10,6 +10,7 @@
 */
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
     //البيانات الاساسية
+    //Basic info
     Route::middleware(['HasBasicInfo'])->group(function () {
         /*********************==user==******************* */
         Route::resource('/users', 'RegisterUsersController');
