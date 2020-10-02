@@ -178,6 +178,7 @@
     
     function openYearBalance(id) {
       
+      
       $.ajax({
           url: "{{route('openYearBalance.fetch')}}",
           method: "get",
