@@ -7,42 +7,6 @@
     "content-hash": "b0ea6c91521af05b6fac6935044a3a09",
     "packages": [
         {
-            "name": "carlos-meneses/laravel-mpdf",
-            "version": "2.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/carlos-meneses/laravel-mpdf.git",
-                "reference": "17b94dfdf8723d7e42a52a102e363e733887a7e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/carlos-meneses/laravel-mpdf/zipball/17b94dfdf8723d7e42a52a102e363e733887a7e4",
-                "reference": "17b94dfdf8723d7e42a52a102e363e733887a7e4",
-                "shasum": ""
-            },
-            "require": {
-                "mpdf/mpdf": "^8.0",
-                "php": ">=7.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Meneses\\LaravelMpdf\\": "src/LaravelMpdf"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Laravel Mpdf: Using Mpdf in Laravel 5 for generate Pdfs.",
-            "keywords": [
-                "laravel",
-                "mpdf",
-                "pdf"
-            ],
-            "time": "2019-08-08T03:03:39+00:00"
-        },
-        {
             "name": "dnoegel/php-xdg-base-dir",
             "version": "v0.1.1",
             "source": {
