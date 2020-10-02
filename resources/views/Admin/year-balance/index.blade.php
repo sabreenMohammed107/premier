@@ -195,6 +195,7 @@
       })
   }
 
+
   function cancelBalance(id) {
       
       $.ajax({
