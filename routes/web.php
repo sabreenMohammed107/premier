@@ -17,3 +17,9 @@
 
 Auth::routes();
 
+// Reports
+// Receipts report
+Route::namespace('Company')->group(function(){
+    Route::post('/Cash/Sales/Report/Fetch','CashReportsController@FetchReceiptReport');
+});
+

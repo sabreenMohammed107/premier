@@ -44,12 +44,18 @@
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
-                                                    <option value="" selected disabled>Select</option>
-                                                    @foreach ($Companies as $Company)
-                                                        <option value="{{$Company->id}}">{{$Company->company_official_name}}</option>
-                                                    @endforeach
-                                                </select>
+
+                                                @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101)
+                                                    <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
+                                                        <option value="" selected disabled>Select</option>
+                                                        @foreach ($Companies as $Company)
+                                                            <option value="{{$Company->id}}">{{$Company->company_official_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @else
+                                                    {{$Companies[0]->company_official_name}}
+                                                @endif
+
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label class="login2">الشركة</label>

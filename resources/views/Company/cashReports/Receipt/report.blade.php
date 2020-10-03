@@ -144,7 +144,7 @@ html,body,.body{
             </div>
         </span>
     </div>
-@foreach ($Cashes as $Cash)
+@foreach ($Cashes as $i => $Cash)
 <div class="right">
     <div dir="rtl" class="company">
         <span>
@@ -310,7 +310,10 @@ html,body,.body{
         </span>
     </div>
 </div>
+@if ($i != count($Cashes) - 1)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+
+@endif
 @endforeach
 </body>
 </html>

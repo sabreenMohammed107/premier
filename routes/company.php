@@ -145,9 +145,6 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::get('/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
 
     });
-
-        Route::post('/Cash/Sales/Report/Fetch','CashReportsController@FetchReceiptReport');
-
     Route::middleware(['HasCheques'])->group(function () {
         /*
         |*********************** Cheques Partition ****************************|
