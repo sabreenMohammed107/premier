@@ -10,6 +10,7 @@
 */
 
 
+
 Route::namespace('Company')->middleware('CompanyUser')->group(function () {
 
     Route::middleware(['HasCompanyData'])->group(function () {

@@ -8,9 +8,13 @@
 |
 |   \Admin
 */
+Route::namespace('Company')->middleware('OfficeAdmin')->group(function () {
+    Route::get('/Admin/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
+});
+
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
     //Reports
-    Route::get('/Admin/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
+
 
 
     //البيانات الاساسية
