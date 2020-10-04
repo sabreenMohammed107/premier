@@ -26,6 +26,7 @@ html,body,.body{
     text-align: center;
     background: #021625;
     color: #fff;
+    float: left;
 }
 .footer{
     padding: 5px 10px;
@@ -36,23 +37,23 @@ html,body,.body{
     color: #fff;
 }
 .report-header{
-    float: left;
-    width: 50%;
+    float: right;
+    width: 40%;
     display: inline-block;
 }
 .date{
+    float: right;
     padding: 10px;
-    width: 30%;
+    width: 40%;
     font-size: 12px;
     text-align: center;
-    background: #021625;
-    color: #fff;
-    margin: 10px 0;
 }
 .image{
-    width: 33.3%;
-    float: right;
+    width: 100%;
+    text-align: center;
+    clear: both;
     padding: 5px 50px 30px 10px;
+
     /* background: #021625; */
 }
 .company{
@@ -85,7 +86,7 @@ html,body,.body{
     clear: both;
 }
 .right{
-    margin: 280px 0 0 0;
+    margin: 250px 0;
 }
 .right, .left{
     float: right;
@@ -104,7 +105,7 @@ html,body,.body{
                 <htmlpageheader name="page-header">
                     <div class="header">
                         <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
-                    </div><br>
+                    </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
@@ -115,6 +116,7 @@ html,body,.body{
                             </div>
                         </span>
                     </div>
+                    <br>
                     <div class="image" dir="rtl">
                         <span><img height="100" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
                     </div>
@@ -153,7 +155,7 @@ html,body,.body{
             </div>
             <div class="off_name">
                 <span>
-                {{$Cash->cash_date}}
+                    {{date('d-m-Y', strtotime($Cash->cash_date))}}
                 </span>
             </div>
         </span>
@@ -311,7 +313,7 @@ html,body,.body{
     </div>
 </div>
 @if ($i != count($Cashes) - 1)
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
 
 @endif
 @endforeach
