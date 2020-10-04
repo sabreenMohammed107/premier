@@ -52,7 +52,7 @@ class CashReportsController extends Controller
         if(!empty($request->from_date) && !empty($request->to_date)){
             $from = $request->from_date;
             $to = $request->to_date;
-            $Cash->whereBetween('reservation_from', [$from, $to]);
+            $Cash->whereBetween('cash_date', [$from, $to]);
         }
         if(!empty($request->approved)){
             $Cash->where('approved','=',$request->approved);
