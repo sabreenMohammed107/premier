@@ -73,9 +73,6 @@ Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')
 Route::get('/invoice-cash', 'InvoiceSalePurchController@indexPurch')->name('invoice-cash');
 Route::get('/invoice-purch-select', 'InvoiceSalePurchController@purchSelect')->name('invoice-purch-select');
 Route::get('/invoicePurch-show/{id}', 'InvoiceSalePurchController@invoicePurchShow')->name('invoicePurch-show');
-/***************Inv Purch Report********************/
-Route::get('/Admin/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
-
 
 /*********************==invoice Sale==******************* */
 Route::get('/invoice-sale', 'InvoiceSalePurchController@indexSale')->name('invoice-sale');
