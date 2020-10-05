@@ -18,8 +18,12 @@
 Auth::routes();
 
 // Reports
-// Receipts report
+
 Route::namespace('Company')->group(function(){
+    // Receipts report - Payments report (Fetching)
     Route::post('/Cash/Sales/Report/Fetch','CashReportsController@FetchReceiptReport');
+    Route::post('/Cash/Purchasing/Report/Fetch','CashReportsController@FetchPaymentReport');
+    Route::post('/Invoice/Purchasing/Report/Fetch','InvoiceReportsController@FetchPurchasingReport');
+    Route::post('/Invoice/Sales/Report/Fetch','InvoiceReportsController@FetchSalesReport');
 });
 

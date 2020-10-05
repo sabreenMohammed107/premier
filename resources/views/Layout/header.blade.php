@@ -82,10 +82,10 @@
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="#" class="dropdown-item">كشف الشركات</a>
 														<a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
-														<a href="#" class="dropdown-item">تقرير المدفوعات النقدية</a>
-														<a href="#" class="dropdown-item">تقرير المشتريات</a>
-														<a href="{{url('/Admin/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير المقبوضات النقدية</a>
-														<a href="#" class="dropdown-item">تقرير المبيعات</a>
+														<a href="{{url('/Admin/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية</a>
+                                                        <a href="{{url('/Admin/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات</a>
+                                                        <a href="{{url('/Admin/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير المقبوضات النقدية</a>
+														<a href="{{url('/Admin/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات</a>
 														<a href="#" class="dropdown-item">تقرير إذونات إستلام النقدية</a>
 														<a href="#" class="dropdown-item">إشعارات الخصم</a>
 														<a href="#" class="dropdown-item">تقرير إذن الصرف</a>
@@ -174,7 +174,11 @@
 												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+                                                <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+                                                <li><a href="{{url('/Admin/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية</a></li>
+                                                <li><a href="{{url('/Admin/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات</a></li>
+                                                <li><a href="{{url('/Admin/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات</a></li>
+                                                <li><a href="{{url('/Admin/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير المقبوضات النقدية</a></li>
 											</ul>
 										</li>
 										<li>

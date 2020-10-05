@@ -8,8 +8,13 @@
 |
 |   \Admin
 */
-Route::namespace('Company')->middleware('OfficeAdmin')->group(function () {
+Route::namespace('Company')->group(function () {
     Route::get('/Admin/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
+    Route::get('/Admin/Cash/Purchasing/Report/Create','CashReportsController@PaymentsReport');
+    Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
+    Route::get('/Admin/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
+    Route::get('/Admin/Invoices/Sales/Report/Create','InvoiceReportsController@SalesReport');
+
 });
 
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
@@ -68,6 +73,9 @@ Route::post('/update.saleconfirmed', 'SalePurchasingController@updateConfirmed')
 Route::get('/invoice-cash', 'InvoiceSalePurchController@indexPurch')->name('invoice-cash');
 Route::get('/invoice-purch-select', 'InvoiceSalePurchController@purchSelect')->name('invoice-purch-select');
 Route::get('/invoicePurch-show/{id}', 'InvoiceSalePurchController@invoicePurchShow')->name('invoicePurch-show');
+/***************Inv Purch Report********************/
+Route::get('/Admin/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
+
 
 /*********************==invoice Sale==******************* */
 Route::get('/invoice-sale', 'InvoiceSalePurchController@indexSale')->name('invoice-sale');

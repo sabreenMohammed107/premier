@@ -70,8 +70,8 @@
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الحركات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
                                                     <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
-												<a href="#" class="dropdown-item">تقرير المشتريات </a>
-												<a href="#" class="dropdown-item">تقرير المبيعات </a>
+												<a href="{{url('/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات </a>
+												<a href="{{url('/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات </a>
 												<a href="#" class="dropdown-item"> إشعارات الخصم</a>
 												<a href="#" class="dropdown-item">تقرير الميزانية  </a>
                                                 <a href="#" class="dropdown-item">تقرير قائمه الدخل </a>
@@ -97,6 +97,7 @@
                                                     <a href="#" class="dropdown-item">تقرير حركة موظف</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة بنك</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
+                                                    <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
 													</div>

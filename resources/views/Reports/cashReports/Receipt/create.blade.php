@@ -1,5 +1,4 @@
-@extends('Layout.company')
-
+@extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? 'Layout.web' : 'Layout.company')
 
 
 @section('crumb')
@@ -22,8 +21,8 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mg-b-15">
-                    {{-- <button class="btn btn-primary waves-effect waves-light">إلغــــاء</button>
-                    <button class="btn btn-primary waves-effect waves-light">حــفـــظ</button> --}}
+                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
+                    {{-- <button class="btn btn-primary waves-effect waves-light">حــفـــظ</button> --}}
                 </div>
             <form action="{{url('/Cash/Sales/Report/Fetch')}}" method="post">
                 {{ csrf_field() }}
@@ -45,8 +44,8 @@
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
-                                                @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101)
-                                                    <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
+                                                @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null)
+                                                    <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker" id="company_id" data-live-search="true" data-width="100%" tabindex="-1">
                                                         <option value="" selected disabled>Select</option>
                                                         @foreach ($Companies as $Company)
                                                             <option value="{{$Company->id}}">{{$Company->company_official_name}}</option>
@@ -54,6 +53,7 @@
                                                     </select>
                                                 @else
                                                     {{$Companies[0]->company_official_name}}
+                                                <input id="company_id" type="hidden" value="{{$Companies[0]->id}}" />
                                                 @endif
 
                                             </div>
@@ -163,7 +163,7 @@
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox" style="margin-right:-10px;">
-                                                    <input class="radio-checked" type="radio" checked="" value="101" id="101" name="person_type_id">
+                                                    <input class="radio-checked" type="radio" checked="" value="101" id="firsr_check" name="person_type_id">
                                                     <label><b> موردين </b></label>
                                                     <input class="" type="radio" value="102" id="optionsRadios2" name="person_type_id">
                                                     <label><b> موظفين </b></label>
@@ -199,19 +199,30 @@
 
         @endsection
         @section('scripts')
+        @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null)
+        <script>
+            $('#company_id').change(function(){
+                $('#firsr_check').prop("checked", true);
+                var Company_id = $('#company_id').val();
+                fetchPersons("{{url('/Cash/Sales/Suppliers')}}",Company_id);
+            });
+        </script>
+        @endif
         <script>
             $(document).ready(function(){
                 debugger;
                 $('#persons').selectpicker();
             })
+
             $('input[name=person_type_id]').change(function() {
                 debugger;
+                var Company_id = $('#company_id').val();
                 if($('input[name=person_type_id]:checked').val() == 100){
-                    fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Cash/Sales/Clients')}}",Company_id);
                 }else if($('input[name=person_type_id]:checked').val() == 101){
-                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}",Company_id);
                 }else{
-                    fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                    fetchPersons("{{url('/Cash/Sales/Employees')}}",Company_id);
                 }
             })
             function fetchPersons(url, compid) {

@@ -9,8 +9,6 @@
 |   \Company
 */
 
-
-
 Route::namespace('Company')->middleware('CompanyUser')->group(function () {
 
     Route::middleware(['HasCompanyData'])->group(function () {
@@ -112,6 +110,10 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::get('/Invoices/{type}/{id}/Delete','PurchasingController@DeleteInvoice');
         Route::get('/Invoices/Purchasing/{inv_id}/View','PurchasingController@ViewInvoice');
         Route::get('/Invoices/Sales/{inv_id}/View','SalesController@ViewInvoice');
+        // Reports
+        //Purchasing - Sales
+        Route::get('/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
+        Route::get('/Invoices/Sales/Report/Create','InvoiceReportsController@SalesReport');
     });
 
 
@@ -133,7 +135,7 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::get('/Cash/Sales/Add','ReceiptsController@Add');
         Route::get('/Cash/Sales/Edit/{cash_id}','ReceiptsController@Edit');
         Route::get('/Cash/Sales/View/{cash_id}','ReceiptsController@View');
-        Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
+        // Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
         Route::post('/Cash/Sales/Create','ReceiptsController@Create');
         Route::post('/Cash/Sales/{cash_id}/Update','ReceiptsController@Update');
         Route::get('/Cash/Sales/{cash_id}/Delete','ReceiptsController@Delete');
@@ -144,6 +146,7 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
          *
          */
         Route::get('/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
+        Route::get('/Cash/Purchasing/Report/Create','CashReportsController@PaymentsReport');
 
     });
     Route::middleware(['HasCheques'])->group(function () {
