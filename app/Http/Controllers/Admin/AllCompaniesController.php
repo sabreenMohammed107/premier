@@ -40,7 +40,7 @@ class AllCompaniesController extends Controller
      */
     public function index()
     {
-        $rows = Company::where('active', 1)->paginate(8);
+        $rows = Company::where('active', 1)->where('id','!=',100)->paginate(8);
        
          return view($this->viewName . 'index', compact('rows'));
     }
