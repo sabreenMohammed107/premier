@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
     </li>
     <li>
         <span class="bread-blod"> تعديل مستخدم </span>
@@ -70,11 +70,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>
-                                                        @if($row->active ==1)
-                                                        <input name="active" value="1" type="checkbox" class="i-checks" checked> مفعل
-                                                        @else
-                                                        <input name="active" value="0" type="checkbox" class="i-checks" > مفعل
-                                                        @endif
+                                                       
+                                                        <input name="active" value="1" type="checkbox" class="i-checks"  @if($row->active ==1)checked @endif> مفعل
+                                                       
                                                     </label>
                                                 </div>
                                             </div>

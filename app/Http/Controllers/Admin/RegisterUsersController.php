@@ -150,6 +150,7 @@ $company_id=0;
 
 
         ];
+      
         if ($request->input('role_id')) {
 
             $data['role_id'] = $request->input('role_id');
@@ -210,10 +211,10 @@ $company_id=0;
 
         $value = $request->get('value');
 
-        $data = Role::whereNotIn('id',[100,101,1])->get();
+        $data = Role::whereNotIn('id',[100,101,110])->get();
 
         if($value==100){
-            $data = Role::whereIn('id',[100,101,1])->get();
+            $data = Role::whereIn('id',[100,101,110])->get();
 
         }
     

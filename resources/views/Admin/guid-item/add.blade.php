@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
     </li>
     <li>
         <span class="bread-blod"> إضافه بند توجيه </span>

@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
     </li>
     <li>
         <span class="bread-blod"> إضافه مستخدم </span>
@@ -31,8 +31,8 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl">
                                                 
                                                 <div class="form-group">
-                                                    <label class="">الاسم بالكامل</label>
-                                                    <input name="user_name" type="text" class="form-control" placeholder="الاسم بالكامل">
+                                                    <label class="">الاسم المستخدم</label>
+                                                    <input name="user_name" type="text" class="form-control" placeholder="الاسم المستخدم">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">كلمة المرور</label>

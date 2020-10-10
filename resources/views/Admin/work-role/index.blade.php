@@ -8,7 +8,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
     </li>
     <li>
         <span class="bread-blod">قواعد العمل </span>
@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+
 <!-- Single pro tab review Start-->
 <div class="single-pro-review-area mt-t-30 mg-b-15">
     <div class="container-fluid">
@@ -101,6 +102,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
+                                                                <a class="btn btn-primary waves-effect waves-light" href="{{route('work-role.index')}}">إلغــاء</a>
+
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light">حــفـــظ</button>
                                                                 </div>
                                                             </div>
@@ -197,6 +200,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
+                                                                <a class="btn btn-primary waves-effect waves-light" href="{{route('work-role.index')}}">إلغــاء</a>
+
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light">حــفـــظ</button>
                                                                 </div>
                                                             </div>
@@ -293,6 +298,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
+                                                                <a class="btn btn-primary waves-effect waves-light" href="{{route('work-role.index')}}">إلغــاء</a>
+
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light">حــفـــظ</button>
                                                                 </div>
                                                             </div>
@@ -373,6 +380,8 @@
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="payment-adress">
+                                                                <a class="btn btn-primary waves-effect waves-light" href="{{route('work-role.index')}}">إلغــاء</a>
+
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light">حــفـــظ</button>
                                                                 </div>
                                                             </div>

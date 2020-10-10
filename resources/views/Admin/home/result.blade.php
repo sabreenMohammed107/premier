@@ -3,7 +3,7 @@
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12  mg-b-15" >
 						<div class="courses-inner res-mg-b-30">
 							<div class="courses-title">
-								<a href="#"><img src="{{ asset('uploads/companies/'.$row->company_logo)}}" style="height:300px;width:100%" alt=""></a>
+								<a href="#"><img style="width: 100%;height:300px" src="{{ asset('uploads/companies/'.$row->company_logo)}}" onerror="this.onerror=null;this.src='{{ asset('webassets/img/default.png')}}';"  style="height:300px;width:100%" alt=""></a>
 								<h2>{{$row->company_official_name}}</h2>
 							</div>
 							<div class="course-des">
