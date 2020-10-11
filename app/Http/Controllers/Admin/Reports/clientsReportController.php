@@ -70,12 +70,13 @@ class clientsReportController extends Controller
     public function store(Request $request)
     {
         $company_id = $request->input('select_company');
-        $client_ids = $request->input('client_ids');
+        $client_id = $request->input('client_ids');
+        $client_ids = explode(', ', $client_id); //convert string to array
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id',[7,6]);
+        $trans = FinanTransaction::whereIn('person_id',$client_ids);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
