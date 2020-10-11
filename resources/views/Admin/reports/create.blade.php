@@ -96,7 +96,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="indexTable">
-                                    @include('admin.reports.createTable')
+                                    @include('Admin.reports.createTable')
 
 
                                 </tbody>

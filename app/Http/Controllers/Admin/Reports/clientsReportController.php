@@ -74,7 +74,7 @@ class clientsReportController extends Controller
            
         ];
         $title = "My Report";
-        $pdf = PDF::loadView('admin.reports.clientReport', $data);
+        $pdf = PDF::loadView('Admin.reports.clientReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
