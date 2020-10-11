@@ -216,11 +216,7 @@
         </div>
      
     </div>
-    @if ($i != count($trans) - 1)
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <hr>
-
-    @endif
+  
     @endforeach
 </body>
 
