@@ -163,6 +163,7 @@
             </div>
         </span>
     </div>
+   {{ count($trans)}}
     @foreach ($trans as $i => $row)
     <div class="right">
         <div dir="rtl" class="company">
@@ -216,7 +217,11 @@
         </div>
      
     </div>
-  
+    @if ($i != count($trans) - 1)
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr>
+
+    @endif
     @endforeach
 </body>
 
