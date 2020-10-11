@@ -13,6 +13,8 @@
         @page {
             header: page-header;
             footer: page-footer;
+            margin-top: 200px;
+            /* Adjust height to be for header - المسافه اللي الفروض يبعد بيها*/
         }
 
         html,
@@ -29,6 +31,7 @@
         }
 
         .header {
+
             padding: 25px 10px;
             width: 20%;
             font-size: 10px;
@@ -36,6 +39,8 @@
             background: #021625;
             color: #fff;
             float: left;
+          
+            
         }
 
         .footer {
@@ -65,7 +70,7 @@
             width: 100%;
             text-align: center;
             clear: both;
-            padding: 5px 50px 30px 10px;
+            /* padding: 5px 50px 30px 10px; */
 
             /* background: #021625; */
         }
@@ -114,7 +119,7 @@
         }
 
         .rightTable {
-            margin: 250px 0;
+            /* margin: 100px 0 0 0; */
         }
 
         table,
@@ -132,10 +137,11 @@
     <hr>
     <div class="body">
         <span>
-            <div class="body-page">
+            <div class="body-page" >
 
 
-                <htmlpageheader name="page-header">
+                <htmlpageheader name="page-header" style="height: 200px;
+            position: fixed;">
                     <div class="header">
                         <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
                     </div>
@@ -151,120 +157,129 @@
                     </div>
                     <br>
 
-                    <div class="image" style="float: right;" dir="rtl">
-                        <span><img height="100" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
+
+                    <br><br>
+
+                    <div class="right">
+                        <div dir="rtl">
+                            <span><img height="70" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
+                        </div>
                     </div>
                     <div class="rep_name">
                         <span>{{$Title}}</span>
-                    </div><br><br>
-                    @foreach($trans as $rows)
-
-
-                    <div class="left">
-                        <div dir="rtl" class="company">
-                            <span>
-                                <div class="name">
-                                    <span> الفتره من :</span>
-                                </div>
-                                <div class="off_name">
-                                    <span>
-                                        {{$from_date}}
-                                    </span>
-                                </div>
-                            </span>
-                        </div>
-
-                        <div dir="rtl" class="company">
-                            <span>
-                                <div class="name">
-                                    <span> الفترة الى :</span>
-                                </div>
-                                <div class="off_name">
-                                    <span>
-                                        {{$to_date}}
-                                    </span>
-                                </div>
-                            </span>
-                        </div>
                     </div>
-                    <div class="right">
-
-
-                        <div dir="rtl" class="company">
-                            <span>
-                                <div class="name">
-                                    <span>اسم الشركة :</span>
-                                </div>
-                                <div class="off_name">
-                                    <span>
-                                        {{$Company->company_official_name}}
-                                    </span>
-                                </div>
-                            </span>
-                        </div>
-                        <div dir="rtl" class="company">
-                            <span>
-                                <div class="name">
-                                    <span>اسم العميل :</span>
-                                </div>
-                                <div class="off_name">
-                                    <span>
-                                        {{$rows->client_id}}
-                                    </span>
-                                </div>
-                            </span>
-                        </div>
-                    </div>
-
                 </htmlpageheader>
-
+                <br><br> <br><br> <br><br>
                 <htmlpagefooter name="page-footer">
                     <div class="footer">
                         <span>{{$Title}}</span>
                     </div>
+                
                 </htmlpagefooter>
+
             </div>
         </span>
-    </div>
 
-    <div dir="rtl" class="rightTable">
-        <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
-            <thead>
-                <tr>
-                  
-                    <th> تاريخ المعاملة </th>
-                    <th>رقم الإذن</th>
-                    <th>رقم الفاتورة</th>
-                    <th>مدين</th>
-                    <th> دائن</th>
-                    <th>نوع الحركة</th>
-                    <th>البيان</th>
-                    <th>الرصيد الحالى
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($rows->trans as  $row)
-                <tr>
-                   
-                    <td> {{date('d-m-Y', strtotime($row->cash_date))}}</td>
-                    <td> {{$row->permission_code}}</td>
-                    <td> {{$row->invoice_no}}</td>
-                    <td> {{$row->additive}}</td>
-                    <td> {{$row->subtractive}}</td>
-                    <td> {{$row->type->transaction_type??''}}</td>
-                    <td> {{$row->purch_sales_statement}}</td>
-                    <?php
-                    $currentBalance = App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('subtractive');
-                    ?>
-                    <td> {{$currentBalance}}</td>
-                </tr>
-                @endforeach
-                </tr>
-            </tbody>
-        </table>
+        <div class="content">
+
+            @foreach($trans as $rows)
+
+
+            <div class="left">
+                <div dir="rtl" class="company">
+                    <span>
+                        <div class="name">
+                            <span> الفتره من :</span>
+                        </div>
+                        <div class="off_name">
+                            <span>
+                                {{$from_date}}
+                            </span>
+                        </div>
+                    </span>
+                </div>
+
+                <div dir="rtl" class="company">
+                    <span>
+                        <div class="name">
+                            <span> الفترة الى :</span>
+                        </div>
+                        <div class="off_name">
+                            <span>
+                                {{$to_date}}
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="right">
+
+
+                <div dir="rtl" class="company">
+                    <span>
+                        <div class="name">
+                            <span>اسم الشركة :</span>
+                        </div>
+                        <div class="off_name">
+                            <span>
+                                {{$Company->company_official_name}}
+                            </span>
+                        </div>
+                    </span>
+                </div>
+                <div dir="rtl" class="company">
+                    <span>
+                        <div class="name">
+                            <span>اسم العميل :</span>
+                        </div>
+                        <div class="off_name">
+                            <span>
+                                {{$rows->client_id}}
+                            </span>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div dir="rtl" class="rightTable">
+                <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
+                    <thead>
+                        <tr>
+
+                            <th> تاريخ المعاملة </th>
+                            <th>رقم الإذن</th>
+                            <th>رقم الفاتورة</th>
+                            <th>مدين</th>
+                            <th> دائن</th>
+                            <th>نوع الحركة</th>
+                            <th>البيان</th>
+                            <th>الرصيد الحالى
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rows->trans as $row)
+                        <tr>
+
+                            <td> {{date('d-m-Y', strtotime($row->cash_date))}}</td>
+                            <td> {{$row->permission_code}}</td>
+                            <td> {{$row->invoice_no}}</td>
+                            <td> {{$row->additive}}</td>
+                            <td> {{$row->subtractive}}</td>
+                            <td> {{$row->type->transaction_type??''}}</td>
+                            <td> {{$row->purch_sales_statement}}</td>
+                            <?php
+                            $currentBalance = App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('subtractive');
+                            ?>
+                            <td> {{$currentBalance}}</td>
+                        </tr>
+                        @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @endforeach
+        </div>
     </div>
-    @endforeach
 
 </body>
 
