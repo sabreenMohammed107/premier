@@ -163,7 +163,7 @@
             </div>
         </span>
     </div>
-    @foreach ($client_ids  $xx)
+    @foreach ($clients  $xx)
     <div class="footer">
                         <span>{{$xx}}</span>
                     </div>
