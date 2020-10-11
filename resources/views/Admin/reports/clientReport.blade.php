@@ -248,7 +248,7 @@
                         <?php
                             $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('subtractive');
                             ?>
-                            <td> </td>
+                           
                             <span>
                             {{$currentBalance}} 
                             </span>

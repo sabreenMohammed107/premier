@@ -80,10 +80,10 @@ class clientsReportController extends Controller
         $trans = FinanTransaction::whereIn('person_id', $client_ids);
 
         if (!empty($request->get("from_date"))) {
-            $trans->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+            $trans->where('transaction_date', '>=', Carbon::parse($request->get("from_date")));
         }
         if (!empty($request->get("to_date"))) {
-            $trans->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+            $trans->where('transaction_date', '<=', Carbon::parse($request->get("to_date")));
         }
 
 
