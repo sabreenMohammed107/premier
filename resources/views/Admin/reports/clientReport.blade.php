@@ -168,6 +168,7 @@
                         <span>{{$xx}}</span>
                    
     @endforeach
+    
     @foreach ($trans as $i => $row)
     <div class="right">
         <div dir="rtl" class="company">

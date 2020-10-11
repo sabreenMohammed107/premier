@@ -75,7 +75,7 @@ class clientsReportController extends Controller
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id', $client_ids);
+        $trans = FinanTransaction::whereIn('person_id',[7,6]);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
