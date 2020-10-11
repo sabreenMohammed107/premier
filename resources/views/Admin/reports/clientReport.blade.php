@@ -163,7 +163,11 @@
             </div>
         </span>
     </div>
-   {{ count($trans)}}
+    @foreach ($client_ids  $xx)
+    <div class="footer">
+                        <span>{{$xx}}</span>
+                    </div>
+    @endforeach
     @foreach ($trans as $i => $row)
     <div class="right">
         <div dir="rtl" class="company">

@@ -74,6 +74,7 @@ class clientsReportController extends Controller
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
+
         $trans = FinanTransaction::whereIn('person_id', $client_ids);
 
         if (!empty($request->get("from_date"))) {
@@ -102,6 +103,7 @@ class clientsReportController extends Controller
             'Logo'  => $company->company_logo,
             'Company' => $company,
             'User'  =>  Auth::user(),
+            'clients'=>$client_ids,
 
         ];
         $title = "My Report";
