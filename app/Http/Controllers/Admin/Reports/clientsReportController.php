@@ -71,7 +71,7 @@ class clientsReportController extends Controller
     {
         $company_id = $request->input('select_company');
         $client_id = $request->input('client_ids');
-        $client_ids = explode(', ', $client_id); //convert string to array
+        $client_ids = explode(",", $client_id[0]); //convert string to array
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
@@ -93,7 +93,7 @@ class clientsReportController extends Controller
 
 
 
-        \Log::info($client_ids);
+      
 
         $data = [
             'Title' => 'تقرير حركة العميل',
