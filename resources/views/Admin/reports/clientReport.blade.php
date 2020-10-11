@@ -234,7 +234,23 @@
                         </div>
                         <div class="off_name">
                             <span>
-                                {{$rows->client_id}}
+                                {{$rows->client_name}}
+                            </span>
+                        </div>
+                    </span>
+                </div>
+                <div dir="rtl" class="company">
+                    <span>
+                        <div class="name">
+                            <span> الرصيد الحالى :</span>
+                        </div>
+                        <div class="off_name">
+                        <?php
+                            $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('subtractive');
+                            ?>
+                            <td> </td>
+                            <span>
+                            {{$currentBalance}} 
                             </span>
                         </div>
                     </span>
@@ -252,25 +268,21 @@
                             <th> دائن</th>
                             <th>نوع الحركة</th>
                             <th>البيان</th>
-                            <th>الرصيد الحالى
-                            </th>
+                          
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($rows->trans as $row)
                         <tr>
 
-                            <td> {{date('d-m-Y', strtotime($row->cash_date))}}</td>
+                            <td> {{date('d-m-Y', strtotime($row->transaction_date))}}</td>
                             <td> {{$row->permission_code}}</td>
                             <td> {{$row->invoice_no}}</td>
                             <td> {{$row->additive}}</td>
                             <td> {{$row->subtractive}}</td>
                             <td> {{$row->type->transaction_type??''}}</td>
                             <td> {{$row->purch_sales_statement}}</td>
-                            <?php
-                            $currentBalance = App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('subtractive');
-                            ?>
-                            <td> {{$currentBalance}}</td>
+                           
                         </tr>
                         @endforeach
                         </tr>
