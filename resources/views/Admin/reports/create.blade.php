@@ -34,79 +34,85 @@
                         </div>
                     </div>
                     <div class="sparkline13-graph">
+                       
 
-                        <div class="datatable-dashv1-list custom-datatable-overright">
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <button class="btn btn-primary waves-effect waves-light">عرض تقرير إكسل</button>
-                                <button onclick="saving()" class="btn btn-primary waves-effect waves-light">عرض تقرير جدول</button>
-                                <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button>
-                            </div>
-                            <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row res-rtl" style="display: flex ;flex-direction: row-reverse ;">
-                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 mg-b-15" style="direction:rtl">
-                                        <div class="row" style="margin-top:5px;">
-                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="chosen-select" tabindex="-1">
-                                                    <option value="">Select</option>
-                                                    @foreach($rows as $row)
-                                                    <option value="{{$row->id}}">{{$row->company_official_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                <div class="input-mask-title">
-                                                    <label><b style="font-size:18px">الشركة</b></label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                <div class="input-mark-inner mg-b-22">
-                                                    <input type="date" class="form-control" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                <label class="login2"><b>التاريخ من</b></label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                <div class="input-mark-inner mg-b-22">
-                                                    <input type="date" class="form-control" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                <label class="login2"><b>التاريخ إالي</b></label>
-                                            </div>
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                            <form action="{{route('Admin-client-report.store')}}" method="post" target="_blank">
+                                <div class="chosen-select-single mg-b-20" style="direction:rtl;">
+
+                                    @csrf
+                                    <input type="hidden" name="client_ids[]" id="deto">
+                                    <button onclick="saving()" type="submit" class="btn btn-primary waves-effect waves-light">عرض تقرير جدول</button>
+                                    <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button>
+                       
+                    </div>
+                    <div class="form-group-inner" style="margin-right:10px;">
+                        <div class="row res-rtl" style="display: flex ;flex-direction: row-reverse ;">
+                            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 mg-b-15" style="direction:rtl">
+                                <div class="row" style="margin-top:5px;">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                        <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="chosen-select" tabindex="-1">
+                                            <option value="">Select</option>
+                                            @foreach($rows as $row)
+                                            <option value="{{$row->id}}">{{$row->company_official_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <div class="input-mask-title">
+                                            <label><b style="font-size:18px">الشركة</b></label>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <input type="date" name="from_date" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <label class="login2"><b>التاريخ من</b></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                        <div class="input-mark-inner mg-b-22">
+                                            <input type="date" name="to_date" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <label class="login2"><b>التاريخ إالي</b></label>
+                                    </div>
+                                </div>
                             </div>
-                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" style="direction:rtl">
-                                <thead>
-                                    <tr>
-                                        <th data-field="state" data-checkbox="true"></th>
-                                        <th data-field="id"></th>
-                                        <th data-field="db">Id</th>
-                                        <th data-field="name">الإسم</th>
-                                        <th>الهاتف</th>
-                                        <th>موبايل</th>
-                                        <th>رقم التسجيل</th>
-                                        <th>السجل التجاري</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="indexTable">
-                                    @include('Admin.reports.createTable')
-
-
-                                </tbody>
-                            </table>
                         </div>
                     </div>
+                            </form>
+                    <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar" style="direction:rtl">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true"></th>
+                                <th data-field="id"></th>
+                                <th data-field="db">Id</th>
+                                <th data-field="name">الإسم</th>
+                                <th>الهاتف</th>
+                                <th>موبايل</th>
+                                <th>رقم التسجيل</th>
+                                <th>السجل التجاري</th>
+                            </tr>
+                        </thead>
+                        <tbody id="indexTable">
+                            @include('Admin.reports.createTable')
+
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <!-- Static Table End -->
 @endsection
@@ -156,24 +162,21 @@
             dd.push(obj[i].db);
         });
 
-
-        $.ajax({
-            type: 'POST',
-            url: "{{route('Admin-client-report.store')}}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                client_ids: dd,
-                company_id: $('#select_company option:selected').val(),
-            },
-            success: function(data) {
-                var win = window.open();
-                win.document.write(data);
-                console.log(data);
-            },
-            error: function(request, status, error) {
-                console.log(request.responseText);
-            }
-        });
+        $('#deto').val(dd);
+        // $.ajax({
+        //     type: 'POST',
+        //     url: "{{route('Admin-client-report.store')}}",
+        //     data: {
+        //         "_token": "{{ csrf_token() }}",
+        //         client_ids: dd,
+        //         company_id: $('#select_company option:selected').val(),
+        //     },
+        //     success: function(data) {
+        //     },
+        //     error: function(request, status, error) {
+        //         console.log(request.responseText);
+        //     }
+        // });
 
     }
 </script>

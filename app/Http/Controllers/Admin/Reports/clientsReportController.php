@@ -7,7 +7,11 @@ use App\Models\Company;
 use App\Models\FinanTransaction;
 use App\Models\Person;
 use Illuminate\Http\Request;
- use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use Illuminate\Support\Facades\Auth;
+
+use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use Carbon\Carbon;
+
 class clientsReportController extends Controller
 {
     protected $object;
@@ -55,7 +59,6 @@ class clientsReportController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -66,21 +69,48 @@ class clientsReportController extends Controller
      */
     public function store(Request $request)
     {
-        $company_id = $request->input('company_id');
+        $company_id = $request->input('select_company');
         $client_ids = $request->input('client_ids');
+        $from_date = $request->get("from_date");
+        $to_date = $request->get("to_date");
+        $company = Company::where('id', $company_id)->first();
+        $trans = FinanTransaction::whereIn('person_id', $client_ids);
+
+        if (!empty($request->get("from_date"))) {
+            $trans->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
+        }
+        if (!empty($request->get("to_date"))) {
+            $trans->where('entry_date', '<=', Carbon::parse($request->get("to_date")));
+        }
+
+
+        $trans = $trans->get();
+
+
+
+
+
+
         \Log::info($client_ids);
+
         $data = [
             'Title' => 'تقرير حركة العميل',
-           
+            'trans' => $trans,
+            'from_date' => $from_date,
+            'to_date' => $to_date,
+            'Today' => date('Y-m-d'),
+            'Logo'  => $company->company_logo,
+            'Company' => $company,
+            'User'  =>  Auth::user(),
+
         ];
         $title = "My Report";
         $pdf = PDF::loadView('Admin.reports.clientReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
-    
-       
-        return $pdf->stream('medium.pdf'); 
+
+        return $pdf->stream('medium.pdf');
     }
 
     /**

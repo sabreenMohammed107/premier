@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>{{$Title}}</title>
     <style>
+        @page {
+            header: page-header;
+            footer: page-footer;
+        }
+
         html,
         body,
         .body {
@@ -110,12 +115,113 @@
 <body>
     <hr>
     <div class="body">
-        <h1>Welcome</h1>
+        <span>
+            <div class="body-page">
 
 
+                <htmlpageheader name="page-header">
+                    <div class="header">
+                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                    </div>
+                    <div class="report-header">
+                        <span>
+                            <div class="date">
+                                <span>التاريخ : {{$Today}}</span>
+                            </div>
+                            <div class="date">
+                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="image" dir="rtl">
+                        <span><img height="100" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
+                    </div>
+                    <div class="rep_name">
+                        <span>{{$Title}}</span>
+                    </div><br><br>
+                    <div dir="rtl" class="company">
+                        <span>
+                            <div class="name">
+                                <span>اسم الشركة :</span>
+                            </div>
+                            <div class="off_name">
+                                <span>
+                                    {{$Company->company_official_name}}
+                                </span>
+                            </div>
+                        </span>
+                    </div>
 
+                </htmlpageheader>
 
+                <htmlpagefooter name="page-footer">
+                    <div class="footer">
+                        <span>{{$Title}}</span>
+                    </div>
+                </htmlpagefooter>
+            </div>
+        </span>
+    </div>
+    @foreach ($trans as $i => $row)
+    <div class="right">
+        <div dir="rtl" class="company">
+            <span>
+                <div class="name">
+                    <span>التاريخ :</span>
+                </div>
+                <div class="off_name">
+                    <span>
+                        {{date('d-m-Y', strtotime($row->transaction_date))}}
+                    </span>
+                </div>
+            </span>
+        </div>
+      
+        <div dir="rtl" class="company">
+            <span>
+                <div class="name">
+                    <span>اسم :</span>
+                </div>
+                <div class="off_name">
+                    <span>
+                        {{$row->person_name}}
+                    </span>
+                </div>
+            </span>
+        </div>
+        <div dir="rtl" class="company">
+            <span>
+                <div class="name">
+                    <span> دائن :</span>
+                </div>
+                <div class="off_name">
+                    <span>
+                        {{$row->additive}}
+                    </span>
+                </div>
+            </span>
+        </div>
+        <div dir="rtl" class="company">
+            <span>
+                <div class="name">
+                    <span> مدين :</span>
+                </div>
+                <div class="off_name">
+                    <span>
+                        {{$row->subtractive}}
+                    </span>
+                </div>
+            </span>
+        </div>
+     
+    </div>
+    @if ($i != count($trans) - 1)
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <hr>
 
+    @endif
+    @endforeach
 </body>
 
 </html>
