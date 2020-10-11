@@ -8,6 +8,7 @@ use App\Models\FinanTransaction;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
 
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
@@ -76,7 +77,7 @@ class clientsReportController extends Controller
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id',$client_ids);
+        $trans = FinanTransaction::whereIn('person_id', $client_ids);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('entry_date', '>=', Carbon::parse($request->get("from_date")));
@@ -88,23 +89,34 @@ class clientsReportController extends Controller
 
         $trans = $trans->get();
 
+        $filterd_trans = [];
+        foreach ($client_ids as $id) {
+            $obj = new Collection();
+            $obj->client_id = Person::where('id',$id)->first()->person_name;
+            $obj->trans = array();
+            foreach ($trans as $objs) {
+                if ($objs->person_id == $id) {
+                    array_push($obj->trans, $objs);
+                }
+              
+            }
+            array_push($filterd_trans, $obj);
+        }
 
 
 
 
-
-      
 
         $data = [
             'Title' => 'تقرير حركة العميل',
-            'trans' => $trans,
+            'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,
             'Today' => date('Y-m-d'),
             'Logo'  => $company->company_logo,
             'Company' => $company,
             'User'  =>  Auth::user(),
-            'clients'=>$client_ids,
+            'clients' => $client_ids,
 
         ];
         $title = "My Report";

@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>{{$Title}}</title>
     <style>
         @page {
@@ -101,13 +104,26 @@
         }
 
         .right {
-            margin: 250px 0;
+            /* margin: 250px 0; */
         }
 
         .right,
         .left {
             float: right;
             width: 50%;
+        }
+
+        .rightTable {
+            margin: 250px 0;
+        }
+
+        table,
+        th,
+        td {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 10px 3px;
+            text-align: center;
         }
     </style>
 </head>
@@ -134,23 +150,70 @@
                         </span>
                     </div>
                     <br>
-                    <div class="image" dir="rtl">
+
+                    <div class="image" style="float: right;" dir="rtl">
                         <span><img height="100" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
                     </div>
                     <div class="rep_name">
                         <span>{{$Title}}</span>
                     </div><br><br>
-                    <div dir="rtl" class="company">
-                        <span>
-                            <div class="name">
-                                <span>اسم الشركة :</span>
-                            </div>
-                            <div class="off_name">
-                                <span>
-                                    {{$Company->company_official_name}}
-                                </span>
-                            </div>
-                        </span>
+                    @foreach($trans as $rows)
+
+
+                    <div class="left">
+                        <div dir="rtl" class="company">
+                            <span>
+                                <div class="name">
+                                    <span> الفتره من :</span>
+                                </div>
+                                <div class="off_name">
+                                    <span>
+                                        {{$from_date}}
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+
+                        <div dir="rtl" class="company">
+                            <span>
+                                <div class="name">
+                                    <span> الفترة الى :</span>
+                                </div>
+                                <div class="off_name">
+                                    <span>
+                                        {{$to_date}}
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="right">
+
+
+                        <div dir="rtl" class="company">
+                            <span>
+                                <div class="name">
+                                    <span>اسم الشركة :</span>
+                                </div>
+                                <div class="off_name">
+                                    <span>
+                                        {{$Company->company_official_name}}
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+                        <div dir="rtl" class="company">
+                            <span>
+                                <div class="name">
+                                    <span>اسم العميل :</span>
+                                </div>
+                                <div class="off_name">
+                                    <span>
+                                        {{$rows->client_id}}
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
                     </div>
 
                 </htmlpageheader>
@@ -164,65 +227,44 @@
         </span>
     </div>
 
+    <div dir="rtl" class="rightTable">
+        <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th> تاريخ المعاملة </th>
+                    <th>رقم الإذن</th>
+                    <th>رقم الفاتورة</th>
+                    <th>مدين</th>
+                    <th> دائن</th>
+                    <th>نوع الحركة</th>
+                    <th>البيان</th>
+                    <th>الرصيد الحالى
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($rows->trans as $index => $row)
+                <tr>
+                    <td>{{$index+1}}</td>
+                    <td> {{date('d-m-Y', strtotime($row->cash_date))}}</td>
+                    <td> {{$row->permission_code}}</td>
+                    <td> {{$row->invoice_no}}</td>
+                    <td> {{$row->additive}}</td>
+                    <td> {{$row->subtractive}}</td>
+                    <td> {{$row->type->transaction_type??''}}</td>
+                    <td> {{$row->purch_sales_statement}}</td>
+                    <?php
+                    $currentBalance = App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->person_id)->sum('subtractive');
+                    ?>
+                    <td> {{$currentBalance}}</td>
+                </tr>
+                @endforeach
+                </tr>
+            </tbody>
+        </table>
 
-    @foreach ($trans as $i => $row)
-    <div class="right">
-        <div dir="rtl" class="company">
-            <span>
-                <div class="name">
-                    <span>التاريخ :</span>
-                </div>
-                <div class="off_name">
-                    <span>
-                        {{date('d-m-Y', strtotime($row->transaction_date))}}
-                    </span>
-                </div>
-            </span>
-        </div>
-      
-        <div dir="rtl" class="company">
-            <span>
-                <div class="name">
-                    <span>اسم :</span>
-                </div>
-                <div class="off_name">
-                    <span>
-                        {{$row->person_name}}
-                    </span>
-                </div>
-            </span>
-        </div>
-        <div dir="rtl" class="company">
-            <span>
-                <div class="name">
-                    <span> دائن :</span>
-                </div>
-                <div class="off_name">
-                    <span>
-                        {{$row->additive}}
-                    </span>
-                </div>
-            </span>
-        </div>
-        <div dir="rtl" class="company">
-            <span>
-                <div class="name">
-                    <span> مدين :</span>
-                </div>
-                <div class="off_name">
-                    <span>
-                        {{$row->subtractive}}
-                    </span>
-                </div>
-            </span>
-        </div>
-     
     </div>
-    @if ($i != count($trans) - 1)
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <hr>
-
-    @endif
     @endforeach
 </body>
 
