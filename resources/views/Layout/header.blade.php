@@ -69,7 +69,7 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الحركات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-														<a href="#" class="dropdown-item">تقرير حركة العميل</a>
+														<a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
 														<a href="#" class="dropdown-item">تقرير حركة المورد</a>
 														<a href="#" class="dropdown-item">تقرير حركة موظف</a>
 														<a href="#" class="dropdown-item">تقرير حركة بنك</a>
