@@ -163,10 +163,10 @@
             </div>
         </span>
     </div>
-    @foreach ($clients  $xx)
-    <div class="footer">
+    @foreach ($clients as $xx)
+  
                         <span>{{$xx}}</span>
-                    </div>
+                   
     @endforeach
     @foreach ($trans as $i => $row)
     <div class="right">
