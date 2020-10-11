@@ -231,7 +231,7 @@
         <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
             <thead>
                 <tr>
-                    <th>#</th>
+                  
                     <th> تاريخ المعاملة </th>
                     <th>رقم الإذن</th>
                     <th>رقم الفاتورة</th>
@@ -244,9 +244,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($rows->trans as $index => $row)
+                @foreach ($rows->trans as  $row)
                 <tr>
-                    <td>{{$index+1}}</td>
+                   
                     <td> {{date('d-m-Y', strtotime($row->cash_date))}}</td>
                     <td> {{$row->permission_code}}</td>
                     <td> {{$row->invoice_no}}</td>
@@ -263,9 +263,9 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
     @endforeach
+
 </body>
 
 </html>
