@@ -15,6 +15,7 @@ use Carbon\Carbon;
 
 class ClientsReportController extends Controller
 {
+    
     protected $object;
     protected $viewName;
     protected $routeName;
