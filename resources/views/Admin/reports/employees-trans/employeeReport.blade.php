@@ -266,12 +266,14 @@
                             <th>رقم الفاتورة</th>
                             <th>مدين</th>
                             <th> دائن</th>
+                            <th> الرصيد الحالى</th>
                             <th>نوع الحركة</th>
                             <th>البيان</th>
                           
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $tbalance=0; ?>
                         @foreach ($rows->trans as $row)
                         <tr>
 
@@ -280,6 +282,9 @@
                             <td> {{$row->invoice_no}}</td>
                             <td> {{$row->additive}}</td>
                             <td> {{$row->subtractive}}</td>
+                            <td><?php $chkbala = $row->subtractive - $row->additive;
+                                echo $tbalance += $chkbala; ?>
+                            </td>
                             <td> {{$row->type->transaction_type??''}}</td>
                             <td> {{$row->purch_sales_statement}}</td>
                            

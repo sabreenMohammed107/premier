@@ -39,8 +39,8 @@
             background: #021625;
             color: #fff;
             float: left;
-          
-            
+
+
         }
 
         .footer {
@@ -134,10 +134,10 @@
 </head>
 
 <body>
-   
+
     <div class="body">
         <span>
-            <div class="body-page" >
+            <div class="body-page">
 
 
                 <htmlpageheader name="page-header" style="height: 200px;
@@ -174,12 +174,12 @@
                     <div class="footer">
                         <span>{{$Title}}</span>
                     </div>
-                
+
                 </htmlpagefooter>
 
             </div>
         </span>
-     
+
         <div class="content">
 
             @foreach($trans as $rows)
@@ -245,12 +245,12 @@
                             <span> الرصيد الحالى :</span>
                         </div>
                         <div class="off_name">
-                        <?php
+                            <?php
                             $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('subtractive');
                             ?>
-                           
+
                             <span>
-                            {{$currentBalance}} 
+                                {{$currentBalance}}
                             </span>
                         </div>
                     </span>
@@ -266,12 +266,14 @@
                             <th>رقم الفاتورة</th>
                             <th>مدين</th>
                             <th> دائن</th>
+                            <th> الرصيد الحالى</th>
                             <th>نوع الحركة</th>
                             <th>البيان</th>
-                          
+
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $tbalance=0; ?>
                         @foreach ($rows->trans as $row)
                         <tr>
 
@@ -280,9 +282,12 @@
                             <td> {{$row->invoice_no}}</td>
                             <td> {{$row->additive}}</td>
                             <td> {{$row->subtractive}}</td>
+                            <td><?php $chkbala = $row->additive - $row->subtractive;
+                                echo $tbalance += $chkbala; ?>
+                            </td>
                             <td> {{$row->type->transaction_type??''}}</td>
                             <td> {{$row->purch_sales_statement}}</td>
-                           
+
                         </tr>
                         @endforeach
                         </tr>
