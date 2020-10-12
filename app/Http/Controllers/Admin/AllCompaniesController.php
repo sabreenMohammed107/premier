@@ -40,8 +40,7 @@ class AllCompaniesController extends Controller
      */
     public function index()
     {
-        $rows = Company::where('active', 1)->paginate(8);
-       
+        $rows = Company::where('active', 1)->where('id','!=',100)->paginate(8);
          return view($this->viewName . 'index', compact('rows'));
     }
 
@@ -85,6 +84,7 @@ class AllCompaniesController extends Controller
 
             'chairman_person_name' => $request->input('chairman_person_name'),
             'contact_person_name' => $request->input('contact_person_name'),
+            'contact_person_mobile' => $request->input('contact_person_mobile'),
             'fax' => $request->input('fax'),
 
             'phone2' => $request->input('phone2'),
@@ -109,6 +109,7 @@ class AllCompaniesController extends Controller
 
         DB::beginTransaction();
         try {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             $company = $this->object::create($data);
             $yy = date("Y");
          
@@ -145,12 +146,12 @@ class AllCompaniesController extends Controller
                 $monthData->save();
             }
             DB::commit();
-
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect()->back()->with('flash_danger', "لم يتم حفظها بسبب خطأ ما حاول مرة أخرى و تأكد من البيانات المدخله");
+            return redirect()->back()->with('flash_danger', $th->getMessage());
         }
     }
 
@@ -207,6 +208,7 @@ class AllCompaniesController extends Controller
 
             'chairman_person_name' => $request->input('chairman_person_name'),
             'contact_person_name' => $request->input('contact_person_name'),
+            'contact_person_mobile' => $request->input('contact_person_mobile'),
             'fax' => $request->input('fax'),
 
             'phone2' => $request->input('phone2'),

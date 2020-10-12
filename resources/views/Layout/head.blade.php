@@ -78,7 +78,7 @@
 	<!-- chosen CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/chosen/bootstrap-chosen.css')}}">
-{{-- >>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a --}}
+
 	<!-- modals CSS
 		============================================ -->
 	<link rel="stylesheet" href="{{ asset('webassets/css/modals.css')}}">
@@ -98,7 +98,6 @@
 ">
 
 
-{{-- >>>>>>> 355fb57568b16d74ee8594f58b0b5e2b04bbaf3a --}}
     <!-- modernizr JS
 		============================================ -->
     <script src="{{ asset('webassets/js/vendor/modernizr-2.8.3.min.js')}}"></script>

@@ -44,4 +44,9 @@ class FinanTransaction extends Model
     {
         return $this->hasMany('App\Models\Item', 'item_id','id');
     }
+
+    public function type()
+    {
+        return $this->belongsTo('App\Models\FinanTransactionType', 'transaction_type_id');
+    }
 }

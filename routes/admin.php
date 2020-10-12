@@ -24,9 +24,18 @@ Route::namespace('Company')->group(function () {
 });
 
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
-    //Reports
+    //Reports   
+    //client report
 
+    Route::resource('/Admin-client-report', 'Reports\ClientReportController');
+    Route::get('/dynamicCompany-clientReport.fetch', 'Reports\ClientReportController@companyFetch')->name('dynamicCompany-clientReport.fetch');
+//supplier report
+    Route::resource('/Admin-supplier-report', 'Reports\SuppliersReportController');
+    Route::get('/dynamicCompany-supplierReport.fetch', 'Reports\SuppliersReportController@companyFetch')->name('dynamicCompany-supplierReport.fetch');
 
+    //employee report
+    Route::resource('/Admin-employee-report', 'Reports\EmployeesReportController');
+    Route::get('/dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('dynamicCompany-employeeReport.fetch');
 
     //البيانات الاساسية
     //Basic info

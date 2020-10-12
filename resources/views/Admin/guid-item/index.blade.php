@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
 	<li>
-		<a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
 	</li>
 	<li>
 		<span class="bread-blod"> بنود التوجية</span>
@@ -14,7 +14,31 @@
 </ul>
 
 @endsection
+@section('style')
+<style>
+    .pagination-info {
+        display: none !important;
+    }
 
+    .page-list {
+        display: none !important;
+    }
+
+    .pagination ul li {
+        float: right !important;
+    }
+
+    .search input:-ms-input-placeholder {
+        color: white !important;
+    }
+
+    #table td,
+    th {
+        text-align: right;
+        text-indent: 10px;
+    }
+</style>
+@endsection
 @section('content')
 <div class="product-status mg-b-15">
 	<div class="container-fluid">
@@ -26,9 +50,11 @@
 						<a href="{{route('guid-item.create')}}" style="direction:ltr">إضافة بند</a>
 					</div>
 					<div class="asset-inner">
-					<table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"
-										   data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">							<thead>
+						<table class="table-striped table" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+							<thead>
 								<tr>
+								<th ></th>
+								
 									<th>#</th>
 									<th>الكود</th>
 									<th> الإسم</th>
@@ -40,6 +66,7 @@
 
 								@foreach($rows as $index => $row)
 								<tr>
+								<td></td>
 									<td>{{$index+1}}</td>
 									<td>{{$row->guided_item_code}}</td>
 									<td>{{$row->guided_item_name}}</td>

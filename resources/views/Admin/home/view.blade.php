@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
     </li>
     <li>
         <span class="bread-blod">عرض الشركة</span>
@@ -85,7 +85,8 @@
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>خاضعه لضريبة القيمة المضافة:</b>{{$companyrow->taxable ?? 'نعم'}} </li>
+                                        <li><i class="fa fa-angle-left"></i> <b>خاضعه لضريبة القيمة المضافة:</b>
+                                        @if($companyrow->taxable ==1) نعم @else لا @endif </li>
                                         <li><i class="fa fa-angle-left"></i> <b>مأموريه الضرائب:</b> {{$companyrow->tax_authority}}</li>
                                         <li><i class="fa fa-angle-left"></i> <b>رقم الملف الضريبى:</b> {{$companyrow->tax_card}}</li>
                                     </ul>

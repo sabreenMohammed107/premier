@@ -69,9 +69,9 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الحركات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-														<a href="#" class="dropdown-item">تقرير حركة العميل</a>
-														<a href="#" class="dropdown-item">تقرير حركة المورد</a>
-														<a href="#" class="dropdown-item">تقرير حركة موظف</a>
+														<a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
+														<a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
+														<a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
 														<a href="#" class="dropdown-item">تقرير حركة بنك</a>
 														<a href="#" class="dropdown-item">تقرير حركة خزينة </a>
                                                         <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
@@ -173,9 +173,9 @@
 										<li>
 											<a data-toggle="collapse" data-target="#democrou" href="#">تقارير الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="democrou" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">تقرير حركة العميل</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة المورد</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
+												<li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
+												<li><a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
+												<li><a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
