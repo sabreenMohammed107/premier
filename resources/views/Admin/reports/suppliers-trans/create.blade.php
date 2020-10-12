@@ -9,7 +9,7 @@
         <a href="#"></a> التقارير <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تقرير حركة العميل</span>
+        <span class="bread-blod"> تقرير حركة المورد</span>
     </li>
 </ul>
 
@@ -21,29 +21,24 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="mg-b-23">
-                    <div class="">
-                        <button class="btn btn-primary waves-effect waves-light">رجــوع</button>
-                        <button class="btn btn-primary waves-effect waves-light">حــفـظ</button>
-                    </div>
-                </div>
+               
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl"> تقرير حركة العميل </h1><br />
+                            <h1 style="direction:rtl"> تقرير حركة المورد </h1><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                        
 
                             <div class="datatable-dashv1-list custom-datatable-overright">
-                            <form action="{{route('Admin-client-report.store')}}" method="post" target="_blank">
+                            <form action="{{route('Admin-supplier-report.store')}}" method="post" target="_blank">
                                 <div class="chosen-select-single mg-b-20" style="direction:rtl;">
 
                                     @csrf
-                                    <input type="hidden" name="client_ids[]" id="deto">
+                                    <input type="hidden" name="supplier_ids[]" id="deto">
                                     <button onclick="saving()" type="submit" class="btn btn-primary waves-effect waves-light">عرض تقرير جدول</button>
-                                    <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button>
+                                    <!-- <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button> -->
                        
                     </div>
                     <div class="form-group-inner" style="margin-right:10px;">
@@ -102,7 +97,7 @@
                             </tr>
                         </thead>
                         <tbody id="indexTable">
-                            @include('Admin.reports.createTable')
+                            @include('Admin.reports.suppliers-trans.createTable')
 
 
                         </tbody>
@@ -129,7 +124,7 @@
 
 
             $.ajax({
-                url: "{{route('dynamicCompany-clientReport.fetch')}}",
+                url: "{{route('dynamicCompany-supplierReport.fetch')}}",
                 method: "get",
                 data: {
                     company_id: company,

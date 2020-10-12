@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
-
-class ClientsReportController extends Controller
+class SuppliersReportController extends Controller
 {
     protected $object;
     protected $viewName;
@@ -26,7 +25,7 @@ class ClientsReportController extends Controller
 
         $this->middleware('auth');
         $this->object = $object;
-        $this->viewName = 'Admin.reports.clients-trans.';
+        $this->viewName = 'Admin.reports.suppliers-trans.';
         $this->routeName = 'Admin-client-report.';
 
         $this->message = 'تم حفظ البيانات';
@@ -39,19 +38,17 @@ class ClientsReportController extends Controller
     public function index()
     {
         $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
-        $clients = [];
-        return view($this->viewName . 'create', compact('rows', 'clients'));
+        $suppliers = [];
+        return view($this->viewName . 'create', compact('rows', 'suppliers'));
     }
-
-
 
     public function companyFetch(Request $request)
     {
 
         $company_id = $request->input('company_id');
-        $clients = Person::where('person_type_id', 100)->where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
+        $suppliers = Person::where('person_type_id', 101)->where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'createTable', compact('clients'))->render();
+        return view($this->viewName . 'createTable', compact('suppliers'))->render();
     }
     /**
      * Show the form for creating a new resource.
@@ -60,6 +57,7 @@ class ClientsReportController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -71,13 +69,13 @@ class ClientsReportController extends Controller
     public function store(Request $request)
     {
         $company_id = $request->input('select_company');
-        $client_id = $request->input('client_ids');
-        $client_ids = explode(",", $client_id[0]); //convert string to array
+        $supplier_id = $request->input('supplier_ids');
+        $supplier_ids = explode(",", $supplier_id[0]); //convert string to array
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id', $client_ids);
+        $trans = FinanTransaction::whereIn('person_id', $supplier_ids);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('transaction_date', '>=', Carbon::parse($request->get("from_date")));
@@ -90,10 +88,10 @@ class ClientsReportController extends Controller
         $trans = $trans->get();
 
         $filterd_trans = [];
-        foreach ($client_ids as $id) {
+        foreach ($supplier_ids as $id) {
             $obj = new Collection();
-            $obj->client_name = Person::where('id',$id)->first()->person_name;
-            $obj->client_id = $id;
+            $obj->supplier_name = Person::where('id',$id)->first()->person_name;
+            $obj->supplier_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {
                 if ($objs->person_id == $id) {
@@ -109,7 +107,7 @@ class ClientsReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة العميل',
+            'Title' => 'تقرير حركة المورد',
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,
@@ -117,17 +115,18 @@ class ClientsReportController extends Controller
             'Logo'  => $company->company_logo,
             'Company' => $company,
             'User'  =>  Auth::user(),
-            'clients' => $client_ids,
+            'clients' => $supplier_ids,
 
         ];
         $title = "My Report";
-        $pdf = PDF::loadView('Admin.reports.clients-trans.clientReport', $data);
+        $pdf = PDF::loadView('Admin.reports.suppliers-trans.supplierReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
 
         return $pdf->stream('medium.pdf');
     }
+    
 
     /**
      * Display the specified resource.

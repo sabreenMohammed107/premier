@@ -134,7 +134,7 @@
 </head>
 
 <body>
-    <hr>
+   
     <div class="body">
         <span>
             <div class="body-page" >
@@ -179,11 +179,11 @@
 
             </div>
         </span>
-
+     
         <div class="content">
 
             @foreach($trans as $rows)
-
+            <hr>
 
             <div class="left">
                 <div dir="rtl" class="company">
