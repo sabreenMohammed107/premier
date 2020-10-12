@@ -71,7 +71,7 @@
 													<div role="menu" class="dropdown-menu animated zoomIn">
 														<a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
 														<a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
-														<a href="#" class="dropdown-item">تقرير حركة موظف</a>
+														<a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
 														<a href="#" class="dropdown-item">تقرير حركة بنك</a>
 														<a href="#" class="dropdown-item">تقرير حركة خزينة </a>
 														<a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
@@ -171,7 +171,7 @@
 											<ul id="democrou" class="collapse dropdown-header-top">
 												<li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
 												<li><a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
+												<li><a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
