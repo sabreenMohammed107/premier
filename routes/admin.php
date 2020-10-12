@@ -20,6 +20,7 @@ Route::namespace('Company')->group(function () {
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
     //Reports   
     //client report
+
     Route::resource('/Admin-client-report', 'Reports\ClientsReportController');
     Route::get('/dynamicCompany-clientReport.fetch', 'Reports\ClientsReportController@companyFetch')->name('dynamicCompany-clientReport.fetch');
 //supplier report
