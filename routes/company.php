@@ -80,6 +80,11 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
     Route::post('/Company/Add/Bank','CompaniesController@AddBank');
     Route::post('/Company/Edit/Bank','CompaniesController@EditBank');
 
+    //Report suppliers
+    Route::get('/Suppliers/Report/Create','Reports\SuppliersReportController@SuppliersReport');
+    Route::get('/Clients/Report/Create','Reports\ClientsReportController@ClientsReport');
+    Route::get('/Items/Report/Create','Reports\ItemsReportController@ItemsReport');
+
     Route::middleware(['HasInvoices'])->group(function () {
          /*
         |*********************** Invoices Partition ****************************|
@@ -112,8 +117,8 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::get('/Invoices/Sales/{inv_id}/View','SalesController@ViewInvoice');
         // Reports
         //Purchasing - Sales
-        Route::get('/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
-        Route::get('/Invoices/Sales/Report/Create','InvoiceReportsController@SalesReport');
+        Route::get('/Invoices/Purchasing/Report/Create','Reports\InvoiceReportsController@PurchasingReport');
+        Route::get('/Invoices/Sales/Report/Create','Reports\InvoiceReportsController@SalesReport');
     });
 
 
@@ -145,8 +150,16 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
          * Cash Reports for Company
          *
          */
-        Route::get('/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
-        Route::get('/Cash/Purchasing/Report/Create','CashReportsController@PaymentsReport');
+        Route::get('/Cash/Sales/Report/Create','Reports\CashReportsController@ReceiptsReport');
+        Route::get('/Cash/Purchasing/Report/Create','Reports\CashReportsController@PaymentsReport');
+        /**
+         *
+         * Permissions reports
+         *
+         */
+        Route::get('/Permissions/Receipt/Report/Create','Reports\PermissionReportsController@ReceiptsReport');
+        Route::get('/Permissions/Payment/Report/Create','Reports\PermissionReportsController@PaymentsReport');
+
 
     });
     Route::middleware(['HasCheques'])->group(function () {
@@ -161,6 +174,8 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
         Route::get('/Cheques/{cash_id}/Delete','ChequesController@Delete');
         Route::post('/Cheques/Create','ChequesController@Create');
         Route::post('/Cheques/Update','ChequesController@Update');
+        Route::get('/Cheques/Report/Create','Reports\ChequesReportsController@ChequesReport');
+
 
     });
 

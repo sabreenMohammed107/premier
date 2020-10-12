@@ -45,7 +45,7 @@
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
                                                 @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null)
-                                                    <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker" id="company_id" data-live-search="true" data-width="100%" tabindex="-1">
+                                                    <select required data-placeholder="Choose a Country..." name="company_id" class="selectpicker" id="company_id" data-live-search="true" data-width="100%" tabindex="-1">
                                                         <option value="" selected disabled>Select</option>
                                                         @foreach ($Companies as $Company)
                                                             <option value="{{$Company->id}}">{{$Company->company_official_name}}</option>
@@ -204,7 +204,7 @@
             $('#company_id').change(function(){
                 $('#firsr_check').prop("checked", true);
                 var Company_id = $('#company_id').val();
-                fetchPersons("{{url('/Cash/Sales/Suppliers')}}",Company_id);
+                fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Suppliers')}}",Company_id);
             });
         </script>
         @endif
@@ -218,11 +218,11 @@
                 debugger;
                 var Company_id = $('#company_id').val();
                 if($('input[name=person_type_id]:checked').val() == 100){
-                    fetchPersons("{{url('/Cash/Sales/Clients')}}",Company_id);
+                    fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Clients')}}",Company_id);
                 }else if($('input[name=person_type_id]:checked').val() == 101){
-                    fetchPersons("{{url('/Cash/Sales/Suppliers')}}",Company_id);
+                    fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Suppliers')}}",Company_id);
                 }else{
-                    fetchPersons("{{url('/Cash/Sales/Employees')}}",Company_id);
+                    fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Employees')}}",Company_id);
                 }
             })
             function fetchPersons(url, compid) {

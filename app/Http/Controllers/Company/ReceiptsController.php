@@ -30,6 +30,7 @@ class ReceiptsController extends Controller
     }
 
     // Add new cash purchasing
+    // /Cash/Sales/Add
     public function Add()
     {
         $id = session('company_id');

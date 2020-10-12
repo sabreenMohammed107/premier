@@ -9,11 +9,17 @@
 |   \Admin
 */
 Route::namespace('Company')->group(function () {
-    Route::get('/Admin/Cash/Sales/Report/Create','CashReportsController@ReceiptsReport');
-    Route::get('/Admin/Cash/Purchasing/Report/Create','CashReportsController@PaymentsReport');
-    Route::get('/Cash/Sales/{type}','ReceiptsController@FetchPerson');
-    Route::get('/Admin/Invoices/Purchasing/Report/Create','InvoiceReportsController@PurchasingReport');
-    Route::get('/Admin/Invoices/Sales/Report/Create','InvoiceReportsController@SalesReport');
+    Route::get('/Admin/Cash/Sales/Report/Create','Reports\CashReportsController@ReceiptsReport');
+    Route::get('/Admin/Cash/Purchasing/Report/Create','Reports\CashReportsController@PaymentsReport');
+    Route::get('/Cash/Sales/Fetch/Persons/{type}','Reports\ReceiptsController@FetchPerson');
+    Route::get('/Admin/Invoices/Purchasing/Report/Create','Reports\InvoiceReportsController@PurchasingReport');
+    Route::get('/Admin/Invoices/Sales/Report/Create','Reports\InvoiceReportsController@SalesReport');
+    Route::get('/Admin/Permissions/Receipt/Report/Create','Reports\PermissionReportsController@ReceiptsReport');
+    Route::get('/Admin/Permissions/Payment/Report/Create','Reports\PermissionReportsController@PaymentsReport');
+    Route::get('/Admin/Cheques/Report/Create','Reports\ChequesReportsController@ChequesReport');
+    Route::get('/Admin/Suppliers/Report/Create','Reports\SuppliersReportController@SuppliersReport');
+    Route::get('/Admin/Clients/Report/Create','Reports\ClientsReportController@ClientsReport');
+    Route::get('/Admin/Items/Report/Create','Reports\ItemsReportController@ItemsReport');
 
 });
 

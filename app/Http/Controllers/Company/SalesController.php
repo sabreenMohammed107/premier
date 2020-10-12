@@ -87,6 +87,7 @@ class SalesController extends Controller
         if($request->ajax()){
             DB::beginTransaction();
             try {
+                return $request;
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 $Inv = $request->invoice;
                 $Inv_items = $request->invoice_items;
@@ -96,7 +97,7 @@ class SalesController extends Controller
                     DB::table('finan_transactions')->insert(
                         ['transaction_type_id' => '105',
                         'transaction_date' => new \DateTime(),
-                        'person_id' => $Person->person_id,
+                        'person_id' => $Inv['person_id'],
                         'person_name'=>$Person->person_name,
                         'person_type_id'=> $Person->person_type_id,
                         'invoice_no'=>$Invoice->serial,
@@ -220,7 +221,7 @@ class SalesController extends Controller
                     $Person = Person::find($Inv['person_id']);
                     $Inv_transaction->update(
                         ['transaction_type_id' => '105',
-                        'person_id' => $Person->person_id,
+                        'person_id' => $Inv['person_id'],
                         'person_name'=>$Person->person_name,
                         'person_type_id'=> $Person->person_type_id,
                         'invoice_no'=>$Invoice->serial,
