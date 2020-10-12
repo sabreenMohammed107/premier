@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
 
-class ClientsReportController extends Controller
+class ClientReportController extends Controller
 {
     
     protected $object;
