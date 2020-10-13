@@ -1551,7 +1551,6 @@
                 "datetime",
                 "time"
             ],
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://opencollective.com/Carbon",
@@ -1563,9 +1562,6 @@
                 }
             ],
             "time": "2020-09-23T08:17:37+00:00"
-=======
-            "time": "2020-10-10T11:06:56+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "nikic/php-parser",
@@ -2507,7 +2503,6 @@
             ],
             "description": "Symfony ErrorHandler Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2523,9 +2518,6 @@
                 }
             ],
             "time": "2020-09-25T08:51:35+00:00"
-=======
-            "time": "2020-10-01T16:21:20+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2735,7 +2727,6 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2751,9 +2742,6 @@
                 }
             ],
             "time": "2020-09-02T16:08:58+00:00"
-=======
-            "time": "2020-10-02T07:34:48+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/http-client-contracts",
@@ -2883,7 +2871,6 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2899,9 +2886,6 @@
                 }
             ],
             "time": "2020-09-13T05:00:26+00:00"
-=======
-            "time": "2020-09-27T14:14:06+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/http-kernel",
@@ -2993,7 +2977,6 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3009,9 +2992,6 @@
                 }
             ],
             "time": "2020-09-27T04:25:44+00:00"
-=======
-            "time": "2020-10-04T07:48:13+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/mime",
@@ -3929,7 +3909,6 @@
                 "uri",
                 "url"
             ],
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3945,9 +3924,6 @@
                 }
             ],
             "time": "2020-09-02T16:08:58+00:00"
-=======
-            "time": "2020-10-01T16:25:17+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/service-contracts",
@@ -4099,7 +4075,6 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4115,9 +4090,6 @@
                 }
             ],
             "time": "2020-09-24T09:40:01+00:00"
-=======
-            "time": "2020-10-02T07:34:48+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/translation-contracts",
@@ -4178,7 +4150,6 @@
                 "interoperability",
                 "standards"
             ],
-<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4194,9 +4165,6 @@
                 }
             ],
             "time": "2020-09-07T11:33:47+00:00"
-=======
-            "time": "2020-09-28T13:05:58+00:00"
->>>>>>> 3a10f7c86f7195b998aeb5586249472a34a6a6ee
         },
         {
             "name": "symfony/var-dumper",
