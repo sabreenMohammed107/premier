@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\Company\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
@@ -34,6 +34,7 @@ class InvoiceReportsController extends Controller
         $Invoice = Invoice::select(DB::raw('serial,return_back_invoice ,return_back_date,invoices.id,invoices.invoice_type,invoices.inv_date,invoices.approved,invoices.invoice_no,invoices.person_id,invoices.person_name,person_types.person_type_name,invoices.company_id,outgoing_type_name,service_type,purchasing_types_name,invoices.total_items_price,invoices.total_items_discount,invoices.total_price_post_discounts,invoices.total_vat,invoices.total_comm_industr_tax,invoices.net_invoice,invoices.notes'))
         ->where('invoice_type','=',0);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+            $id = $request->company_id;
             $Invoice->where('invoices.company_id','=',$request->company_id);
         }else{
             $id = session('company_id');
@@ -76,7 +77,7 @@ class InvoiceReportsController extends Controller
         ->leftjoin('services_types','services_types.id','=','invoices.service_type_id')
         ->leftjoin('outgoing_types','outgoing_types.id','=','invoices.outgoing_type_id')
         ->get();
-        $id = session('company_id');
+        // $id = session('company_id');
         $Company = Company::find($id);
         $data = [
             'Invoices' => $Invoices,
@@ -118,6 +119,7 @@ class InvoiceReportsController extends Controller
         $Invoice = Invoice::select(DB::raw('serial,return_back_invoice ,return_back_date,invoices.id,invoices.invoice_type,invoices.inv_date,invoices.approved,invoices.invoice_no,invoices.person_id,invoices.person_name,person_types.person_type_name,invoices.company_id,outgoing_type_name,service_type,purchasing_types_name,invoices.total_items_price,invoices.total_items_discount,invoices.total_price_post_discounts,invoices.total_vat,invoices.total_comm_industr_tax,invoices.net_invoice,invoices.notes'))
         ->where('invoice_type','=',1);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+            $id = $request->company_id;
             $Invoice->where('invoices.company_id','=',$request->company_id);
         }else{
             $id = session('company_id');
@@ -160,7 +162,7 @@ class InvoiceReportsController extends Controller
         ->leftjoin('services_types','services_types.id','=','invoices.service_type_id')
         ->leftjoin('outgoing_types','outgoing_types.id','=','invoices.outgoing_type_id')
         ->get();
-        $id = session('company_id');
+        // $id = session('company_id');
         $Company = Company::find($id);
         $data = [
             'Invoices' => $Invoices,

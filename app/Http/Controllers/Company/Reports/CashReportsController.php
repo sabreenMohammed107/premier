@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\Company\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\CompanyUser;
@@ -55,6 +55,7 @@ class CashReportsController extends Controller
         ->select(DB::raw('cash_master.cash_amount,cash_master.company_id as id,cash_master.cash_date,cash_master.statement,cash_master.person_name,cash_master.person_id,cash_master.cash_receipt_note,guided_items.guided_item_name,cash_master.confirm,cash_master.approved,cash_master.notes,person_types.person_type_name,cash_master.fund_source,detailed_criterion,persons.company_id as p_comp_id'))
         ->where('cash_master_type','=',1);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+            $id = $request->company_id;
             $Cash->where('cash_master.company_id','=',$request->company_id);
         }else{
             $id = session('company_id');
@@ -92,7 +93,7 @@ class CashReportsController extends Controller
         ->leftjoin('persons','persons.id','=','cash_master.person_id')
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
         ->get();
-        $id = session('company_id');
+        // $id = session('company_id');
         $Company = Company::find($id);
         $data = [
             'Cashes' => $Cashes,
@@ -118,6 +119,7 @@ class CashReportsController extends Controller
         ->select(DB::raw('cash_master.cash_amount,cash_master.company_id as id,cash_master.cash_date,cash_master.statement,cash_master.person_name,cash_master.person_id,cash_master.exit_permission_code,guided_items.guided_item_name,cash_master.confirm,cash_master.approved,cash_master.notes,person_types.person_type_name,cash_master.fund_source,detailed_criterion,persons.company_id as p_comp_id,purchasing_types_name,service_type,outgoing_type_name,cash_master.net_value,cash_master.comm_industr_prof_tax,cash_master.vat_value'))
         ->where('cash_master_type','=',0);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+            $id = $request->company_id;
             $Cash->where('cash_master.company_id','=',$request->company_id);
         }else{
             $id = session('company_id');
@@ -167,7 +169,7 @@ class CashReportsController extends Controller
         ->leftjoin('services_types','services_types.id','=','cash_master.service_type_id')
         ->leftjoin('outgoing_types','outgoing_types.id','=','cash_master.outgoing_type_id')
         ->get();
-        $id = session('company_id');
+        // $id = session('company_id');
         $Company = Company::find($id);
         $data = [
             'Cashes' => $Cashes,

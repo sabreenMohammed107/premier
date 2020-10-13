@@ -120,7 +120,7 @@ class PurchasingController extends Controller
                     DB::table('finan_transactions')->insert(
                         ['transaction_type_id' => '103',
                         'transaction_date' => new \DateTime(),
-                        'person_id' => $Person->person_id,
+                        'person_id' => $Inv['person_id'],
                         'person_name'=>$Person->person_name,
                         'person_type_id'=> $Person->person_type_id,
                         'invoice_no'=>$Invoice->invoice_no,
@@ -327,7 +327,7 @@ class PurchasingController extends Controller
                     $Person = Person::find($Inv['person_id']);
                     $Inv_transaction->update(
                         ['transaction_type_id' => '103',
-                        'person_id' => $Person->person_id,
+                        'person_id' => $Inv['person_id'],
                         'person_name'=>$Person->person_name,
                         'person_type_id'=> $Person->person_type_id,
                         'invoice_no'=>$Invoice->invoice_no,
@@ -442,6 +442,7 @@ class PurchasingController extends Controller
 
             foreach ($InvoiceItems as $key => $Item) {
                 $Item->delete();
+                FinanTransaction::where('inv_item_id','=',$Item->id)->delete();
             }
             $Invoice->delete();
 
@@ -450,7 +451,7 @@ class PurchasingController extends Controller
             }else{
                 $no = $Invoice->invoice_no;
             }
-
+            FinanTransaction::where('inv_id','=',$id)->delete();
             DB::commit();
             return redirect("/Invoices/$type")->with('flash_success', "نجحت عملية حذف الفاتورة رقم : $no");
 

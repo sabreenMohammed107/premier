@@ -75,9 +75,9 @@
 												<a href="#" class="dropdown-item"> إشعارات الخصم</a>
 												<a href="#" class="dropdown-item">تقرير الميزانية  </a>
                                                 <a href="#" class="dropdown-item">تقرير قائمه الدخل </a>
-                                                <a href="#" class="dropdown-item">تقرير أرصدة العملاء  </a>
-												<a href="#" class="dropdown-item">تقرير أرصدة الموردين  </a>
-                                                <a href="#" class="dropdown-item">تقرير الأصناف </a>
+                                                <a href="{{url('/Clients/Report/Create')}}" class="dropdown-item">تقرير أرصدة العملاء  </a>
+												<a href="{{url('/Suppliers/Report/Create')}}" class="dropdown-item">تقرير أرصدة الموردين  </a>
+                                                <a href="{{url('/Items/Report/Create')}}" class="dropdown-item">تقرير الأصناف </a>
 
 
                                                 <!-- <a href="#" class="dropdown-item"> تقرير المقبوضات النقدية </a>
@@ -99,6 +99,9 @@
                                                     <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
                                                     <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
+                                                    <a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a>
+                                                    <a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a>
+                                                    <a href="{{url('/Cheques/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف  - استلام شيكات </a>
                                                     <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
 													</div>
                                                 </li>
@@ -172,7 +175,7 @@
 										<li>
 											<a data-toggle="collapse" data-target="#Charts" href="#">بيانات أساسية <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">تفاصيل الشركة</a></li>
+												<li><a href="{{ url("/Company") }}" class="dropdown-item">تفاصيل الشركة</a></li>
 												<!--<li><a href="#" class="dropdown-item">إضافة خزنة</a></li>
 												<li><a href="#" class="dropdown-item">إضافة بنك</a></li>-->
 											</ul>
@@ -180,11 +183,10 @@
 										<li>
 											<a data-toggle="collapse" data-target="#demoevent" href="#">الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demoevent" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">تفاصيل الشركة</a></li>
-												<li><a href="#" class="dropdown-item">الأصناف</a></li>
-												<li><a href="#" class="dropdown-item">كشف العملاء</a></li>
-												<li><a href="#" class="dropdown-item">كشف الموردين </a></li>
-												<li><a href="#" class="dropdown-item">كشف الموظفين</a></li>
+												<li><a href="{{ url("/Company/Items")}}" class="dropdown-item">الأصناف</a></li>
+												<li><a href="{{ url("/Company/Clients")}}" class="dropdown-item">كشف العملاء</a></li>
+												<li><a href="{{ url("/Company/Suppliers")}}" class="dropdown-item">كشف الموردين </a></li>
+												<li><a href="{{ url("/Company/Employees")}}" class="dropdown-item">كشف الموظفين</a></li>
 												<!-- <li><a href="#" class="dropdown-item">مشتريات</a></li>
 												<li><a href="#" class="dropdown-item">قيود ألية</a></li> -->
 											</ul>
@@ -192,8 +194,8 @@
 										<li>
 											<a data-toggle="collapse" data-target="#demopro" href="#">الخزينة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demopro" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item"> مدفوعات نقدية</a></li>
-												<li><a href="#" class="dropdown-item">مقبوضات نقدية </a></li>
+												<li><a href="{{url('/Cash/Purchasing')}}" class="dropdown-item"> مدفوعات نقدية</a></li>
+												<li><a href="{{url('/Cash/Sales')}}" class="dropdown-item">مقبوضات نقدية </a></li>
 											</ul>
                                         </li>
                                         <li>
@@ -206,7 +208,7 @@
                                         <li>
 											<a data-toggle="collapse" data-target="#demopro" href="#">الشيكات <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demopro" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">  حركة الشيكات</a></li>
+												<li><a href="{{url('/Cheques')}}" class="dropdown-item">  حركة الشيكات</a></li>
 											</ul>
 										</li>
 										<li>
@@ -216,30 +218,35 @@
 												<li><a href="#" class="dropdown-item">تقرير حركة المورد</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
 												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+                                                <li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
+                                                <li><a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a></li>
+                                                <li><a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
+                                                <li><a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a></li>
+                                                <li><a href="{{url('/Cheques/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف  - استلام شيكات </a></li>
+                                                <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+                                                <li><a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a></li>
 											</ul>
 										</li>
 										<li>
 											<a data-toggle="collapse" data-target="#demolibra" href="#"> تقارير الحركات <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demolibra" class="collapse dropdown-header-top">
 												<li><a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a></li>
-												<li><a href="#" class="dropdown-item">تقرير المشتريات </a></li>
-												<li><a href="#" class="dropdown-item">تقرير المبيعات </a></li>
+												<li><a href="{{url('/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات </a></li>
+												<li><a href="{{url('/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات </a></li>
 												<li><a href="#" class="dropdown-item"> إشعارات الخصم</a></li>
 												<li><a href="#" class="dropdown-item">تقرير الميزانية  </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير قائمه الدخل </a></li>
-                                                <li><a href="#" class="dropdown-item">تقرير أرصدة العملاء  </a></li>
-												<li><a href="#" class="dropdown-item">تقرير أرصدة الموردين  </a></li>
-                                                <li><a href="#" class="dropdown-item">تقرير الأصناف </a></li>
+                                                <li><a href="{{url('/Clients/Report/Create')}}" class="dropdown-item">تقرير أرصدة العملاء  </a></li>
+												<li><a href="{{url('/Suppliers/Report/Create')}}" class="dropdown-item">تقرير أرصدة الموردين  </a></li>
+                                                <li><a href="{{url('/Items/Report/Create')}}" class="dropdown-item">تقرير الأصناف </a></li>
 
 
-                                                <li><a href="#" class="dropdown-item"> تقرير المقبوضات النقدية </a></li>
+                                                {{-- <li><a href="#" class="dropdown-item"> تقرير المقبوضات النقدية </a></li>
 												<li><a href="#" class="dropdown-item">تقرير المدفوعات النقدية  </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير إذن صرف نقدية   </a></li>
 												<li><a href="#" class="dropdown-item">تقرير أذونات صرف  - استلام شيكات   </a></li>
-                                                <li><a href="#" class="dropdown-item">تقرير الضريبة على القيمه المضافة </a></li>
+                                                <li><a href="#" class="dropdown-item">تقرير الضريبة على القيمه المضافة </a></li> --}}
 
 
 

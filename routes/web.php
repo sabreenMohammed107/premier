@@ -20,10 +20,15 @@ Auth::routes();
 // Reports
 
 Route::namespace('Company')->group(function(){
-    // Receipts report - Payments report (Fetching)
-    Route::post('/Cash/Sales/Report/Fetch','CashReportsController@FetchReceiptReport');
-    Route::post('/Cash/Purchasing/Report/Fetch','CashReportsController@FetchPaymentReport');
-    Route::post('/Invoice/Purchasing/Report/Fetch','InvoiceReportsController@FetchPurchasingReport');
-    Route::post('/Invoice/Sales/Report/Fetch','InvoiceReportsController@FetchSalesReport');
+    Route::post('/Cash/Sales/Report/Fetch','Reports\CashReportsController@FetchReceiptReport');
+    Route::post('/Cash/Purchasing/Report/Fetch','Reports\CashReportsController@FetchPaymentReport');
+    Route::post('/Invoice/Purchasing/Report/Fetch','Reports\InvoiceReportsController@FetchPurchasingReport');
+    Route::post('/Invoice/Sales/Report/Fetch','Reports\InvoiceReportsController@FetchSalesReport');
+    Route::post('/Permissions/Receipt/Report/Fetch','Reports\PermissionReportsController@FetchReceiptReport');
+    Route::post('/Permissions/Payment/Report/Fetch','Reports\PermissionReportsController@FetchPaymentReport');
+    Route::post('/Cheques/Report/Fetch','Reports\ChequesReportsController@FetchChequesReport');
+    Route::post('/Suppliers/Report/Fetch','Reports\SuppliersReportController@FetchSuppliersReport');
+    Route::post('/Clients/Report/Fetch','Reports\ClientsReportController@FetchClientsReport');
+    Route::post('/Items/Report/Fetch','Reports\ItemsReportController@FetchItemsReport');
 });
 

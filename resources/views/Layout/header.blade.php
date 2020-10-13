@@ -75,6 +75,10 @@
 														<a href="{{route('Admin-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a>
 														<a href="{{route('Admin-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
 														<a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
+														
+                                                        <a href="{{url('/Admin/Clients/Report/Create')}}" class="dropdown-item">تقرير أرصدة العملاء  </a>
+                                                        <a href="{{url('/Admin/Suppliers/Report/Create')}}" class="dropdown-item">تقرير أرصدة الموردين  </a>
+                                                        <a href="{{url('/Admin/Items/Report/Create')}}" class="dropdown-item">تقرير الأصناف </a>
 													</div>
 												</li>
 												<li class="nav-item dropdown res-dis-nn">
@@ -86,9 +90,10 @@
                                                         <a href="{{url('/Admin/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات</a>
                                                         <a href="{{url('/Admin/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير المقبوضات النقدية</a>
 														<a href="{{url('/Admin/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات</a>
-														<a href="#" class="dropdown-item">تقرير إذونات إستلام النقدية</a>
+														<a href="{{url('/Admin/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير إذونات إستلام النقدية</a>
 														<a href="#" class="dropdown-item">إشعارات الخصم</a>
-														<a href="#" class="dropdown-item">تقرير إذن الصرف</a>
+                                                        <a href="{{url('/Admin/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية </a>
+                                                        <a href="{{url('/Admin/Cheques/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف  - استلام شيكات </a>
 													</div>
 												</li>
 												@if (Auth::user()->role_id == 100)

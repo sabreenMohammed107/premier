@@ -313,11 +313,11 @@
         $('input[name=person_type]').change(function() {
             // alert($('input[name=person_type]:checked').val());
             if($('input[name=person_type]:checked').val() == 100){
-                fetchPersons("{{url('/Cash/Sales/Clients')}}","{{session('company_id')}}");
+                fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Clients')}}","{{session('company_id')}}");
             }else if($('input[name=person_type]:checked').val() == 101){
-                fetchPersons("{{url('/Cash/Sales/Suppliers')}}","{{session('company_id')}}");
+                fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Suppliers')}}","{{session('company_id')}}");
             }else if($('input[name=person_type]:checked').val() == 102){
-                fetchPersons("{{url('/Cash/Sales/Employees')}}","{{session('company_id')}}");
+                fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Employees')}}","{{session('company_id')}}");
             }else{
                 $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
                 $('.selectpicker').attr('disabled','disabled');

@@ -12,7 +12,7 @@
         <a href="#"></a> التقارير<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تقرير المدفوعات النقدية </span>
+        <span class="bread-blod"> تقرير إذونات إستلام النقدية  </span>
     </li>
 </ul>
 
@@ -30,12 +30,12 @@
                     <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
 
                 </div>
-            <form action="{{url('/Cash/Purchasing/Report/Fetch')}}" method="post">
+            <form action="{{url('/Cheques/Report/Fetch')}}" method="post">
                 {{ csrf_field() }}
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h4 style="text-align:right">تقرير المدفوعات النقدية</h4>
+                                <h4 style="text-align:right">تقرير إذونات إستلام النقدية </h4>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
@@ -70,11 +70,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" name="exit_permission_code" class="form-control" placeholder="">
+                                                        <input type="text" name="cheque_no" class="form-control" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">رقم إذن الصرف</label>
+                                                    <label class="login2">رقم الشيك</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -98,114 +98,25 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="approved">
-                                                        <label><b> غير معتمد </b></label>
-                                                        <input class="" type="radio" value="1" id="optionsRadios2" name="approved">
-                                                        <label><b> معتمد </b></label>
-                                                        <input class="" type="radio" id="optionsRadios3" value="" name="approved">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
+												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+														<div class="bt-df-checkbox" style="margin-right:-10px;">
+															<input class="" type="radio" value="1" id="optionsRadios1" name="trans_type">
+															<label><b> استلام شيك </b></label>
+															<input class="" type="radio" value="0" id="optionsRadios2" name="trans_type">
+															<label><b> صرف شيك </b></label>
+															<input class="radio-checked" type="radio" value="" checked="" id="optionsRadios3" name="trans_type">
+															<label><b> الكل </b></label>
+														</div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">النوع</label>
+                                                    <label class="login2"><b>نوع الشيك</b></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="fund_source">
-                                                        <label><b> الخزينة </b></label>
-                                                        <input class="" type="radio" value="1" id="optionsRadios2" name="fund_source">
-                                                        <label><b> البنك </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="fund_source">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">السيولة</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="outgoing_type_id">
-                                                        <label><b> خدمات </b></label>
-                                                        <input class="" type="radio" value="100" id="optionsRadios2" name="outgoing_type_id">
-                                                        <label><b> سلعة </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="outgoing_type_id">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">المصروف</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="confirm">
-                                                        <label><b> لم يتم </b></label>
-                                                        <input class="" type="radio" value="1" id="optionsRadios2" name="confirm">
-                                                        <label><b> تم </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="confirm">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">إعتماد</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="100" id="service_type_id" name="service_type_id">
-                                                        <label><b> خدمة </b></label>
-                                                        <input class="" type="radio" value="101" id="optionsRadios2" name="service_type_id">
-                                                        <label><b> توريد </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="service_type_id">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">خدمة</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="purchasing_type_id">
-                                                        <label><b> محلي </b></label>
-                                                        <input class="" type="radio" value="100" id="optionsRadios2" name="purchasing_type_id">
-                                                        <label><b> مستورد </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="purchasing_type_id">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">النوع</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="guided_item_id">
-                                                        <label><b> لم يتم </b></label>
-                                                        <input class="" type="radio" value="1" id="optionsRadios2" name="guided_item_id">
-                                                        <label><b> تم </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="guided_item_id">
-                                                        <label><b> الكل </b></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">بند التوجيه</label>
-                                                </div>
-                                            </div>
+
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <select data-placeholder="Choose a Country..." name="person_id" id="persons" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
-                                                        <option value="" selected disabled>Select</option>
+                                                        <option value="" selected disabled>اختر</option>
                                                         @foreach ($Persons as $Person)
                                                             <option value="{{$Person->id}}">{{$Person->person_name}}</option>
                                                         @endforeach
@@ -220,6 +131,8 @@
                                                         <label><b> موظفين </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios3" name="person_type_id">
                                                         <label><b> عملاء </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios4457" name="person_type_id">
+                                                        <label><b> الكل </b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -271,8 +184,11 @@
                     fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Clients')}}",Company_id);
                 }else if($('input[name=person_type_id]:checked').val() == 101){
                     fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Suppliers')}}",Company_id);
-                }else{
+                }else if($('input[name=person_type_id]:checked').val() == 102){
                     fetchPersons("{{url('/Cash/Sales/Fetch/Persons/Employees')}}",Company_id);
+                }else{
+                    $('#persons').attr('disabled','disabled');
+                    $('#persons').selectpicker('refresh');
                 }
             })
             function fetchPersons(url, compid) {
@@ -283,6 +199,7 @@
                         compid : compid
                     },
                         success:function(data) {
+                            $('#persons').attr('disabled',false);
                             $('#persons').html(data);
                             $('#persons').selectpicker('refresh');
                     },
