@@ -39,8 +39,8 @@
             background: #021625;
             color: #fff;
             float: left;
-
-
+          
+            
         }
 
         .footer {
@@ -134,10 +134,10 @@
 </head>
 
 <body>
-
+   
     <div class="body">
         <span>
-            <div class="body-page">
+            <div class="body-page" >
 
 
                 <htmlpageheader name="page-header" style="height: 200px;
@@ -162,7 +162,7 @@
 
                     <div class="right">
                         <div dir="rtl">
-                            <span><img height="70" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
+                           {{-- <!-- <span><img height="70" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo ?? '')}}" /></span> -->--}}
                         </div>
                     </div>
                     <div class="rep_name">
@@ -174,12 +174,12 @@
                     <div class="footer">
                         <span>{{$Title}}</span>
                     </div>
-
+                
                 </htmlpagefooter>
 
             </div>
         </span>
-
+     
         <div class="content">
 
             @foreach($trans as $rows)
@@ -222,39 +222,28 @@
                         </div>
                         <div class="off_name">
                             <span>
-                                {{$Company->company_official_name}}
+                            {{$rows->company_name}}
                             </span>
                         </div>
                     </span>
                 </div>
-                <div dir="rtl" class="company">
-                    <span>
-                        <div class="name">
-                            <span>اسم العميل :</span>
-                        </div>
-                        <div class="off_name">
-                            <span>
-                                {{$rows->client_name}}
-                            </span>
-                        </div>
-                    </span>
-                </div>
+               
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
                             <span> الرصيد الحالى :</span>
                         </div>
                         <div class="off_name">
-                            <?php
-                            $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('subtractive');
-                            if(!$rows->client_id){
-                                $currentBalance =0;
-                              }
+                        <?php
+                       
+                            $currentBalance = App\Models\FinanTransaction::where('bank_id', $rows->bank_id)->sum('additive') - App\Models\FinanTransaction::where('bank_id', $rows->bank_id)->sum('subtractive');
+                          if(!$rows->bank_id){
+                            $currentBalance =0;
+                          }
+                          ?>
                            
-                           ?>
-
                             <span>
-                                {{$currentBalance}}
+                            {{$currentBalance}} 
                             </span>
                         </div>
                     </span>
@@ -273,7 +262,7 @@
                             <th> الرصيد الحالى</th>
                             <th>نوع الحركة</th>
                             <th>البيان</th>
-
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -291,7 +280,7 @@
                             </td>
                             <td> {{$row->type->transaction_type??''}}</td>
                             <td> {{$row->purch_sales_statement}}</td>
-
+                           
                         </tr>
                         @endforeach
                         </tr>

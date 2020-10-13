@@ -31,6 +31,11 @@ Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
     Route::resource('/Admin-employee-report', 'Reports\EmployeesReportController');
     Route::get('/dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('dynamicCompany-employeeReport.fetch');
 
+    //cash-box report
+    Route::resource('/Admin-cashBox-report', 'Reports\CashBoxReportController');
+     //bank report
+     Route::resource('/Admin-bank-report', 'Reports\BankReportController');
+
     //البيانات الاساسية
     //Basic info
     Route::middleware(['HasBasicInfo'])->group(function () {

@@ -86,7 +86,7 @@ class EmployeesReportController extends Controller
         }
 
 
-        $trans = $trans->get();
+        $trans = $trans->orderBy("transaction_date", "asc")->get();
 
         $filterd_trans = [];
         foreach ($employee_ids as $id) {

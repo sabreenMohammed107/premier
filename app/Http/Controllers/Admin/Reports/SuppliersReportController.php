@@ -85,7 +85,7 @@ class SuppliersReportController extends Controller
         }
 
 
-        $trans = $trans->get();
+        $trans = $trans->orderBy("transaction_date", "asc")->get();
 
         $filterd_trans = [];
         foreach ($supplier_ids as $id) {

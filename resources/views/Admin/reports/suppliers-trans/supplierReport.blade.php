@@ -247,7 +247,10 @@
                         <div class="off_name">
                         <?php
                             $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->supplier_id)->sum('subtractive') - App\Models\FinanTransaction::where('person_id', $rows->supplier_id)->sum('additive');
-                            ?>
+                            if(!$rows->supplier_id){
+                                $currentBalance =0;
+                              }
+                           ?>
                            
                             <span>
                             {{$currentBalance}} 
