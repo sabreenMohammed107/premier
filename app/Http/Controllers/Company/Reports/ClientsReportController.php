@@ -38,7 +38,7 @@ class ClientsReportController extends Controller
         ->groupBy('person_id');
 
         $Supplier = DB::table('persons')
-        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(total_price_post_discounts) as total_sales,persons.person_name, persons.open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
         ->leftJoin('invoices','invoices.person_id','=','persons.id')
         ->leftJoinSub($TotalPay,'finan_transactions',function($join){
             $join->on('finan_transactions.person_id', '=', 'persons.id');

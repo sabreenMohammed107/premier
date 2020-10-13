@@ -12,7 +12,7 @@
         <a href="#"></a> التقارير<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تقرير أرصدة الموردين</span>
+        <span class="bread-blod"> تقرير أرصدة العملاء</span>
     </li>
 </ul>
 
