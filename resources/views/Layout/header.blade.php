@@ -74,7 +74,7 @@
 														<a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
 														<a href="{{route('Admin-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a>
 														<a href="{{route('Admin-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
-														<a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
+														<a href="{{route('Admin-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a>
 														
                                                         <a href="{{url('/Admin/Clients/Report/Create')}}" class="dropdown-item">تقرير أرصدة العملاء  </a>
                                                         <a href="{{url('/Admin/Suppliers/Report/Create')}}" class="dropdown-item">تقرير أرصدة الموردين  </a>
@@ -174,12 +174,7 @@
 										<li>
 											<a data-toggle="collapse" data-target="#democrou" href="#">تقارير الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="democrou" class="collapse dropdown-header-top">
-												<li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
-												<li><a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
-												<li><a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
-												<li><a href="{{route('Admin-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a></li>
-												<li><a href="{{route('Admin-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a></li>
-                                                <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+												
                                                 <li><a href="{{url('/Admin/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية</a></li>
                                                 <li><a href="{{url('/Admin/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات</a></li>
                                                 <li><a href="{{url('/Admin/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات</a></li>
@@ -189,12 +184,12 @@
 										<li>
 											<a data-toggle="collapse" data-target="#demolibra" href="#"> تقارير الحركات <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demolibra" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">تقرير حركة العميل</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة المورد</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+											<li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
+												<li><a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
+												<li><a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
+												<li><a href="{{route('Admin-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a></li>
+												<li><a href="{{route('Admin-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a></li>
+                                                <li><a href="{{route('Admin-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a></li>
 											</ul>
 										</li>
 									</ul>
