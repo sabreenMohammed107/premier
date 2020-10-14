@@ -122,5 +122,10 @@ Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
         Route::get('dynamicYearOpen/fetch', 'YearBalanceController@yearOpen')->name('dynamicYearOpen.fetch');
         Route::get('openYearBalance/fetch', 'YearBalanceController@openYearBalance')->name('openYearBalance.fetch');
         Route::get('cancelBalance/fetch', 'YearBalanceController@cancelBalance')->name('cancelBalance.fetch');
+
+          /*********************==Restrictions==******************* */
+          Route::get('/restrictions', 'RestrictionsController@index')->name('restrictions');
+          Route::get('dynamicRestricCompany/fetch', 'RestrictionsController@fetchYear')->name('dynamicRestricCompany.fetch');
+          Route::get('dynamicRestricYear/fetch', 'RestrictionsController@fetchMonth')->name('dynamicRestricYear.fetch');
     });
 });
