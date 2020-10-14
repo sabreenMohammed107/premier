@@ -77,6 +77,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                     
                                         <div class="modal-footer info-md">
                                             <a href="{{route('users.index')}}">إلغــاء</a>
                                             <button type="submit">حفظ التعديل</button>

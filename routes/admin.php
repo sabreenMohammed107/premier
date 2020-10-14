@@ -50,6 +50,7 @@ Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
         /*********************==user==******************* */
         Route::resource('/users', 'RegisterUsersController');
         Route::get('dynamicdependentCat/fetch', 'RegisterUsersController@fetchCat')->name('dynamicdependentCat.fetch');
+        Route::post('savePrevildge', 'RegisterUsersController@savePrevildge')->name('savePrevildge');
 
         /*********************==guid==******************* */
         Route::resource('/guid-item', 'GuideItemController');
@@ -64,8 +65,12 @@ Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
         /*********************==BalanceAdjust==******************* */
         Route::get('/balance-adjust', 'BalanceAdjustController@index')->name('balance-adjust');
         Route::get('dynamicPerson/fetch', 'BalanceAdjustController@fetchPerson')->name('dynamicPerson.fetch');
+        Route::get('dynamicPersonComp/fetch', 'BalanceAdjustController@dynamicPersonComp')->name('dynamicPersonComp.fetch');
         Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
         Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
+   
+        Route::post('/balance-adjust/store', 'BalanceAdjustController@store')->name('balance-adjust.store');
+   
     });
 
     Route::get('/', 'AllCompaniesController@home');

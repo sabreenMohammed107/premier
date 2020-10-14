@@ -40,6 +40,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
+
+    
     /**
      * The attributes that should be cast to native types.
      *
