@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Auth;
+
 class YearBalanceController extends Controller
 {
     protected $viewName;
@@ -27,7 +29,11 @@ class YearBalanceController extends Controller
     }
     public function index()
     {
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $years = array();
         $company = new Company();
         return view($this->viewName . 'index', compact('companies', 'years', 'company'));

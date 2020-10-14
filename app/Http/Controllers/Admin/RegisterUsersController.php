@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\UserCompany;
 use DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterUsersController extends Controller
 {
@@ -48,7 +49,11 @@ class RegisterUsersController extends Controller
     public function create()
     {
         $roles = Role::all();
-        $companies = Company::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::all();
         return view($this->viewName . 'add', compact('roles', 'companies'));
     }
 
@@ -105,7 +110,11 @@ class RegisterUsersController extends Controller
     {
         $row = User::where('id', '=', $id)->first();
         $roles = Role::all();
-        $companies = Company::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::all();
         // $alls = Company::where('active', 1)->where('id', '!=', 100)->get();
         $exception = $row->company->pluck('id')->toArray();
       
@@ -123,7 +132,11 @@ class RegisterUsersController extends Controller
     {
         $row = User::where('id', '=', $id)->first();
         $roles = Role::all();
-        $companies = Company::all();
+        // $companies = Company::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
         return view($this->viewName . 'edit', compact('row', 'roles', 'companies'));
     }
 

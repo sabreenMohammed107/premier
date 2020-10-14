@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Person;
 use App\Models\FinanTransaction;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class BalanceAdjustController extends Controller
 {
@@ -30,7 +31,11 @@ class BalanceAdjustController extends Controller
 
     public function index()
     {
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $id = 0;
         $suppliers = Person::where('person_type_id', 101)->where('company_id', $id)->where('active', 1)->get();
         return view($this->viewName . 'index', compact('companies'));

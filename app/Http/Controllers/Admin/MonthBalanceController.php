@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BalanceMonth;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 
 class MonthBalanceController extends Controller
 {
@@ -25,7 +26,11 @@ class MonthBalanceController extends Controller
     }
     public function index()
     {
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $months = array();
         return view($this->viewName . 'index', compact('companies', 'months'));
     }

@@ -38,7 +38,11 @@ class EmployeesReportController extends Controller
      */
     public function index()
     {
-        $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
         $employees = [];
         return view($this->viewName . 'create', compact('rows', 'employees'));
     }

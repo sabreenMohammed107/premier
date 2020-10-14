@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Person;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use DB;
@@ -40,13 +41,21 @@ class AllCompaniesController extends Controller
      */
     public function index()
     {
-        $rows = Company::where('active', 1)->where('id','!=',100)->paginate(8);
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->paginate(8);
+        // $rows = Company::where('active', 1)->where('id','!=',100)->paginate(8);
          return view($this->viewName . 'index', compact('rows'));
     }
 
     public function home()
     {
-        $rows = Company::where('active', 1)->paginate(8);
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->paginate(8);
+        // $rows = Company::where('active', 1)->paginate(8);
 
         return view($this->viewName . 'index', compact('rows'));
     }

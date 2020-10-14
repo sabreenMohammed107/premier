@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\GuidedItem;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class CashPurchasingController extends Controller
 {
@@ -34,8 +35,11 @@ class CashPurchasingController extends Controller
      */
     public function index()
     {
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
       
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $company_id=0;
         $rows=CashMaster::where('cash_master_type',0)->where('company_id',$company_id)->orderBy("created_at", "Desc")->get();
         $guided_items=GuidedItem::all();
