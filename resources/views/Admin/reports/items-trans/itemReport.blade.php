@@ -39,8 +39,8 @@
             background: #021625;
             color: #fff;
             float: left;
-
-
+          
+            
         }
 
         .footer {
@@ -134,10 +134,10 @@
 </head>
 
 <body>
-
+   
     <div class="body">
         <span>
-            <div class="body-page">
+            <div class="body-page" >
 
 
                 <htmlpageheader name="page-header" style="height: 200px;
@@ -174,12 +174,12 @@
                     <div class="footer">
                         <span>{{$Title}}</span>
                     </div>
-
+                
                 </htmlpagefooter>
 
             </div>
         </span>
-
+     
         <div class="content">
 
             @foreach($trans as $rows)
@@ -230,11 +230,11 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span>اسم العميل :</span>
+                            <span>اسم المورد :</span>
                         </div>
                         <div class="off_name">
                             <span>
-                                {{$rows->client_name}}
+                                {{$rows->item_arabic_name}}
                             </span>
                         </div>
                     </span>
@@ -245,16 +245,15 @@
                             <span> الرصيد الحالى :</span>
                         </div>
                         <div class="off_name">
-                            <?php
-                            $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $rows->client_id)->sum('subtractive');
-                            if(!$rows->client_id){
+                        <?php
+                            $currentBalance = App\Models\FinanTransaction::where('item_id', $rows->item_id)->sum('additive') - App\Models\FinanTransaction::where('item_id', $rows->item_id)->sum('subtractive');
+                            if(!$rows->supplier_id){
                                 $currentBalance =0;
                               }
-                           
                            ?>
-
+                           
                             <span>
-                                {{$currentBalance}}
+                            {{$currentBalance}} 
                             </span>
                         </div>
                     </span>
@@ -270,10 +269,10 @@
                             <th>رقم الفاتورة</th>
                             <th>مدين</th>
                             <th> دائن</th>
-                            <th> الرصيد الحالى</th>
+                            <th> الرصيد الحالي</th>
                             <th>نوع الحركة</th>
                             <th>البيان</th>
-
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -291,7 +290,7 @@
                             </td>
                             <td> {{$row->type->transaction_type??''}}</td>
                             <td> {{$row->purch_sales_statement}}</td>
-
+                           
                         </tr>
                         @endforeach
                         </tr>

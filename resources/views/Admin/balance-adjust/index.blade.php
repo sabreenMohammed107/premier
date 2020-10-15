@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="sparkline13-list">
-					<form action="{{route('users.store')}}" method="POST" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
+					<form action="{{route('balance-adjust.store')}}" method="POST" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
 						@csrf
 						<div class="sparkline13-hd">
 							<div class="main-sparkline13-hd">
@@ -56,7 +56,7 @@
 											<div class="row">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="input-mark-inner mg-b-22">
-														<input type="date" class="form-control" placeholder="">
+														<input type="date" name="transaction_date" class="form-control" placeholder="">
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -80,7 +80,7 @@
 											</div>
 											<div class="row">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-													<select data-placeholder="Choose a supplier..."  onchange="getSelect()" class="form-control" id="sub" tabindex="-1">
+													<select data-placeholder="Choose a supplier..." name="person_id"  onchange="getSelect()" class="form-control" id="sub" tabindex="-1">
 														<option value="">المورد</option>
 
 													</select>
@@ -108,9 +108,9 @@
 											<div class="row">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="bt-df-checkbox">
-														<input class="radio-checked" type="radio" value="option1" id="optionsRadios1" name="optionsRadios2">
+														<input class="radio-checked" type="radio" value="10" id="optionsRadios1" name="additv">
 														<label><b> زيادة </b></label>
-														<input class="" type="radio" checked="" value="option2" id="optionsRadios2" name="optionsRadios2">
+														<input class="" type="radio" checked="" value="20" id="optionsRadios2" name="additv">
 														<label><b> عجز </b></label>
 													</div>
 												</div>
@@ -121,7 +121,7 @@
 											<div class="row" style="margin-top:5px;">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="input-mark-inner mg-b-22">
-														<input type="number" class="form-control" placeholder="">
+														<input type="number" name="amount" class="form-control" placeholder="">
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -153,11 +153,13 @@
 			if ($(this).val() != '') {
 				var select = $(this).attr("id");
 				var value = $(this).val();
+				var person_id=$('input[name=optionsRadios1]:checked').val();
 				$.ajax({
-					url: "{{route('dynamicPerson.fetch')}}",
+					url: "{{route('dynamicPersonComp.fetch')}}",
 					method: "get",
 					data: {
 						value: value,
+						person_id: person_id,
 					},
 					success: function(result) {
 
@@ -212,7 +214,6 @@
 	function getSelect(){
 		var person=$('#sub').val();
 		var type=$('input[type=radio][name=optionsRadios1]').val();
-		alert(person+type);
 		$.ajax({
 					url: "{{route('getCurrentBalance.fetch')}}",
 					method: "get",
@@ -221,7 +222,6 @@
 						type:type
 					},
 					success: function(result) {
-alert(result);
 						$('#currentBalance').val(result);
 
 					}

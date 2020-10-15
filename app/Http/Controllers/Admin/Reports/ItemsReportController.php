@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Reports;
-
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\FinanTransaction;
+use App\Models\Item;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
 
-class EmployeesReportController extends Controller
+class ItemsReportController extends Controller
 {
     protected $object;
     protected $viewName;
@@ -26,8 +26,8 @@ class EmployeesReportController extends Controller
 
         $this->middleware('auth');
         $this->object = $object;
-        $this->viewName = 'Admin.reports.employees-trans.';
-        $this->routeName = 'Admin-employee-report.';
+        $this->viewName = 'Admin.reports.items-trans.';
+        $this->routeName = 'Admin-client-report.';
 
         $this->message = 'تم حفظ البيانات';
     }
@@ -43,17 +43,17 @@ class EmployeesReportController extends Controller
       
         $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
         // $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
-        $employees = [];
-        return view($this->viewName . 'create', compact('rows', 'employees'));
+        $items = [];
+        return view($this->viewName . 'create', compact('rows', 'items'));
     }
 
     public function companyFetch(Request $request)
     {
 
         $company_id = $request->input('company_id');
-        $employees = Person::where('person_type_id', 102)->where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
+        $items = Item::where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
 
-        return view($this->viewName . 'createTable', compact('employees'))->render();
+        return view($this->viewName . 'createTable', compact('items'))->render();
     }
     /**
      * Show the form for creating a new resource.
@@ -74,13 +74,13 @@ class EmployeesReportController extends Controller
     public function store(Request $request)
     {
         $company_id = $request->input('select_company');
-        $employee_id = $request->input('employee_ids');
-        $employee_ids = explode(",", $employee_id[0]); //convert string to array
+        $item_id = $request->input('item_ids');
+        $item_ids = explode(",", $item_id[0]); //convert string to array
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
         $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id', $employee_ids);
+        $trans = FinanTransaction::whereIn('item_id', $item_ids);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('transaction_date', '>=', Carbon::parse($request->get("from_date")));
@@ -93,13 +93,13 @@ class EmployeesReportController extends Controller
         $trans = $trans->orderBy("transaction_date", "asc")->get();
 
         $filterd_trans = [];
-        foreach ($employee_ids as $id) {
+        foreach ($item_ids as $id) {
             $obj = new Collection();
-            $obj->employee_name = Person::where('id',$id)->first()->person_name;
-            $obj->employee_id = $id;
+            $obj->item_name = Item::where('id',$id)->first()->item_arabic_name;
+            $obj->item_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {
-                if ($objs->person_id == $id) {
+                if ($objs->item_id == $id) {
                     array_push($obj->trans, $objs);
                 }
               
@@ -112,7 +112,7 @@ class EmployeesReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة الموظف',
+            'Title' => 'تقرير حركة الأصناف',
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,
@@ -120,11 +120,11 @@ class EmployeesReportController extends Controller
             'Logo'  => $company->company_logo,
             'Company' => $company,
             'User'  =>  Auth::user(),
-            'clients' => $employee_ids,
+            'clients' => $item_ids,
 
         ];
         $title = "My Report";
-        $pdf = PDF::loadView('Admin.reports.employees-trans.employeeReport', $data);
+        $pdf = PDF::loadView('Admin.reports.items-trans.itemReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;

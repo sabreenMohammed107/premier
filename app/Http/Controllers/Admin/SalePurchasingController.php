@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\GuidedItem;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class SalePurchasingController extends Controller
 {
@@ -35,7 +36,11 @@ class SalePurchasingController extends Controller
     public function index()
     {
         $rows = array();
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         return view($this->viewName . 'index', compact('rows', 'companies'));
     }
     /**

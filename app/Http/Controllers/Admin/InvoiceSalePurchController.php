@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\Person;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceSalePurchController extends Controller
 {
@@ -16,7 +17,11 @@ class InvoiceSalePurchController extends Controller
      */
     public function indexPurch()
     {
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $compid = 0;
        
         $Invoices = Invoice::where('company_id', $compid)->orderBy('id', 'desc')->get();
@@ -40,7 +45,11 @@ class InvoiceSalePurchController extends Controller
         //     ->orderBy('id', 'desc')
         //     ->get();
         $Invoices = Invoice::where('company_id', $compid)->where('invoice_type', 0)->orderBy('id', 'desc')->get();
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
 
         return view('Admin.invoice.indexTable', [
             'companies'   => $companies,
@@ -81,7 +90,11 @@ class InvoiceSalePurchController extends Controller
      */
     public function indexSale()
     {
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         $compid = 0;
 
         $Invoices = Invoice::where('company_id', $compid)->orderBy('id', 'desc')->get();
@@ -98,7 +111,11 @@ class InvoiceSalePurchController extends Controller
         $Company = Company::find($compid);
 
         $Invoices = Invoice::where('company_id', $compid)->where('invoice_type', 1)->orderBy('id', 'desc')->get();
-        $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
 
         return view('Admin.invoice.indexTableSale', [
             'companies'   => $companies,

@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\UserCompany;
 use DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterUsersController extends Controller
 {
@@ -21,17 +22,13 @@ class RegisterUsersController extends Controller
 
     public function __construct(User $object)
     {
-        
+
         $this->middleware('auth');
         $this->object = $object;
         $this->viewName = 'Admin.users.';
         $this->routeName = 'users.';
 
         $this->message = 'تم حفظ البيانات';
-      
-        
-       
-       
     }
     /**
      * Display a listing of the resource.
@@ -40,8 +37,8 @@ class RegisterUsersController extends Controller
      */
     public function index()
     {
-        $rows=User::with('company')->orderBy("created_at", "Desc")->get();
-        return view($this->viewName.'index', compact('rows'));
+        $rows = User::with('company')->orderBy("created_at", "Desc")->get();
+        return view($this->viewName . 'index', compact('rows'));
     }
 
     /**
@@ -51,9 +48,13 @@ class RegisterUsersController extends Controller
      */
     public function create()
     {
-        $roles=Role::all();
-        $companies=Company::all();
-        return view($this->viewName.'add', compact('roles','companies'));
+        $roles = Role::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::all();
+        return view($this->viewName . 'add', compact('roles', 'companies'));
     }
 
     /**
@@ -64,14 +65,14 @@ class RegisterUsersController extends Controller
      */
     public function store(Request $request)
     {
-$company_id=0;
+        $company_id = 0;
         $data = [
-            
+
             'user_name' => $request->input('user_name'),
             'password' => $request->input('password'),
             'notes' => $request->input('notes'),
-            'user_full_name' =>$request->input('user_full_name'),
-            'active'=>$request->input('active')
+            'user_full_name' => $request->input('user_full_name'),
+            'active' => $request->input('active')
 
 
         ];
@@ -85,21 +86,18 @@ $company_id=0;
         }
         DB::transaction(function () use ($data,  $company_id, $request) {
 
-           $user= $this->object::create($data);
-            if ($user && $company_id>0) {
-              
-                    UserCompany::create([
-                        'user_id' => $user->id,
-                        'company_id' => $company_id,
-                    ]);
-               
+            $user = $this->object::create($data);
+            if ($user && $company_id > 0) {
+
+                UserCompany::create([
+                    'user_id' => $user->id,
+                    'company_id' => $company_id,
+                ]);
             }
-            
-            
         });
 
-       
-        return redirect()->route($this->routeName .'index')->with('flash_success', $this->message);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -110,10 +108,18 @@ $company_id=0;
      */
     public function show($id)
     {
-        $row=User::where('id','=',$id)->first();
-        $roles=Role::all();
-        $companies=Company::all();
-        return view($this->viewName.'view', compact('row','roles','companies'));
+        $row = User::where('id', '=', $id)->first();
+        $roles = Role::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $companies = Company::all();
+        // $alls = Company::where('active', 1)->where('id', '!=', 100)->get();
+        $exception = $row->company->pluck('id')->toArray();
+      
+        $alls = Company::whereNotIn('id', $exception)->where('id', '!=', 100)->get();
+        return view($this->viewName . 'view', compact('row', 'roles', 'companies', 'alls'));
     }
 
     /**
@@ -124,10 +130,14 @@ $company_id=0;
      */
     public function edit($id)
     {
-        $row=User::where('id','=',$id)->first();
-        $roles=Role::all();
-        $companies=Company::all();
-        return view($this->viewName.'edit', compact('row','roles','companies'));
+        $row = User::where('id', '=', $id)->first();
+        $roles = Role::all();
+        // $companies = Company::all();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        return view($this->viewName . 'edit', compact('row', 'roles', 'companies'));
     }
 
     /**
@@ -139,18 +149,18 @@ $company_id=0;
      */
     public function update(Request $request, $id)
     {
-        $company_id=0;
+        $company_id = 0;
         $data = [
-            
+
             'user_name' => $request->input('user_name'),
             'password' => $request->input('password'),
             'notes' => $request->input('notes'),
-            'user_full_name' =>$request->input('user_full_name'),
-            'active'=>$request->input('active')
+            'user_full_name' => $request->input('user_full_name'),
+            'active' => $request->input('active')
 
 
         ];
-      
+
         if ($request->input('role_id')) {
 
             $data['role_id'] = $request->input('role_id');
@@ -159,24 +169,19 @@ $company_id=0;
 
             $company_id = $request->input('company_id');
         }
-        DB::transaction(function () use ($data,$id,  $company_id, $request) {
-           
+        DB::transaction(function () use ($data, $id,  $company_id, $request) {
+
             $this->object::findOrFail($id)->update($data);
 
-        //    $user= $this->object::create($data);
-          
-           if ($id && $company_id>0) {
-            $this->object::findOrFail($id)->company()->sync($company_id);
-                    
-                  
-               
+            //    $user= $this->object::create($data);
+
+            if ($id && $company_id > 0) {
+                $this->object::findOrFail($id)->company()->sync($company_id);
             }
-            
-            
         });
 
-       
-        return redirect()->route($this->routeName .'index')->with('flash_success', $this->message);
+
+        return redirect()->route($this->routeName . 'index')->with('flash_success', $this->message);
     }
 
     /**
@@ -185,45 +190,60 @@ $company_id=0;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $Request,$id)
+    public function destroy(Request $Request, $id)
     {
-        
-        $company_id= $Request->input('deleteCompany');
-        $user=User::find($id);
+
+        $company_id = $Request->input('deleteCompany');
+        $user = User::find($id);
         try {
             $user->company()->detach($company_id);
 
             $user->delete();
-          
         } catch (QueryException $q) {
 
             return redirect()->back()->with('flash_danger', 'لايسمح بحذف هذا المستخدم');
         }
 
         return redirect()->route($this->routeName . 'index')->with('flash_success', 'نم حذف المستخدم بنجاح!');
-
-
     }
 
-   
+
     function fetchCat(Request $request)
     {
 
         $value = $request->get('value');
 
-        $data = Role::whereNotIn('id',[100,101,110])->get();
+        $data = Role::whereNotIn('id', [100, 101, 110])->get();
 
-        if($value==100){
-            $data = Role::whereIn('id',[100,101,110])->get();
-
+        if ($value == 100) {
+            $data = Role::whereIn('id', [100, 101, 110])->get();
         }
-    
-            $output = '<option value="" selected="" disabled="">الصلاحيات</option>';
-            foreach ($data as $row) {
 
-                $output .= '<option value="' . $row->id . '">' . $row->role_name . '</option>';
-            }
-        
+        $output = '<option value="" selected="" disabled="">الصلاحيات</option>';
+        foreach ($data as $row) {
+
+            $output .= '<option value="' . $row->id . '">' . $row->role_name . '</option>';
+        }
+
         echo $output;
+    }
+
+    public function savePrevildge(Request $request)
+    {
+        // users_stocks
+        $userId = $request->input('UserPrev');
+        $companies_ids = $request->input('companies_ids');
+        $companies = explode(",", $companies_ids[0]);
+
+
+        $row = User::where('id', '=', $userId)->first();
+        if ($companies) {
+
+            $row->company()->sync($companies);
+        } else {
+            $row->company()->detach();
+        }
+
+        return redirect()->back()->with('flash_success', 'تم التعديل بنجاح !');
     }
 }

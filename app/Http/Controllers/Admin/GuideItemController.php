@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\GuidedItem;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class GuideItemController extends Controller
 {

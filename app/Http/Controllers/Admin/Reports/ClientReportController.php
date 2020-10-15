@@ -39,7 +39,11 @@ class ClientReportController extends Controller
      */
     public function index()
     {
-        $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
+        $user=Auth::user();
+        $exception = $user->company->pluck('id')->toArray();
+      
+        $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        // $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
         $clients = [];
         return view($this->viewName . 'create', compact('rows', 'clients'));
     }
@@ -88,7 +92,7 @@ class ClientReportController extends Controller
         }
 
 
-        $trans = $trans->get();
+        $trans = $trans->orderBy("transaction_date", "asc")->get();
 
         $filterd_trans = [];
         foreach ($client_ids as $id) {

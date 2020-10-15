@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
 
-class EmployeesReportController extends Controller
+class CashBoxReportController extends Controller
 {
     protected $object;
     protected $viewName;
@@ -26,8 +26,8 @@ class EmployeesReportController extends Controller
 
         $this->middleware('auth');
         $this->object = $object;
-        $this->viewName = 'Admin.reports.employees-trans.';
-        $this->routeName = 'Admin-employee-report.';
+        $this->viewName = 'Admin.reports.cashBox-trans.';
+        $this->routeName = 'Admin-cashBox-report.';
 
         $this->message = 'تم حفظ البيانات';
     }
@@ -43,18 +43,10 @@ class EmployeesReportController extends Controller
       
         $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
         // $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
-        $employees = [];
-        return view($this->viewName . 'create', compact('rows', 'employees'));
+
+        return view($this->viewName . 'create', compact('rows'));
     }
 
-    public function companyFetch(Request $request)
-    {
-
-        $company_id = $request->input('company_id');
-        $employees = Person::where('person_type_id', 102)->where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
-
-        return view($this->viewName . 'createTable', compact('employees'))->render();
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -73,14 +65,18 @@ class EmployeesReportController extends Controller
      */
     public function store(Request $request)
     {
-        $company_id = $request->input('select_company');
-        $employee_id = $request->input('employee_ids');
-        $employee_ids = explode(",", $employee_id[0]); //convert string to array
+        $company_id = $request->input('companies_ids');
+        $companies_ids = explode(",", $company_id[0]);
+
+
+
+        $cashBox_id = $request->input('cashBox_ids');
+        $cashBox_ids = explode(",", $cashBox_id[0]); //convert string to array
+
         $from_date = $request->get("from_date");
         $to_date = $request->get("to_date");
-        $company = Company::where('id', $company_id)->first();
 
-        $trans = FinanTransaction::whereIn('person_id', $employee_ids);
+        $trans = FinanTransaction::whereIn('safe_id', $cashBox_ids);
 
         if (!empty($request->get("from_date"))) {
             $trans->where('transaction_date', '>=', Carbon::parse($request->get("from_date")));
@@ -93,16 +89,16 @@ class EmployeesReportController extends Controller
         $trans = $trans->orderBy("transaction_date", "asc")->get();
 
         $filterd_trans = [];
-        foreach ($employee_ids as $id) {
+        foreach ($companies_ids as $id) {
             $obj = new Collection();
-            $obj->employee_name = Person::where('id',$id)->first()->person_name;
-            $obj->employee_id = $id;
+            $obj->company_name = Company::where('id', $id)->first()->company_official_name;
+            $obj->safe_id =Company::where('id', $id)->first()->safe_id;
+            $obj->logo =Company::where('id', $id)->first()->company_logo;
             $obj->trans = array();
             foreach ($trans as $objs) {
-                if ($objs->person_id == $id) {
+                if ($objs->safe_id == Company::where('id', $id)->first()->safe_id) {
                     array_push($obj->trans, $objs);
                 }
-              
             }
             array_push($filterd_trans, $obj);
         }
@@ -112,19 +108,18 @@ class EmployeesReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة الموظف',
+            'Title' => 'تقرير حركة الخزينة',
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,
             'Today' => date('Y-m-d'),
-            'Logo'  => $company->company_logo,
-            'Company' => $company,
+           
             'User'  =>  Auth::user(),
-            'clients' => $employee_ids,
+            
 
         ];
         $title = "My Report";
-        $pdf = PDF::loadView('Admin.reports.employees-trans.employeeReport', $data);
+        $pdf = PDF::loadView('Admin.reports.cashBox-trans.cashBoxReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
