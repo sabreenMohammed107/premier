@@ -30,18 +30,18 @@
                     <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
 
                 </div>
-            <form action="{{url('/Clients/Report/Fetch')}}" method="post">
+            <form target="_blank" action="{{url('/Clients/Report/Fetch')}}" method="post">
                 {{ csrf_field() }}
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd">
-                                <h4 style="text-align:right">تقرير اذن صرف نقدية</h4>
+                                <h4 style="text-align:right">تقرير أرصدة العملاء</h4>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
                             <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
                                 <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                    <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button>
+                                    <button class="btn btn-primary waves-effect waves-light">عرض التقرير </button>
                                 </div>
                                 <div class="form-group-inner" style="margin-right:10px;">
                                     <div class="row" style="text-align:right !important;direction:rtl !important">

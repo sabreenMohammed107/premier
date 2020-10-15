@@ -74,7 +74,7 @@
                                     @endphp
                                        <tr>
                                        <td>{{$i}}</td>
-                                        <td>{{$Invoice->inv_date}}</td>
+                                        <td>{{date('Y-m-d', strtotime($Invoice->inv_date))}}</td>
                                         <td>{{$Invoice->serial}}</td>
                                         <td>
                                             @if ($Invoice->approved == 1)
@@ -83,15 +83,15 @@
                                                 غير معتمد
                                             @endif
                                         </td>
-                                        <td>{{$Invoice->net_invoice}}</td>
+                                        <td>{{$Invoice->net_invoice}}جم</td>
                                         <td>{{$Invoice->outgoing_type_name}}</td>
                                         <td>{{$Invoice->purchasing_types_name}}</td>
                                         <td>{{$Invoice->service_type}}</td>
                                         <td>
                                             <div class="product-buttons">
-                                            <a href="{{ url("/Invoices/Sales/$Invoice->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></ش>
-                                                <a href="{{ url("/Invoices/Sales/$Invoice->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#del{{$Invoice->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            <a href="{{ url("/Invoices/Sales/$Invoice->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" style="color: #fff;" aria-hidden="true"></i></a>
+                                                <a href="{{ url("/Invoices/Sales/$Invoice->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" style="color: #fff;" aria-hidden="true"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#del{{$Invoice->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" style="color: #fff;" aria-hidden="true"></i></a>
                                             </div>
                                         </td>
                                     </tr>

@@ -7,7 +7,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
         <a href="{{ url("/Company/Clients")}}">العملاء</a> <span class="bread-slash"> / </span>
@@ -39,7 +39,7 @@
                 @endslot
             @if($type == 'View' || $type == 'Edit')
             @slot('current')
-                {{$TotalBalance}}
+                {{$ClientTrans->current}}
             @endslot
             @slot('name')
                 {{$Client->person_name}}
@@ -49,6 +49,18 @@
             @endslot
             @slot('tax_card')
                 {{$Client->tax_card}}
+            @endslot
+            @slot('contact_person_name')
+                {{$Client->contact_person_name}}
+            @endslot
+            @slot('contact_person_mobile')
+                {{$Client->contact_person_mobile}}
+            @endslot
+            @slot('website')
+                {{$Client->website}}
+            @endslot
+            @slot('legal_entity')
+                {{$Client->legal_entity}}
             @endslot
             @slot('notes')
                 {{$Client->notes}}
@@ -104,6 +116,11 @@
                             display:none;
                         @endslot
                     @else
+                    @slot('open')
+                            @if ($Open == 1)
+                                disabled
+                            @endif
+                        @endslot
                         @slot('title')
                             تعديل بيانات العميل : {{$Client->person_name}}
                         @endslot

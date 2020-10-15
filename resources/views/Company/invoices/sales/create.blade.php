@@ -199,9 +199,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="total_items_price" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="total_items_price" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -213,9 +217,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="total_items_discount" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="total_items_discount" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -227,9 +235,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="total_vat" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="total_vat" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -241,9 +253,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="total_comm_industr_tax" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="total_comm_industr_tax" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -255,9 +271,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="total_price_post_discounts" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="total_price_post_discounts" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -269,9 +289,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                    <div class="input-mark-inner mg-b-22">
-                                                        <input type="text" id="net_invoice_total" readonly class="form-control" placeholder="">
-                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                                        <div class="input-group">
+                                                          <div class="input-group-addon">جم</div>
+                                                          <input type="text" id="net_invoice_total" readonly class="form-control" placeholder="">
+                                                        </div>
+                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
@@ -312,7 +336,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             <br>
                             <table class="table-striped" id="puchasetable"
                             data-locale="ar-SA"
-                            data-pagination="true"
+                            data-pagination="false"
                             data-pagination-pre-text="السابق"
                             data-pagination-next-text="التالي"
                             data-show-export="true"

@@ -241,6 +241,15 @@ class PersonsController extends Controller
                     'active' => 0,
                 ]);
             }
+            if($request->hasFile('logo')){
+                $extension = $request->logo->extension();
+                $filename = time() . '.' . $extension;
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
+                $request->merge([
+                    'person_logo' => $filename,
+                ]);
+            }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
             return redirect("/Company/Employees")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على الموظف : $request->person_name");
@@ -329,19 +338,44 @@ class PersonsController extends Controller
         ->where([['person_type_id','=',101],['id','=',$id]])->first();
 
         //Current person balance value
-        $TotalBalanceRec = DB::table('finan_transactions')
-            ->select(DB::raw('sum(additive - subtractive) as total'))
-            ->where([['person_id','=',$id],['person_type_id','=',101]])
-            ->first();
-        $TotalBalance = $TotalBalanceRec->total;
+        // $TotalBalanceRec = DB::table('finan_transactions')
+        //     ->select(DB::raw('sum(additive - subtractive) as total'))
+        //     ->where([['person_id','=',$id],['person_type_id','=',101]])
+        //     ->first();
+        // $TotalBalance = $TotalBalanceRec->total;
+
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
+        $SupplierTrans = DB::table('persons')
+        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(total_price_post_discounts) as total_purch,persons.person_name, persons.open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_rec,0) - ifnull(total_pay,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',101],['persons.company_id','=',$compid],['persons.id','=',$id]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->first();
         return view('Company.suppliers.Supplier-all',[
             'type'=>$type,
             'id'=>$id,
             'CompanyId'=>$compid,
             'Supplier'=>$Supplier,
             'Company'=>$Company,
+            'SupplierTrans'=>$SupplierTrans,
             'Open'=>$open,
-            'TotalBalance'=>$TotalBalance,
+            // 'TotalBalance'=>$TotalBalance,
         ]);
     }
 
@@ -520,6 +554,16 @@ class PersonsController extends Controller
         }else{
             //Configure
             //configure checkbox
+            // return $request;
+            if($request->hasFile('logo')){
+                $extension = $request->logo->extension();
+                $filename = time() . '.' . $extension;
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
+                $request->merge([
+                    'person_logo' => $filename,
+                ]);
+            }
             if ($request->active == "on") {
                 $request->merge([
                     'active' => 1,
@@ -529,6 +573,16 @@ class PersonsController extends Controller
                     'active' => 0,
                 ]);
             }
+            if ($request->taxable == "on") {
+                $request->merge([
+                    'taxable' => 1,
+                ]);
+            }else{
+                $request->merge([
+                    'taxable' => 0,
+                ]);
+            }
+
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
             return redirect("/Company/Suppliers")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المورد : $request->person_name");
@@ -618,11 +672,34 @@ class PersonsController extends Controller
         ->where([['person_type_id','=',100],['id','=',$id]])->first();
 
         //Current person balance value
-        $TotalBalanceRec = DB::table('finan_transactions')
-            ->select(DB::raw('sum(additive - subtractive) as total'))
-            ->where([['person_id','=',$id],['person_type_id','=',100]])
-            ->first();
-        $TotalBalance = $TotalBalanceRec->total;
+        // $TotalBalanceRec = DB::table('finan_transactions')
+        //     ->select(DB::raw('sum(additive - subtractive) as total'))
+        //     ->where([['person_id','=',$id],['person_type_id','=',100]])
+        //     ->first();
+        // $TotalBalance = $TotalBalanceRec->total;
+
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
+        $ClientTrans = DB::table('persons')
+        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',100],['persons.company_id','=',$compid],['persons.id','=',$id]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')->first();
 
         return view('Company.clients.Client-all',[
             'type'=>$type,
@@ -631,7 +708,7 @@ class PersonsController extends Controller
             'Client'=>$Client,
             'Company'=>$Company,
             'Open'=>$open,
-            'TotalBalance'=>$TotalBalance,
+            'ClientTrans'=>$ClientTrans,
         ]);
     }
 
@@ -818,9 +895,28 @@ class PersonsController extends Controller
                     'active' => 0,
                 ]);
             }
+            if($request->hasFile('logo')){
+                $extension = $request->logo->extension();
+                $filename = time() . '.' . $extension;
+                $path = public_path('uploads/person');
+                $request->file('logo')->move($path,$filename);
+                $request->merge([
+                    'person_logo' => $filename,
+                ]);
+            }
+
+            if ($request->taxable == "on") {
+                $request->merge([
+                    'taxable' => 1,
+                ]);
+            }else{
+                $request->merge([
+                    'taxable' => 0,
+                ]);
+            }
             //update a record of person from received request
             $Person->update($request->except(['logo','role_name','id','open_balance','open_balance']));
-            return redirect("/Compan/Clients")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على العميل : $request->person_name");
+            return redirect("/Company/Clients")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على العميل : $request->person_name");
         }
 
 

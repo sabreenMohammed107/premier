@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> كشف الموظفين </span>
@@ -60,9 +60,9 @@
                                 <td>{{$Employee->address}}</td>
                                 <td>
                                     <div class="product-buttons">
-                                        <a href="{{ url("/Company/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#Del{{$Employee->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
+                                        <a href="{{ url("/Company/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a href="#" data-toggle="modal" data-target="#Del{{$Employee->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                                     </div>
                                 </td>
                             </tr>

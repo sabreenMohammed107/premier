@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> كشف الموردين </span>
@@ -60,9 +60,9 @@
                                 <td>{{$Supplier->balance_start_date}}</td>
                                 <td>
                                     <div class="product-buttons">
-                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#Del{{$Supplier->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a href="#" data-toggle="modal" data-target="#Del{{$Supplier->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -96,7 +96,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-color-modal bg-color-2">
-                <h4 class="modal-title" style="text-align:right">حذف بيانات الموظف</h4>
+                <h4 class="modal-title" style="text-align:right">حذف بيانات المورد</h4>
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
@@ -104,7 +104,7 @@
             <div class="modal-body">
                 <span class="educate-icon educate-danger modal-check-pro information-icon-pro"> </span>
                 <h2>{{$SupplierModal->person_name}}</h2>
-                <h4>هل تريد حذف جميع بيانات متضمنه كل الحركات الماليه من مدفوعات و مصروفات الموظف ؟  </h4>
+                <h4>هل تريد حذف جميع بيانات متضمنه كل الحركات الماليه من مدفوعات و مصروفات المورد ؟  </h4>
             </div>
             <div class="modal-footer info-md">
                 <a data-dismiss="modal" href="#">إلغــاء</a>

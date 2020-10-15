@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a> {{$Company->company_official_name}}<span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> بيانات الشركة</span>
@@ -26,7 +26,7 @@
 			</div> --}}
 		</nav>
 	</div>
-	<!-- End Left menu area -->
+    <!-- End Left menu area -->
     <!-- Start Welcome area -->
     <div class="all-content-wrapper">
 
@@ -34,8 +34,10 @@
         <div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="row">
-					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 						<div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+
+                        @if (Auth::user()->role_id == 103)
                             <ul id="myTabedu1" class="tab-review-design" style="direction:rtl">
 
                                 <li
@@ -275,9 +277,14 @@
 										</div> --}}
 									</div>
 								</div>
-							</div>
-						</div>
+                            </div>
+
+                            @else
+                                <div style="text-align: right;">لا توجد بيانات للعرض</div>
+                        @endif
+                        </div>
 					</div>
+
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 						<div class="profile-info-inner">
 							<div class="profile-img">
@@ -353,55 +360,57 @@
 											</ul>
 										</div>
 									</div>
-								</div>
-								<div class="row mg-b-15">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="skill-title">
-													<h2>بيانات الخزينة</h2>
-													<hr />
-												</div>
-											</div>
-										</div>
-										<div class="ex-pro">
-                                            @if ($Safe)
-                                            <ul>
-												<li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$Safe->open_balance}}</li>
-												<li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b> {{$Safe->balance_start_date}}</li>
-												<li><i class="fa fa-angle-left"></i> <b>رصيدالخزينه الحالى:</b> {{$SafeTotal}}</li>
-											</ul>
-                                            @else
-                                            لم يتم تسجيل خزينه
-                                            @endif
+                                </div>
+                                @if (Auth::user()->role_id != 103)
+                                    <div class="row mg-b-15">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="skill-title">
+                                                        <h2>بيانات الخزينة</h2>
+                                                        <hr />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ex-pro">
+                                                @if ($Safe)
+                                                <ul>
+                                                    <li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$Safe->open_balance}}</li>
+                                                    <li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b> {{$Safe->balance_start_date}}</li>
+                                                    <li><i class="fa fa-angle-left"></i> <b>رصيدالخزينه الحالى:</b> {{$SafeTotal}}</li>
+                                                </ul>
+                                                @else
+                                                لم يتم تسجيل خزينه
+                                                @endif
 
-										</div>
-									</div>
-								</div>
-								<div class="row mg-b-15">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col-lg-12">
-												<div class="skill-title">
-													<h2>بيانات البنك</h2>
-													<hr />
-												</div>
-											</div>
-										</div>
-										<div class="ex-pro">
-                                            @if ($Bank)
-                                               <ul>
-                                                    <li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$Bank->open_balance}}</li>
-                                                    <li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b> {{$Bank->balance_start_date}}</li>
-                                                    <li><i class="fa fa-angle-left"></i> <b>رصيدالبنك الحالى:</b> {{$BankTotal}}</li>
-											    </ul>
-                                            @else
-                                                لم يتم تسجيل بنك
-                                            @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mg-b-15">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="skill-title">
+                                                        <h2>بيانات البنك</h2>
+                                                        <hr />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ex-pro">
+                                                @if ($Bank)
+                                                   <ul>
+                                                        <li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$Bank->open_balance}}</li>
+                                                        <li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b> {{$Bank->balance_start_date}}</li>
+                                                        <li><i class="fa fa-angle-left"></i> <b>رصيدالبنك الحالى:</b> {{$BankTotal}}</li>
+                                                    </ul>
+                                                @else
+                                                    لم يتم تسجيل بنك
+                                                @endif
 
-										</div>
-									</div>
-								</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
 							</div>
 						</div>
 					</div>

@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+    <a href="{{url('/Company')}}"> {{$Company->company_official_name}}</a><span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> تعديل شركة </span>
@@ -58,19 +58,19 @@
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">البريد الالكترونى</label>
-																	<input tabindex="1" name="email" type="text" class="form-control" value="{{$Company->email}}" placeholder="البريد الالكترونى">
+																	<input tabindex="7" name="email" type="text" class="form-control" value="{{$Company->email}}" placeholder="البريد الالكترونى">
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">2 موبايل</label>
-																	<input name="phone2" tabindex="3" type="text" class="form-control" value="{{$Company->phone2}}" placeholder="موبايل">
+																	<input name="phone2" tabindex="8" type="text" class="form-control" value="{{$Company->phone2}}" placeholder="موبايل">
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">موقع الكترونى</label>
-																	<input name="website" tabindex="5" type="text" class="form-control" value="{{$Company->website}}" placeholder="موقع الكترونى">
+																	<input name="website" tabindex="9" type="text" class="form-control" value="{{$Company->website}}" placeholder="موقع الكترونى">
 																</div>
                                                                 <div class="form-group">
 																	<label class="">هاتف شخص للتواصل</label>
-																	<input name="contact_person_mobile" tabindex="7" type="text" class="form-control" value="{{$Company->contact_person_mobile}}" placeholder="هاتف شخص للتواصل">
+																	<input name="contact_person_mobile" tabindex="10" type="text" class="form-control" value="{{$Company->contact_person_mobile}}" placeholder="هاتف شخص للتواصل">
 																</div>
 																<div class="form-group res-mg-t-15">
 																	<label class="">رقم الملف الضريبى</label>
@@ -78,7 +78,7 @@
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">رئيس مجلس الاداره</label>
-																	<input name="chairman_person_name" tabindex="9" type="text" class="form-control" value="{{$Company->chairman_person_name}}" placeholder="رئيس مجلس الاداره">
+																	<input name="chairman_person_name" tabindex="11" type="text" class="form-control" value="{{$Company->chairman_person_name}}" placeholder="رئيس مجلس الاداره">
 																</div>
                                                                 <div class="form-group">
 																	<label class="">رأس المال</label>
@@ -90,7 +90,7 @@
                                                                     <div id="uploadOne" class="img-upload">
                                                                         <img src="{{ asset('uploads/companies/'.$Company->company_logo)}}" alt="" style="width: 200px;height:150px;border: 1px dashed #CCC;">
                                                                         <div class="upload-icon">
-                                                                            <input type="file" tabindex="11" name="company_logo" class="upload">
+                                                                            <input type="file" tabindex="12" name="company_logo" class="upload">
                                                                             <i class="fa fa-camera"></i>
                                                                         </div>
                                                                     </div>
@@ -126,19 +126,19 @@
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">العنوان</label>
-																	<textarea tabindex="2" name="address" placeholder="العنوان" style="max-height:100px">{{$Company->address}}</textarea>
+																	<textarea tabindex="1" name="address" placeholder="العنوان" style="max-height:100px">{{$Company->address}}</textarea>
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">موبيل 1</label>
-																	<input tabindex="4" name="phone1" type="text" class="form-control" value="{{$Company->phone1}}" placeholder="هاتف">
+																	<input tabindex="2" name="phone1" type="text" class="form-control" value="{{$Company->phone1}}" placeholder="هاتف">
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">فاكس</label>
-																	<input name="fax" tabindex="6" type="text" class="form-control" value="{{$Company->fax}}" placeholder="فاكس">
+																	<input name="fax" tabindex="3" type="text" class="form-control" value="{{$Company->fax}}" placeholder="فاكس">
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">شخص للتواصل</label>
-																	<input tabindex="8" name="contact_person_name" type="text" class="form-control" value="{{$Company->contact_person_name}}" placeholder="شخص للتواصل">
+																	<input tabindex="4" name="contact_person_name" type="text" class="form-control" value="{{$Company->contact_person_name}}" placeholder="شخص للتواصل">
                                                                 </div>
 																<div class="form-group">
 																	<label class="">السجل تجاري</label>
@@ -146,11 +146,11 @@
                                                                 </div>
                                                                 <div class="form-group">
 																	<label class="">ملاحظات</label>
-																	<textarea name="notes" tabindex="10" placeholder="ملاحظات" style="max-height:100px">{{$Company->notes}}</textarea>
+																	<textarea name="notes" tabindex="5" placeholder="ملاحظات" style="max-height:100px">{{$Company->notes}}</textarea>
                                                                 </div>
                                                                 <div class="form-group">
 																	<label>
-                                                                        <input disabled type="checkbox" name="active" class="i-checks"
+                                                                        <input disabled type="checkbox" tabindex="6" name="active" class="i-checks"
                                                                         @if ($Company->active === 1)
                                                                             checked
                                                                         @endif

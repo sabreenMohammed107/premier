@@ -7,7 +7,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
         <a href="{{ url("/Company/Suppliers")}}">الموردين</a> <span class="bread-slash"> / </span>
@@ -55,6 +55,15 @@
             @slot('phone2')
                 {{$Supplier->phone2}}
             @endslot
+            @slot('contact_person_name')
+                {{$Supplier->contact_person_name}}
+            @endslot
+            @slot('contact_person_mobile')
+                {{$Supplier->contact_person_mobile}}
+            @endslot
+            @slot('website')
+                {{$Supplier->website}}
+            @endslot
             @slot('address')
                 {{$Supplier->address}}
             @endslot
@@ -86,8 +95,11 @@
             @slot('commercial_register')
                 {{$Supplier->commercial_register}}
             @endslot
+            @slot('legal_entity')
+                {{$Supplier->legal_entity}}
+            @endslot
             @slot('current')
-                {{$TotalBalance}}
+                {{$SupplierTrans->current}}
             @endslot
             @slot('tax_card')
                 {{$Supplier->tax_card}}
