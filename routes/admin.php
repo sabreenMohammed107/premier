@@ -22,15 +22,12 @@ Route::namespace('Company')->group(function () {
     Route::get('/Admin/Items/Report/Create', 'Reports\ItemsReportController@ItemsReport');
 });
 
-<<<<<<< HEAD
-Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
-    //Reports
-=======
+
 /*
 
 */
 Route::namespace('Admin')->group(function ()  {
-   //Reports   
+   //Reports
     //client report
 
     Route::resource('/Company-client-report', 'Reports\ClientReportController');
@@ -42,7 +39,7 @@ Route::namespace('Admin')->group(function ()  {
     //employee report
     Route::resource('/Company-employee-report', 'Reports\EmployeesReportController');
     Route::get('/Company-dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('Company-dynamicCompany-employeeReport.fetch');
-    
+
     //cash-box report
     Route::resource('/Company-cashBox-report', 'Reports\CashBoxReportController');
     //bank report
@@ -52,8 +49,8 @@ Route::namespace('Admin')->group(function ()  {
 
 
      Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
-    //Reports   
->>>>>>> b4ecf08a895c5f3a8d916f01b46675f3159498fa
+    //Reports
+
     //client report
 
     Route::resource('/Admin-client-report', 'Reports\ClientReportController');
