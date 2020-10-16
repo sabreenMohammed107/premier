@@ -57,7 +57,8 @@ class RestrictionsController extends Controller
 
 
     /***
-     * 
+     * DB::statement('call new_user(?, ?, ?, ?)',["myemail@test.com","mypassword","myname","mysurname"]);
+
      */
     public function fetchMonth(Request $request){
 

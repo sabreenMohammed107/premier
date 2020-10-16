@@ -1,4 +1,4 @@
-@extends('Layout.web')
+@extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? 'Layout.web' : 'Layout.company')
 
 
 
@@ -32,7 +32,8 @@
                        
 
                             <div class="datatable-dashv1-list custom-datatable-overright">
-                            <form action="{{route('Admin-client-report.store')}}" method="post" target="_blank">
+                            <form action="@if(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110){{route('Admin-client-report.store')}}
+                                @else {{route('Company-client-report.store')}} @endif" method="post" target="_blank">
                                 <div class="chosen-select-single mg-b-20" style="direction:rtl;">
 
                                     @csrf
@@ -124,13 +125,14 @@
 
 
             $.ajax({
-                url: "{{route('dynamicCompany-clientReport.fetch')}}",
+                url: "@if(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id ==110){{route('dynamicCompany-clientReport.fetch')}}@else{{route('Company-dynamicCompany-clientReport.fetch')}}@endif",
                 method: "get",
                 data: {
                     company_id: company,
 
                 },
                 success: function(result) {
+                    alert(result);
                     $('#table').bootstrapTable('destroy');
 
                     $('tbody').html(result);

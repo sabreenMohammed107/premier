@@ -55,7 +55,6 @@ class ClientReportController extends Controller
 
         $company_id = $request->input('company_id');
         $clients = Person::where('person_type_id', 100)->where('company_id', $company_id)->where('active', 1)->orderBy("created_at", "Desc")->get();
-
         return view($this->viewName . 'createTable', compact('clients'))->render();
     }
     /**
@@ -126,6 +125,7 @@ class ClientReportController extends Controller
 
         ];
         $title = "My Report";
+     
         $pdf = PDF::loadView('Admin.reports.clients-trans.clientReport', $data);
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
