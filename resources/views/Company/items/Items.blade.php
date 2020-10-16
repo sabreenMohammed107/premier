@@ -11,7 +11,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> عرض الأصناف</span>
@@ -26,29 +26,37 @@
 <div class="courses-area">
     <div class="container-fluid">
     <a href="{{url("/Company/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة صنف</a>
-        <div class="row mg-b-15" id="item">
+        <div class="row mg-b-15" id="item" style="direction:rtl;text-align:right;">
             @foreach ($Items as $Item)
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;float:right">
                 <div class="courses-inner res-mg-b-30">
                     <div style="text-align: center;">
+                        @if ($Item->item_image)
                         <img src="{{ asset("/uploads/item/$Item->item_image")}}" style="height:200px;">
+                        @else
+<img src="{{ asset('webassets/img/default.png')}}" style="height:200px;">
+                        @endif
                     </div>
                     <div class="courses-title">
                         <h2>{{$Item->item_arabic_name}}</h2>
                     </div>
-                    <div class="courses-title" style="text-align: left;">
+                    {{-- <div class="courses-title" style="text-align: left;">
                         <h2>{{$Item->item_english_name}}</h2>
-                    </div>
+                    </div> --}}
                     <div class="course-des">
                         <p><span><i class="fa fa-clock"></i></span> <b>الكود:</b> {{$Item->item_code}}</p>
-                        <p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> {{$Item->balance_start_date}}</p>
-                        <p><span><i class="fa fa-clock"></i></span> <b>الرصيد الافتتاحي:</b> {{$Item->total_open_balance_cost}}</p>
-                        <p><span><i class="fa fa-clock"></i></span> <b>رصيد المخزن الحالى:</b> {{$Item->current_total}}</p>
+                        @if ($Item->balance_start_date)
+                        <p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> {{date('Y-m-d', strtotime($Item->balance_start_date))}}</p>
+                        @else
+                        <p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> لم يتم تحديد تاريخ</p>
+                        @endif
+                        <p><span><i class="fa fa-clock"></i></span> <b> الرصيد الإفتتاحى تكلفة :</b> {{$Item->total_open_balance_cost}}</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b> الرصيد الحالى تكلفة :</b> {{$Item->current_total}}</p>
                     </div>
                     <div class="product-buttons">
-                    <a href="{{url("/Company/Items/$Item->id/View")}}" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                        <a href="{{url("/Company/Items/$Item->id/Edit")}}" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#del{{$Item->id}}" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a href="{{url("/Company/Items/$Item->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a href="{{url("/Company/Items/$Item->id/Edit")}}" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#del{{$Item->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

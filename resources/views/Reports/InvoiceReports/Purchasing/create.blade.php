@@ -30,7 +30,7 @@
                     <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
 
                 </div>
-            <form action="{{url('/Invoice/Purchasing/Report/Fetch')}}" method="post">
+            <form target="_blank" action="{{url('/Invoice/Purchasing/Report/Fetch')}}" method="post">
                 {{ csrf_field() }}
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
@@ -100,11 +100,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="approved">
+                                                        <input class="" type="radio" value="0" id="optionsRadios1" name="approved">
                                                         <label><b> غير معتمد </b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadios2" name="approved">
                                                         <label><b> معتمد </b></label>
-                                                        <input class="" type="radio" id="optionsRadios3" value="" name="approved">
+                                                        <input class="radio-checked" type="radio" checked="" id="optionsRadios3" value="" name="approved">
                                                         <label><b> الكل </b></label>
                                                     </div>
                                                 </div>
@@ -115,13 +115,13 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="outgoing_type_id">
+                                                        <input class="" type="radio" value="101" id="optionsRadios1" name="outgoing_type_id">
                                                         <label><b> خدمات </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios2" name="outgoing_type_id">
                                                         <label><b> سلعة </b></label>
                                                         <input class="" type="radio" value="102" id="optionsRadios3" name="outgoing_type_id">
                                                         <label><b> الات و معدات </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="outgoing_type_id">
+                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="outgoing_type_id">
                                                         <label><b> الكل </b></label>
                                                     </div>
                                                 </div>
@@ -132,11 +132,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="100" id="service_type_id" name="service_type_id">
+                                                        <input class="" type="radio" value="100" id="service_type_id" name="service_type_id">
                                                         <label><b> خدمة </b></label>
                                                         <input class="" type="radio" value="101" id="optionsRadios2" name="service_type_id">
                                                         <label><b> توريد </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="service_type_id">
+                                                        <input class="radio-checked" type="radio" checked="" value="" id="optionsRadios3" name="service_type_id">
                                                         <label><b> الكل </b></label>
                                                     </div>
                                                 </div>
@@ -147,11 +147,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadiosx1" name="return_back_invoice">
+                                                        <input class="" type="radio" value="0" id="optionsRadiosx1" name="return_back_invoice">
                                                         <label><b> فاتورة </b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadiosx2" name="return_back_invoice">
                                                         <label><b> مرتد </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadiosx3" name="return_back_invoice">
+                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadiosx3" name="return_back_invoice">
                                                         <label><b> الكل </b></label>
                                                     </div>
                                                 </div>
@@ -162,11 +162,11 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="purchasing_type_id">
+                                                        <input class="" type="radio" value="101" id="optionsRadios1" name="purchasing_type_id">
                                                         <label><b> محلي </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios2" name="purchasing_type_id">
                                                         <label><b> مستورد </b></label>
-                                                        <input class="" type="radio" value="" id="optionsRadios3" name="purchasing_type_id">
+                                                        <input class="radio-checked" type="radio" value="" checked="" id="optionsRadios3" name="purchasing_type_id">
                                                         <label><b> الكل </b></label>
                                                     </div>
                                                 </div>

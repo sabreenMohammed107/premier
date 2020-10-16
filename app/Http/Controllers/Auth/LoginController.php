@@ -76,7 +76,7 @@ class LoginController extends Controller
         if (!isset($user)) {
             return false;
         }
-        if($user->role_id != 100 || $user->rol_id != 101){
+        if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
             $UserCompany = DB::table('users')
             ->join('user_companies','user_companies.user_id','=','users.id')
             ->where('users.id','=',$user->id)->first();
@@ -87,6 +87,22 @@ class LoginController extends Controller
         Auth::login($user);
 
         return true;
+    }
+
+    /**
+     * The user has been authenticated.
+     * Method copied from "Illumunate\Foundation\Auth\AuthenticateUsers.php"
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
+            return redirect('/Company');
+        }else{
+            return redirect('/');
+        }
     }
 
     public function logout(Request $request)

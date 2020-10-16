@@ -7,7 +7,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="{{url('/Company')}}"> الرئيسية</a><span class="bread-slash"> / </span>
     </li>
     <li>
         <a href="{{ url("/Company/Employees")}}">الموظفين</a> <span class="bread-slash"> / </span>
@@ -43,6 +43,9 @@
             @endslot
             @slot('name')
                 {{$Employee->person_name}}
+            @endslot
+            @slot('notes')
+                {{$Employee->notes}}
             @endslot
             @slot('nick_name')
                 {{$Employee->person_nick_name}}
