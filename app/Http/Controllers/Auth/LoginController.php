@@ -69,7 +69,6 @@ class LoginController extends Controller
     //to login without inception
     protected function attemptLogin(Request $request)
     {
-
         $user = User::where('user_name', $request->user_name)
             ->where('password', $request->password)
             ->first();
@@ -84,7 +83,11 @@ class LoginController extends Controller
             Session::put('company_id', $UserCompany->company_id);
         }
 
-        Auth::login($user);
+        if ($request->remember) {
+            Auth::login($user,true);
+        }else{
+            Auth::login($user);
+        }
 
         return true;
     }

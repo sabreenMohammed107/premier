@@ -96,7 +96,7 @@
 														<a href="{{url('/Admin/Cheques/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف - استلام شيكات </a>
 													</div>
 												</li>
-												@if (Auth::user()->role_id == 100)
+												@if (Auth::user()->role_id == 100 || Auth::user()->role_id == 110)
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الترصيد </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
@@ -116,7 +116,7 @@
 														<a href="{{route('restrictions')}}" class="dropdown-item">قيود ألية</a>
 													</div>
 												</li>
-												@if (Auth::user()->role_id == 100)
+												@if (Auth::user()->role_id == 100 || Auth::user()->role_id == 110)
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> بيانات أساسية </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">

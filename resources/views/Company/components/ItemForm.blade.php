@@ -4,23 +4,21 @@
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <div class="profile-info-inner">
             <div class="profile-img">
-                <img src="{{ asset("/uploads/item/$image") }}" alt="" />
+                {{-- <img src="{{ asset("/uploads/item/$image") }}" alt="" /> --}}
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="review-content-section">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="direction:rtl"">
-                                <div class="file-upload-inner ts-forms mg-b-15">
-                                    <div class="input prepend-big-btn">
-                                        <label class="icon-right" for="prepend-big-btn">
-                                            <i class="fa fa-download"></i>
-                                        </label>
-                                        <div class="file-button">
-                                             تحميل صورة
+                                <div class="form-group alert-up-pd">
+                                    <label class=""> تحميل صورة</label>
+                                    <div id="uploadOne" class="img-upload">
+                                        <img src="{{ asset("/uploads/item/$image") }}" {{$disabled ?? ''}} alt="" style="width: 100%;height:250px;border: 1px dashed #CCC;">
+                                        <div class="upload-icon">
                                             <input type="file" name="logo" {{$disabled ?? ''}} onchange="document.getElementById('prepend-big-btn').value = this.value;">
+                                            <i class="fa fa-camera"></i>
                                         </div>
-                                        <input type="text" id="prepend-big-btn" placeholder="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -63,10 +61,18 @@
                                                     <input name="total_open_balance_qty" {{$disabled ?? ''}} {{$open ?? ''}}  value="{{$total_open_balance_qty ?? ''}}" type="text" class="form-control" placeholder="الرصيد الافتتاحي لعدد القطع">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="address">الرصيد الحالى</label>
-                                                    <input name="total_open_balance_cost" disabled value="{{$total_open_balance_cost ?? ''}}" type="text" class="form-control" placeholder="الرصيد الحالى">
+                                                        <label class="address">الرصيد الافتتاحي تكلفة</label>
+                                                    <input name="total_open_balance_cost" {{$disabled ?? ''}} {{$open ?? ''}} value="{{$total_open_balance_cost ?? ''}}" type="text" class="form-control" placeholder="الرصيد الحالى">
                                                     </div>
-
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        <label class=""> سعر القطعة الحالي</label>
+                                                    <input name="open_item_price" disabled {{$open ?? ''}}  value="{{$open_item_price ?? ''}}" type="text" class="form-control" placeholder="الرصيد الافتتاحي لسعر القطعة">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="address">الرصيد الحالى</label>
+                                                    <input name="total_current_balance_cost" disabled value="{{$total_current_balance_cost ?? ''}}" type="text" class="form-control" placeholder="الرصيد الحالى">
+                                                    </div>
 
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="direction:rtl">

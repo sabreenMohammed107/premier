@@ -69,6 +69,10 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الحركات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
+                                                        @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                        <a href="#" class="dropdown-item">تقرير حركة بنك</a>
+                                                        <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
+                                                        @endif
                                                     <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
 												<a href="{{url('/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات </a>
 												<a href="{{url('/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات </a>
@@ -95,8 +99,6 @@
                                                     <a href="#" class="dropdown-item">تقرير حركة العميل</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة المورد</a>
                                                     <a href="#" class="dropdown-item">تقرير حركة موظف</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة بنك</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
                                                     <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a>

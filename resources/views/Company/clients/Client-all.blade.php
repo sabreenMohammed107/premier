@@ -14,9 +14,11 @@
     </li>
     <li>
     <span class="bread-blod">
-        @isset($Client->person_name)
+        @if(isset($Client->person_name))
         {{$Client->person_name}}
-        @endisset
+        @else
+        أضافة جديد
+        @endif
     </span>
     </li>
 </ul>

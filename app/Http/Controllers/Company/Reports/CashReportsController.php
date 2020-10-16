@@ -18,7 +18,7 @@ class CashReportsController extends Controller
     public function ReceiptsReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
             $Persons = DB::table('persons')->where([['person_type_id','=',101]])->get();
         } else {
@@ -35,7 +35,7 @@ class CashReportsController extends Controller
     public function PaymentsReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
             $Persons = DB::table('persons')->where([['person_type_id','=',101]])->get();
         } else {
@@ -54,7 +54,7 @@ class CashReportsController extends Controller
         $Cash = DB::table('cash_master')
         ->select(DB::raw('cash_master.cash_amount,cash_master.company_id as id,cash_master.cash_date,cash_master.statement,cash_master.person_name,cash_master.person_id,cash_master.cash_receipt_note,guided_items.guided_item_name,cash_master.confirm,cash_master.approved,cash_master.notes,person_types.person_type_name,cash_master.fund_source,detailed_criterion,persons.company_id as p_comp_id'))
         ->where('cash_master_type','=',1);
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Cash->where('cash_master.company_id','=',$request->company_id);
         }else{
@@ -118,7 +118,7 @@ class CashReportsController extends Controller
         $Cash = DB::table('cash_master')
         ->select(DB::raw('cash_master.cash_amount,cash_master.company_id as id,cash_master.cash_date,cash_master.statement,cash_master.person_name,cash_master.person_id,cash_master.exit_permission_code,guided_items.guided_item_name,cash_master.confirm,cash_master.approved,cash_master.notes,person_types.person_type_name,cash_master.fund_source,detailed_criterion,persons.company_id as p_comp_id,purchasing_types_name,service_type,outgoing_type_name,cash_master.net_value,cash_master.comm_industr_prof_tax,cash_master.vat_value'))
         ->where('cash_master_type','=',0);
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Cash->where('cash_master.company_id','=',$request->company_id);
         }else{

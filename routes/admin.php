@@ -23,7 +23,7 @@ Route::namespace('Company')->group(function () {
 });
 
 Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
-    //Reports   
+    //Reports
     //client report
 
     Route::resource('/Admin-client-report', 'Reports\ClientReportController');
@@ -68,9 +68,9 @@ Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
         Route::get('dynamicPersonComp/fetch', 'BalanceAdjustController@dynamicPersonComp')->name('dynamicPersonComp.fetch');
         Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
         Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
-   
+
         Route::post('/balance-adjust/store', 'BalanceAdjustController@store')->name('balance-adjust.store');
-   
+
     });
 
     Route::get('/', 'AllCompaniesController@home');

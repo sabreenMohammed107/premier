@@ -7,16 +7,18 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+    <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/Items")}}">العملاء</a> <span class="bread-slash"> / </span>
+        <a href="{{ url("/Company/Items")}}">الاصناف</a> <span class="bread-slash"> / </span>
     </li>
     <li>
     <span class="bread-blod">
-        @isset($Item->person_name)
-        {{$Item->person_name}}
-        @endisset
+        @if(isset($Item->item_arabic_name))
+        {{$Item->item_arabic_name}}
+        @else
+        أضافة جديد
+        @endif
     </span>
     </li>
 </ul>
@@ -39,6 +41,9 @@
                 @endslot
             @if($type == 'View' || $type == 'Edit')
             @slot('total_open_balance_cost')
+                {{$Item->total_open_balance_cost}}
+            @endslot
+            @slot('total_current_balance_cost')
                 {{$TotalBalance}}
             @endslot
             @slot('item_code')

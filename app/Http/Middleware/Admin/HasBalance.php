@@ -16,7 +16,7 @@ class HasBalance
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 100){
+        if(Auth::user()->role_id != 100 || Auth::user()->role_id != 110){
             return redirect("/")->with('flash_info', " قسم الترصيد ليس تابع لصلاحياتك");
         }
         return $next($request);
