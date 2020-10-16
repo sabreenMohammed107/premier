@@ -22,7 +22,32 @@ Route::namespace('Company')->group(function () {
     Route::get('/Admin/Items/Report/Create', 'Reports\ItemsReportController@ItemsReport');
 });
 
-Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
+/*
+
+*/
+Route::namespace('Admin')->group(function ()  {
+   //Reports   
+    //client report
+
+    Route::resource('/Company-client-report', 'Reports\ClientReportController');
+    Route::get('/Company-dynamicCompany-clientReport.fetch', 'Reports\ClientReportController@companyFetch')->name('Company-dynamicCompany-clientReport.fetch');
+    //supplier report
+    Route::resource('/Company-supplier-report', 'Reports\SuppliersReportController');
+    Route::get('/Company-dynamicCompany-supplierReport.fetch', 'Reports\SuppliersReportController@companyFetch')->name('Company-dynamicCompany-supplierReport.fetch');
+
+    //employee report
+    Route::resource('/Company-employee-report', 'Reports\EmployeesReportController');
+    Route::get('/Company-dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('Company-dynamicCompany-employeeReport.fetch');
+    
+    //cash-box report
+    Route::resource('/Company-cashBox-report', 'Reports\CashBoxReportController');
+    //bank report
+    Route::resource('/Company-bank-report', 'Reports\BankReportController');
+
+});
+
+
+     Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
     //Reports   
     //client report
 

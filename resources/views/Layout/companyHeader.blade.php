@@ -92,11 +92,11 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الشركة  </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                    <a href="#" class="dropdown-item">تقرير حركة العميل</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة المورد</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة موظف</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة بنك</a>
-                                                    <a href="#" class="dropdown-item">تقرير حركة خزينة </a>
+													<a href="{{route('Company-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
+														<a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
+														<a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
+														<a href="{{route('Company-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a>
+														<a href="{{route('Company-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
                                                     <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a>
@@ -214,11 +214,11 @@
 										<li>
 											<a data-toggle="collapse" data-target="#democrou" href="#">تقارير الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="democrou" class="collapse dropdown-header-top">
-												<li><a href="#" class="dropdown-item">تقرير حركة العميل</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة المورد</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة موظف</a></li>
-												<li><a href="#" class="dropdown-item">تقرير حركة بنك</a></li>
-                                                <li><a href="#" class="dropdown-item">تقرير حركة خزينة </a></li>
+											<li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
+												<li><a href="{{route('Admin-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
+												<li><a href="{{route('Admin-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
+												<li><a href="{{route('Admin-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a></li>
+												<li><a href="{{route('Admin-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a></li>
                                                 <li><a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a></li>
                                                 <li><a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
                                                 <li><a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a></li>
