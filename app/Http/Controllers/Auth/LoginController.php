@@ -76,7 +76,7 @@ class LoginController extends Controller
         if (!isset($user)) {
             return false;
         }
-        dd($user);
+        
         if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
             $UserCompany = DB::table('users')
             ->join('user_companies','user_companies.user_id','=','users.id')
