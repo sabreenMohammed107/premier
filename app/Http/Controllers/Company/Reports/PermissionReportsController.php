@@ -11,6 +11,10 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class PermissionReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //
     public function ReceiptsReport()
     {

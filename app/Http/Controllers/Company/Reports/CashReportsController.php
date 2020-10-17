@@ -15,6 +15,11 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class CashReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function ReceiptsReport()
     {
         $id = session('company_id');

@@ -10,6 +10,10 @@ use App\Models\Person;
 
 class PersonsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /*
     Employee functions

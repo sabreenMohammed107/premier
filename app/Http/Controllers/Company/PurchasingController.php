@@ -16,6 +16,11 @@ use stdClass;
 
 class PurchasingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function Invoices()
     {
         //Define user's company id

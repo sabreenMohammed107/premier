@@ -11,6 +11,12 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class SuppliersReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function SuppliersReport()
     {
         $id = session('company_id');
