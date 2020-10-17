@@ -74,7 +74,7 @@
 														<a href="{{route('Company-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
                                                         @endif
                                                         @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
-                                                        <a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
+                                                        <a href="{{route('Company-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
                                                         <a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
 														<a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
                                                         <a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a>
