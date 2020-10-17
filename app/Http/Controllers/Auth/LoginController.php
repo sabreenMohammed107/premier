@@ -101,7 +101,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
+        if($user->role_id != 100 && $user->rol_id != 101 && $user->role_id != 110){
             return redirect('/Company');
         }else{
             return redirect('/');
