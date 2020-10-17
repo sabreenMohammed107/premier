@@ -40,6 +40,9 @@ class SalePurchasingController extends Controller
         $exception = $user->company->pluck('id')->toArray();
       
         $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
         return view($this->viewName . 'index', compact('rows', 'companies'));
     }
