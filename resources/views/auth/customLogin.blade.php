@@ -28,7 +28,7 @@
 										<input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
 										<span class="help-block small">Yur strong password</span>
 									</div>
-									<div class="form-group" style="padding: 0px 25px;">
+									<div class="form-group" style="padding: 0px 25px; ">
                                         <div class="checkbox login-checkbox">
                                             <label>
                                                 <input type="checkbox" name="remember" id="remember" class="i-checks"> Remember me
