@@ -11,10 +11,15 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ClientsReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function ClientsReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
         } else {
             $Companies = Company::where('id','=',$id)->get();
@@ -47,7 +52,7 @@ class ClientsReportController extends Controller
             $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
         })
         ->where('person_type_id','=',100);
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Supplier->where('persons.company_id','=',$request->company_id);
         }else{

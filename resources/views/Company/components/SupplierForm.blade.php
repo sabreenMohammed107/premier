@@ -161,7 +161,7 @@
                                                     <div></div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="direction:rtl">
                                                         <div class="form-group">
-                                                            <label class="alert alert-danger" style="color: red;"> في حالة الدائن نضع الرصيد الافتتاحي -6000</label>
+                                                            <label class="alert alert-danger" style="color: red;"> في حالة المدين نضع الرصيد الافتتاحي مثال -6000</label>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class=""> رصيد المورد الحالي</label>

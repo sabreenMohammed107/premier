@@ -10,6 +10,10 @@ use App\Models\Person;
 
 class PersonsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /*
     Employee functions
@@ -18,12 +22,36 @@ class PersonsController extends Controller
     public function Employees()
     {
         $id = session('company_id');
-        $Employees = DB::table('persons')
-        ->where([['company_id','=',$id],['person_type_id','=',102]])->get();
+        // $Employees = DB::table('persons')
+        // ->where([['company_id','=',$id],['person_type_id','=',102]])->get();
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
+        $EmployeeTrans = DB::table('persons')
+        ->select(DB::raw('person_logo ,active,ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',102],['persons.company_id','=',$id]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->get();
         // return $Employees;
         return view('Company.employees.Employees',[
-            'Employees'=>$Employees,
-            'id'=>$id
+            // 'Employees'=>$Employees,
+            'id'=>$id,
+            'EmployeeTrans'=>$EmployeeTrans,
         ]);
     }
 
@@ -57,24 +85,48 @@ class PersonsController extends Controller
             $open=0;
         }
         //Current employee perfo
+        // $Employee = DB::table('persons')
+        // ->where([['person_type_id','=',102],['id','=',$id]])->first();
+
+        // //Current person balance value
+        // $TotalBalanceRec = DB::table('finan_transactions')
+        //     ->select(DB::raw('sum(additive - subtractive) as total'))
+        //     ->where([['person_id','=',$id],['person_type_id','=',102]])
+        //     ->first();
+        // $TotalBalance = $TotalBalanceRec->total;
+        //Current employee perfo
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
         $Employee = DB::table('persons')
-        ->where([['person_type_id','=',102],['id','=',$id]])->first();
-
-        //Current person balance value
-        $TotalBalanceRec = DB::table('finan_transactions')
-            ->select(DB::raw('sum(additive - subtractive) as total'))
-            ->where([['person_id','=',$id],['person_type_id','=',102]])
-            ->first();
-        $TotalBalance = $TotalBalanceRec->total;
-
+        ->select(DB::raw('person_logo ,persons.notes,person_nick_name,persons.registeration_no ,phone2 ,address ,tax_authority ,email ,balance_start_date,active,ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',102],['persons.id','=',$id],['persons.company_id','=',$compid]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->first();
         return view('Company.employees.Employee-all',[
             'type'=>$type,
             'id'=>$id,
             'CompanyId'=>$compid,
-            'Employee'=>$Employee,
+            // 'Employee'=>$Employee,
             'Company'=>$Company,
             'Open'=>$open,
-            'TotalBalance'=>$TotalBalance,
+            // 'TotalBalance'=>$TotalBalance,
+            'Employee'=>$Employee,
         ]);
     }
 
@@ -294,12 +346,36 @@ class PersonsController extends Controller
     {
         $id = session('company_id');
         //All Company suppliers
-        $Suppliers = DB::table('persons')
-        ->where([['company_id','=',$id],['person_type_id','=',101]])->get();
+        // $Suppliers = DB::table('persons')
+        // ->where([['company_id','=',$id],['person_type_id','=',101]])->get();
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
+        $SupplierTrans = DB::table('persons')
+        ->select(DB::raw('person_logo,active, ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(total_price_post_discounts) as total_purch,persons.person_name, persons.open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_rec,0) - ifnull(total_pay,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',101],['persons.company_id','=',$id]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->get();
 
         return view('Company.suppliers.Suppliers',[
-            'Suppliers'=>$Suppliers,
-            'id'=>$id
+            // 'Suppliers'=>$Suppliers,
+            'id'=>$id,
+            'SupplierTrans'=>$SupplierTrans,
         ]);
     }
 
@@ -628,12 +704,37 @@ class PersonsController extends Controller
     {
         $id = session('company_id');
         //All Company suppliers
-        $Clients = DB::table('persons')
-        ->where([['company_id','=',$id],['person_type_id','=',100]])->get();
+        // $Clients = DB::table('persons')
+        // ->where([['company_id','=',$id],['person_type_id','=',100]])->get();
+
+        $TotalPay = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.subtractive) as total_pay, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [102, 107, 109])
+        ->groupBy('person_id');
+
+        $TotalRec = DB::table('finan_transactions')
+        ->select(DB::raw('sum(finan_transactions.additive) as total_rec, finan_transactions.person_id'))
+        ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
+        ->groupBy('person_id');
+
+        $ClientTrans = DB::table('persons')
+        ->select(DB::raw('person_logo ,active,ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->leftJoinSub($TotalPay,'finan_transactions',function($join){
+            $join->on('finan_transactions.person_id', '=', 'persons.id');
+        })
+        ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
+            $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
+        })
+        ->where([['person_type_id','=',100],['persons.company_id','=',$id]])
+        ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->get();
 
         return view('Company.clients.Clients',[
-            'Clients'=>$Clients,
-            'id'=>$id
+            // 'Clients'=>$Clients,
+            'id'=>$id,
+            'ClientTrans'=>$ClientTrans,
         ]);
     }
 
@@ -699,7 +800,8 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',100],['persons.company_id','=',$compid],['persons.id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')->first();
+        ->groupBy('persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->first();
 
         return view('Company.clients.Client-all',[
             'type'=>$type,

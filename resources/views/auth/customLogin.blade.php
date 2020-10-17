@@ -20,7 +20,7 @@
                                      @csrf
 									<div class="form-group">
 										<label class="control-label" for="username">Username</label>
-										<input type="text" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="user_name" id="user_name" class="form-control">
+										<input type="text" placeholder="username" title="Please enter you username" required="" value="" name="user_name" id="user_name" class="form-control">
 										<span class="help-block small">Your unique username to app</span>
 									</div>
 									<div class="form-group">
@@ -28,11 +28,13 @@
 										<input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
 										<span class="help-block small">Yur strong password</span>
 									</div>
-									<div class="checkbox login-checkbox">
-										<label>
-											<input type="checkbox" class="i-checks"> Remember me
-										</label>
-									</div>
+									<div class="form-group" style="padding: 0px 25px; ">
+                                        <div class="checkbox login-checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember" id="remember" class="i-checks"> Remember me
+                                            </label>
+                                        </div>
+                                    </div>
 
 									<button type="submit" class="btn btn-default btn-block" value="" >Login</button>
 								</form>
@@ -40,10 +42,10 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
-		
+
 	</div>
 @include('Layout.footer')
 

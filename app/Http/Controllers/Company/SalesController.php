@@ -16,6 +16,11 @@ use stdClass;
 
 class SalesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function Invoices()
     {
         //Define user's company id

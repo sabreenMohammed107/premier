@@ -12,10 +12,15 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class InvoiceReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function PurchasingReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
             $Persons = DB::table('persons')->where([['person_type_id','=',101]])->get();
         } else {
@@ -33,7 +38,7 @@ class InvoiceReportsController extends Controller
     {
         $Invoice = Invoice::select(DB::raw('serial,return_back_invoice ,return_back_date,invoices.id,invoices.invoice_type,invoices.inv_date,invoices.approved,invoices.invoice_no,invoices.person_id,invoices.person_name,person_types.person_type_name,invoices.company_id,outgoing_type_name,service_type,purchasing_types_name,invoices.total_items_price,invoices.total_items_discount,invoices.total_price_post_discounts,invoices.total_vat,invoices.total_comm_industr_tax,invoices.net_invoice,invoices.notes'))
         ->where('invoice_type','=',0);
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Invoice->where('invoices.company_id','=',$request->company_id);
         }else{
@@ -100,7 +105,7 @@ class InvoiceReportsController extends Controller
     public function SalesReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
             $Persons = DB::table('persons')->where([['person_type_id','=',101]])->get();
         } else {
@@ -118,7 +123,7 @@ class InvoiceReportsController extends Controller
     {
         $Invoice = Invoice::select(DB::raw('serial,return_back_invoice ,return_back_date,invoices.id,invoices.invoice_type,invoices.inv_date,invoices.approved,invoices.invoice_no,invoices.person_id,invoices.person_name,person_types.person_type_name,invoices.company_id,outgoing_type_name,service_type,purchasing_types_name,invoices.total_items_price,invoices.total_items_discount,invoices.total_price_post_discounts,invoices.total_vat,invoices.total_comm_industr_tax,invoices.net_invoice,invoices.notes'))
         ->where('invoice_type','=',1);
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Invoice->where('invoices.company_id','=',$request->company_id);
         }else{

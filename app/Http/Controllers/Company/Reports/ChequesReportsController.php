@@ -11,10 +11,15 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ChequesReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function ChequesReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
             $Persons = DB::table('persons')->where([['person_type_id','=',101]])->get();
         } else {
@@ -32,7 +37,7 @@ class ChequesReportsController extends Controller
     {
         $Cheque = DB::table('cheques')
         ->select(DB::raw('bank_name,transaction_date,cheque_no,cheques.trans_type,cheques.amount,cheques.company_id as id,cheques.person_name,cheques.person_id,cheques.notes,person_types.person_type_name,persons.company_id as p_comp_id'));
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Cheque->where('cheques.company_id','=',$request->company_id);
         }else{

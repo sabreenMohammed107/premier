@@ -14,6 +14,11 @@ use stdClass;
 
 class ReceiptsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function Index()
     {
         $id = session('company_id');

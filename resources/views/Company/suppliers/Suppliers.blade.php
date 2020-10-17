@@ -23,22 +23,38 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
                     <h4>كشف الموردين</h4>
-                    <div class="asset-inner">
-                        <table id="example" class="display responsive nowrap" style="width:100%">
+                    <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+                        <table class="table-striped" id="table"
+                                    data-toggle="table"
+                                    data-pagination="true"
+                                    data-pagination-pre-text="السابق"
+                                    data-pagination-next-text="التالي"
+                                    data-search="true"
+                                    data-show-columns="true"
+                                    data-show-pagination-switch="true"
+                                    data-show-refresh="true"
+                                    data-key-events="true"
+                                    data-resizable="true"
+                                    data-cookie="true"
+                                    data-toolbar="#toolbar"
+                                    data-show-toggle="true"
+                                    data-show-fullscreen="true"
+                                    data-show-columns-toggle-all="true"
+                                    data-show-export="true"
+                                    data-minimum-count-columns="2" >
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>صوره</th>
-									<th>الاسم</th>
-									<th>الهاتف</th>
-									<th>الحاله</th>
-									<th>الرصيد الافتتاحي</th>
-									<th>تاريخ بداية الترصيد</th>
-									<th>الخيارات</th>
+									<th data-sortable="true">#</th>
+									<th data-sortable="true">صوره</th>
+									<th data-sortable="true">الاسم</th>
+									<th data-sortable="true">الهاتف</th>
+									<th data-sortable="true">الرصيد الحالي</th>
+									<th data-sortable="true">مفعل</th>
+									<th data-sortable="true">الخيارات</th>
 								</tr>
 							</thead>
 
-                                @foreach ($Suppliers as $i => $Supplier)
+                                @foreach ($SupplierTrans as $i => $Supplier)
                                 <tr>
                                 <td>{{++$i}}</td>
                                 <td>
@@ -48,6 +64,7 @@
                                 </td>
                                 <td>{{$Supplier->person_name}}</td>
                                 <td>{{$Supplier->phone1}}</td>
+                                <td>{{$Supplier->current}}جم</td>
                                 <td>
                                     @if($Supplier->active == 1)
                                         <button class="pd-setting">مـفعـل</button>
@@ -56,13 +73,11 @@
                                     @endif
 
                                 </td>
-                                <td>{{$Supplier->open_balance}}</td>
-                                <td>{{$Supplier->balance_start_date}}</td>
                                 <td>
                                     <div class="product-buttons">
-                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#Del{{$Supplier->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" style="color:#fff;" aria-hidden="true"></i></a>
+                                        <a href="{{ url("/Company/Suppliers/$Supplier->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" style="color:#fff;" aria-hidden="true"></i></a>
+                                        <a href="#" data-toggle="modal" data-target="#Del{{$Supplier->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" style="color:#fff;" aria-hidden="true" ></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -91,7 +106,7 @@
 
 @section('modal')
 <!--Modal-->
-@foreach ($Suppliers as $SupplierModal)
+@foreach ($SupplierTrans as $SupplierModal)
 <div id="Del{{$SupplierModal->id}}" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

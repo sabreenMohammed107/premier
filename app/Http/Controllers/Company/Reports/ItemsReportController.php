@@ -11,10 +11,15 @@ use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 
 class ItemsReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function ItemsReport()
     {
         $id = session('company_id');
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $Companies = DB::table('companies')->get();
         } else {
             $Companies = Company::where('id','=',$id)->get();
@@ -45,7 +50,7 @@ class ItemsReportController extends Controller
         ->leftJoinSub($TotalSub,'finan_transactions_sub',function($join){
             $join->on('finan_transactions_sub.item_id', '=', 'items.id');
         });
-        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101) {
+        if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Item->where('items.company_id','=',$request->company_id);
         }else{

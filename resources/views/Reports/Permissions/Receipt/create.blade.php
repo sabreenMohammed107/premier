@@ -50,7 +50,7 @@
                                             <div class="row">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
-                                                    @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null)
+                                                    @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110)
                                                         <select required data-placeholder="Choose a Country..." name="company_id" class="selectpicker" id="company_id" data-live-search="true" data-width="100%" tabindex="-1">
                                                             <option value="" selected disabled>Select</option>
                                                             @foreach ($Companies as $Company)
@@ -146,7 +146,7 @@
 
         @endsection
         @section('scripts')
-        @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null)
+        @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110)
         <script>
             $('#company_id').change(function(){
                 $('#firsr_check').prop("checked", true);

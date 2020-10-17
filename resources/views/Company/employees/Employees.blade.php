@@ -23,50 +23,64 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
                     <h4>كشف الموظفين</h4>
-                    <div class="asset-inner">
-                        <table id="example" class="display responsive nowrap" style="width:100%">
+                    <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+
+                        <table class="table-striped" id="table" style="text-align: left;"
+                        data-toggle="table"
+                        data-pagination="true"
+                        data-pagination-pre-text="السابق"
+                        data-pagination-next-text="التالي"
+                        data-search="true"
+                        data-show-columns="true"
+                        data-show-pagination-switch="true"
+                        data-show-refresh="true"
+                        data-key-events="true"
+                        data-resizable="true"
+                        data-cookie="true"
+                        data-toolbar="#toolbar"
+                        data-show-toggle="true"
+                        data-show-fullscreen="true"
+                        data-show-columns-toggle-all="true"
+                        data-show-export="true"
+                        data-minimum-count-columns="2" >
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>الصورة</th>
-									<th>الاسم</th>
-									<th>الصلاحيه (الوظيفة)</th>
-									<th>الحاله</th>
-									<th>البريد الالكتروني</th>
-									<th>الهاتف</th>
-									<th>المحمول</th>
-									<th>العنوان</th>
-									<th>الخيارات</th>
+									<th data-field="serial"  data-sortable="true">#</th>
+									<th data-field="logo"  data-sortable="true">الصورة</th>
+									<th data-field="name"  data-sortable="true">الاسم</th>
+									<th data-field="phone"  data-sortable="true">الهاتف</th>
+									<th data-field="current"  data-sortable="true">الرصيد الحالي</th>
+									<th data-field="active"  data-sortable="true">التفعيل</th>
+									<th data-field="actions"  data-sortable="true">الخيارات</th>
 								</tr>
 							</thead>
 
-                                @foreach ($Employees as $i => $Employee)
+                               <tbody>
+                                @foreach ($EmployeeTrans as $i => $Employee)
                                 <tr>
-                                <td>{{++$i}}</td>
-                                <td><img src="{{ asset("/uploads/person/$Employee->person_logo") }}" alt="{{$Employee->person_name}}" title="{{$Employee->person_name}}" /></td>
-                                <td>{{$Employee->person_name}}</td>
-                                <td>محاسب قانوني</td>
-                                <td>
-                                    @if($Employee->active == 1)
-                                        <button class="pd-setting">مـفعـل</button>
-                                    @else
-                                        <button class="ds-setting">متوقف</button>
-                                    @endif
+                                    <td>{{++$i}}</td>
+                                    <td><img src="{{ asset("/uploads/person/$Employee->person_logo") }}" alt="{{$Employee->person_name}}" title="{{$Employee->person_name}}" /></td>
+                                    <td>{{$Employee->person_name}}</td>
+                                    <td>{{$Employee->phone1}}</td>
+                                    <td>{{$Employee->current}}جم</td>
+                                    <td>
+                                        @if($Employee->active == 1)
+                                            <button class="pd-setting">مـفعـل</button>
+                                        @else
+                                            <button class="ds-setting">متوقف</button>
+                                        @endif
 
-                                </td>
-                                <td>{{$Employee->email}}</td>
-                                <td>{{$Employee->phone1}}</td>
-                                <td>{{$Employee->phone2}}</td>
-                                <td>{{$Employee->address}}</td>
-                                <td>
-                                    <div class="product-buttons">
-                                        <a href="{{ url("/Company/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file" aria-hidden="true"></i></a>
-                                        <a href="{{ url("/Company/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#Del{{$Employee->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                        <div class="product-buttons">
+                                            <a href="{{ url("/Company/Employees/$Employee->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-file"  style="color:#fff;" aria-hidden="true"></i></a>
+                                            <a href="{{ url("/Company/Employees/$Employee->id/Edit")}}" title="Edit" class="pd-setting-ed btn btn-primary"><i class="fa fa-pencil-square-o" style="color:#fff;"  aria-hidden="true"></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#Del{{$Employee->id}}" title="Trash" class="pd-setting-ed btn btn-primary"><i class="fa fa-trash-o" style="color:#fff;"  aria-hidden="true" ></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
                                 @endforeach
+                               </tbody>
 
 
                         </table>
@@ -91,7 +105,7 @@
 
 @section('modal')
 <!--Modal-->
-@foreach ($Employees as $EmployeeModal)
+@foreach ($EmployeeTrans as $EmployeeModal)
 <div id="Del{{$EmployeeModal->id}}" class="modal modal-edu-general fullwidth-popup-InformationproModal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">

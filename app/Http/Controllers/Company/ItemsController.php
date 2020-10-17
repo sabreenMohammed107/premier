@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class ItemsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //Company->Items
     public function Items()
     {

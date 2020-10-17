@@ -22,11 +22,12 @@ Route::namespace('Company')->group(function () {
     Route::get('/Admin/Items/Report/Create', 'Reports\ItemsReportController@ItemsReport');
 });
 
+
 /*
 
 */
 Route::namespace('Admin')->group(function ()  {
-   //Reports   
+   //Reports
     //client report
 
     Route::resource('/Company-client-report', 'Reports\ClientReportController');
@@ -38,11 +39,10 @@ Route::namespace('Admin')->group(function ()  {
     //employee report
     Route::resource('/Company-employee-report', 'Reports\EmployeesReportController');
     Route::get('/Company-dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('Company-dynamicCompany-employeeReport.fetch');
-    
+
     //items report
     Route::resource('/Company-item-report', 'Reports\ItemsReportController');
     Route::get('/Company-dynamicCompany-itemReport.fetch', 'Reports\ItemsReportController@companyFetch')->name('Company-dynamicCompany-itemReport.fetch');
-
     //cash-box report
     Route::resource('/Company-cashBox-report', 'Reports\CashBoxReportController');
     //bank report
@@ -52,7 +52,8 @@ Route::namespace('Admin')->group(function ()  {
 
 
      Route::namespace('Admin')->middleware('OfficeAdmin')->group(function () {
-    //Reports   
+    //Reports
+
     //client report
 
     Route::resource('/Admin-client-report', 'Reports\ClientReportController');
@@ -97,9 +98,9 @@ Route::namespace('Admin')->group(function ()  {
         Route::get('dynamicPersonComp/fetch', 'BalanceAdjustController@dynamicPersonComp')->name('dynamicPersonComp.fetch');
         Route::get('dynamicClient/fetch', 'BalanceAdjustController@fetchClient')->name('dynamicClient.fetch');
         Route::get('getCurrentBalance/fetch', 'BalanceAdjustController@getCurrentBalance')->name('getCurrentBalance.fetch');
-   
+
         Route::post('/balance-adjust/store', 'BalanceAdjustController@store')->name('balance-adjust.store');
-   
+
     });
 
     Route::get('/', 'AllCompaniesController@home');

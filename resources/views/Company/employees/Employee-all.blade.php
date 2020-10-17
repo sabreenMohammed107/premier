@@ -14,9 +14,12 @@
     </li>
     <li>
     <span class="bread-blod">
-        @isset($Employee->person_name)
+
+        @if(isset($Employee->person_name))
         {{$Employee->person_name}}
-        @endisset
+        @else
+        أضافة جديد
+        @endif
     </span>
     </li>
 </ul>
@@ -83,7 +86,7 @@
                 {{$Employee->balance_start_date}}
             @endslot
             @slot('current')
-                {{$TotalBalance}}
+                {{$Employee->current}}
             @endslot
                     @if($type == 'View')
                         @slot('title')

@@ -95,7 +95,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             <a href="#">حــفـظ</a>
                         </div>-->
                     <a href="{{url('/Invoices/Purchasing')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
-                        <button class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button>
+                        <button id="save_inv" class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button>
                         <!--<div class="btn-cancel">
                             <a href="#">إلــغاء</a>
                         </div>
@@ -454,6 +454,8 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
 
             function saveInvoice() {
+                $('#save_inv').attr('disabled','disabled');
+                setTimeout(function(){ $('#save_inv').attr('disabled',false); }, 10000);
                 debugger;
                 var person_type = $('input[type=radio][name=person]:checked').val();
                 if (person_type == 'other') {

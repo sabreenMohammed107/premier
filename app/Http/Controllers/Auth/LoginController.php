@@ -69,15 +69,13 @@ class LoginController extends Controller
     //to login without inception
     protected function attemptLogin(Request $request)
     {
-
         $user = User::where('user_name', $request->user_name)
             ->where('password', $request->password)
             ->first();
         if (!isset($user)) {
             return false;
         }
-        
-        if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
+        if($user->role_id != 100 && $user->rol_id != 101 && $user->role_id != 110){
             $UserCompany = DB::table('users')
             ->join('user_companies','user_companies.user_id','=','users.id')
             ->where('users.id','=',$user->id)->first();
@@ -85,7 +83,11 @@ class LoginController extends Controller
             Session::put('company_id', $UserCompany->company_id);
         }
 
-        Auth::login($user);
+        if ($request->remember) {
+            Auth::login($user,true);
+        }else{
+            Auth::login($user);
+        }
 
         return true;
     }
@@ -99,7 +101,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if($user->role_id != 100 || $user->rol_id != 101 || $user->role_id != 110){
+        if($user->role_id != 100 && $user->rol_id != 101 && $user->role_id != 110){
             return redirect('/Company');
         }else{
             return redirect('/');
