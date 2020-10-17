@@ -39,14 +39,10 @@ Route::namespace('Admin')->group(function ()  {
     //employee report
     Route::resource('/Company-employee-report', 'Reports\EmployeesReportController');
     Route::get('/Company-dynamicCompany-empolyeeReport.fetch', 'Reports\EmployeesReportController@companyFetch')->name('Company-dynamicCompany-employeeReport.fetch');
-<<<<<<< HEAD
-=======
-    
+
     //items report
     Route::resource('/Company-item-report', 'Reports\ItemsReportController');
     Route::get('/Company-dynamicCompany-itemReport.fetch', 'Reports\ItemsReportController@companyFetch')->name('Company-dynamicCompany-itemReport.fetch');
->>>>>>> 2f4657ff444c52626255e487836a86af0fc784e8
-
     //cash-box report
     Route::resource('/Company-cashBox-report', 'Reports\CashBoxReportController');
     //bank report

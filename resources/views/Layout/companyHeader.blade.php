@@ -77,7 +77,7 @@
                                                         <a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
                                                         <a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
 														<a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
-                                                        <a href="#" class="dropdown-item">تقرير حركات الأصناف</a>
+                                                        <a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a>
                                                         @endif
                                                     {{-- <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a> --}}
 
@@ -94,7 +94,6 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الشركة  </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-<<<<<<< HEAD
                                                     @if(Auth::user()->role_id == 104)
                                                     <a href="#" class="dropdown-item">كشف الشركات</a>
                                                     <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
@@ -110,15 +109,6 @@
                                                     @endif
                                                     @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
                                                     <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
-=======
-													<a href="{{route('Company-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
-														<a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
-														<a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
-														<a href="{{route('Company-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a>
-														<a href="{{route('Company-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
-														<a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a>
-														<a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
->>>>>>> 2f4657ff444c52626255e487836a86af0fc784e8
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a>
                                                     <a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a>
@@ -269,7 +259,7 @@
 												<li><a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a></li>
 
 											    <li><a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a></li>
-                                               
+
 											    <li><a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
 >>>>>>> 2f4657ff444c52626255e487836a86af0fc784e8
                                                 <li><a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a></li>
@@ -294,7 +284,7 @@
                                                         <li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
                                                         <li><a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
 														<li><a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
-                                                        <li><a href="#" class="dropdown-item">تقرير حركات الأصناف</a></li>
+                                                        <li><a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a></li>
                                                         @endif
 
 
