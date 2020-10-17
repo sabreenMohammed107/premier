@@ -132,7 +132,6 @@
 
                 },
                 success: function(result) {
-                    alert(result);
                     $('#table').bootstrapTable('destroy');
 
                     $('tbody').html(result);
