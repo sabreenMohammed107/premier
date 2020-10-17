@@ -45,7 +45,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',102],['persons.company_id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->get();
         // return $Employees;
         return view('Company.employees.Employees',[
@@ -116,7 +116,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',102],['persons.id','=',$id],['persons.company_id','=',$compid]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->first();
         return view('Company.employees.Employee-all',[
             'type'=>$type,
@@ -369,7 +369,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',101],['persons.company_id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->get();
 
         return view('Company.suppliers.Suppliers',[
@@ -441,7 +441,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',101],['persons.company_id','=',$compid],['persons.id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->first();
         return view('Company.suppliers.Supplier-all',[
             'type'=>$type,
@@ -728,7 +728,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',100],['persons.company_id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->get();
 
         return view('Company.clients.Clients',[
@@ -800,7 +800,7 @@ class PersonsController extends Controller
         })
         ->where([['person_type_id','=',100],['persons.company_id','=',$compid],['persons.id','=',$id]])
         ->leftjoin('person_types','person_types.id','=','persons.person_type_id')
-        ->groupBy('person_logo,persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
+        ->groupBy('person_logo','persons.person_name','total_pay','total_rec','persons.id','phone1','persons.open_balance')
         ->first();
 
         return view('Company.clients.Client-all',[
