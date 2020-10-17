@@ -42,6 +42,9 @@ class BankReportController extends Controller
         $exception = $user->company->pluck('id')->toArray();
       
         $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         // $rows = Company::where('active', 1)->where('id', '!=', 100)->get();
 
         return view($this->viewName . 'create', compact('rows'));

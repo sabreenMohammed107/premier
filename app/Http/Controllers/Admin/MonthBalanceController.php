@@ -31,6 +31,9 @@ class MonthBalanceController extends Controller
       
         $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
         // $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         $months = array();
         return view($this->viewName . 'index', compact('companies', 'months'));
     }

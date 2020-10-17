@@ -53,6 +53,9 @@ class RegisterUsersController extends Controller
         $exception = $user->company->pluck('id')->toArray();
       
         $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         // $companies = Company::all();
         return view($this->viewName . 'add', compact('roles', 'companies'));
     }
@@ -114,6 +117,10 @@ class RegisterUsersController extends Controller
         $exception = $user->company->pluck('id')->toArray();
       
         $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         // $companies = Company::all();
         // $alls = Company::where('active', 1)->where('id', '!=', 100)->get();
         $exception = $row->company->pluck('id')->toArray();
@@ -137,6 +144,9 @@ class RegisterUsersController extends Controller
         $exception = $user->company->pluck('id')->toArray();
       
         $companies = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
+        if(Auth::user()->role_id == 110){
+            $companies = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
+        }
         return view($this->viewName . 'edit', compact('row', 'roles', 'companies'));
     }
 
