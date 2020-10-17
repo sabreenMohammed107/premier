@@ -40,6 +40,7 @@ class SuppliersReportController extends Controller
         $user=Auth::user();
         $exception = $user->company->pluck('id')->toArray();
       
+        
         $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->get();
         if(Auth::user()->role_id == 110){
             $rows = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->get();
