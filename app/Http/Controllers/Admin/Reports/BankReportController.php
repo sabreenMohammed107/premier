@@ -94,7 +94,7 @@ class BankReportController extends Controller
         $filterd_trans = [];
         foreach ($companies_ids as $id) {
             $obj = new Collection();
-            $obj->company_name = Company::where('id', $id)->first()->company_official_name;
+            $obj->company_name = Company::where('id', $id)->first()->company_official_name ?? '';
             $obj->bank_id =Company::where('id', $id)->first()->bank_id;
             $obj->logo =Company::where('id', $id)->first()->company_logo;
             $obj->trans = array();

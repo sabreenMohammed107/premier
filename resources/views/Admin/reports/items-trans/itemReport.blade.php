@@ -222,7 +222,7 @@
                         </div>
                         <div class="off_name">
                             <span>
-                                {{$Company->company_official_name}}
+                                {{$Company->company_official_name ?? ''}}
                             </span>
                         </div>
                     </span>
@@ -234,7 +234,7 @@
                         </div>
                         <div class="off_name">
                             <span>
-                                {{$rows->item_arabic_name}}
+                                {{$rows->item_arabic_name ?? ''}}
                             </span>
                         </div>
                     </span>

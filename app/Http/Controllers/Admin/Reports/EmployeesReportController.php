@@ -98,7 +98,7 @@ class EmployeesReportController extends Controller
         $filterd_trans = [];
         foreach ($employee_ids as $id) {
             $obj = new Collection();
-            $obj->employee_name = Person::where('id',$id)->first()->person_name;
+            $obj->employee_name = Person::where('id',$id)->first()->person_name ?? '';
             $obj->employee_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {

@@ -98,7 +98,7 @@ class ItemsReportController extends Controller
         $filterd_trans = [];
         foreach ($item_ids as $id) {
             $obj = new Collection();
-            $obj->item_name = Item::where('id',$id)->first()->item_arabic_name;
+            $obj->item_name = Item::where('id',$id)->first()->item_arabic_name ?? '';
             $obj->item_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {
