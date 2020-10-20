@@ -17,8 +17,6 @@
 
 @section('content')
 <style>
-  
-
     .pagination ul li {
         float: right !important;
     }
@@ -57,11 +55,7 @@
                                 </select>
                             </div>
 
-                            <table class="table-striped" id="table" data-toggle="table"   data-pagination="true"
-                             data-search="true" data-show-columns="true" data-show-pagination-switch="true" 
-                             data-show-refresh="true" data-key-events="true" data-resizable="true" 
-                             data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" 
-                             data-click-to-select="true" data-toolbar="#toolbar">
+                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
                                         <th data-field="id" data-sortable="true">#</th>
@@ -247,14 +241,13 @@
 
 
 <script>
-    
     $(document).ready(function() {
-  
+
 
         $('select[name="select_company"]').on('change', function() {
             var company = $(this).val();
 
-          
+
             $.ajax({
                 url: "{{route('dynamicCompany.fetch')}}",
                 method: "get",
@@ -266,9 +259,12 @@
                     $('#table').bootstrapTable('destroy');
 
                     $('tbody').html(result);
-                    $('#table').bootstrapTable()
-                
- 
+                    $('#table').bootstrapTable();
+                    $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
+
+
                 }
             });
 
@@ -280,7 +276,7 @@
     function fillForm(id) {
 
         var criterion = $('input[name=detailed_criterion' + id + ']').val();
-     
+
         $.ajax({
             url: "{{route('update.criterion')}}",
             method: "Post",
@@ -294,7 +290,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 
@@ -303,7 +302,7 @@
     function fillSelect(id) {
 
         var guided_item_id = $('select[name=guided_item_id' + id + ']').val();
-      
+
         $.ajax({
             url: "{{route('update.guided')}}",
             method: "Post",
@@ -317,7 +316,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 
@@ -325,7 +327,7 @@
 
     function fillCheck(id) {
         var confirmed = 0;
-      
+
         if ($('input[name=confirmed' + id + ']').prop('checked')) {
 
             confirmed = 1;
@@ -346,7 +348,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 

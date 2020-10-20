@@ -231,7 +231,10 @@
                 success: function(result) {
                     $('#table').bootstrapTable('destroy');
                     $('#indexTable').html(result);
-                    $('#table').bootstrapTable()
+                    $('#table').bootstrapTable();
+                    $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
 
                 }
             });
@@ -258,7 +261,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 
@@ -281,7 +287,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 
@@ -310,7 +319,10 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $("#select_company").addClass("chosen-select");
+                    $("#select_company").trigger("chosen:updated");
+                    $(select).trigger("chosen:updated");
             }
         });
 
