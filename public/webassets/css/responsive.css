@@ -504,7 +504,7 @@
 		margin-top:40px;
 	}
 	.add-product a {
-		display: none;
+		/* display: none; */
 	}
 	.active-hook button{
 		margin:3px 0px;
