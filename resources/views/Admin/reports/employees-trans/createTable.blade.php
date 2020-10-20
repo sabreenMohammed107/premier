@@ -9,4 +9,5 @@
     <td>{{$employee->registeration_no}}</td>
     <td>{{$employee->commercial_register}}</td>
 </tr>
+
 @endforeach
