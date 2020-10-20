@@ -44,7 +44,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="">الشركات</label>
-                                                    <select data-placeholder="Choose a Country..." name="company_id" class="chosen-select dynamic" tabindex="-1" id="country" data-dependent="sub">
+                                                    <select data-placeholder="Choose a Country..." name="company_id" class="selectpicker dynamic" data-live-search="true" data-width="100%" id="country" data-dependent="sub">
                                                         <option value="none" selected="" disabled="">{{$row->company[0]->company_official_name ?? 'الشركة'}}</option>
                                                         @foreach($companies as $company)
                                                         <option value="{{$company->id}}" >{{$company->company_official_name}}</option>
@@ -134,7 +134,7 @@ function myFunction() {
 }
 
 $(document).ready(function() {
-
+    $('#country').selectpicker();
 $('.dynamic').change(function() {
 
     if ($(this).val() != '') {
@@ -149,6 +149,7 @@ $('.dynamic').change(function() {
             success: function(result) {
 
                 $('#sub').html(result);
+                $('#country').selectpicker();
             }
 
         })
