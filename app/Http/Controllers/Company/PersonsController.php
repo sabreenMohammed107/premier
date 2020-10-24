@@ -147,6 +147,10 @@ class PersonsController extends Controller
                 $request->merge([
                     'person_logo' => $filename,
                 ]);
+            }else{
+                $request->merge([
+                    'person_logo' => 'def.jpg',
+                ]);
             }
             //configure data
             //configure checkbox
@@ -471,6 +475,10 @@ class PersonsController extends Controller
                 $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'person_logo' => $filename,
+                ]);
+            }else{
+                $request->merge([
+                    'person_logo' => 'def.jpg',
                 ]);
             }
             //configure data
@@ -830,6 +838,10 @@ class PersonsController extends Controller
                 $request->file('logo')->move($path,$filename);
                 $request->merge([
                     'person_logo' => $filename,
+                ]);
+            }else{
+                $request->merge([
+                    'person_logo' => 'def.jpg',
                 ]);
             }
             //configure checkbox

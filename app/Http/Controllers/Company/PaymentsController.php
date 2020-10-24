@@ -20,7 +20,7 @@ class PaymentsController extends Controller
     {
         $this->middleware('auth');
     }
-
+    
     public function Index()
     {
         $id = session('company_id');
@@ -43,6 +43,11 @@ class PaymentsController extends Controller
         $Suppliers = DB::table('persons')
         ->where([['company_id','=',$id],['person_type_id','=',101]])->get();
 
+        $SafeCurrentBalance = DB::table('finan_transactions')
+        ->select(DB::raw('sum(additive-subtractive) as current'))
+        ->where('safe_id','=',$Company->safe_id)
+        ->first();
+
         $maxCashPurchase = DB::table('cash_master')
         ->where([['company_id','=',$id],['cash_master_type','=',0]])->orderBy('exit_permission_code','DESC')->first();
         if($maxCashPurchase){
@@ -62,6 +67,7 @@ class PaymentsController extends Controller
             'CIT_Items'=>$CIT_Items,
             'CIT_Services'=>$CIT_Services,
             'Company'=>$Company,
+            'SafeCurrentBalance'=>$SafeCurrentBalance,
         ]);
     }
 
@@ -83,6 +89,10 @@ class PaymentsController extends Controller
             $Persons = [];
         }
 
+        $SafeCurrentBalance = DB::table('finan_transactions')
+        ->select(DB::raw('sum(additive-subtractive) as current'))
+        ->where('safe_id','=',$Company->safe_id)->first();
+
         $VAT = BusinessItemsSetup::find(100);
         $CIT_Items = BusinessItemsSetup::find(101);
         $CIT_Services = BusinessItemsSetup::find(102);
@@ -96,6 +106,7 @@ class PaymentsController extends Controller
             'CIT_Items'=>$CIT_Items,
             'CIT_Services'=>$CIT_Services,
             'Company'=>$Company,
+            'SafeCurrentBalance'=>$SafeCurrentBalance,
         ]);
     }
 
@@ -119,9 +130,9 @@ class PaymentsController extends Controller
 
             $CashPurch = CashMaster::create($request->all());
             if($request->person_type != null){
-                DB::table('finan_transactions')->insert(
+                FinanTransaction::create(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'person_type_id'=> $Person->person_type_id,
@@ -133,9 +144,9 @@ class PaymentsController extends Controller
                     ]
                 );
             }else{
-                DB::table('finan_transactions')->insert(
+                FinanTransaction::create(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_name'=>$request->person_name,
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$CashPurch->id,
@@ -183,7 +194,7 @@ class PaymentsController extends Controller
             if($request->person_type != null){
                 $Transaction->update(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'cash_id'=>$cash_id,
@@ -196,7 +207,7 @@ class PaymentsController extends Controller
             }else{
                 $Transaction->update(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_name'=>$request->person_name,
                     'person_id'=>null,
                     'person_type_id'=>null,
@@ -222,16 +233,18 @@ class PaymentsController extends Controller
     {
         DB::beginTransaction();
         try {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             $Cash = CashMaster::find($cash_id);
             $Transaction = FinanTransaction::where('cash_id','=',$cash_id)->first();
 
             $Cash->delete();
             $Transaction->delete();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             DB::commit();
             return redirect("/Cash/Purchasing")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
 
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             DB::rollBack();
             return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم حذف بيانات المدفوعات");
         }

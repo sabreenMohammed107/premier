@@ -11,7 +11,7 @@
 Route::namespace('Company')->group(function () {
     Route::get('/Admin/Cash/Sales/Report/Create', 'Reports\CashReportsController@ReceiptsReport');
     Route::get('/Admin/Cash/Purchasing/Report/Create', 'Reports\CashReportsController@PaymentsReport');
-    Route::get('/Cash/Sales/Fetch/Persons/{type}', 'Reports\ReceiptsController@FetchPerson');
+    Route::get('/Cash/Sales/Fetch/Persons/{type}', 'ReceiptsController@FetchPerson');
     Route::get('/Admin/Invoices/Purchasing/Report/Create', 'Reports\InvoiceReportsController@PurchasingReport');
     Route::get('/Admin/Invoices/Sales/Report/Create', 'Reports\InvoiceReportsController@SalesReport');
     Route::get('/Admin/Permissions/Receipt/Report/Create', 'Reports\PermissionReportsController@ReceiptsReport');

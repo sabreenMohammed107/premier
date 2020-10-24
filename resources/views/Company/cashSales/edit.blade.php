@@ -75,7 +75,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input type="number" class="form-control" placeholder="120100" readonly>
+                                                <input type="text" class="form-control" placeholder="{{$SafeCurrentBalance->current}}جم" readonly>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label class="login2"><b>رصيدالخزينه الحالى</b></label>
@@ -202,7 +202,10 @@
 @section('scripts')
 @if ($Person->person_type_id == 0)
 <script>
-    $('.selectpicker').selectpicker('destroy');
+    // $('.selectpicker').selectpicker('destroy');
+    jQuery(window).load(function () {
+        $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
+    })
 </script>
 @endif
 <script>

@@ -52,10 +52,15 @@ class ReceiptsController extends Controller
             $followingExitCode = 1;
         }
 
+        $SafeCurrentBalance = DB::table('finan_transactions')
+        ->select(DB::raw('sum(additive-subtractive) as current'))
+        ->where('safe_id','=',$Company->safe_id)->first();
+
         return view('Company.cashSales.add',[
             'Clients'=>$Clients,
             'Code'=>$followingExitCode,
             'Company'=>$Company,
+            'SafeCurrentBalance'=>$SafeCurrentBalance,
         ]);
     }
 
@@ -81,6 +86,9 @@ class ReceiptsController extends Controller
         $CIT_Items = BusinessItemsSetup::find(101);
         $CIT_Services = BusinessItemsSetup::find(102);
 
+        $SafeCurrentBalance = DB::table('finan_transactions')
+        ->select(DB::raw('sum(additive-subtractive) as current'))
+        ->where('safe_id','=',$Company->safe_id)->first();
 
         return view('Company.cashSales.edit',[
             'Persons'=>$Persons,
@@ -90,6 +98,7 @@ class ReceiptsController extends Controller
             'CIT_Items'=>$CIT_Items,
             'CIT_Services'=>$CIT_Services,
             'Company'=>$Company,
+            'SafeCurrentBalance'=>$SafeCurrentBalance,
         ]);
     }
 
@@ -111,9 +120,9 @@ class ReceiptsController extends Controller
 
             $CashSales = CashMaster::create($request->all());
             if($request->person_type != null){
-                DB::table('finan_transactions')->insert(
+                FinanTransaction::create(
                     ['transaction_type_id' => '104',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashSales->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'person_type_id'=> $Person->person_type_id,
@@ -125,9 +134,9 @@ class ReceiptsController extends Controller
                     ]
                 );
             }else{
-                DB::table('finan_transactions')->insert(
+                FinanTransaction::create(
                     ['transaction_type_id' => '104',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashSales->cash_date,
                     'person_name'=>$request->person_name,
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$CashSales->id,
@@ -201,7 +210,7 @@ class ReceiptsController extends Controller
             if($request->person_type != null){
                 $Transaction->update(
                     ['transaction_type_id' => '104',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'cash_id'=>$cash_id,
@@ -214,7 +223,7 @@ class ReceiptsController extends Controller
             }else{
                 $Transaction->update(
                     ['transaction_type_id' => '104',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $CashPurch->cash_date,
                     'person_name'=>$request->person_name,
                     'person_id'=>null,
                     'person_type_id'=>null,
@@ -249,11 +258,11 @@ class ReceiptsController extends Controller
             $Transaction->delete();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             DB::commit();
-            return redirect("/Cash/Sales")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
+            return redirect("/Cash/Sales")->with('flash_success', "تم حذف بيانات المقبوض بنجاح");
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم حذف بيانات المدفوعات ");
+            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم حذف بيانات المقبوض ");
 
         }
     }

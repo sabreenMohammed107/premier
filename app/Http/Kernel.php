@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'HasInvoices' => \App\Http\Middleware\Company\HasInvoices::class,
         'HasBasicInfo' => \App\Http\Middleware\Admin\HasBasicInfo::class,
         'HasBalance' => \App\Http\Middleware\Admin\HasBalance::class,
+        'HasSafeAndBankData' => \App\Http\Middleware\Company\HasSafeAndBankData::class,
     ];
 
     /**
