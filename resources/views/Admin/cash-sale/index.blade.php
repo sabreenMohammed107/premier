@@ -47,7 +47,7 @@
                         <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
                             <div class="chosen-select-single mg-b-20" style="direction:rtl;">
                                 <label>الشركة</label>
-                                <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="chosen-select" tabindex="-1" style="display: none;">
+                                <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
                                     <option value="">إختار الشركة</option>
                                     @foreach($companies as $company)
                                     <option value="{{$company->id}}">{{$company->company_official_name}} </option>
@@ -216,6 +216,7 @@
 
 <script>
     $(document).ready(function() {
+        $('#select_company').selectpicker();
         $('select[name="select_company"]').on('change', function() {
             var company = $(this).val();
 
@@ -231,7 +232,8 @@
                 success: function(result) {
                     $('#table').bootstrapTable('destroy');
                     $('#indexTable').html(result);
-                    $('#table').bootstrapTable()
+                    $('#table').bootstrapTable();
+                    $('#select_company').selectpicker();
 
                 }
             });
@@ -258,7 +260,8 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
             }
         });
 
@@ -281,7 +284,8 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
             }
         });
 
@@ -310,7 +314,8 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
             }
         });
 

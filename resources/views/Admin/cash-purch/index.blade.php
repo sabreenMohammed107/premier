@@ -17,8 +17,6 @@
 
 @section('content')
 <style>
-  
-
     .pagination ul li {
         float: right !important;
     }
@@ -48,7 +46,7 @@
                         <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
                             <div class="chosen-select-single mg-b-20" style="direction:rtl;">
                                 <label>الشركة</label>
-                                <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="chosen-select" tabindex="-1" style="display: none;">
+                                <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
                                     <option value="">إختار الشركة</option>
                                     @foreach($companies as $company)
                                     <option value="{{$company->id}}">{{$company->company_official_name}} </option>
@@ -57,11 +55,7 @@
                                 </select>
                             </div>
 
-                            <table class="table-striped" id="table" data-toggle="table"   data-pagination="true"
-                             data-search="true" data-show-columns="true" data-show-pagination-switch="true" 
-                             data-show-refresh="true" data-key-events="true" data-resizable="true" 
-                             data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" 
-                             data-click-to-select="true" data-toolbar="#toolbar">
+                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
                                         <th data-field="id" data-sortable="true">#</th>
@@ -247,14 +241,14 @@
 
 
 <script>
-    
     $(document).ready(function() {
-  
-
+     
+        $('#select_company').selectpicker();
+       
         $('select[name="select_company"]').on('change', function() {
             var company = $(this).val();
 
-          
+
             $.ajax({
                 url: "{{route('dynamicCompany.fetch')}}",
                 method: "get",
@@ -266,9 +260,9 @@
                     $('#table').bootstrapTable('destroy');
 
                     $('tbody').html(result);
-                    $('#table').bootstrapTable()
-                
- 
+                    $('#table').bootstrapTable();
+                    $('#select_company').selectpicker();
+
                 }
             });
 
@@ -280,7 +274,7 @@
     function fillForm(id) {
 
         var criterion = $('input[name=detailed_criterion' + id + ']').val();
-     
+
         $.ajax({
             url: "{{route('update.criterion')}}",
             method: "Post",
@@ -294,7 +288,9 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
+            
             }
         });
 
@@ -303,7 +299,7 @@
     function fillSelect(id) {
 
         var guided_item_id = $('select[name=guided_item_id' + id + ']').val();
-      
+
         $.ajax({
             url: "{{route('update.guided')}}",
             method: "Post",
@@ -317,7 +313,8 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
             }
         });
 
@@ -325,7 +322,7 @@
 
     function fillCheck(id) {
         var confirmed = 0;
-      
+
         if ($('input[name=confirmed' + id + ']').prop('checked')) {
 
             confirmed = 1;
@@ -346,7 +343,8 @@
             success: function(result) {
                 $('#table').bootstrapTable('destroy');
                 $('#indexTable').html(result);
-                $('#table').bootstrapTable()
+                $('#table').bootstrapTable();
+                $('#select_company').selectpicker();
             }
         });
 

@@ -99,7 +99,7 @@ class ClientReportController extends Controller
         $filterd_trans = [];
         foreach ($client_ids as $id) {
             $obj = new Collection();
-            $obj->client_name = Person::where('id',$id)->first()->person_name;
+            $obj->client_name = Person::where('id',$id)->first()->person_name ?? '';
             $obj->client_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {
@@ -121,7 +121,7 @@ class ClientReportController extends Controller
             'from_date' => $from_date,
             'to_date' => $to_date,
             'Today' => date('Y-m-d'),
-            'Logo'  => $company->company_logo,
+            'Logo'  => $company->company_logo ?? '',
             'Company' => $company,
             'User'  =>  Auth::user(),
             'clients' => $client_ids,

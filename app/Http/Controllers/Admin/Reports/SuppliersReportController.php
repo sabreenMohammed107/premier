@@ -98,7 +98,7 @@ class SuppliersReportController extends Controller
         $filterd_trans = [];
         foreach ($supplier_ids as $id) {
             $obj = new Collection();
-            $obj->supplier_name = Person::where('id',$id)->first()->person_name;
+            $obj->supplier_name = Person::where('id',$id)->first()->person_name ?? '';
             $obj->supplier_id = $id;
             $obj->trans = array();
             foreach ($trans as $objs) {
@@ -120,7 +120,7 @@ class SuppliersReportController extends Controller
             'from_date' => $from_date,
             'to_date' => $to_date,
             'Today' => date('Y-m-d'),
-            'Logo'  => $company->company_logo,
+            'Logo'  => $company->company_logo ?? '',
             'Company' => $company,
             'User'  =>  Auth::user(),
             'clients' => $supplier_ids,
