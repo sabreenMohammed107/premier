@@ -43,6 +43,7 @@
 												<th data-sortable="true">#</th>
 												<th data-sortable="true">التاريخ</th>
 												<th data-sortable="true">البيان</th>
+												<th data-sortable="true">اسم الشخص</th>
 												<th data-sortable="true">معتمد</th>
 												<th data-sortable="true">اذن الاستلام</th>
 												<th data-sortable="true">المبلغ</th>
@@ -55,6 +56,7 @@
                                         <td>{{++$i}}</td>
                                         <td>{{date('Y-m-d', strtotime($Cash->cash_date))}}</td>
                                         <td>{{$Cash->statement}}</td>
+                                        <td>{{$Cash->person_name}}</td>
                                         <td>
                                             @if ($Cash->approved == 1)
                                             معتمد

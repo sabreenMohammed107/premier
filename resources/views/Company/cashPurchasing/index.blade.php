@@ -45,6 +45,7 @@
                                         <th data-sortable="true">معتمد</th>
                                         <th data-sortable="true">رقم اذن الصرف</th>
                                         <th data-sortable="true">البيان</th>
+                                        <th data-sortable="true">اسم الشخص</th>
                                         <th data-sortable="true">المصروف</th>
                                         <th data-sortable="true">السيولة</th>
                                         <th data-sortable="true">المبلغ</th>
@@ -65,6 +66,7 @@
                                         </td>
                                         <td>{{$Cash->exit_permission_code}}</td>
                                         <td>{{$Cash->statement}}</td>
+                                        <td>{{$Cash->person_name}}</td>
                                         <td>
                                             @if ($Cash->outgoing_type_id == 100)
                                             سلع

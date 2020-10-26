@@ -301,7 +301,7 @@ class CompaniesController extends Controller
 
             DB::table('finan_transactions')->insert(
                 ['transaction_type_id' => '110',
-                 'transaction_date' => new \DateTime(),
+                 'transaction_date' => $request->balance_start_date,
                  'safe_id' => $Safe->id,
                  'additive' => $request->open_balance,
                  'purch_sales_statement'=>'رصيد افتتاحي',
@@ -344,7 +344,7 @@ class CompaniesController extends Controller
                 //update data
                 $Safe->update($request->all());
                 $SafeTrans->update([
-                'transaction_date' => new \DateTime(),
+                'transaction_date' => $request->balance_start_date,
                 'additive' => $request->open_balance,
                 ]);
                 DB::commit();
@@ -380,7 +380,7 @@ class CompaniesController extends Controller
 
             DB::table('finan_transactions')->insert(
                 ['transaction_type_id' => '110',
-                'transaction_date' => new \DateTime(),
+                'transaction_date' => $request->balance_start_date,
                 'bank_id' => $Bank->id,
                 'additive' => $request->open_balance,
                 ]
@@ -421,7 +421,7 @@ class CompaniesController extends Controller
                 //update data
                 $Bank->update($request->all());
                 $BankTrans->update([
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'additive' => $request->open_balance,
                 ]);
                 DB::commit();

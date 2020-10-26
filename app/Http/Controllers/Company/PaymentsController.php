@@ -20,7 +20,7 @@ class PaymentsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function Index()
     {
         $id = session('company_id');
@@ -194,7 +194,7 @@ class PaymentsController extends Controller
             if($request->person_type != null){
                 $Transaction->update(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => $CashPurch->cash_date,
+                    'transaction_date' => $request->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'cash_id'=>$cash_id,
@@ -207,7 +207,7 @@ class PaymentsController extends Controller
             }else{
                 $Transaction->update(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => $CashPurch->cash_date,
+                    'transaction_date' => $request->cash_date,
                     'person_name'=>$request->person_name,
                     'person_id'=>null,
                     'person_type_id'=>null,
