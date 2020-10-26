@@ -42,16 +42,23 @@ class ClientsReportController extends Controller
         ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
         ->groupBy('person_id');
 
+        $TotalPost = DB::table('invoices')
+        ->select(DB::raw('sum(ifnull(total_price_post_discounts,0)) as total_sales,invoices.person_id'))
+        ->where('invoice_type','=',1)
+        ->groupBy('person_id');
+
         $Supplier = DB::table('persons')
-        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
-        ->leftJoin('invoices','invoices.person_id','=','persons.id')
+        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_sales,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_sales,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoinSub($TotalPost, 'invoices',function($join){
+            $join->on('invoices.person_id','=','persons.id');
+        })
         ->leftJoinSub($TotalPay,'finan_transactions',function($join){
             $join->on('finan_transactions.person_id', '=', 'persons.id');
         })
         ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
             $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
         })
-        ->where([['person_type_id','=',100],['invoice_type','=',1]]);
+        ->where('person_type_id','=',100);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Supplier->where('persons.company_id','=',$request->company_id);
