@@ -28,7 +28,7 @@
                 </div>
                 <div class="product-status-wrap drp-lst">
                     <h4 style="text-align:right">بيان المدفوعات</h4>
-                    <h3 style="text-align:right">{{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3>
+                    <h3 style="text-align:right">{{$Company->company_official_name}}</h3>
                 </div>
                 <div class="product-payment-inner-st"style="padding-top:0px">
                     <div class="row">

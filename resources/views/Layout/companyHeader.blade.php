@@ -69,11 +69,11 @@
 												<li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> تقارير الحركات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
-                                                        @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                        @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                         <a href="{{route('Company-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a>
 														<a href="{{route('Company-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a>
                                                         @endif
-                                                        @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
+                                                        @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                         <a href="{{route('Company-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a>
                                                         <a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a>
 														<a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a>
@@ -97,17 +97,17 @@
                                                     @if(Auth::user()->role_id == 104)
                                                     <a href="#" class="dropdown-item">كشف الشركات</a>
                                                     <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
-                                                    @elseif (Auth::user()->role_id == 102)
+                                                    @elseif (Auth::user()->role_id == 102 || Auth::user()->role_id == 106)
                                                     <a href="#" class="dropdown-item">كشف الشركات</a>
-                                                    @elseif(Auth::user()->role_id == 103)
+                                                    @elseif(Auth::user()->role_id == 103 || Auth::user()->role_id == 106)
                                                     <a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a>
                                                     @endif
-                                                    @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
+                                                    @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                     <a href="{{url('/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات </a>
                                                     <a href="{{url('/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات </a>
                                                     <a href="#" class="dropdown-item"> إشعارات الخصم</a>
                                                     @endif
-                                                    @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                    @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                     <a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a>
                                                     <a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a>
                                                     <a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a>
@@ -123,7 +123,7 @@
 
 													</div>
                                                 </li>
-                                                @if (Auth::user()->role_id == 102)
+                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 106)
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشيكات </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
@@ -132,7 +132,7 @@
 													</div>
                                                 </li>
                                                 @endif
-                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
+                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الفواتير </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
@@ -142,7 +142,7 @@
                                                 </li>
                                                 @endif
 
-                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                 <li class="nav-item dropdown res-dis-nn">
 													<a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"> <span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الخزينة </a>
 													<div role="menu" class="dropdown-menu animated zoomIn">
@@ -152,7 +152,7 @@
                                                 </li>
                                                 @endif
 
-                                                @if (Auth::user()->role_id == 103)
+                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 106)
                                                     <li class="nav-item dropdown res-dis-nn">
                                                         <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> الشركة </a>
                                                         <div role="menu" class="dropdown-menu animated zoomIn">
@@ -232,25 +232,24 @@
 										<li>
 											<a data-toggle="collapse" data-target="#democrou" href="#">تقارير الشركة <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="democrou" class="collapse dropdown-header-top">
-<<<<<<< HEAD
                                                 @if(Auth::user()->role_id == 104)
                                                 <li><a href="#" class="dropdown-item">كشف الشركات</a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a></li>
-                                                @elseif (Auth::user()->role_id == 102)
+                                                @elseif (Auth::user()->role_id == 102 || Auth::user()->role_id == 106)
                                                 <li><a href="#" class="dropdown-item">كشف الشركات</a></li>
-                                                @elseif(Auth::user()->role_id == 103)
+                                                @elseif(Auth::user()->role_id == 103 || Auth::user()->role_id == 106)
                                                 <li><a href="#" class="dropdown-item">تقرير بيانات المتعاملين</a></li>
                                                 @endif
-                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
+                                                @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                 <li><a href="{{url('/Invoices/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المشتريات </a></li>
                                                 <li><a href="{{url('/Invoices/Sales/Report/Create')}}" class="dropdown-item">تقرير المبيعات </a></li>
                                                 <li><a href="#" class="dropdown-item"> إشعارات الخصم</a></li>
                                                 @endif
-                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+                                                @if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                 <li><a href="{{url('/Cash/Purchasing/Report/Create')}}" class="dropdown-item">تقرير المدفوعات النقدية  </a></li>
                                                 <li><a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a></li>
                                                 <li><a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
-=======
+{{-- =======
 											<li><a href="{{route('Company-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
 												<li><a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
 												<li><a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
@@ -261,7 +260,7 @@
 											    <li><a href="{{url('/Cash/Sales/Report/Create')}}" class="dropdown-item">تقرير حركة مقبوضات نقدية </a></li>
 
 											    <li><a href="{{url('/Permissions/Receipt/Report/Create')}}" class="dropdown-item">تقرير أذونات استيلام النقدية  </a></li>
->>>>>>> 2f4657ff444c52626255e487836a86af0fc784e8
+>>>>>>> 2f4657ff444c52626255e487836a86af0fc784e8 --}}
                                                 <li><a href="{{url('/Permissions/Payment/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف النقدية  </a></li>
                                                 <li><a href="{{url('/Cheques/Report/Create')}}" class="dropdown-item">تقرير أذونات صرف  - استلام شيكات </a></li>
                                                 <li><a href="#" class="dropdown-item">تقرير الضريبة على القيمه المضافة </a></li>
@@ -276,11 +275,11 @@
 										<li>
 											<a data-toggle="collapse" data-target="#demolibra" href="#"> تقارير الحركات <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 											<ul id="demolibra" class="collapse dropdown-header-top">
-												@if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104)
+												@if (Auth::user()->role_id == 102 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                         <li><a href="{{route('Company-bank-report.index')}}" class="dropdown-item">تقرير حركة بنك</a></li>
 														<li><a href="{{route('Company-cashBox-report.index')}}" class="dropdown-item">تقرير حركة خزينة </a></li>
                                                         @endif
-                                                        @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104)
+                                                        @if (Auth::user()->role_id == 103 || Auth::user()->role_id == 104 || Auth::user()->role_id == 106)
                                                         <li><a href="{{route('Admin-client-report.index')}}" class="dropdown-item">تقرير حركة العميل</a></li>
                                                         <li><a href="{{route('Company-supplier-report.index')}}" class="dropdown-item">تقرير حركة المورد</a></li>
 														<li><a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>

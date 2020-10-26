@@ -31,7 +31,7 @@
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd">
                             <h4 style="text-align:right">بيان المقبوضات</h4>
-                            <h3 style="text-align:right">{{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3><br />
+                            <h3 style="text-align:right">{{$Company->company_official_name}}</h3><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
