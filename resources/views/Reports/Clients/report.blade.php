@@ -163,8 +163,8 @@ tbody tr td{
         <thead>
             <tr>
                 <th>المسلسل</th>
-                <th>كود المورد</th>
-                <th>اسم المورد</th>
+                <th>كود العميل</th>
+                <th>اسم العميل</th>
                 <th>الهاتف</th>
                 <th>اجمالي المشتريات</th>
                 <th>الرصيدالافتتاحي</th>
@@ -182,7 +182,7 @@ tbody tr td{
                     <td>{{$Supplier->total_sales}}جم</td>
                     <td>{{$Supplier->open_balance}}جم</td>
                     <td>{{$Supplier->current}}جم</td>
-                    <td>{{$Supplier->total_pay}}جم</td>
+                    <td>{{$Supplier->total_rec - $Supplier->total_pay}}جم</td>
                 </tr>
             @endforeach
         </tbody>

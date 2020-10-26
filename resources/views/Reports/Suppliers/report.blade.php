@@ -182,7 +182,7 @@ tbody tr td{
                     <td>{{$Supplier->total_purch}}جم</td>
                     <td>{{$Supplier->open_balance}}جم</td>
                     <td>{{$Supplier->current}}جم</td>
-                    <td>{{$Supplier->total_pay}}جم</td>
+                    <td>{{$Supplier->total_pay - $Supplier->total_rec}}جم</td>
                 </tr>
             @endforeach
         </tbody>

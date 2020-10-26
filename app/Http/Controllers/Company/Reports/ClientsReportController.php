@@ -51,7 +51,7 @@ class ClientsReportController extends Controller
         ->leftJoinSub($TotalRec,'finan_transactions_rec',function($join){
             $join->on('finan_transactions_rec.person_id', '=', 'persons.id');
         })
-        ->where('person_type_id','=',100);
+        ->where([['person_type_id','=',100],['invoice_type','=',1]]);
         if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110) {
             $id = $request->company_id;
             $Supplier->where('persons.company_id','=',$request->company_id);
