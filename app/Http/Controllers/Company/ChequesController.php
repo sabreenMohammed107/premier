@@ -16,7 +16,7 @@ use stdClass;
 
 class ChequesController extends Controller
 {
-
+    //Cheques
     public function __construct()
     {
         $this->middleware('auth');
