@@ -171,7 +171,7 @@ class PersonsController extends Controller
             if($request->open_balance > 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
@@ -182,7 +182,7 @@ class PersonsController extends Controller
             }elseif($request->open_balance < 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
@@ -193,7 +193,7 @@ class PersonsController extends Controller
             }else{
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '102',
@@ -260,20 +260,20 @@ class PersonsController extends Controller
                 //update transaction data
                 if($request->open_balance > 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => $request->open_balance,
                         'subtractive' => 0,
                         ]);
 
                 }elseif($request->open_balance < 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => abs($request->open_balance),
                         ]);
                 }else{
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => 0,
                     ]);
@@ -509,7 +509,7 @@ class PersonsController extends Controller
             if($request->open_balance > 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
@@ -520,7 +520,7 @@ class PersonsController extends Controller
             }elseif($request->open_balance < 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
@@ -531,7 +531,7 @@ class PersonsController extends Controller
             }else{
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '101',
@@ -606,20 +606,20 @@ class PersonsController extends Controller
                 //update transaction data
                 if($request->open_balance > 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => $request->open_balance,
                         'subtractive' => 0,
                         ]);
 
                 }elseif($request->open_balance < 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => abs($request->open_balance),
                         ]);
                 }else{
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => 0,
                     ]);
@@ -871,7 +871,7 @@ class PersonsController extends Controller
             if($request->open_balance > 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'additive' => $request->open_balance,
                     'person_name'=>$request->person_name,
@@ -882,7 +882,7 @@ class PersonsController extends Controller
             }elseif($request->open_balance < 0){
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'subtractive' => abs($request->open_balance),
                     'person_name'=>$request->person_name,
@@ -893,7 +893,7 @@ class PersonsController extends Controller
             }else{
                 DB::table('finan_transactions')->insert(
                     ['transaction_type_id' => '110',
-                    'transaction_date' => new \DateTime(),
+                    'transaction_date' => $request->balance_start_date,
                     'person_id' => $Person->id,
                     'person_name'=>$request->person_name,
                     'person_type_id'=> '100',
@@ -966,20 +966,20 @@ class PersonsController extends Controller
                 //update transaction data
                 if($request->open_balance > 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => $request->open_balance,
                         'subtractive' => 0,
                         ]);
 
                 }elseif($request->open_balance < 0){
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => abs($request->open_balance),
                         ]);
                 }else{
                     $OpenBalance->update([
-                        'transaction_date' => new \DateTime(),
+                        'transaction_date' => $request->balance_start_date,
                         'additive' => 0,
                         'subtractive' => 0,
                     ]);
