@@ -132,7 +132,7 @@ class PaymentsController extends Controller
             if($request->person_type != null){
                 FinanTransaction::create(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => $CashPurch->cash_date,
+                    'transaction_date' => $request->cash_date,
                     'person_id' => $Person->id,
                     'person_name'=>$Person->person_name,
                     'person_type_id'=> $Person->person_type_id,
@@ -146,7 +146,7 @@ class PaymentsController extends Controller
             }else{
                 FinanTransaction::create(
                     ['transaction_type_id' => '107',
-                    'transaction_date' => $CashPurch->cash_date,
+                    'transaction_date' => $request->cash_date,
                     'person_name'=>$request->person_name,
                     'safe_id'=>$Company->safe_id,
                     'cash_id'=>$CashPurch->id,
