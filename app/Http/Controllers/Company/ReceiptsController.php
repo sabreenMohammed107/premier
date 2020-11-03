@@ -238,7 +238,7 @@ class ReceiptsController extends Controller
 
             return redirect("/Cash/Sales")->with('flash_success', "تم تعديل بيانات المقبوضات بنجاح");
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             DB::rollBack();
             return redirect("/Cash/Sales")->with('flash_danger', "لم يتم تعديل بيانات المقبوضات ");
 
