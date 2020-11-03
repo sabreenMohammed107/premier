@@ -159,7 +159,7 @@ class PaymentsController extends Controller
             DB::commit();
             return redirect("/Cash/Purchasing")->with('flash_success', "تم اضافة المدفوعات بنجاح");
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             DB::rollBack();
             return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم اضافة المدفوعات ");
 
@@ -222,7 +222,7 @@ class PaymentsController extends Controller
             DB::commit();
             return redirect("/Cash/Purchasing")->with('flash_success', "تم تعديل بيانات المدفوعات بنجاح");
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             DB::rollBack();
             return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم تعديل بيانات المدفوعات ");
         }
@@ -244,7 +244,7 @@ class PaymentsController extends Controller
             return redirect("/Cash/Purchasing")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
 
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             DB::rollBack();
             return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم حذف بيانات المدفوعات");
         }
