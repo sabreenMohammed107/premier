@@ -16,7 +16,7 @@ class HasCash
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 102 && Auth::user()->role_id != 104){
+        if(Auth::user()->role_id != 102 && Auth::user()->role_id != 106 && Auth::user()->role_id != 104){
             return redirect("/Company")->with('flash_info', " قسم الخزينة ليس تابع لصلاحياتك");
         }
         return $next($request);

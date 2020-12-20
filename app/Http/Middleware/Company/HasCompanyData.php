@@ -16,7 +16,7 @@ class HasCompanyData
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 103){
+        if(Auth::user()->role_id != 103 && Auth::user()->role_id != 106){
             return redirect("/Company")->with('flash_info', "هذا قسم ليس تابع لصلاحياتك");
         }
         return $next($request);

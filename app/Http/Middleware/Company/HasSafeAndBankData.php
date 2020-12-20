@@ -3,9 +3,8 @@
 namespace App\Http\Middleware\Company;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class HasCheques
+class HasSafeAndBankData
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class HasCheques
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 102 && Auth::user()->role_id != 106){
-            return redirect("/Company")->with('flash_info', " قسم المعاملات البنكية ليس تابع لصلاحياتك");
+        if(!\App\Http\Controllers\Company\SettingsController::CheckSafeAndBank()){
+            return redirect("/Company")->with('flash_info', " برجاء ادخال بنك و خزينة لتوافر تلك الخدمة");
         }
         return $next($request);
     }

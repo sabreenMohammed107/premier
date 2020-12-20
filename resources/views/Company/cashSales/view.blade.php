@@ -27,9 +27,9 @@
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd dir-rtl">
-                        <h1 class="dir-rtl">{{ __('titles.receipts') }}</h1>
-                        <h3>{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>                            <br />
+                        <div class="main-sparkline13-hd">
+                            <h4 style="text-align:right">بيان المقبوضات</h4>
+                            <h3 style="text-align:right">{{$Company->company_official_name}}</h3><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">

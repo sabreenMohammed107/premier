@@ -31,10 +31,10 @@
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright " >
-                            <div class="chosen-select-single mg-b-20 dir-rtl" >
-                                <h3>{{ __('titles.company') }}</h3>
-                                <h3>{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>
+                        <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
+                                <h3>الشركة</h3>
+                                <h3>{{$Company->company_official_name}}</h3>
                             </div>
 
                             <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"

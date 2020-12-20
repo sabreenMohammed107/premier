@@ -8,6 +8,7 @@ class FinanTransaction extends Model
 {
     //main settings
     protected $table = 'finan_transactions';
+    public $timestamps = true;
     protected $primaryKey = 'id';
     protected $fillable = [
         'transaction_type_id',

@@ -27,10 +27,9 @@
                         <a href="{{url('/Cash/Purchasing')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.back') }}</a>
                     </div>
                 </div>
-                <div class="product-status-wrap drp-lst dir-rtl">
-                <h4 >{{ __('titles.purchasing') }}</h4>
-                            <h3 >{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3><br />
-                       
+                <div class="product-status-wrap drp-lst">
+                    <h4 style="text-align:right">بيان المدفوعات</h4>
+                    <h3 style="text-align:right">{{$Company->company_official_name}}</h3>
                 </div>
                 <div class="product-payment-inner-st" style="padding-top:0px">
                     <div class="row">

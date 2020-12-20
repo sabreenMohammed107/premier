@@ -94,12 +94,12 @@
                                         <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
-                                                    <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="approved">
-                                                    <label><b> {{ __('titles.not_confirm') }} </b></label>
+                                                    <input class="" type="radio" value="0" id="optionsRadios1" name="approved">
+                                                    <label><b> غير معتمد </b></label>
                                                     <input class="" type="radio" value="1" id="optionsRadios2" name="approved">
-                                                    <label><b> {{ __('titles.confirm') }} </b></label>
-                                                    <input class="" type="radio" id="optionsRadios3" value="" name="approved">
-                                                    <label><b>  {{ __('titles.all') }} </b></label>
+                                                    <label><b> معتمد </b></label>
+                                                    <input class="radio-checked" checked="" type="radio" id="optionsRadios3" value="" name="approved">
+                                                    <label><b> الكل </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -109,12 +109,12 @@
                                         <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
-                                                    <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="fund_source">
-                                                    <label><b> {{ __('titles.cash_box') }} </b></label>
+                                                    <input class="" type="radio" value="0" id="optionsRadios1" name="fund_source">
+                                                    <label><b> الخزينة </b></label>
                                                     <input class="" type="radio" value="1" id="optionsRadios2" name="fund_source">
-                                                    <label><b> {{ __('titles.bank') }}  </b></label>
-                                                    <input class="" type="radio" value="" id="optionsRadios3" name="fund_source">
-                                                    <label><b> {{ __('titles.all') }}  </b></label>
+                                                    <label><b> البنك </b></label>
+                                                    <input class="radio-checked" type="radio" checked="" value="" id="optionsRadios3" name="fund_source">
+                                                    <label><b> الكل </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -124,12 +124,12 @@
                                         <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
-                                                    <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="confirm">
-                                                    <label><b> {{ __('titles.not_done') }}</b></label>
+                                                    <input class="" type="radio" value="0" id="optionsRadios1" name="confirm">
+                                                    <label><b> لم يتم </b></label>
                                                     <input class="" type="radio" value="1" id="optionsRadios2" name="confirm">
-                                                    <label><b> {{ __('titles.done') }} </b></label>
-                                                    <input class="" type="radio" value="" id="optionsRadios3" name="confirm">
-                                                    <label><b> {{ __('titles.all') }} </b></label>
+                                                    <label><b> تم </b></label>
+                                                    <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="confirm">
+                                                    <label><b> الكل </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -139,12 +139,12 @@
                                         <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
-                                                    <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="guided_item_id">
-                                                    <label><b> {{ __('titles.not_done') }} </b></label>
+                                                    <input class="" type="radio" value="0" id="optionsRadios1" name="guided_item_id">
+                                                    <label><b> لم يتم </b></label>
                                                     <input class="" type="radio" value="1" id="optionsRadios2" name="guided_item_id">
-                                                    <label><b> {{ __('titles.done') }} </b></label>
-                                                    <input class="" type="radio" value="" id="optionsRadios3" name="guided_item_id">
-                                                    <label><b> {{ __('titles.all') }} </b></label>
+                                                    <label><b> تم </b></label>
+                                                    <input class="radio-checked" type="radio" checked="" value="" id="optionsRadios3" name="guided_item_id">
+                                                    <label><b> الكل </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">

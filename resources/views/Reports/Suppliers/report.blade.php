@@ -192,10 +192,10 @@ tbody tr td{
                     <td>{{$Supplier->id}}</td>
                     <td>{{$Supplier->person_name}}</td>
                     <td>{{$Supplier->phone1}}</td>
-                    <td>{{$Supplier->total_purch}}</td>
-                    <td>{{$Supplier->open_balance}}</td>
-                    <td>{{$Supplier->current}}</td>
-                    <td>{{$Supplier->total_pay}}</td>
+                    <td>{{$Supplier->total_purch}}جم</td>
+                    <td>{{$Supplier->open_balance}}جم</td>
+                    <td>{{$Supplier->current}}جم</td>
+                    <td>{{$Supplier->total_pay - $Supplier->total_rec}}جم</td>
                 </tr>
             @endforeach
         </tbody>
