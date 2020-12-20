@@ -264,7 +264,6 @@ return [
 'depit'=>'مدين',
    /*------table----------*/
    'showing'=>'',
-   ''
 
        /*------global Admin header----------*/
 
