@@ -138,11 +138,11 @@ class ReceiptsController extends Controller
                 );
             }
             DB::commit();
-            return redirect("/Cash/Sales")->with('flash_success', "تم اضافة المقبوضات بنجاح");
+            return redirect("/Cash/Sales")->with('flash_success', \Lang::get('titles.saving_msg'));
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Cash/Sales")->with('flash_danger', "لم تتم اضافة المقبوضات ");
+            return redirect("/Cash/Sales")->with('flash_danger', \Lang::get('titles.saving_msg_error'));
 
         }
 
@@ -227,11 +227,11 @@ class ReceiptsController extends Controller
             }
             DB::commit();
 
-            return redirect("/Cash/Sales")->with('flash_success', "تم تعديل بيانات المقبوضات بنجاح");
+            return redirect("/Cash/Sales")->with('flash_success', \Lang::get('titles.update_msg'));
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم تعديل بيانات المقبوضات ");
+            return redirect("/Cash/Sales")->with('flash_danger', \Lang::get('titles.update_msg_error'));
 
         }
 
@@ -249,11 +249,11 @@ class ReceiptsController extends Controller
             $Transaction->delete();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             DB::commit();
-            return redirect("/Cash/Sales")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
+            return redirect("/Cash/Sales")->with('flash_success',\Lang::get('titles.delete_msg'));
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Cash/Sales")->with('flash_danger', "لم يتم حذف بيانات المدفوعات ");
+            return redirect("/Cash/Sales")->with('flash_danger', \Lang::get('titles.delete_msg_error'));
 
         }
     }

@@ -7,17 +7,18 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.clients') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/Clients")}}">العملاء</a> <span class="bread-slash"> / </span>
+        <span class="bread-blod"> {{ __('titles.company') }}</span>
     </li>
+
     <li>
     <span class="bread-blod">
         @if(isset($Client->person_name))
         {{$Client->person_name}}
         @else
-        أضافة جديد
+        {{ __('titles.add') }}
         @endif
     </span>
     </li>
@@ -29,7 +30,7 @@
 		<!-- Single pro tab review Start-->
 		<div class="single-pro-review-area mt-t-30 mg-b-15">
 			<div class="container-fluid">
-                <a href="{{ url("/Company/Clients")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
+                <a href="{{ url("/Company/Clients")}}" class="btn btn-primary waves-effect waves-light mg-b-15"> {{ __('titles.back') }}</a>
             @component('/Company/components/ClientForm')
             @slot('image')
             @isset($Client->person_logo)
@@ -109,7 +110,7 @@
             @endslot
                     @if($type == 'View')
                         @slot('title')
-                            بيانات العميل : {{$Client->person_name}}
+                        {{ __('titles.client_data') }} : {{$Client->person_name}}
                         @endslot
                         @slot('disabled')
                             disabled
@@ -124,10 +125,10 @@
                             @endif
                         @endslot
                         @slot('title')
-                            تعديل بيانات العميل : {{$Client->person_name}}
+                        {{ __('titles.edit') }} : {{$Client->person_name}}
                         @endslot
                         @slot('button')
-                            تعديل البيانات
+                        {{ __('titles.edit') }}
                         @endslot
                         @slot('action')
                             {{ url("/Company/Client/$Client->id/Update") }}
@@ -142,17 +143,17 @@
 
             @else
                 @slot('title')
-                    أضافة عميل
+                {{ __('titles.add') }}
                 @endslot
 
                 @slot('button')
-                            أضافة العميل
+                {{ __('titles.add') }}
                 @endslot
                 @slot('action')
                     {{ url("/Company/Client/Create") }}
                 @endslot
             @endif
-            <strong>حدث خطأ ما!</strong> حاول مره أخرى!
+            <strong>{{ __('titles.something_error') }}</strong>{{ __('titles.try_again') }}
             @endcomponent
 			</div>
 		</div>

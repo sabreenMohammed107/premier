@@ -6,11 +6,12 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.receipts') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod">  مقبوضات </span>
+        <span class="bread-blod"> {{ __('titles.company') }}</span>
     </li>
+
 </ul>
 
 @endsection
@@ -22,105 +23,105 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mg-b-15">
-                <a href="{{url('/Cash/Sales')}}" class="btn btn-primary waves-effect waves-light">رجــــوع</a>
+                <a href="{{url('/Cash/Sales')}}" class="btn btn-primary waves-effect waves-light"> {{ __('titles.back') }}</a>
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h4 style="text-align:right">بيان المقبوضات</h4>
-                            <h3 style="text-align:right">{{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                        <h1 class="dir-rtl">{{ __('titles.receipts') }}</h1>
+                        <h3>{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>                            <br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
+                        <div class="datatable-dashv1-list custom-datatable-overright" >
                             <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row" style="text-align:right !important;direction:rtl !important">
+                                <div class="row row-ltr" >
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow">
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" class="form-control" value="{{date('Y-m-d', strtotime($Cash->cash_date))}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>التاريخ</b></label>
+                                                <label class="login2"><b>{{__('titles.date')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" class="form-control" value="{{$Cash->cash_receipt_note}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>اذن الاستلام</b></label>
+                                                <label class="login2"><b>{{__('titles.permission_no')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="text" class="form-control"
                                                     @if ($Cash->approved == 1)
-                                                        value="نعم"
+                                                        value="{{__('titles.yes')}}"
                                                     @else
-                                                        value="لا"
+                                                        value="{{__('titles.no')}}"
                                                     @endif
                                                     disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>معتمد</b></label>
+                                                <label class="login2"><b> {{__('titles.confirm')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="text" class="form-control" value="{{$Cash->statement}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>البيان</b></label>
+                                                <label class="login2"><b>{{__('titles.declaration')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="text" class="form-control" value="الخزينة" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>السيولة</b></label>
+                                                <label class="login2"><b>{{__('titles.mony_amount')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" class="form-control" value="{{$Cash->person_name}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>الاسم</b></label>
+                                                <label class="login2"><b>{{__('titles.name')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="text" class="form-control" disabled placeholder="28198211">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>رصيدالخزينه الحالى</b></label>
+                                                <label class="login2"><b>{{__('titles.current_balance')}}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" class="form-control" value="{{$Cash->cash_amount}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>المبلغ</b></label>
+                                                <label class="login2"><b>{{__('titles.amount')}}</b></label>
                                             </div>
                                         </div>
                                     </div>

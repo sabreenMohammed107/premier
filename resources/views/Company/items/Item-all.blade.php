@@ -4,20 +4,21 @@
 
 
 @section('crumb')
+<ul class="breadcome-menu dir-rtl">
+<li>
+        <span class="bread-blod"> {{ __('titles.items') }}</span> <span class="bread-slash"> / </span>
+    </li>
+    <li>
+        <a href="{{url('/Company')}}"> {{ __('titles.company') }}</a><span class="bread-slash"> / </span>
+    </li>
+    
 
-<ul class="breadcome-menu">
-    <li>
-    <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
-    </li>
-    <li>
-        <a href="{{ url("/Company/Items")}}">الاصناف</a> <span class="bread-slash"> / </span>
-    </li>
     <li>
     <span class="bread-blod">
         @if(isset($Item->item_arabic_name))
         {{$Item->item_arabic_name}}
         @else
-        أضافة جديد
+        {{ __('titles.add') }}
         @endif
     </span>
     </li>
@@ -29,7 +30,7 @@
 		<!-- Single pro tab review Start-->
 		<div class="single-pro-review-area mt-t-30 mg-b-15">
 			<div class="container-fluid">
-                <a href="{{ url("/Company/Items")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
+                <a href="{{ url("/Company/Items")}}" class="btn btn-primary waves-effect waves-light mg-b-15"> {{ __('titles.back') }}</a>
             @component('/Company/components/ItemForm')
             @slot('image')
             @isset($Item->item_image)
@@ -66,7 +67,7 @@
             @endslot
                     @if($type == 'View')
                         @slot('title')
-                            بيانات المنتج : {{$Item->item_arabic_name}}
+                        {{ __('titles.item_details') }}: {{$Item->item_arabic_name}}
                         @endslot
                         @slot('disabled')
                             disabled
@@ -81,10 +82,10 @@
                             @endif
                         @endslot
                         @slot('title')
-                            تعديل بيانات المنتج : {{$Item->item_arabic_name}}
+                        {{ __('titles.edit') }} : {{$Item->item_arabic_name}}
                         @endslot
                         @slot('button')
-                            تعديل البيانات
+                        {{ __('titles.edit') }}
                         @endslot
                         @slot('action')
                             {{ url("/Company/Item/$Item->id/Update") }}
@@ -99,17 +100,17 @@
 
             @else
                 @slot('title')
-                    أضافة منتج
+                {{ __('titles.add') }}
                 @endslot
 
                 @slot('button')
-                            أضافة المنتج
+                {{ __('titles.add') }}
                 @endslot
                 @slot('action')
                     {{ url("/Company/Item/Create") }}
                 @endslot
             @endif
-            <strong>حدث خطأ ما!</strong> حاول مره أخرى!
+            <strong> {{ __('titles.something_error') }}</strong> {{ __('titles.try_again') }}
             @endcomponent
 			</div>
 		</div>

@@ -20,6 +20,18 @@ html,body,.body{
     /* background: #ddd; */
     width: 100%;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .header{
     padding: 25px 10px;
     width: 20%;
@@ -144,15 +156,15 @@ td{
 
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }}: {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }}: {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -165,9 +177,9 @@ td{
                     <div class="header-head">
                         <span>
                             <div class="data">
-                                <span dir="rtl">م.ض : {{$Company->tax_card}}</span><br>
-                                <span dir="rtl">ض.م : {{$Company->registeration_no}}</span><br>
-                                <span dir="rtl">س.ت : {{$Company->commercial_register}}</span>
+                                <span dir="rtl">{{ __('titles.tax_card') }}: {{$Company->tax_card}}</span><br>
+                                <span dir="rtl">{{ __('titles.registeration_no') }} : {{$Company->registeration_no}}</span><br>
+                                <span dir="rtl">{{ __('titles.commercial_register') }} : {{$Company->commercial_register}}</span>
                             </div>
                         </span>
                     </div>
@@ -175,7 +187,7 @@ td{
                     {{-- <div dir="rtl" class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span>{{ __('titles.company') }}  :</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -198,7 +210,7 @@ td{
 
 @foreach ($Invoices as $i => $Invoice)
 <div class="rep_name">
-    <span dir="rtl">فاتورة مبيعات رقم : {{$Invoice->invoice_no}}</span>
+    <span dir="rtl">{{ __('titles.invoice_no') }}: {{$Invoice->invoice_no}}</span>
 </div><br><br><br>
 <div style="text-align: right;font-size:12px;background-color: #eee;padding:10px;direction:rtl; width:40%;">
     <span dir="rtl">المطلوب من السيد / {{$Invoice->person_name}}</span><br>
@@ -208,11 +220,11 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>نوع الخدمة :</span>
+                <span>{{ __('titles.Services_type') }}  :</span>
             </div>
             <div class="off_name">
                 <span>
-                {{$Invoice->service_type ?? 'لم يتم'}}
+                {{$Invoice->service_type ?? {{ __('titles.not_done')}}
                 </span>
             </div>
         </span>
@@ -220,7 +232,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اجمالي الاصناف :</span>
+                <span>{{ __('titles.total_items')}} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -232,7 +244,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>الاجمالي بعد الخصومات :</span>
+                <span>{{ __('titles.total_price_post_discounts')}} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -244,7 +256,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اجمالي ضريبة ارباح تجارية و صناعية :</span>
+                <span>{{ __('titles.comm_industr_prof_tax')}} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -256,7 +268,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اجمالي القيمة المضافة :</span>
+                <span>{{ __('titles.total_vat_value')}} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -268,7 +280,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>ملاحظات :</span>
+                <span>{{ __('titles.notes')}}  :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -282,14 +294,14 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>معتمد :</span>
+                <span>{{ __('titles.confirm')}} :</span>
             </div>
             <div class="off_name">
                 <span>
                     @if ($Invoice->approved == 1)
-                        معتمد
+                    {{ __('titles.confirm')}}
                     @else
-                    غير معتمد
+                    {{ __('titles.not_confirm')}}
                     @endif
 
                 </span>
@@ -299,7 +311,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>نوع الشخص :</span>
+                <span> {{ __('titles.person_type')}} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -311,7 +323,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>نوع المصروف :</span>
+                <span>{{ __('titles.outgoings_type')}}:</span>
             </div>
             <div class="off_name">
                 <span>
@@ -323,11 +335,11 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اجمالي الخصومات :</span>
+                <span>{{ __('titles.discount')}} :</span>
             </div>
             <div class="off_name">
                 <span>
-                {{$Invoice->total_items_discount ?? 'لم يتم'}}
+                {{$Invoice->total_items_discount ??  __('titles.not_done')}}
                 </span>
             </div>
         </span>
@@ -335,11 +347,11 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>صافي الفاتورة :</span>
+                <span>{{ __('titles.net_value')}} :</span>
             </div>
             <div class="off_name">
                 <span>
-                {{$Invoice->net_invoice ?? 'لم يتم'}}
+                {{$Invoice->net_invoice ??  __('titles.not_done')}}
                 </span>
             </div>
         </span>
@@ -347,14 +359,14 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>فاتورة مرتدة :</span>
+                <span>{{ __('titles.returned')}} :</span>
             </div>
             <div class="off_name">
                 <span>
                     @if ($Invoice->return_back_invoice == 1)
-                        نعم
+                    {{ __('titles.yes')}}
                     @else
-                        لا
+                    {{ __('titles.no')}}
                     @endif
                 </span>
             </div>
@@ -364,18 +376,18 @@ td{
 <table>
     <thead>
         <tr>
-            <th>عنصر مخزون</th>
-            <th>كود</th>
-            <th>اسم الصنف</th>
-            <th>السعر</th>
-            <th>الكمية</th>
-            <th>الاجمالي</th>
-            <th>اجمالي الخصومات</th>
-            <th>الاجمالي بعد الخصومات</th>
-            <th>اعفاء ضريبي</th>
-            <th>ضريبة القيمة المضافة</th>
-            <th>ضريبة ارباح تجارية و صناعية</th>
-            <th>صافي المبلغ</th>
+            <th>{{ __('titles.stocked')}}</th>
+            <th>{{ __('titles.code')}}</th>
+            <th>{{ __('titles.name')}}</th>
+            <th>{{ __('titles.price')}}</th>
+            <th>{{ __('titles.qty')}}</th>
+            <th>{{ __('titles.total')}}</th>
+            <th>{{ __('titles.discount')}}</th>
+            <th>{{ __('titles.total_price_post_discounts')}}</th>
+            <th>{{ __('titles.exemption')}}</th>
+            <th>{{ __('titles.vat_value')}}</th>
+            <th>{{ __('titles.comm_industr_prof_tax')}}</th>
+            <th>{{ __('titles.net_value')}}</th>
         </tr>
     </thead>
     <tbody>
@@ -386,28 +398,28 @@ td{
             <tr>
                 <td>
                     @if ($Item->store_item == 1)
-                        نعم
+                    {{ __('titles.yes')}}
                     @else
-                        لا
+                    {{ __('titles.no')}}
                     @endif
                 </td>
                 <td>{{$Item->id}}</td>
                 <td>{{$Item->item_text}}</td>
-                <td>{{$Item->item_price}}جم</td>
+                <td>{{$Item->item_price}}</td>
                 <td>{{$Item->item_quantity}}</td>
-                <td>{{$Item->total_item_price}}جم</td>
-                <td>{{$Item->item_discount}}جم</td>
-                <td>{{$Item->total_after_discounts}}جم</td>
+                <td>{{$Item->total_item_price}}</td>
+                <td>{{$Item->item_discount}}</td>
+                <td>{{$Item->total_after_discounts}}</td>
                 <td>
                     @if ($Item->tax_exemption == 1)
-                        نعم
+                    {{ __('titles.yes')}}
                     @else
-                        لا
+                    {{ __('titles.no')}}
                     @endif
                 </td>
-                <td>{{$Item->vat_tax_value}}جم</td>
-                <td>{{$Item->comm_industr_tax}}جم</td>
-                <td>{{$Item->net_value}}جم</td>
+                <td>{{$Item->vat_tax_value}}</td>
+                <td>{{$Item->comm_industr_tax}}</td>
+                <td>{{$Item->net_value}}</td>
             </tr>
         @endforeach
 

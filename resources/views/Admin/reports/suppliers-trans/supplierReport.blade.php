@@ -29,6 +29,18 @@
             /* background: #ddd; */
             width: 100%;
         }
+        .dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 
         .header {
 
@@ -143,15 +155,15 @@
                 <htmlpageheader name="page-header" style="height: 200px;
             position: fixed;">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }} : {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -189,7 +201,7 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span> الفتره من :</span>
+                            <span> {{ __('titles.date_from') }} :</span>
                         </div>
                         <div class="off_name">
                             <span>
@@ -202,7 +214,7 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span> الفترة الى :</span>
+                            <span> {{ __('titles.date_to') }} :</span>
                         </div>
                         <div class="off_name">
                             <span>
@@ -218,7 +230,7 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span>اسم الشركة :</span>
+                            <span>{{ __('titles.company') }} :</span>
                         </div>
                         <div class="off_name">
                             <span>
@@ -230,7 +242,7 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span>اسم المورد :</span>
+                            <span>{{ __('titles.name') }} :</span>
                         </div>
                         <div class="off_name">
                             <span>
@@ -242,7 +254,7 @@
                 <div dir="rtl" class="company">
                     <span>
                         <div class="name">
-                            <span> الرصيد الحالى :</span>
+                            <span>{{ __('titles.current_balance') }}:</span>
                         </div>
                         <div class="off_name">
                         <?php
@@ -260,18 +272,20 @@
                 </div>
             </div>
             <div dir="rtl" class="rightTable">
-                <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
+                <table id="courseEval" style="width: 100%" border="1" 
+                @if(str_replace('_', '-', app()->getLocale())=='ar') class="dattable table table-striped thead-dark dir-rtl"  @else
+    class="dattable table table-striped thead-dark dir-ltr"   @endif>
                     <thead>
                         <tr>
 
-                            <th> تاريخ المعاملة </th>
-                            <th>رقم الإذن</th>
-                            <th>رقم الفاتورة</th>
-                            <th>مدين</th>
-                            <th> دائن</th>
-                            <th> الرصيد الحالي</th>
-                            <th>نوع الحركة</th>
-                            <th>البيان</th>
+                            <th> {{ __('titles.date') }} </th>
+                            <th>{{ __('titles.permission_no') }}</th>
+                            <th>{{ __('titles.bill_no') }}</th>
+                            <th>{{ __('titles.depit') }}</th>
+                            <th> {{ __('titles.credit') }}</th>
+                            <th>{{ __('titles.current_balance') }}</th>
+                            <th>{{ __('titles.type') }}</th>
+                            <th>{{ __('titles.declaration') }}</th>
                           
                         </tr>
                     </thead>

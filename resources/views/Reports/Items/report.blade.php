@@ -14,6 +14,18 @@
 html,body,.body{
     box-sizing: border-box;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .body-page{
     padding: 35px 0 0;
     direction: ltr;
@@ -117,15 +129,15 @@ tbody tr td{
             <div class="body-page">
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }}: {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -139,7 +151,7 @@ tbody tr td{
                     <div dir="rtl" class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span>{{ __('titles.company') }}:</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -162,12 +174,12 @@ tbody tr td{
     <table dir="rtl" style="background-color: #021625;color:#fff;width:100%;">
         <thead>
             <tr>
-                <th>المسلسل</th>
-                <th>كود الصنف</th>
-                <th>اسم الصنف</th>
-                <th>سعر الوحدة</th>
-                <th>الرصيد الافتتاحي</th>
-                <th>الرصيد الحالي تكلفة</th>
+                <th>#</th>
+                <th>{{ __('titles.code') }}</th>
+                <th>{{ __('titles.name') }}</th>
+                <th>{{ __('titles.item_price') }}</th>
+                <th>{{ __('titles.open_blance_amount') }}</th>
+                <th>{{ __('titles.current_balance') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -176,9 +188,9 @@ tbody tr td{
                     <td style="padding: 10px;">{{++$i}}</td>
                     <td>{{$Item->id}}</td>
                     <td>{{$Item->item_name}}</td>
-                    <td>{{$Item->open_item_price}}جم</td>
-                    <td>{{$Item->total_open_balance}}جم</td>
-                    <td>{{$Item->current}}جم</td>
+                    <td>{{$Item->open_item_price}}</td>
+                    <td>{{$Item->total_open_balance}}</td>
+                    <td>{{$Item->current}}</td>
                 </tr>
             @endforeach
         </tbody>

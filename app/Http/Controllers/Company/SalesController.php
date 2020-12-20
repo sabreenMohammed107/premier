@@ -145,13 +145,13 @@ class SalesController extends Controller
                         );
                     }
                 }
-                $request->session()->flash('flash_success', "تم اضافة الفاتورة رقم : $Invoice->serial");
+                $request->session()->flash('flash_success', \Lang::get('titles.saving_msg'));
                 DB::commit();
                 return url('/Invoices/Sales');
             } catch (\Throwable $th) {
                 throw $th;
                 DB::rollBack();
-                $request->session()->flash('flash_danger', "حدث خطأ ما يرجي اعادة المحاولة");
+                $request->session()->flash('flash_danger', \Lang::get('titles.saving_msg_error'));
                 return url('/Invoices/Sales');
             }
         }
@@ -290,13 +290,13 @@ class SalesController extends Controller
                         }
                     }
                 }
-                $request->session()->flash('flash_success', "تم تعديل الفاتورة رقم : $Invoice->serial");
+                $request->session()->flash('flash_success',  \Lang::get('titles.update_msg'));
                 DB::commit();
                 return url("/Invoices/Sales/$inv_id/Edit");
             } catch (\Throwable $th) {
                 throw $th;
                 DB::rollBack();
-                $request->session()->flash('flash_danger', "حدث خطأ ما يرجي اعادة المحاولة");
+                $request->session()->flash('flash_danger',  \Lang::get('titles.update_msg_error'));
                 return url("/Invoices/Sales/$inv_id/Edit");
             }
         }

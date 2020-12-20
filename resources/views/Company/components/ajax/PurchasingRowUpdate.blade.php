@@ -25,9 +25,9 @@
         <input id="inv_type{{$i}}" type="hidden" name="" class="inv_type" value="update">
         <input id="id{{$i}}" type="hidden" name="" class="id" value="{{$InvItem->id}}">
         <input class="radio-checked isStored" onclick="editRadioStored({{$i}})" {{$checked_yes ?? ''}} type="radio"  value="yes" id="optionsRadios{{$i}}sec" name="optionsRadios{{$i}}">
-            <label><b> نعم </b></label><br>
+            <label><b> {{ __('titles.yes') }} </b></label><br>
         <input class="isStored" {{$checked_no ?? ''}} onclick="editRadioStored({{$i}})" type="radio" value="no" id="optionsRadios{{$i}}" name="optionsRadios{{$i}}">
-            <label><b> لا </b></label>
+            <label><b> {{ __('titles.no') }} </b></label>
 
         </div>
     </td>
@@ -100,7 +100,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-color-modal bg-color-2">
-                <h4 class="modal-title" style="text-align:right">حذف بيانات الصنف</h4>
+                <h4 class="modal-title" style="text-align:right">{{ __('titles.delete_data') }}</h4>
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
@@ -108,12 +108,11 @@
             <div class="modal-body">
                 <span class="educate-icon educate-danger modal-check-pro information-icon-pro"> </span>
                 <h2>{{$InvItem->item_text}}</h2>
-                <h4>هل تريد حذف جميع بيانات الصنف ؟  </h4>
-                <h4>سيتم حذف المنتجات التي لم يتم حفظ تدوينها</h4>
+                <h4>{{ __('titles.delete_data_qest') }}   </h4>
             </div>
             <div class="modal-footer info-md">
-                <a data-dismiss="modal" href="#">إلغــاء</a>
-                <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}},{{$i}});">حـذف</a>
+                <a data-dismiss="modal" href="#">{{ __('titles.cancel') }} </a>
+                <a href="#" onclick="DeleteInvoiceItem({{$InvItem->id}},{{$i}});">{{ __('titles.delete') }} </a>
             </div>
         </div>
     </div>

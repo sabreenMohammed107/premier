@@ -22,7 +22,18 @@
         .body {
             box-sizing: border-box;
         }
-
+        .dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
         .body-page {
             padding: 35px 0 0;
             direction: ltr;

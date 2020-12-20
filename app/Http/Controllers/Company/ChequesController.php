@@ -181,11 +181,11 @@ class ChequesController extends Controller
             }
             DB::commit();
 
-            return redirect("/Cheques")->with('flash_success', "تم اضافة الشيك بنجاح");
+            return redirect("/Cheques")->with('flash_success',  \Lang::get('titles.saving_msg'));
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Cheques")->with('flash_danger', "لم تتم اضافة الشيك ");
+            return redirect("/Cheques")->with('flash_danger',  \Lang::get('titles.saving_msg_error'));
         }
     }
 
@@ -239,11 +239,11 @@ class ChequesController extends Controller
             }
             $Cheque->update($request->except(['optionsRadios0','optionsRadios2','person_type']));
             DB::commit();
-            return redirect("/Cheques")->with('flash_success', "تم تعديل بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+            return redirect("/Cheques")->with('flash_success', \Lang::get('titles.update_msg'));
        } catch (\Throwable $th) {
            throw $th;
            DB::rollback();
-           return redirect("/Cheques")->with('flash_danger', "لم يتم تعديل بيانات الشيك رقم $Cheque->cheque_no ");
+           return redirect("/Cheques")->with('flash_danger',\Lang::get('titles.update_msg_error'));
 
        }
     }
@@ -258,11 +258,11 @@ class ChequesController extends Controller
             $Transactions = FinanTransaction::where('cheque_id','=',$cash_id)->delete();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             DB::commit();
-            return redirect("/Cheques")->with('flash_success', "تم حذف بيانات الشيك رقم $Cheque->cheque_no بنجاح");
+            return redirect("/Cheques")->with('flash_success', \Lang::get('titles.delete_msg'));
         } catch (\Throwable $th) {
             throw $th;
             DB::rollback();
-            return redirect("/Cheques")->with('flash_danger', "لم يتم حذف بيانات الشيك رقم $Cheque->cheque_no ");
+            return redirect("/Cheques")->with('flash_danger', \Lang::get('titles.delete_msg_error'));
         }
     }
 }

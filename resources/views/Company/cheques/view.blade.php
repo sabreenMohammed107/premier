@@ -6,10 +6,10 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.company') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod">  شيكات </span>
+        <span class="bread-blod">  {{ __('titles.cheques') }}  </span>
     </li>
 </ul>
 
@@ -20,63 +20,63 @@
 <div class="single-pro-review-area mt-t-30 mg-b-15">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                 <div class="mg-b-15">
-                <a href="{{url('/Cheques')}}" class="btn btn-primary waves-effect waves-light">رجــــــوع</a>
+                <a href="{{url('/Cheques')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.back') }}</a>
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h4 style="text-align:right">بيان الشيكات</h4>
-                            <h3 style="text-align:right">شركة : {{$Company->company_official_name}}</h3><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                            <h4 >{{ __('titles.company') }}</h4>
+                            <h3 >{{ __('titles.company') }} : {{$Company->company_official_name}}</h3><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
+                        <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
                             <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row" style="text-align:right !important;direction:rtl !important">
+                                <div class="row row-ltr">
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{$Cheque->cheque_no}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">رقم الشيك :</label>
+                                                <label class="login2">{{ __('titles.cheque_no') }} :</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                             <label class="login2">{{$Cheque->amount}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">القيمة :</label>
+                                                <label class="login2">{{ __('titles.mony_amount') }} :</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{date('Y-m-d', strtotime($Cheque->transaction_date))}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">التاريخ :</label>
+                                                <label class="login2">{{ __('titles.date') }} :</label>
                                             </div>
                                         </div>
                                         @if ($Cheque->person_id)
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{$Cheque->person_name}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">الاسم :</label>
+                                                <label class="login2">{{ __('titles.name') }} :</label>
                                             </div>
                                         </div>
                                         @endif
-                                        <div class="row">
+                                        <div class="row row-ltr" >
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{date('Y-m-d', strtotime($Cheque->due_date))}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">تاريخ الاستحقاق :</label>
+                                                <label class="login2">{{ __('titles.due_date') }} :</label>
                                             </div>
                                         </div>
                                         @if ($Cheque->person_id)
@@ -84,43 +84,43 @@
                                             $Person = $Cheque->person;
                                             $PersonType = $Person->person_type;
                                         @endphp
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{$PersonType->person_type_name}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">النوع :</label>
+                                                <label class="login2"> {{ __('titles.type') }} :</label>
                                             </div>
                                         </div>
                                         @endif
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">
                                                     @if ($Cheque->trans_type == 0)
-                                                        مشتريات
+                                                    {{ __('titles.purchasing') }}
                                                     @else
-                                                        مبيعات
+                                                    {{ __('titles.sale_bills') }}
                                                     @endif
                                                 </label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">نوع الصرف :</label>
+                                                <label class="login2">{{ __('titles.type') }} :</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{date('Y-m-d', strtotime($Cheque->release_date))}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">تاريخ الاصدار :</label>
+                                                <label class="login2">{{ __('titles.release_date') }}:</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <label class="login2">{{$Cheque->bank_name}}</label>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">بنك :</label>
+                                                <label class="login2">{{ __('titles.bank') }} :</label>
                                             </div>
                                         </div>
                                     </div>

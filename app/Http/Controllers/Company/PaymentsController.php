@@ -146,11 +146,11 @@ class PaymentsController extends Controller
                 );
             }
             DB::commit();
-            return redirect("/Cash/Purchasing")->with('flash_success', "تم اضافة المدفوعات بنجاح");
+            return redirect("/Cash/Purchasing")->with('flash_success', \Lang::get('titles.saving_msg'));
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم اضافة المدفوعات ");
+            return redirect("/Cash/Purchasing")->with('flash_danger', \Lang::get('titles.saving_msg_error'));
 
         }
 
@@ -209,11 +209,11 @@ class PaymentsController extends Controller
             }
 
             DB::commit();
-            return redirect("/Cash/Purchasing")->with('flash_success', "تم تعديل بيانات المدفوعات بنجاح");
+            return redirect("/Cash/Purchasing")->with('flash_success', \Lang::get('titles.update_msg_error'));
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم تعديل بيانات المدفوعات ");
+            return redirect("/Cash/Purchasing")->with('flash_danger', \Lang::get('titles.update_msg'));
         }
 
     }
@@ -228,12 +228,12 @@ class PaymentsController extends Controller
             $Cash->delete();
             $Transaction->delete();
             DB::commit();
-            return redirect("/Cash/Purchasing")->with('flash_success', "تم حذف بيانات المدفوعات بنجاح");
+            return redirect("/Cash/Purchasing")->with('flash_success', \Lang::get('titles.delete_msg'));
 
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return redirect("/Cash/Purchasing")->with('flash_danger', "لم يتم حذف بيانات المدفوعات");
+            return redirect("/Cash/Purchasing")->with('flash_danger', \Lang::get('titles.delete_msg_error'));
         }
 
 

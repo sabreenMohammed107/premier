@@ -125,14 +125,14 @@ class ItemsController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company/Items")->with('flash_success', "تم اضافة المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_success',  \Lang::get('titles.saving_msg'));
 
 
         } catch (\Throwable $th) {
 
             DB::rollBack();
             throw $th;
-            return redirect("/Company/Items")->with('flash_danger', "لم يتم اضافة المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_danger', \Lang::get('titles.saving_msg_error'));
         }
     }
 
@@ -177,16 +177,16 @@ class ItemsController extends Controller
 
 
                 DB::commit();
-                return redirect("/Company/Items")->with('flash_success', "تم تعديل بيانات المنتج : $request->item_arabic_name ");
+                return redirect("/Company/Items")->with('flash_success', \Lang::get('titles.update_msg'));
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company/Items")->with('flash_danger', "لم يتم تعديل بيانات المنتج : $request->item_arabic_name بسبب خطأ ما حاول مره أخرى");
+                return redirect("/Company/Items")->with('flash_danger', \Lang::get('titles.update_msg_error'));
             }
         }else{
             //update a record of person from received request
             $Item->update($request->except(['logo','id','balance_start_date','total_open_balance_qty','total_open_balance_cost','open_item_price']));
-            return redirect("/Company/Items")->with('flash_info', "تم تعديل بيانات باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على المنتج : $request->item_arabic_name");
+            return redirect("/Company/Items")->with('flash_info', \Lang::get('titles.balance_msg'));
 
         }
 
@@ -207,15 +207,15 @@ class ItemsController extends Controller
                 $Item->delete();
 
                 DB::commit();
-                return redirect("/Company/Items")->with('flash_success', "تم حذف بيانات المنتج : $Item->item_arabic_name ");
+                return redirect("/Company/Items")->with('flash_success',  \Lang::get('titles.delete_msg'));
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود خطأ ما");
+                return redirect("/Company/Items")->with('flash_danger', \Lang::get('titles.delete_msg_error'));
             }
         }else{
-            return redirect("/Company/Items")->with('flash_danger', "لم يتم حذف المنتج: $Item->item_arabic_name لوجود حركات تمت عليه");
+            return redirect("/Company/Items")->with('flash_danger', \Lang::get('titles.dont_delete_msg'));
         }
     }
 }

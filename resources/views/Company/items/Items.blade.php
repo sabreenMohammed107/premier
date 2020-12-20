@@ -3,19 +3,20 @@
 
 @section('search')
 <form role="search" class="sr-input-func">
-    <input type="text" oninput="searchItem(this.value)" placeholder="...إبحث هنا" class="search-int form-control" style="text-align:right">
+    <input type="text" oninput="searchItem(this.value)" placeholder="...{{ __('titles.search') }}" class="search-int form-control" style="text-align:right">
     <a href="#"><i class="fa fa-search"></i></a>
 </form>
 @endsection
 @section('crumb')
 
-<ul class="breadcome-menu">
-    <li>
-        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
+<ul class="breadcome-menu dir-rtl">
+<li>
+        <span class="bread-blod"> {{ __('titles.items') }}</span> <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> عرض الأصناف</span>
+        <a href="{{url('/Company')}}"> {{ __('titles.company') }}</a>
     </li>
+    
 </ul>
 
 @endsection
@@ -25,8 +26,8 @@
 {{-- Items content --}}
 <div class="courses-area">
     <div class="container-fluid">
-    <a href="{{url("/Company/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15">إضافة صنف</a>
-        <div class="row mg-b-15" id="item" style="direction:rtl;text-align:right;">
+    <a href="{{url("/Company/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15"> {{ __('titles.add') }}</a>
+        <div class="row mg-b-15 row-ltr txt-right" id="item" >
             @foreach ($Items as $Item)
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;float:right">
                 <div class="courses-inner res-mg-b-30">
@@ -44,14 +45,14 @@
                         <h2>{{$Item->item_english_name}}</h2>
                     </div> --}}
                     <div class="course-des">
-                        <p><span><i class="fa fa-clock"></i></span> <b>الكود:</b> {{$Item->item_code}}</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b>{{ __('titles.code') }}:</b> {{$Item->item_code}}</p>
                         @if ($Item->balance_start_date)
-                        <p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> {{date('Y-m-d', strtotime($Item->balance_start_date))}}</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b>{{ __('titles.open_balance_date') }}:</b> {{date('Y-m-d', strtotime($Item->balance_start_date))}}</p>
                         @else
-                        <p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> لم يتم تحديد تاريخ</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b>{{ __('titles.open_balance_date') }}:</b> لم يتم تحديد تاريخ</p>
                         @endif
-                        <p><span><i class="fa fa-clock"></i></span> <b> الرصيد الإفتتاحى تكلفة :</b> {{$Item->total_open_balance_cost}}</p>
-                        <p><span><i class="fa fa-clock"></i></span> <b> الرصيد الحالى تكلفة :</b> {{$Item->current_total}}</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b> {{ __('titles.open_blance_amount') }} :</b> {{$Item->total_open_balance_cost}}</p>
+                        <p><span><i class="fa fa-clock"></i></span> <b> {{ __('titles.current_balance') }} :</b> {{$Item->current_total}}</p>
                     </div>
                     <div class="product-buttons">
                     <a href="{{url("/Company/Items/$Item->id/View")}}" title="View" class="pd-setting-ed btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
@@ -76,7 +77,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-color-modal bg-color-2">
-                <h4 class="modal-title" style="text-align:right">حذف بيانات الصنف</h4>
+                <h4 class="modal-title" style="text-align:right">{{ __('titles.delete_data') }}</h4>
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
@@ -84,11 +85,11 @@
             <div class="modal-body">
                 <span class="educate-icon educate-danger modal-check-pro information-icon-pro"> </span>
                 <h2>{{$ItemModal->item_arabic_name}}</h2>
-                <h4>هل تريد حذف جميع بيانات متضمنه حركة فتح الحساب و ترصيد جديد الصنف ؟  </h4>
+                <h4>{{ __('titles.delete_data_qest') }} </h4>
             </div>
             <div class="modal-footer info-md">
-                <a data-dismiss="modal" href="#">إلغــاء</a>
-                <a href="{{ url("/Company/Item/$ItemModal->id/Delete")}}">حـذف</a>
+                <a data-dismiss="modal" href="#">{{ __('titles.cancel') }}</a>
+                <a href="{{ url("/Company/Item/$ItemModal->id/Delete")}}">{{ __('titles.delete') }}</a>
             </div>
         </div>
     </div>
@@ -130,10 +131,10 @@ $.ajax({
                         '<h2>'+Item.item_english_name+'</h2>' +
                     '</div>' +
                     '<div class="course-des">' +
-                        '<p><span><i class="fa fa-clock"></i></span> <b>الكود:</b> '+Item.item_code+'</p>' +
-                        '<p><span><i class="fa fa-clock"></i></span> <b>تاريخ الترصيد:</b> '+Item.balance_start_date+'</p>' +
-                        '<p><span><i class="fa fa-clock"></i></span> <b>الرصيد الافتتاحي:</b> '+Item.total_open_balance_cost+'</p>' +
-                        '<p><span><i class="fa fa-clock"></i></span> <b>رصيد المخزن الحالى:</b> '+Item.current_total+'</p>' +
+                        '<p><span><i class="fa fa-clock"></i></span> <b>{{ __("titles.code") }}:</b> '+Item.item_code+'</p>' +
+                        '<p><span><i class="fa fa-clock"></i></span> <b>{{ __("titles.open_balance_date") }}:</b> '+Item.balance_start_date+'</p>' +
+                        '<p><span><i class="fa fa-clock"></i></span> <b>{{ __("titles.open_blance_amount") }} :</b> '+Item.total_open_balance_cost+'</p>' +
+                        '<p><span><i class="fa fa-clock"></i></span> <b>{{ __("titles.current_balance") }}:</b> '+Item.current_total+'</p>' +
                     '</div>' +
                     '<div class="product-buttons">' +
                         '<a href="'+ viewUrl+'" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>'+

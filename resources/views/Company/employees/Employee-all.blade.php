@@ -7,10 +7,10 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="{{url('/Company')}}"> الرئيسية</a><span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.employees') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/Employees")}}">الموظفين</a> <span class="bread-slash"> / </span>
+        <span class="bread-blod"> {{ __('titles.company') }}</span>
     </li>
     <li>
     <span class="bread-blod">
@@ -18,7 +18,7 @@
         @if(isset($Employee->person_name))
         {{$Employee->person_name}}
         @else
-        أضافة جديد
+        {{ __('titles.add') }}
         @endif
     </span>
     </li>
@@ -105,10 +105,10 @@
                             @endif
                         @endslot
                         @slot('title')
-                            تعديل بيانات الموظف : {{$Employee->person_name}}
+                        {{ __('titles.employee_data') }}: {{$Employee->person_name}}
                         @endslot
                         @slot('button')
-                            تعديل البيانات
+                        {{ __('titles.edit') }}
                         @endslot
                         @slot('action')
                             {{ url("/Company/Employee/$Employee->id/Update") }}
@@ -123,17 +123,17 @@
 
             @else
                 @slot('title')
-                    أضافة موظف
+                {{ __('titles.add') }}
                 @endslot
 
                 @slot('button')
-                            أضافة الموظف
+                {{ __('titles.add') }}
                 @endslot
                 @slot('action')
                     {{ url("/Company/Employee/Create") }}
                 @endslot
             @endif
-            <strong>حدث خطأ ما!</strong> حاول مره أخرى!
+            <strong>{{ __('titles.something_error') }}</strong> {{ __('titles.try_again') }}
             @endcomponent
 			</div>
 		</div>

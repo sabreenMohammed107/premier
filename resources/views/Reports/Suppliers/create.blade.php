@@ -9,10 +9,10 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> التقارير<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.reports') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تقرير أرصدة الموردين</span>
+        <span class="bread-blod"> {{ __('titles.supplier_balance') }}</span>
     </li>
 </ul>
 
@@ -25,8 +25,8 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mg-b-15">
-                    {{-- <button class="btn btn-primary waves-effect waves-light">إلغــــاء</button>
-                    <button class="btn btn-primary waves-effect waves-light">حــفـــظ</button> --}}
+                    {{-- <button class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }} </button>
+                    <button class="btn btn-primary waves-effect waves-light">{{ __('titles.save') }} </button> --}}
                     <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
 
                 </div>
@@ -34,20 +34,20 @@
                 {{ csrf_field() }}
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
-                            <div class="main-sparkline13-hd">
-                                <h4 style="text-align:right">تقرير أرصدة الموردين</h4>
+                            <div class="main-sparkline13-hd dir-rtl">
+                                <h4 >{{ __('titles.supplier_balance') }}</h4>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
-                            <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                                <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                    <button class="btn btn-primary waves-effect waves-light">عرض التقرير </button>
+                            <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
+                                <div class="chosen-select-single mg-b-20" >
+                                    <button class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }} </button>
                                 </div>
                                 <div class="form-group-inner" style="margin-right:10px;">
-                                    <div class="row" style="text-align:right !important;direction:rtl !important">
+                                <div class="row row-ltr" style="margin-top:5px;">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
-                                            <div class="row">
+                                        <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
                                                     @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110)
@@ -64,7 +64,7 @@
 
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">الشركة</label>
+                                                    <label class="login2">{{ __('titles.company') }}</label>
                                                 </div>
                                             </div>
                                         </div>

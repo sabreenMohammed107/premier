@@ -111,7 +111,7 @@ class BankReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة البنك',
+            'Title' => \Lang::get('titles.bank_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,

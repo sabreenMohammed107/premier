@@ -9,10 +9,10 @@ use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
-
+use App\Exports\UsersExport;
 use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
-
+use Maatwebsite\Excel\Facades\Excel as Excel;
 class CashBoxReportController extends Controller
 {
     protected $object;
@@ -99,6 +99,7 @@ class CashBoxReportController extends Controller
             $obj->logo =Company::where('id', $id)->first()->company_logo;
             $obj->trans = array();
             foreach ($trans as $objs) {
+                
                 if ($objs->safe_id == Company::where('id', $id)->first()->safe_id) {
                     array_push($obj->trans, $objs);
                 }
@@ -111,7 +112,7 @@ class CashBoxReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة الخزينة',
+            'Title' => \Lang::get('titles.cashbox_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,
@@ -121,13 +122,33 @@ class CashBoxReportController extends Controller
             
 
         ];
-        $title = "My Report";
-        $pdf = PDF::loadView('Admin.reports.cashBox-trans.cashBoxReport', $data);
-        $pdf->allow_charset_conversion = false;
-        $pdf->autoScriptToLang = true;
-        $pdf->autoLangToFont = true;
+    
 
-        return $pdf->stream('medium.pdf');
+        if ($request->get('action') == 'savepdf') {
+            
+            $title = "My Report";
+            $pdf = PDF::loadView('Admin.reports.cashBox-trans.cashBoxReport', $data);
+            $pdf->allow_charset_conversion = false;
+            $pdf->autoScriptToLang = true;
+            $pdf->autoLangToFont = true;
+          
+    
+            return $pdf->stream('medium.pdf');
+            }
+    
+    
+            if ($request->get('action') == 'saveExcel') {
+                ob_end_clean(); // this
+                ob_start(); // and this
+               
+                $range = ['start'=>$from_date, 'end'=>$to_date ,'cashIds'=>[$cashBox_ids]];
+                //  return Excel::download(new UsersExport($range), 'invoices.xlsx');
+        
+                return (new UsersExport($range))->download('invoices.xlsx');
+        
+        
+            }
+    
     }
 
     /**

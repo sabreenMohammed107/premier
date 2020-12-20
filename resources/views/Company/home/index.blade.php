@@ -6,7 +6,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.home') }}<span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> كشف المستخدمين </span>

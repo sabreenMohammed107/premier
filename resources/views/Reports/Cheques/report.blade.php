@@ -20,6 +20,18 @@ html,body,.body{
     /* background: #ddd; */
     width: 100%;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .header{
     padding: 25px 10px;
     width: 20%;
@@ -152,15 +164,15 @@ td{
 
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }} : {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -173,9 +185,9 @@ td{
                     {{-- <div class="header-head">
                         <span>
                             <div class="data">
-                                <span dir="rtl">م.ض : {{$Company->tax_card}}</span><br>
-                                <span dir="rtl">ض.م : {{$Company->registeration_no}}</span><br>
-                                <span dir="rtl">س.ت : {{$Company->commercial_register}}</span>
+                                <span dir="rtl">{{ __('titles.tax_card') }}: {{$Company->tax_card}}</span><br>
+                                <span dir="rtl">{{ __('titles.registeration_no') }} : {{$Company->registeration_no}}</span><br>
+                                <span dir="rtl">{{ __('titles.commercial_register') }} : {{$Company->commercial_register}}</span>
                             </div>
                         </span>
                     </div> --}}
@@ -183,7 +195,7 @@ td{
                     {{-- <div dir="rtl" class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span>{{ __('titles.company') }} :</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -207,29 +219,29 @@ td{
 @foreach ($Cheques as $i => $Cheque)
 <div class="rep_name">
     @if ($Cheque->trans_type == 1)
-    <span dir="rtl">اذن استلام شيك : {{$Cheque->cheque_no}}</span>
+    <span dir="rtl">{{ __('titles.recieve_cheques') }} : {{$Cheque->cheque_no}}</span>
     @else
-    <span dir="rtl">اذن صرف شيك : {{$Cheque->cheque_no}}</span>
+    <span dir="rtl">{{ __('titles.cash_cheques') }} : {{$Cheque->cheque_no}}</span>
     @endif
 
 </div><br><br><br>
 <div style="float:right;text-align: right;font-size:12px;background-color: #eee;padding:10px;direction:rtl; width:70%;">
     @if ($Cheque->trans_type == 1)
-    <span dir="rtl">استلمنا من : {{$Cheque->person_name}}</span><br>
+    <span dir="rtl">{{ __('titles.recieved_from') }} : {{$Cheque->person_name}}</span><br>
     @else
-    <span dir="rtl">يصرف الى : {{$Cheque->person_name}}</span><br>
+    <span dir="rtl">{{ __('titles.cashed_to') }} : {{$Cheque->person_name}}</span><br>
     @endif
-    <span dir="rtl">تحريرا في : {{date('d-m-Y', strtotime($Cheque->transaction_date))}}</span>
+    <span dir="rtl">{{ __('titles.date') }} : {{date('d-m-Y', strtotime($Cheque->transaction_date))}}</span>
 </div>
 <div class="left" style="float: left;">
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>المبلغ</span>
+                <span>{{ __('titles.mony_amount') }}</span>
             </div>
             <div class="off_name">
                 <span>
-                {{$Cheque->amount}}جم
+                {{$Cheque->amount}}
                 </span>
             </div>
         </span>
@@ -241,7 +253,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name" style="font-size: 14px;">
-                <span>مبلغ و قدرة :</span>
+                <span>{{ __('titles.mony_amount') }}:</span>
             </div>
             <div class="off_name" style="font-size: 14px;">
                 <span>
@@ -259,7 +271,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اسم البنك :</span>
+                <span>{{ __('titles.bank') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -271,7 +283,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>رقم الشيك :</span>
+                <span>{{ __('titles.cheque_no') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -283,7 +295,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>و ذلك قيمة :</span>
+                <span>{{ __('titles.notes') }}:</span>
             </div>
             <div class="off_name">
                 <span>
@@ -297,7 +309,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>تاريخ الشيك</span>
+                <span>{{ __('titles.date') }}</span>
             </div>
             <div class="off_name">
                 <span>
@@ -312,7 +324,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اسم المستلم :</span>
+                <span>{{ __('titles.reciver_name') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -324,7 +336,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>بطاقة ش \ ع رقم :</span>
+                <span>{{ __('titles.id_no') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -336,7 +348,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>التوقيع :</span>
+                <span>{{ __('titles.signature') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -351,7 +363,7 @@ td{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>يعتمد</span>
+                <span>{{ __('titles.confirm') }}</span>
             </div>
             <div class="off_name">
                 <span>

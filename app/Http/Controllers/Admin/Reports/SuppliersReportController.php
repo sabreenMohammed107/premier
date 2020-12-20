@@ -115,7 +115,7 @@ class SuppliersReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة المورد',
+            'Title' => \Lang::get('titles.supplier_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,

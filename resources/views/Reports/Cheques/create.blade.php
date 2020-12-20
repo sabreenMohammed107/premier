@@ -9,10 +9,10 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> التقارير<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.report') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تقرير إذونات إستلام النقدية  </span>
+        <span class="bread-blod">{{ __('titles.Permission_receive_cash') }}</span>
     </li>
 </ul>
 
@@ -34,20 +34,20 @@
                 {{ csrf_field() }}
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
-                            <div class="main-sparkline13-hd">
-                                <h4 style="text-align:right">تقرير إذونات إستلام النقدية </h4>
+                            <div class="main-sparkline13-hd dir-rtl">
+                                <h4 >{{ __('titles.Permission_receive_cash') }}</h4>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
                             <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
                                 <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                    <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button>
+                                    <button class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }}</button>
                                 </div>
                                 <div class="form-group-inner" style="margin-right:10px;">
-                                    <div class="row" style="text-align:right !important;direction:rtl !important">
+                                <div class="row row-ltr" style="margin-top:5px;">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
-                                            <div class="row">
+                                        <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 
                                                     @if (Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110)
@@ -64,59 +64,59 @@
 
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">الشركة</label>
+                                                    <label class="login2">{{ __('titles.company') }}</label>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
                                                         <input type="text" name="cheque_no" class="form-control" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">رقم الشيك</label>
+                                                    <label class="login2">{{ __('titles.cheque_no') }}</label>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
                                                         <input type="date" name="from_date" class="form-control" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2"><b>التاريخ من</b></label>
+                                                    <label class="login2"><b>{{ __('titles.date_from') }}</b></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
                                                         <input type="date" name="to_date" class="form-control" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2"><b>التاريخ إالي</b></label>
+                                                    <label class="login2"><b>{{ __('titles.date_to') }}</b></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row row-ltr" style="margin-top:5px;">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 														<div class="bt-df-checkbox" style="margin-right:-10px;">
 															<input class="" type="radio" value="1" id="optionsRadios1" name="trans_type">
-															<label><b> استلام شيك </b></label>
+															<label><b>{{ __('titles.recieve_cheques') }}</b></label>
 															<input class="" type="radio" value="0" id="optionsRadios2" name="trans_type">
-															<label><b> صرف شيك </b></label>
+															<label><b>{{ __('titles.cash_cheques') }}</b></label>
 															<input class="radio-checked" type="radio" value="" checked="" id="optionsRadios3" name="trans_type">
-															<label><b> الكل </b></label>
+															<label><b> {{ __('titles.all') }} </b></label>
 														</div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2"><b>نوع الشيك</b></label>
+                                                    <label class="login2"><b>{{ __('titles.type_cheques') }}</b></label>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <select data-placeholder="Choose a Country..." name="person_id" id="persons" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
-                                                        <option value="" selected disabled>اختر</option>
+                                                        <option value="" selected disabled>{{ __('titles.select') }}</option>
                                                         @foreach ($Persons as $Person)
                                                             <option value="{{$Person->id}}">{{$Person->person_name}}</option>
                                                         @endforeach
@@ -126,13 +126,13 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="bt-df-checkbox" style="margin-right:-10px;">
                                                         <input class="radio-checked" type="radio" checked="" value="101" id="firsr_check" name="person_type_id">
-                                                        <label><b> موردين </b></label>
+                                                        <label><b> {{ __('titles.suppliers') }} </b></label>
                                                         <input class="" type="radio" value="102" id="optionsRadios2" name="person_type_id">
-                                                        <label><b> موظفين </b></label>
+                                                        <label><b> {{ __('titles.employees') }} </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios3" name="person_type_id">
-                                                        <label><b> عملاء </b></label>
+                                                        <label><b> {{ __('titles.clients') }} </b></label>
                                                         <input class="" type="radio" value="" id="optionsRadios4457" name="person_type_id">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                             </div>

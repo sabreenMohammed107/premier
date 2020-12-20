@@ -115,7 +115,7 @@ class EmployeesReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة الموظف',
+            'Title' => \Lang::get('titles.empolyee_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,

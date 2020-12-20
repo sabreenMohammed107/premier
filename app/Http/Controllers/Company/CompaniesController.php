@@ -11,12 +11,15 @@ use App\Models\FinanTransaction;
 use App\Models\Safe;
 use App\Models\Person;
 use Illuminate\Support\Facades\Auth;
-
 class CompaniesController extends Controller
 {
+    protected $lang;
+
     public function __construct()
     {
         $this->middleware('auth');
+      
+       
     }
     /**
      * Display a listing of the resource.
@@ -25,6 +28,8 @@ class CompaniesController extends Controller
      */
     public function index()
     {
+        // for lang
+        // dd(app()->getLocale());
         $id = session('company_id');
         //Current Company data
         $Company = Company::find($id);
@@ -264,11 +269,14 @@ class CompaniesController extends Controller
                 $Company->update($request->except('company_logo'));
 
                 DB::commit();
-                return redirect("/Company")->with('flash_success', "بيانات الشركه : $Company->company_official_name تم تعديلها بنجاح");
+
+                return redirect("/Company")->with('flash_success', \Lang::get('titles.update_msg'));
+           
             } catch (\Throwable $th) {
                 //throw $th;
                 DB::rollBack();
-                return redirect("/Company")->with('flash_danger', "بيانات الشركه : $Company->company_official_name لم يتم تعديلها بسبب خطأ ما حاول مرة أخرى و تأكد من البيانات المدخله");
+
+                return redirect("/Company")->with('flash_danger',\Lang::get('titles.update_msg_error'));
             }
 
     }
@@ -312,11 +320,11 @@ class CompaniesController extends Controller
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-            return redirect("/Company")->with('flash_success', "تم اضافة خزينه لشركة : $Company->company_official_name بنجاح");
+            return redirect("/Company")->with('flash_success', \Lang::get('titles.update_msg'));
         } catch (\Throwable $th) {
             DB::rollBack();
             // throw $th;
-            return redirect("/Company")->with('flash_danger', "لم يتم اضافة خزينه لشركة  : $Company->company_official_name بسبب خطأ ما");
+            return redirect("/Company")->with('flash_danger', \Lang::get('titles.update_msg_error'));
         }
 
 
@@ -348,17 +356,17 @@ class CompaniesController extends Controller
                 'additive' => $request->open_balance,
                 ]);
                 DB::commit();
-                return redirect("/Company")->with('flash_success', "تم تعديل بيانات الخزينه لشركة : $Company->company_official_name بنجاح");
+                return redirect("/Company")->with('flash_success', \Lang::get('titles.update_msg'));
             } catch (\Throwable $th) {
 
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company")->with('flash_danger', "لم يتم تعديل بيانات الخزينه لشركة : $Company->company_official_name بسبب خطأ ما حاول مرة أخرى");
+                return redirect("/Company")->with('flash_danger', \Lang::get('titles.update_msg_error'));
             }
 
         }else{
             $Safe->update($request->except(['open_balance','balance_start_date']));
-            return redirect("/Company")->with('flash_info', "تم تعديل بيانات الخزينه باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على لشركة : $Company->company_official_name");
+            return redirect("/Company")->with('flash_info', \Lang::get('titles.balance_msg'));
         }
 
     }
@@ -389,11 +397,11 @@ class CompaniesController extends Controller
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-            return redirect("/Company")->with('flash_success', "تم اضافة بنك لشركة : $Company->company_official_name بنجاح");
+            return redirect("/Company")->with('flash_success', \Lang::get('titles.update_msg'));
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect("/Company")->with('flash_danger', "لم يتم اضافة بنك لشركة : $Company->company_official_name بسبب خطأ ما حاول مره اخرى");
+            return redirect("/Company")->with('flash_danger', \Lang::get('titles.update_msg_error'));
 
         }
 
@@ -425,17 +433,17 @@ class CompaniesController extends Controller
                     'additive' => $request->open_balance,
                 ]);
                 DB::commit();
-                return redirect("/Company")->with('flash_success', "تم تعديل بيانات البنك لشركة : $Company->company_official_name بنجاح");
+                return redirect("/Company")->with('flash_success',\Lang::get('titles.update_msg'));
 
             } catch (\Throwable $th) {
                 DB::rollBack();
                 // throw $th;
-                return redirect("/Company")->with('flash_danger', "لم يتم تعديل بيانات البنك لشركة : $Company->company_official_name بسبب خطأ ما حاول مرة أخرى");
+                return redirect("/Company")->with('flash_danger', \Lang::get('titles.update_msg_error'));
             }
         }else{
 
             $Bank->update($request->except(['open_balance','balance_start_date']));
-            return redirect("/Company")->with('flash_info', "تم تعديل بيانات البنك باستثناء الرصيد الافتتاحي و تاريخ الترصيد لوجود حركات تمت على لشركة : $Company->company_official_name بنجاح");
+            return redirect("/Company")->with('flash_info', \Lang::get('titles.balance_msg'));
         }
     }
 

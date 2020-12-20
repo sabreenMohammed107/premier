@@ -20,6 +20,18 @@ html,body,.body{
     /* background: #ddd; */
     width: 100%;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .header{
     padding: 25px 10px;
     width: 20%;
@@ -117,15 +129,15 @@ tbody tr td{
             <div class="body-page">
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }}  : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }} : {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -139,7 +151,7 @@ tbody tr td{
                     <div dir="rtl" class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span>{{ __('titles.company') }} :</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -162,14 +174,14 @@ tbody tr td{
     <table dir="rtl" style="background-color: #021625;color:#fff;width:100%;">
         <thead>
             <tr>
-                <th>المسلسل</th>
-                <th>كود المورد</th>
-                <th>اسم المورد</th>
-                <th>الهاتف</th>
-                <th>اجمالي المشتريات</th>
-                <th>الرصيدالافتتاحي</th>
-                <th>الرصيد الحالي</th>
-                <th>اجمالي السداد</th>
+                <th>#</th>
+                <th>{{ __('titles.code') }}</th>
+                <th>{{ __('titles.name') }}</th>
+                <th>{{ __('titles.phone') }}</th>
+                <th>{{ __('titles.total_purchases') }}</th>
+                <th>{{ __('titles.open_blance_amount') }}</th>
+                <th>{{ __('titles.current_balance') }}</th>
+                <th>{{ __('titles.total_repayment') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -179,10 +191,10 @@ tbody tr td{
                     <td>{{$Supplier->id}}</td>
                     <td>{{$Supplier->person_name}}</td>
                     <td>{{$Supplier->phone1}}</td>
-                    <td>{{$Supplier->total_sales}}جم</td>
-                    <td>{{$Supplier->open_balance}}جم</td>
-                    <td>{{$Supplier->current}}جم</td>
-                    <td>{{$Supplier->total_pay}}جم</td>
+                    <td>{{$Supplier->total_sales}}</td>
+                    <td>{{$Supplier->open_balance}}</td>
+                    <td>{{$Supplier->current}}</td>
+                    <td>{{$Supplier->total_pay}}</td>
                 </tr>
             @endforeach
         </tbody>

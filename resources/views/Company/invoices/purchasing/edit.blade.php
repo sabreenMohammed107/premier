@@ -41,12 +41,14 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.purchases') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> تعديل المشتريات </span>
+        <span class="bread-blod"> {{ __('titles.company') }}</span>
     </li>
+
 </ul>
+
 @endsection
 
 @section('content')
@@ -75,13 +77,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
     }
     if ($Person->person_type_id == 101) {
         $supplier = 'checked="checked"';
-        $type = 'مورد';
+        $type = '{{__("titles.suppliers")}}';
     }elseif($Person->person_type_id == 102){
         $employee = 'checked="checked"';
-        $type = 'موظف';
+        $type = '{{__("titles.employees")}}';
     }else{
         $other = 'checked="checked"';
-        $type = 'أخرى';
+        $type = '{{__("titles.others")}}';
     }
 @endphp
 <!-- Static Table Start -->
@@ -94,8 +96,8 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         <!--<div class="btn-back">
                             <a href="#">حــفـظ</a>
                         </div>-->
-                    <a href="{{url('/Invoices/Purchasing')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
-                        <button id="save_inv" class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">حــفـظ</button>
+                    <a href="{{url('/Invoices/Purchasing')}}" class="btn btn-primary waves-effect waves-light">{{__('titles.cancel')}}</a>
+                        <button id="save_inv" class="btn btn-primary waves-effect waves-light" onclick="saveInvoice()">{{__('titles.save')}}</button>
                         <!--<div class="btn-cancel">
                             <a href="#">إلــغاء</a>
                         </div>
@@ -106,19 +108,20 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl">المشتريات</h1><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                        <h1 >{{ __('titles.purchases') }}</h1>
+                        <br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <h3><span>شركة : </span> {{$Company->company_official_name}} (حركة الموردين+حركة المخزون)</h3>
+                            <div class="chosen-select-single mg-b-20 dir-rtl" >
+                            <h3><span>{{ __('titles.company') }} : </span> {{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>
                             </div>
                             <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row res-rtl"style="display: flex ;flex-direction: row-reverse ;">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15" style="direction:rtl">
-                                        <div class="row" style="margin-top:5px;">
+                                <div class="row res-rtl row-rtl">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15 dir-rtl">
+                                        <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" id="invoice_no" value="{{$Invoice->invoice_no}}" class="form-control" placeholder="">
@@ -132,79 +135,79 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="input-mask-title">
-                                                    <label><b>رقم الفاتورة</b></label>
+                                                <label><b>{{ __('titles.bill_no') }}</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="row row-ltr">
+													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="date" value="{{date('Y-m-d', strtotime($Invoice->inv_date))}}" id="inv_date" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="input-mask-title">
-                                                    <label><b>تاريخ الفاتورة</b></label>
+                                                <label><b>{{ __('titles.date') }}</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="row row-ltr">
+													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                 <input class="" type="radio" {{$approved_yes ?? ''}} value="1" id="optionsRadios9" name="optionsRadios10">
-                                                    <label><b> معتمد </b></label>
+                                                <label><b> {{ __('titles.confirm') }} </b></label>
                                                 <input class="radio-checked " type="radio" {{$approved_no ?? ''}} value="0" id="optionsRadios10" name="optionsRadios10">
-                                                    <label><b> غير معتمد </b></label>
+                                                <label><b> {{ __('titles.not_confirm') }} </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">الحالة</label>
+                                            <label class="login2">{{ __('titles.status') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                 <input class="radio-checked" type="radio" {{$supply ?? ''}} value="101" id="optionsRadios1" name="optionsRadiosser1">
-                                                    <label><b> توريد </b></label>
+                                                <label><b> {{ __('titles.supplying') }} </b></label>
                                                     <input class="" type="radio" value="100" {{$service ?? ''}} id="optionsRadios2" name="optionsRadiosser1">
-                                                    <label><b> خدمة </b></label>
+                                                    <label><b> {{ __('titles.Services') }} </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">الخدمات</label>
+                                            <label class="login2">{{ __('titles.Services_type') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="row row-ltr">
+													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                 <input class="radio-checked" {{$items ?? ''}} type="radio" value="100" id="optionsRadios3" name="optionsRadiostype4">
-                                                    <label><b> سلع </b></label>
+                                                    <label><b> {{__('titles.commodity')}}  </b></label>
                                                     <input class="" type="radio" {{$serve ?? ''}} value="101" id="optionsRadios1" name="optionsRadiostype4">
-                                                    <label><b> خدمات </b></label>
+                                                    <label><b> {{__('titles.Services')}} </b></label>
                                                     <input class="" type="radio" {{$machine ?? ''}} value="102" id="optionsRadios2" name="optionsRadiostype4">
-                                                    <label><b> ألات ومعدات </b></label>
+                                                    <label><b>{{__('titles.machine_equipment')}} </b></label>
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">نوع المصروف</label>
+                                                <label class="login2">{{__('titles.outgoings_type')}}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     <input class="radio-checked" {{$local ?? ''}} type="radio" checked="" value="101" id="optionsRadios1" name="optionsRadiospur3">
-                                                    <label><b> محلي </b></label>
+                                                    <label><b> {{__('titles.local')}} </b></label>
                                                     <input class="" type="radio" value="100" {{$import ?? ''}} id="optionsRadios2" name="optionsRadiospur3">
-                                                    <label><b> مستورد </b></label>
+                                                    <label><b> {{__('titles.imported')}} </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">المدفوعات</label>
+                                                <label class="login2">{{__('titles.purshasing')}}</label>
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <input type="text" value="{{$Person->person_name}}" name="person_name" id="other_text" class="form-control"
                                                     @if ($Person->person_type_id != 'other')
@@ -218,7 +221,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                     disabled
                                                     @endif
                                                     data-live-search="true" tabindex="-1">
-                                                        <option disabled selected>أختر {{$type ?? ''}}</option>
+                                                        <option disabled selected>{{__('titles.select')}} {{$type ?? ''}}</option>
                                                             @foreach ($Persons as $InvPerson)
                                                                 <option
                                                                 @if ($Invoice->person_id == $InvPerson->id)
@@ -232,126 +235,126 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="bt-df-checkbox">
                                                         <input class="radio-checked" {{$supplier ?? ''}} type="radio" checked="" value="101" id="optionsRadios1 person_type_id" name="person">
-                                                        <label><b> مورد </b></label>
+                                                        <label><b> {{__('titles.suppliers')}} </b></label>
                                                         <input class="" type="radio" {{$employee ?? ''}} value="102" id="optionsRadios2" name="person">
-                                                        <label><b> موظفين </b></label>
+                                                        <label><b> {{__('titles.employees')}} </b></label>
                                                         <input class="" type="radio" {{$other ?? ''}} value="other" id="optionsRadios2" name="person">
-                                                        <label><b> أخري </b></label>
+                                                        <label><b> {{__('titles.other')}}  </b></label>
                                                     </div>
                                                 </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15">
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" id="total_items_price" value="{{$Invoice->total_items_price}}" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>الإجمالي</b></label>
+                                                        <label><b> {{__('titles.total')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" id="total_items_discount" value="{{$Invoice->total_items_discount}}" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>الخصومات</b></label>
+                                                        <label><b>{{__('titles.discount')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" id="total_vat" value="{{$Invoice->total_vat}}" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى ضريبه قيمه مضافه</b></label>
+                                                        <label><b>{{__('titles.total_vat_value')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" value="{{$Invoice->total_comm_industr_tax}}" id="total_comm_industr_tax" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى ض تجاريه صناعيه</b></label>
+                                                        <label><b>{{__('titles.total_comm_industr_tax')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" value="{{$Invoice->total_price_post_discounts}}" id="total_price_post_discounts" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى بعد الخصم</b></label>
+                                                        <label><b>{{__('titles.total_price_post_discounts')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
                                                         <div class="input-group">
-                                                          <div class="input-group-addon">جم</div>
+                                                          <div class="input-group-addon"></div>
                                                           <input type="text" value="{{$Invoice->net_invoice}}" id="net_invoice_total" readonly class="form-control" placeholder="">
                                                         </div>
                                                       </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>إجمالى الصافى</b></label>
+                                                        <label><b>{{__('titles.net_invoice_total')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row-ltr">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
                                                         <!--<input type="text" class="form-control" placeholder="">-->
@@ -360,7 +363,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>ملاحظات</b></label>
+                                                        <label><b>{{__('titles.notes')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -374,22 +377,22 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             text-align:center !important;
                             }
                             </style>
-                            <h3 style="text-align:right">الأصناف</h3>
-                            <div style="direction:rtl;text-align:right;"><input type="text" id="search" class="form-control" style="display: inline-block;width:200px" placeholder="بحث">
+                            <h3 class="dir-rtl">{{__('titles.items')}}</h3>
+                            <div style="direction:rtl;text-align:right;"><input type="text" id="search" class="form-control" style="display: inline-block;width:200px" placeholder="{{__('titles.search')}}">
 
-                                <button id="add" style="float: left;" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button></div>
+                                <button id="add" style="float: left;" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">{{__('titles.add')}}{{__('titles.items')}}</button></div>
                                 <br>
-                            <table class="table-striped" id="puchasetable"
+                            <table class="table-striped dir-rtl" id="puchasetable"
                                 data-locale="ar-SA"
                                 data-pagination="false"
-                                data-pagination-pre-text="السابق"
-                                data-pagination-next-text="التالي"
+                                data-pagination-pre-text="{{__('titles.prev')}}"
+                                data-pagination-next-text="{{__('titles.next')}}"
                                 data-show-export="true"
                                 data-minimum-count-columns="2"
                                 data-page-list="[10, 25, 50, 100, all]"
                                 data-sort-name="index"
                                 data-sort-order="asc"
-                                style="direction:rtl"
+                               
                                 data-toggle="table"
                                     data-key-events="true"
                                     data-resizable="true"
@@ -400,18 +403,18 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                 <thead>
                                     <tr>
                                         <th data-field="index" data-sortable="true">#</th>
-                                        <th data-field="storeItem" data-sortable="true">مخزون</th>
-                                        <th data-field="item" data-sortable="true">البيان</th>
-                                        <th data-field="price" data-sortable="true">سعر الوحدة</th>
-                                        <th data-field="qty" data-sortable="true">الكمية</th>
-                                        <th data-field="total" data-sortable="true">الاجمالى</th>
-                                        <th data-field="discount" data-sortable="true">الخصومات</th>
-                                        <th data-field="totalAfterDiscount" data-sortable="true">اجمالى بعد الخصم</th>
-                                        <th data-field="exemption" data-sortable="true">اعفاء ضريبى</th>
-                                        <th data-field="vat" data-sortable="true">ض.القيمه المضافه</th>
-                                        <th data-field="cit" data-sortable="true">ض.أ.ت.ص</th>
-                                        <th data-field="net" data-sortable="true">صافى القيمه</th>
-                                        <th data-field="del" data-sortable="true">حذف</th>
+                                        <th data-field="storeItem" data-sortable="true">{{__('titles.stocked')}}</th>
+                                        <th data-field="item" data-sortable="true">{{__('titles.declaration')}}</th>
+                                        <th data-field="price" data-sortable="true">{{__('titles.item_price')}}</th>
+                                        <th data-field="qty" data-sortable="true">{{__('titles.qty')}}</th>
+                                        <th data-field="total" data-sortable="true">{{__('titles.total')}}</th>
+                                        <th data-field="discount" data-sortable="true">{{__('titles.discount')}}</th>
+                                        <th data-field="totalAfterDiscount" data-sortable="true">{{__('titles.total_price_post_discounts')}}</th>
+                                        <th data-field="exemption" data-sortable="true">{{__('titles.exemption')}}</th>
+                                        <th data-field="vat" data-sortable="true">{{__('titles.vat_value')}}</th>
+                                        <th data-field="cit" data-sortable="true">{{__('titles.comm_industr_prof_tax')}}</th>
+                                        <th data-field="net" data-sortable="true">{{__('titles.net_value')}}</th>
+                                        <th data-field="del" data-sortable="true">{{__('titles.delete')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody id="rows">

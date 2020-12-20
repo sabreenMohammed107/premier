@@ -7,17 +7,17 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="{{url('/Company')}}">الرئيسية</a> <span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.suppliers') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <a href="{{ url("/Company/Suppliers")}}">الموردين</a> <span class="bread-slash"> / </span>
+        <span class="bread-blod"> {{ __('titles.company') }}</span>
     </li>
     <li>
     <span class="bread-blod">
         @if(isset($Supplier->person_name))
         {{$Supplier->person_name}}
         @else
-        أضافة جديد
+        {{ __('titles.add') }}
         @endif
     </span>
     </li>
@@ -109,7 +109,7 @@
             @endslot
                     @if($type == 'View')
                         @slot('title')
-                            بيانات المورد : {{$Supplier->person_name}}
+                        {{ __('titles.supplier_data') }} : {{$Supplier->person_name}}
                         @endslot
                         @slot('disabled')
                             disabled
@@ -124,10 +124,10 @@
                             @endif
                         @endslot
                         @slot('title')
-                            تعديل بيانات المورد : {{$Supplier->person_name}}
+                        {{ __('titles.edit') }} : {{$Supplier->person_name}}
                         @endslot
                         @slot('button')
-                            تعديل البيانات
+                        {{ __('titles.edit') }}
                         @endslot
                         @slot('action')
                             {{ url("/Company/Supplier/$Supplier->id/Update") }}
@@ -142,17 +142,17 @@
 
             @else
                 @slot('title')
-                    أضافة مورد
+                {{ __('titles.add') }}
                 @endslot
 
                 @slot('button')
-                            أضافة المورد
+                {{ __('titles.add') }}
                 @endslot
                 @slot('action')
                     {{ url("/Company/Supplier/Create") }}
                 @endslot
             @endif
-            <strong>حدث خطأ ما!</strong> حاول مره أخرى!
+            <strong>{{ __('titles.something_error') }}</strong> {{ __('titles.try_again') }}
             @endcomponent
 			</div>
 		</div>

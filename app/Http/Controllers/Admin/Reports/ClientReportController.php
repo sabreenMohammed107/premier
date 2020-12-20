@@ -116,7 +116,7 @@ class ClientReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة العميل',
+            'Title' =>\Lang::get('titles.client_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,

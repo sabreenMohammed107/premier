@@ -17,6 +17,16 @@
 
 Auth::routes();
 
+
+ //  Change Lang..
+ Route::get('changeLang/{lang}', function($lang){
+ 
+	\Session::put('locale', $lang);
+
+	return redirect()->back();
+
+});
+
 // Reports
 
 Route::namespace('Company')->group(function(){

@@ -115,7 +115,7 @@ class ItemsReportController extends Controller
 
 
         $data = [
-            'Title' => 'تقرير حركة الأصناف',
+            'Title' =>  \Lang::get('titles.items_transactions_reports'),
             'trans' => $filterd_trans,
             'from_date' => $from_date,
             'to_date' => $to_date,

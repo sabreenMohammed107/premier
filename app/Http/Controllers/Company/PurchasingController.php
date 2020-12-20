@@ -168,13 +168,13 @@ class PurchasingController extends Controller
                         );
                     }
                 }
-                $request->session()->flash('flash_success', "تم اضافة الفاتورة رقم : $Invoice->invoice_no");
+                $request->session()->flash('flash_success', \Lang::get('titles.saving_msg'));
                 DB::commit();
                 return url('/Invoices/Purchasing');
             } catch (\Throwable $th) {
                 throw $th;
                 DB::rollBack();
-                $request->session()->flash('flash_danger', "حدث خطأ ما يرجي اعادة المحاولة");
+                $request->session()->flash('flash_danger', \Lang::get('titles.saving_msg_error'));
                 return url('/Invoices/Purchasing');
             }
         }
@@ -394,13 +394,13 @@ class PurchasingController extends Controller
 
                     }
                 }
-                $request->session()->flash('flash_success', "تم تعديل الفاتورة رقم : $Invoice->invoice_no");
+                $request->session()->flash('flash_success', \Lang::get('titles.update_msg'));
                 DB::commit();
                 return url("/Invoices/Purchasing/$inv_id/Edit");
             } catch (\Throwable $th) {
                 throw $th;
                 DB::rollBack();
-                $request->session()->flash('flash_danger', "حدث خطأ ما يرجي اعادة المحاولة");
+                $request->session()->flash('flash_danger', \Lang::get('titles.update_msg_error'));
                 return url("/Invoices/Purchasing/$inv_id/Edit");
             }
         }
@@ -458,12 +458,12 @@ class PurchasingController extends Controller
             }
             FinanTransaction::where('inv_id','=',$id)->delete();
             DB::commit();
-            return redirect("/Invoices/$type")->with('flash_success', "نجحت عملية حذف الفاتورة رقم : $no");
+            return redirect("/Invoices/$type")->with('flash_success', \Lang::get('titles.delete_msg'));
 
         } catch (\Throwable $th) {
             throw $th;
             DB::rollBack();
-            return redirect("/Invoices/$type")->with('flash_danger', "فشلت عملية حذف الفاتورة رقم : $no");
+            return redirect("/Invoices/$type")->with('flash_danger', \Lang::get('titles.delete_msg_error'));
 
         }
 

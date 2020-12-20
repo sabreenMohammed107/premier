@@ -1,6 +1,10 @@
 <form action="{{$action ?? ''}}" method="POST" enctype="multipart/form-data" class="dropzone dropzone-custom needsclick addcourse" id="demo1-upload">
-<div class="row res-rtl"style="display: flex ;flex-direction: row-reverse ;">
-    {{ csrf_field() }}
+@if(str_replace('_', '-', app()->getLocale())=='ar')
+    <div class="row res-rtl" style="display: flex ;flex-direction: row-reverse ;">
+        @else
+        <div class="row">
+            @endif
+                {{ csrf_field() }}
     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <div class="profile-info-inner">
             <div class="profile-img">
@@ -17,7 +21,7 @@
                                             <i class="fa fa-download"></i>
                                         </label>
                                         <div class="file-button">
-                                             تحميل صورة
+                                        {{ __('titles.load_image') }} 
                                             <input type="file" name="logo" {{$disabled ?? ''}} onchange="document.getElementById('prepend-big-btn').value = this.value;">
                                         </div>
                                         <input type="text" id="prepend-big-btn" placeholder="">
@@ -67,7 +71,7 @@
                     <div class="product-status-wrap drp-lst">
                         <h4 style="text-align:right">{{$title ?? ''}}</h4>
                     </div>
-                    {{-- <button type="button" onclick="customReset()" {{$disabled ?? ''}} class="btn btn-primary waves-effect waves-light mg-b-15">تفريغ البيانات</button> --}}
+                    {{-- <button type="button" onclick="customReset()" {{$disabled ?? ''}} class="btn btn-primary waves-effect waves-light mg-b-15">{{ __('titles.clear') }} </button> --}}
                     <div class="product-payment-inner-st" style="padding-top:0px">
                         <div class="row mg-b-15">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-b-15">
@@ -182,8 +186,8 @@
                                                         </div>
                                                     </div>
                                             </div>
-                                        <a href="{{ url("/Company/Suppliers")}}" class="btn btn-primary waves-effect waves-light mg-b-15">الغاء</a>
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" style="{{$style ?? ""}}">{{$button ?? ''}}</button>
+                                        <a href="{{ url("/Company/Suppliers")}}" class="btn btn-primary waves-effect waves-light mg-b-15">{{ __('titles.cancel') }}</a>
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15" style="{{$style ?? ""}}">{{ __('titles.save') }}</button>
                                     </div>
                                 </div>
                             </div>

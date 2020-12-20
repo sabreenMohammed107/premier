@@ -14,6 +14,18 @@
 html,body,.body{
     box-sizing: border-box;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .body-page{
     padding: 35px 0 0;
     direction: ltr;
@@ -112,34 +124,34 @@ tbody tr td{
 </head>
 <body>
     <hr>
-    <div class="body">
+    <div  class="body" >
         <span>
             <div class="body-page">
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span >{{ __('titles.user_name') }} : {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
                     <br>
-                    <div class="image" dir="rtl">
+                    <div class="image" >
                         <span><img height="100" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo)}}" /></span>
                     </div>
                     <div class="rep_name">
                         <span>{{$Title}}</span>
                     </div><br><br>
-                    <div dir="rtl" class="company">
+                    <div  class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span>{{ __('titles.company') }} :</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -159,17 +171,18 @@ tbody tr td{
             </div>
         </span>
     </div>
-    <table dir="rtl" style="background-color: #021625;color:#fff;width:100%;">
+    <table @if(str_replace('_', '-', app()->getLocale())=='ar') class="dir-rtl"  @else
+    class="dir-ltr"   @endif style="background-color: #021625;color:#fff;width:100%;">
         <thead>
             <tr>
-                <th>المسلسل</th>
-                <th>كود المورد</th>
-                <th>اسم المورد</th>
-                <th>الهاتف</th>
-                <th>اجمالي المشتريات</th>
-                <th>الرصيدالافتتاحي</th>
-                <th>الرصيد الحالي</th>
-                <th>اجمالي السداد</th>
+                <th>#</th>
+                <th>{{ __('titles.code') }}</th>
+                <th>{{ __('titles.name') }}</th>
+                <th>{{ __('titles.phone') }}</th>
+                <th>{{ __('titles.total_purchases') }}</th>
+                <th>{{ __('titles.open_blance_amount') }}</th>
+                <th>{{ __('titles.current_balance') }}</th>
+                <th>{{ __('titles.total_repayment') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -179,10 +192,10 @@ tbody tr td{
                     <td>{{$Supplier->id}}</td>
                     <td>{{$Supplier->person_name}}</td>
                     <td>{{$Supplier->phone1}}</td>
-                    <td>{{$Supplier->total_purch}}جم</td>
-                    <td>{{$Supplier->open_balance}}جم</td>
-                    <td>{{$Supplier->current}}جم</td>
-                    <td>{{$Supplier->total_pay}}جم</td>
+                    <td>{{$Supplier->total_purch}}</td>
+                    <td>{{$Supplier->open_balance}}</td>
+                    <td>{{$Supplier->current}}</td>
+                    <td>{{$Supplier->total_pay}}</td>
                 </tr>
             @endforeach
         </tbody>

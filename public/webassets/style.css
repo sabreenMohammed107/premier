@@ -111,6 +111,15 @@ body {}
 .mt-b-30{
 	margin-bottom:30px;
 }
+.ml-55{
+	margin-left: 55px;
+}
+.mr-55{
+	margin-right: 55px;
+}
+.mr-5{
+	margin-right:5px;
+}
 .bg-green {
     background: #20B2AA;
 }
@@ -307,7 +316,8 @@ body {}
 .header-top-menu .navbar-nav>li .dropdown-menu a{
 	padding: 10px 20px;
 	display:block;
-	color: #303030;
+    color: #303030;
+    text-align: right;
 }
 .header-top-menu .navbar-nav>li .dropdown-menu a:hover{
 	background:#2b2a2a;
@@ -571,6 +581,7 @@ ul.message-menu li .message-content .message-date, ul.notification-menu li .noti
 	font-style: italic;
 	color:#303030;
 }
+
 ul.message-menu li .message-content h2, ul.notification-menu li .notification-content h2{
 	font-size:14px;
 	font-weight:700;
@@ -1273,6 +1284,9 @@ ul.breadcome-menu li a:hover{
 	padding:20px;
 	background:#fff;
 }
+.tab-review-design{
+	direction:rtl
+}
 #myTab3.tab-review-design, #myTabedu1.tab-review-design{
 	padding: 0px 0px 20px 0px;
 	background:#fff;
@@ -1366,19 +1380,24 @@ ul.tab-custon-design, ul.tab-review-design {
     padding-bottom:0px;
 }
 .chat-discussion .chat-message .message-avatar {
-    /*float: left;*/
+    float: left;
 /**/
+/*float:right;*/
+    margin-right: 10px;
+/**/
+/*margin-left: 10px;*/
+}
+.chat-discussion .chat-message .message-avatar-ar {
 float:right;
-    /*margin-right: 10px;*/
-/**/
 margin-left: 10px;
 }
 .chat-discussion .chat-message .message {
 
     text-align: left;
 /**/
-    margin-right: 55px;
+    /*margin-left: 55px;*/
 }
+
 .chat-discussion .message {
     background-color: #f7f8fa;
     text-align: left;
@@ -3719,7 +3738,7 @@ div#sparklinehome canvas {
 .sidebar-nav .metismenu a:hover, .sidebar-nav .metismenu a:focus, .sidebar-nav .metismenu a:active {
     background: #F6F6F6;
 }
-.header-top-menu{
+.dir-menu{
 	float:right
 }
 .header-top-menu .navbar-nav>li .dropdown-menu, .header-right-info ul.header-right-menu li .author-message-top, .header-right-info ul.header-right-menu li .notification-author, .header-right-info ul.header-right-menu li .author-log, .header-right-info ul.header-right-menu li .admintab-wrap.menu-setting-wrap.menu-setting-wrap-bg.dropdown-menu {
@@ -4728,16 +4747,15 @@ div#sparklinehome canvas {
     border-color: #65b12d;
 	outline:none;
 }
-.info-md a , .info-md button{
+.info-md a{
 	background-color: #20B2AA;
     border-color: #20B2AA;
 }
-
-.warning-md a, .warning-md button{
+.warning-md a{
 	background-color: #65b12d;
     border-color: #65b12d;
 }
-.danger-md a,.danger-md button{
+.danger-md a{
 	background-color: #D80027;
     border-color: #D80027;
 }
@@ -4752,37 +4770,36 @@ div#sparklinehome canvas {
     font-size: 15px;
     color: #fff;
 }
+.txt-right{
+	text-align:right;
+}
 .footer-copy-right a{
 	color:#fff;
 	text-decoration:none;
 }
-.img-upload {
-    position: relative;
+/*Arabic & English Style*/
+.row-rtl{
+display: flex ;
+flex-direction: row-reverse ;
+		}
+
+.dir-rtl{
+	direction:rtl !important;
 }
-.img-upload .upload-icon {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    overflow: hidden;
-    bottom: 0;
-    right: 0;
-    background-color: #eee;
-    padding: 3px 3px 0 0;
+.dir-ltr{
+	direction:ltr !important;
 }
-.upload-icon input {
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-    font-size: 17px;
-    cursor: pointer;
-    color: #999;
+.float-r{
+	float:right !important;
 }
-.img-upload .upload-icon input {
-    z-index: 3;
-    opacity: 0;
+.float-l{
+	float:left !important;
 }
+	#table td, th {
+			text-align: right;
+		}
+			.input-mask-title {
+			text-align: right !important;
+		}
+
+

@@ -41,6 +41,24 @@
 		button.toggleClass('fa-plus').toggleClass('fa-minus');
 		
 	});
+	/*------------------
+			language
+		--------------------*/
+		var language = function () {
+
+			var locale = document.getElementsByTagName("html")[0].getAttribute("lang");
+			//alert("nn"+locale);
+			if (locale === 'en') {
+	
+				document.body.classList.add('ltr');
+	
+			}
+			else {
+				document.body.classList.remove('ltr')
+	
+			}
+		};
+		language();
 	/*-----------------------------
 		Menu Stick
 	---------------------------------*/

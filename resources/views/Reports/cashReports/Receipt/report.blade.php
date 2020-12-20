@@ -13,6 +13,18 @@
 html,body,.body{
     box-sizing: border-box;
 }
+.dir-rtl{
+	direction:rtl !important;
+}
+.dir-ltr{
+	direction:ltr !important;
+}
+.float-r{
+	float:right !important;
+}
+.float-l{
+	float:left !important;
+}
 .body-page{
     padding: 35px 0 0;
     direction: ltr;
@@ -104,15 +116,15 @@ html,body,.body{
 
                 <htmlpageheader name="page-header">
                     <div class="header">
-                        <span>الصفحة رقم : {PAGENO} / {nbpg}</span>
+                        <span>{{ __('titles.page_no') }} : {PAGENO} / {nbpg}</span>
                     </div>
                     <div class="report-header">
                         <span>
                             <div class="date">
-                                <span>التاريخ : {{$Today}}</span>
+                                <span>{{ __('titles.date') }} : {{$Today}}</span>
                             </div>
                             <div class="date">
-                                <span dir="rtl">اسم المستخدم : {{$User->user_name}}</span>
+                                <span dir="rtl">{{ __('titles.user_name') }} : {{$User->user_name}}</span>
                             </div>
                         </span>
                     </div>
@@ -126,7 +138,7 @@ html,body,.body{
                     <div dir="rtl" class="company">
                         <span>
                             <div class="name">
-                                <span>اسم الشركة :</span>
+                                <span> {{ __('titles.company') }} :</span>
                             </div>
                             <div class="off_name">
                                 <span>
@@ -151,7 +163,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>التاريخ :</span>
+                <span>{{ __('titles.date') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -163,7 +175,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>البيان :</span>
+                <span>{{ __('titles.declaration') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -175,7 +187,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>اسم العميل :</span>
+                <span>{{ __('titles.name') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -187,7 +199,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>رقم الاذن :</span>
+                <span>{{ __('titles.permission_no') }}:</span>
             </div>
             <div class="off_name">
                 <span>
@@ -199,11 +211,11 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>التوجيه المحاسبي :</span>
+                <span>{{ __('titles.giuded_item') }} :</span>
             </div>
             <div class="off_name">
                 <span>
-                {{$Cash->guided_item_name ?? 'لم يتم'}}
+                {{$Cash->guided_item_name ?? __('titles.not_done')}}
                 </span>
             </div>
         </span>
@@ -211,61 +223,28 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>الاعتماد المحاسبي :</span>
+                <span>{{ __('titles.confirmed_items') }} :</span>
             </div>
             <div class="off_name">
                 <span>
                     @if ($Cash->confirm == 1)
-                        معتمد
+                    {{ __('titles.confirm') }}
                     @else
-                        غير معتمد
+                    {{ __('titles.not_confirm') }}
                     @endif
                 </span>
             </div>
         </span>
     </div>
-    <div dir="rtl" class="company">
-        <span>
-            <div class="name">
-                <span>ملاحظات :</span>
-            </div>
-            <div class="off_name">
-                <span>
-                {{$Cash->notes}}
-                </span>
-            </div>
-        </span>
-    </div>
-</div>
-<div class="left">
-    <div dir="rtl" class="company">
-        <span>
-            <div class="name">
-                <span>مقبوض معتمد :</span>
-            </div>
-            <div class="off_name">
-                <span>
-                    @if ($Cash->approved == 1)
-                        معتمد
-                    @else
-                    غير معتمد
-                    @endif
-
-                </span>
-            </div>
-        </span>
-    </div>
-    <div dir="rtl" class="company">
-        <span>
-            <div class="name">
-                <span>نوع الشخص :</span>
+    <div dir
+    span>  {{ __('titles.person_type   ') }}:</span>
             </div>
             <div class="off_name">
                 <span>
                     @if (!empty($Cash->person_id))
                         {{$Cash->person_type_name}}
                     @else
-                        غير مسجل
+                    {{ __('titles.other   ') }}
                     @endif
                 </span>
             </div>
@@ -274,14 +253,14 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>مصدر الاموال :</span>
+                <span>  {{ __('titles.type   ') }}:</span>
             </div>
             <div class="off_name">
                 <span>
                     @if ($Cash->fund_source == 0)
-                        خزينة
+                    {{ __('titles.cash_box   ') }}
                     @else
-                        بنك
+                    {{ __('titles.bank   ') }}
                     @endif
                 </span>
             </div>
@@ -290,7 +269,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>صافي قيمة الفاتورة :</span>
+                <span> {{ __('titles.net_value   ') }} :</span>
             </div>
             <div class="off_name">
                 <span>
@@ -302,7 +281,7 @@ html,body,.body{
     <div dir="rtl" class="company">
         <span>
             <div class="name">
-                <span>المعيار التفصيلي :</span>
+                <span>{{ __('titles.detailed_standard   ') }} :</span>
             </div>
             <div class="off_name">
                 <span>

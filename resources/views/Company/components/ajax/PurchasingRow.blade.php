@@ -4,10 +4,10 @@
         <div class="bt-df-checkbox">
         <input type="hidden" name="" class="inv_type" value="new">
         <input class="radio-checked isStored" checked="" onclick="editRadioStored({{$rowCount}});" type="radio"  value="yes" id="optionsRadios{{$rowCount}}sec" name="optionsRadios{{$rowCount}}">
-            <label><b> نعم </b></label>
+            <label><b> {{ __('titles.yes') }} </b></label>
             <br>
         <input class="isStored" onclick="editRadioStored({{$rowCount}});" type="radio" value="no" id="optionsRadios{{$rowCount}}" name="optionsRadios{{$rowCount}}">
-            <label><b> لا </b></label>
+            <label><b> {{ __('titles.no') }} </b></label>
 
 
         </div>

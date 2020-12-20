@@ -6,10 +6,10 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.company') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> إضافة شيكات </span>
+        <span class="bread-blod">{{ __('titles.cheques') }} </span>
     </li>
 </ul>
 
@@ -24,39 +24,39 @@
             {{ csrf_field() }}
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mg-b-15">
-                    <a href="{{url('/Cheques')}}" class="btn btn-warning">إلغــــاء</a>
-                    <button type="submit" class="btn btn-primary waves-effect waves-light">حــفـــظ</button>
+                    <a href="{{url('/Cheques')}}" class="btn btn-warning">{{ __('titles.cancel') }} </a>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light">{{ __('titles.save') }} </button>
                 </div>
                 <div class="sparkline13-list">
-                    <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h4 style="text-align:right">بيان الشيكات</h4>
-                            <h3 style="text-align:right">شركة : {{$Company->company_official_name}}</h3><br />
+                    <div class="sparkline13-hd dir-rtl">
+                        <div class="main-sparkline13-hd  dir-rtl">
+                            <h4 >{{ __('titles.cheques') }}</h4>
+                            <h3 >{{ __('titles.company') }} : {{$Company->company_official_name}}</h3><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
+                        <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
                             <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row" style="text-align:right !important;direction:rtl !important">
+                                <div class="row row-ltr" >
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     <input class="radio-checked" type="radio" checked="" value="person" id="optionsRadios1" name="optionsRadios0">
-                                                    <label><b> شخص </b></label>
+                                                    <label><b> {{ __('titles.person') }} </b></label>
                                                     <input class="" type="radio" value="safe" id="optionsRadios2" name="optionsRadios0">
-                                                    <label><b> الخزينة </b></label>
+                                                    <label><b> {{ __('titles.cash_box') }} </b></label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">شيك موجه إالي</label>
+                                                <label class="login2" >{{ __('titles.send_to') }} </label>
                                             </div>
                                         </div>
-                                        <div class="row" id="forperson">
+                                        <div class="row row-ltr" id="forperson">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <select data-width="100%" name="person_id" class="selectpicker" data-live-search="true" tabindex="-1">
-                                                    <option value="">أختر</option>
+                                                    <option value="">{{ __('titles.select') }}</option>
                                                     @foreach ($Suppliers as $Supplier)
                                                         <option value="{{$Supplier->id}}">{{$Supplier->person_name}}</option>
                                                     @endforeach
@@ -66,35 +66,35 @@
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox" style="margin-right:-10px;">
                                                     <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="person_type">
-                                                    <label><b> موردين </b></label>
+                                                    <label><b>  {{ __('titles.suppliers') }}  </b></label>
                                                     <input class="" type="radio" value="102" id="optionsRadios2" name="person_type">
-                                                    <label><b> موظفين </b></label>
+                                                    <label><b>  {{ __('titles.employees') }}  </b></label>
                                                     <input class="" type="radio" value="100" id="optionsRadios3" name="person_type">
-                                                    <label><b> عملاء </b></label>
+                                                    <label><b>  {{ __('titles.clients') }}  </b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="date" name="transaction_date" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>التاريخ</b></label>
+                                                <label class="login2"><b> {{ __('titles.date') }} </b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="number" disabled class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2" id="forwhomtext"><b>دائن + / مدين  - </b></label>
+                                                <label class="login2" id="forwhomtext"><b> {{ __('titles.credit') }}  + / {{ __('titles.depit') }}  - </b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     @php
@@ -108,15 +108,15 @@
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox" style="margin-right:-10px;">
                                                     <input class="radio-checked" type="radio" checked="" value="current" id="optionsRadios1" name="optionsRadios2">
-                                                    <label><b> بنك </b></label>
+                                                    <label><b> {{ __('titles.bank') }} </b></label>
                                                     <input class="" type="radio" value="other" id="optionsRadios2" name="optionsRadios2">
-                                                    <label><b> أخري </b></label>
+                                                    <label><b> {{ __('titles.other') }} </b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <div class="row">
+                                                <div class="row row-ltr">
                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                         <div class="input-mark-inner mg-b-22">
                                                             <input type="text" disabled class="form-control" value="{{$Code}}" placeholder="">
@@ -124,65 +124,65 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                        <label class="login2"><b>مسلسل الشيك</b></label>
+                                                        <label class="login2"><b>{{ __('titles.cheque_nu') }}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="bt-df-checkbox" style="margin-right:-10px;">
                                                     <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="trans_type">
-                                                    <label><b> صرف شيك مشتريات </b></label>
+                                                    <label><b>{{ __('titles.cash_cheques') }}</b></label>
                                                     <input class="" type="radio" value="1" id="1aaa" name="trans_type">
-                                                    <label><b> ايداع شيك مبيعات </b></label>
+                                                    <label><b>{{ __('titles.receipt_cheques') }}</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="text" name="cheque_no" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>رقم الشيك</b></label>
+                                                <label class="login2"><b>{{ __('titles.cheque_no') }}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <input type="number" name="amount" class="form-control" placeholder="">
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>القيمة</b></label>
+                                                <label class="login2"><b>{{ __('titles.mony_amount') }}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="date" name="release_date" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>تاريخ الاصدار</b></label>
+                                                <label class="login2"><b>{{ __('titles.release_date') }}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <input type="date" name="due_date" class="form-control" placeholder="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>تاريخ الاستحقاق</b></label>
+                                                <label class="login2"><b>{{ __('titles.due_date') }}</b></label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                     <textarea class="form-control" name="notes" placeholder=""></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2"><b>البيان</b></label>
+                                                <label class="login2"><b>{{ __('titles.notes') }}</b></label>
                                             </div>
                                         </div>
                                     </div>
