@@ -306,7 +306,7 @@
 														<li><a href="{{route('Company-employee-report.index')}}" class="dropdown-item">تقرير حركة موظف</a></li>
                                                         <li><a href="{{route('Company-item-report.index')}}" class="dropdown-item">تقرير حركات الأصناف</a></li>
                                                         @endif
->>>>>>> 4d2a7c6111b9a3c64fe2895ac3d6d61cbc6ddd58
+
 
 
     										<a data-toggle="collapse" data-target="#demolibra" href="#">{{ __('titles.transactions_reports') }}<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
