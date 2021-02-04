@@ -112,7 +112,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="direction:rtl">
                                                     <div class="form-group">
-                                                        <label class="">{{ __('titles.pnone') }} 1</label>
+                                                        <label class="">{{ __('titles.phone') }} 1</label>
                                                     <input name="phone1" tabindex="6" {{$disabled ?? ''}} value="{{$phone1 ?? ''}}" type="text" class="form-control" placeholder="{{ __('titles.pnone') }} ">
                                                     </div>
                                                     <div class="form-group">
