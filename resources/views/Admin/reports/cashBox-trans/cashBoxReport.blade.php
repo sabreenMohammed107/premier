@@ -29,18 +29,23 @@
             /* background: #ddd; */
             width: 100%;
         }
-        .dir-rtl{
-	direction:rtl !important;
-}
-.dir-ltr{
-	direction:ltr !important;
-}
-.float-r{
-	float:right !important;
-}
-.float-l{
-	float:left !important;
-}
+
+        .dir-rtl {
+            direction: rtl !important;
+        }
+
+        .dir-ltr {
+            direction: ltr !important;
+        }
+
+        .float-r {
+            float: right !important;
+        }
+
+        .float-l {
+            float: left !important;
+        }
+
         .header {
 
             padding: 25px 10px;
@@ -50,8 +55,8 @@
             background: #021625;
             color: #fff;
             float: left;
-          
-            
+
+
         }
 
         .footer {
@@ -145,10 +150,10 @@
 </head>
 
 <body>
-   
+
     <div class="body">
         <span>
-            <div class="body-page" >
+            <div class="body-page">
 
 
                 <htmlpageheader name="page-header" style="height: 200px;
@@ -173,132 +178,215 @@
 
                     <div class="right">
                         <div dir="rtl">
-                           {{-- <!-- <span><img height="70" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo ?? '')}}" /></span> -->--}}
-                        </div>
-                    </div>
-                    <div class="rep_name">
-                        <span>{{$Title}} {{ __('titles.home') }}  </span>
-                    </div>
-                </htmlpageheader>
-                <br><br> <br><br> <br><br>
-                <htmlpagefooter name="page-footer">
-                    <div class="footer">
-                        <span>{{$Title}}</span>
-                    </div>
-                
-                </htmlpagefooter>
+                            {{-- <!-- <span><img height="70" style="text-align: right;" src="{{public_path('/uploads/companies/'.$Logo ?? '')}}" />
+        </span> -->--}}
+    </div>
+    </div>
+    <div class="rep_name">
+        <span>{{$Title}} {{ __('titles.home') }} </span>
+    </div>
+    </htmlpageheader>
+    <br><br> <br><br> <br><br>
+    <htmlpagefooter name="page-footer">
+        <div class="footer">
+            <span>{{$Title}}</span>
+        </div>
 
+    </htmlpagefooter>
+
+    </div>
+    </span>
+
+    <div class="content">
+
+        @foreach($trans as $rows)
+        <hr>
+
+        <div class="left">
+            <div  class="company ">
+                <span>
+                @if(str_replace('_', '-', app()->getLocale())=='ar')
+                <div class="name">
+                        <span> {{ __('titles.date_from') }} </span>
+                    </div>
+                    <div class="off_name">
+                        <span>
+                            {{$from_date}}
+                        </span>
+                    </div>
+                @else
+                <div class="off_name">
+                        <span>
+                            {{$from_date}}
+                        </span>
+                    </div>
+                <div class="name">
+                        <span> {{ __('titles.date_from') }} </span>
+                    </div>
+                   
+                @endif
+                   
+                </span>
             </div>
-        </span>
-     
-        <div class="content">
 
-            @foreach($trans as $rows)
-            <hr>
-
-            <div class="left">
-                <div dir="rtl" class="company">
-                    <span>
-                        <div class="name">
-                            <span> {{ __('titles.date_from') }} :</span>
-                        </div>
-                        <div class="off_name">
-                            <span>
-                                {{$from_date}}
-                            </span>
-                        </div>
-                    </span>
-                </div>
-
-                <div dir="rtl" class="company">
-                    <span>
-                        <div class="name">
-                            <span>{{ __('titles.date_to') }} :</span>
-                        </div>
-                        <div class="off_name">
-                            <span>
-                                {{$to_date}}
-                            </span>
-                        </div>
-                    </span>
-                </div>
+            <div  class="company">
+                <span>
+                @if(str_replace('_', '-', app()->getLocale())=='ar')
+                <div class="name">
+                        <span>{{ __('titles.date_to') }} </span>
+                    </div>
+                    <div class="off_name">
+                        <span>
+                            {{$to_date}}
+                        </span>
+                    </div>
+                @else
+                <div class="off_name">
+                        <span>
+                            {{$to_date}}
+                        </span>
+                    </div>
+                <div class="name">
+                        <span>{{ __('titles.date_to') }} </span>
+                    </div>
+                    
+                @endif
+                   
+                </span>
             </div>
-            <div class="right">
+        </div>
+        <div class="right">
 
 
-                <div dir="rtl" class="company">
-                    <span>
-                        <div class="name">
-                            <span>{{ __('titles.company') }}:</span>
-                        </div>
-                        <div class="off_name">
-                            <span>
+            <div  class="company">
+                <span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                        <span>{{ __('titles.company') }}</span>
+                    </div>
+                    <div class="off_name">
+                        <span>
                             {{$rows->company_name}}
-                            </span>
-                        </div>
-                    </span>
-                </div>
-               
-                <div dir="rtl" class="company">
-                    <span>
-                        <div class="name">
-                            <span> {{ __('titles.current_balance') }} :</span>
-                        </div>
-                        <div class="off_name">
-                        <?php
-                            $currentBalance = App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('additive') - App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('subtractive');
-                            if(!$rows->safe_id){
-                                $currentBalance =0;
-                              }
-                            ?>
-                           
-                            <span>
-                            {{$currentBalance}} 
-                            </span>
-                        </div>
-                    </span>
-                </div>
+                        </span>
+                    </div>
+
+                    @else
+                    <div class="off_name">
+                        <span>
+                            {{$rows->company_name}}
+                        </span>
+                    </div>
+                    <div class="name">
+                        <span>{{ __('titles.company') }}</span>
+                    </div>
+
+                    @endif
+
+
+
+
+
+
+
+
+
+
+
+
+                </span>
             </div>
-            <div dir="rtl" class="rightTable">
-                <table id="courseEval" style="width: 100%" border="1" @if(str_replace('_', '-', app()->getLocale())=='ar') class="dattable table table-striped thead-dark dir-rtl"  @else
-    class="dattable table table-striped thead-dark dir-ltr"   @endif >
-                    <thead>
-                        <tr>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div  class="company">
+                <span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                        <span> {{ __('titles.current_balance') }} </span>
+                    </div>
+                    <div class="off_name">
+                        <?php
+                        $currentBalance = App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('additive') - App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('subtractive');
+                        if (!$rows->safe_id) {
+                            $currentBalance = 0;
+                        }
+                        ?>
+
+                        <span>
+                            {{$currentBalance}}
+                        </span>
+                    </div>
+                    @else
+                    <div class="off_name">
+                        <?php
+                        $currentBalance = App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('additive') - App\Models\FinanTransaction::where('safe_id', $rows->safe_id)->sum('subtractive');
+                        if (!$rows->safe_id) {
+                            $currentBalance = 0;
+                        }
+                        ?>
+
+                        <span>
+                            {{$currentBalance}}
+                        </span>
+                    </div>
+                    <div class="name">
+                        <span> {{ __('titles.current_balance') }} </span>
+                    </div>
+
+                    @endif
+
+                </span>
+            </div>
+        </div>
+        <div dir="rtl" class="rightTable">
+            <table id="courseEval" style="width: 100%" border="1" @if(str_replace('_', '-' , app()->getLocale())=='ar') class="dattable table table-striped thead-dark dir-rtl" @else
+                class="dattable table table-striped thead-dark dir-ltr" @endif >
+                <thead>
+                    <tr>
 
                         <th> {{ __('titles.date') }} </th>
-                            <th>{{ __('titles.permission_no') }}</th>
-                            <th>{{ __('titles.bill_no') }}</th>
-                            <th>{{ __('titles.depit') }}</th>
-                            <th> {{ __('titles.credit') }}</th>
-                            <th>{{ __('titles.current_balance') }}</th>
-                            <th>{{ __('titles.type') }}</th>
-                            <th>{{ __('titles.declaration') }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php $tbalance=0; ?>
-                        @foreach ($rows->trans as $row)
-                        <tr>
+                        <th>{{ __('titles.permission_no') }}</th>
+                        <th>{{ __('titles.bill_no') }}</th>
+                        <th>{{ __('titles.depit') }}</th>
+                        <th> {{ __('titles.credit') }}</th>
+                        <th>{{ __('titles.current_balance') }}</th>
+                        <th>{{ __('titles.type') }}</th>
+                        <th>{{ __('titles.declaration') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $tbalance = 0; ?>
+                    @foreach ($rows->trans as $row)
+                    <tr>
 
-                            <td> {{date('d-m-Y', strtotime($row->transaction_date))}}</td>
-                            <td> {{$row->permission_code}}</td>
-                            <td> {{$row->invoice_no}}</td>
-                            <td> {{$row->additive}}</td>
-                            <td> {{$row->subtractive}}</td>
-                            <td><?php $chkbala = $row->additive - $row->subtractive;
-                                echo $tbalance += $chkbala; ?>
-                            </td>
-                            <td> {{$row->type->transaction_type??''}}</td>
-                            <td> {{$row->purch_sales_statement}}</td>
-                           
-                        </tr>
-                        @endforeach
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            @endforeach
+                        <td> {{date('d-m-Y', strtotime($row->transaction_date))}}</td>
+                        <td> {{$row->permission_code}}</td>
+                        <td> {{$row->invoice_no}}</td>
+                        <td> {{$row->additive}}</td>
+                        <td> {{$row->subtractive}}</td>
+                        <td><?php $chkbala = $row->additive - $row->subtractive;
+                            echo $tbalance += $chkbala; ?>
+                        </td>
+                        <td> {{$row->type->transaction_type??''}}</td>
+                        <td> {{$row->purch_sales_statement}}</td>
+
+                    </tr>
+                    @endforeach
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        @endforeach
+    </div>
     </div>
 
 </body>

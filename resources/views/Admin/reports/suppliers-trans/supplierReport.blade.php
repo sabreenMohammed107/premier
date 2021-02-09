@@ -198,63 +198,116 @@
             <hr>
 
             <div class="left">
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> {{ __('titles.date_from') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> {{ __('titles.date_from') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$from_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$from_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> {{ __('titles.date_from') }} </span>
+                        </div>
+                        
+                    @endif
+                        
                     </span>
                 </div>
 
-                <div dir="rtl" class="company">
+                <div class="company">
                     <span>
-                        <div class="name">
-                            <span> {{ __('titles.date_to') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> {{ __('titles.date_to') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$to_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$to_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> {{ __('titles.date_to') }} </span>
+                        </div>
+                       
+                    @endif
+                        
                     </span>
                 </div>
             </div>
             <div class="right">
 
 
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>{{ __('titles.company') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>{{ __('titles.company') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$Company->company_official_name ?? ''}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$Company->company_official_name ?? ''}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>{{ __('titles.company') }} </span>
+                        </div>
+                       
+                    @endif
+                        
                     </span>
                 </div>
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>{{ __('titles.name') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>{{ __('titles.name') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$rows->supplier_name ?? ''}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$rows->supplier_name ?? ''}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>{{ __('titles.name') }} </span>
+                        </div>
+                       
+                    @endif
+                       
                     </span>
                 </div>
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>{{ __('titles.current_balance') }}:</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>{{ __('titles.current_balance') }}</span>
                         </div>
                         <div class="off_name">
                         <?php
@@ -268,6 +321,25 @@
                             {{$currentBalance}} 
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                        <?php
+                            $currentBalance = App\Models\FinanTransaction::where('person_id', $rows->supplier_id)->sum('subtractive') - App\Models\FinanTransaction::where('person_id', $rows->supplier_id)->sum('additive');
+                            if(!$rows->supplier_id){
+                                $currentBalance =0;
+                              }
+                           ?>
+                           
+                            <span>
+                            {{$currentBalance}} 
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>{{ __('titles.current_balance') }}</span>
+                        </div>
+                       
+                    @endif
+                        
                     </span>
                 </div>
             </div>

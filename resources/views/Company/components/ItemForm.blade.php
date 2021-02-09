@@ -55,8 +55,8 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mg-b-15">
                                     <div class="review-content-section">
                                         <div id="dropzone1" class="pro-ad addcoursepro">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="direction:rtl">
+                                            <div class="row row-ltr">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                                                     <div class="form-group">
                                                         <label class="">{{ __('titles.open_blance_one_item') }}</label>
                                                         <input name="open_item_price" {{$disabled ?? ''}} {{$open ?? ''}} value="{{$open_item_price ?? ''}}" type="text" class="form-control" placeholder="{{ __('titles.open_blance_one_item') }}">
@@ -80,7 +80,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="direction:rtl">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                                                     <div class="form-group">
                                                         <label class="">{{ __('titles.code') }}</label>
                                                         <input name="item_code" {{$disabled ?? ''}} value="{{$item_code ?? ''}}" type="text" class="form-control" placeholder="{{ __('titles.code') }} ">

@@ -5,12 +5,24 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+  
+    @if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> القيود الاليه</span>
+        <span class="bread-blod"> {{ __('titles.restrictions') }}</span>
     </li>
+	@else
+   
+    <li>
+        <span class="bread-blod"> {{ __('titles.restrictions') }} /</span>
+    </li>
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 
 @endsection
@@ -29,20 +41,22 @@
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl">القيود الاليه</h1><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                            <h1>{{ __('titles.restrictions') }}</h1><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
                             <div class="form-group-inner" style="margin-right:10px;">
                                 <form>
-                                    <div class="row res-rtl" style="display: flex ;flex-direction: row-reverse ;">
-                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 mg-b-15" style="direction:rtl">
-                                            <div class="row" style="margin-top:5px;">
+
+                                    <div class="row row-ltr">
+                                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7"></div>
+                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 dir-rtl">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                                                     <select data-placeholder="Choose a Company..." name="company_id" id="company" class="chosen-select dynamic" tabindex="-1">
-                                                        <option value=""> الشركة</option>
+                                                        <option value=""> {{ __('titles.select') }}</option>
                                                         @foreach($companies as $company)
                                                         <option value="{{$company->id}}">{{$company->company_official_name}}</option>
 
@@ -51,40 +65,40 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                     <div class="input-mask-title">
-                                                        <label><b style="font-size:20px">الشركة</b></label>
+                                                        <label><b style="font-size:20px">{{ __('titles.company') }}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row" style="margin-top:5px;">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                    <select data-placeholder="إختر السنه" name="year_id" id="year" class="chosen-select year" tabindex="-1">
+                                                    <select data-placeholder="{{ __('titles.years') }}" name="year_id" id="year" class="chosen-select year" tabindex="-1">
 
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                     <div class="input-mask-title">
-                                                        <label><b style="font-size:20px">السنوات</b></label>
+                                                        <label><b style="font-size:20px">{{ __('titles.years') }}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row" style="margin-top:5px;">
+                                            <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                <select data-placeholder="إختر الشهر" name="month_id" id="month" class="chosen-select month" tabindex="-1">
+                                                    <select data-placeholder="{{ __('titles.months') }}" name="month_id" id="month" class="chosen-select month" tabindex="-1">
 
-</select>
+                                                    </select>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                     <div class="input-mask-title">
-                                                        <label><b style="font-size:20px">الشهور</b></label>
+                                                        <label><b style="font-size:20px">{{ __('titles.months') }}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="chosen-select-single mg-b-20">
-                                        <button class="btn btn-primary waves-effect waves-light">إلغاء توجيه</button>
-                                        <button class="btn btn-primary waves-effect waves-light">توجيه</button>
-                                        <button class="btn btn-primary waves-effect waves-light">عرض</button>
+                                        <button class="btn btn-primary waves-effect waves-light">{{ __('titles.exit_guidance') }}</button>
+                                        <button class="btn btn-primary waves-effect waves-light">{{ __('titles.guidance') }}</button>
+                                        <button class="btn btn-primary waves-effect waves-light">{{ __('titles.show') }}</button>
                                     </div>
                                 </form>
                             </div>
@@ -135,34 +149,34 @@
 
         $('.year').change(function() {
 
-if ($(this).val() != '') {
-    var select = $(this).attr("id");
-    var value = $(this).val();
-var company_id=$('#company option:selected').val();
+            if ($(this).val() != '') {
+                var select = $(this).attr("id");
+                var value = $(this).val();
+                var company_id = $('#company option:selected').val();
 
-    $.ajax({
-        url: "{{route('dynamicRestricYear.fetch')}}",
-        method: "get",
-        data: {
-            select: select,
-            value: value,
-            company_id:company_id,
-
-
-        },
-        success: function(result) {
-
-            $('#month').html(result);
-            $("#month").addClass("chosen-select");
-            $("#month").trigger("chosen:updated");
-            $(select).trigger("chosen:updated");
+                $.ajax({
+                    url: "{{route('dynamicRestricYear.fetch')}}",
+                    method: "get",
+                    data: {
+                        select: select,
+                        value: value,
+                        company_id: company_id,
 
 
-        }
+                    },
+                    success: function(result) {
 
-    })
-}
-});
+                        $('#month').html(result);
+                        $("#month").addClass("chosen-select");
+                        $("#month").trigger("chosen:updated");
+                        $(select).trigger("chosen:updated");
+
+
+                    }
+
+                })
+            }
+        });
     });
 </script>
 @endsection

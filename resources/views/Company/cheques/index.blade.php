@@ -5,12 +5,23 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+@if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> {{ __('titles.company') }}<span class="bread-slash"> / </span>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> {{ __('titles.cheques') }}  </span>
+        <span class="bread-blod">{{ __('titles.transfer_cheques') }} </span>
     </li>
+	@else
+   
+    <li>
+        <span class="bread-blod">{{ __('titles.transfer_cheques') }} </span>
+    </li>
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 
 @endsection
@@ -27,14 +38,13 @@
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
                         <div class="main-sparkline13-hd dir-rtl">
-                            <h1 >{{ __('titles.cheques') }}</h1>
+                            <h1 >{{ __('titles.transfer_cheques') }}</h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <h3>الشركة</h3>
-                                <h3>{{$Company->company_official_name}}</h3>
+                        <div class="datatable-dashv1-list custom-datatable-overright " >
+                            <div class="chosen-select-single mg-b-20 dir-rtl" >
+                                <h3>{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>
                             </div>
 
                             <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true"

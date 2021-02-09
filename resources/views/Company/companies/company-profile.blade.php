@@ -226,7 +226,7 @@
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <p><b>{{ __('titles.phone') }} : </b>{{$Employee->phone1}}</p>
-                                                                    <p><b>{{ __('titles.phone') }} : </b>{{$Employee->phone2}}</p>
+                                                                    <p><b>{{ __('titles.mobile') }} : </b>{{$Employee->phone2}}</p>
                                                                     <p><b>{{ __('titles.current_balance') }} : </b>{{$Employee->total}}</p>
 
                                                                     {{-- <p><b>{{ __('titles.job_date') }} : </b>01-01-2020</p>
@@ -300,7 +300,7 @@
                                                                 <p><b>{{$Supplier->person_name}}</b></p>
                                                             </div>
                                                             <div class="col-lg-6 dir-rtl">
-                                                                <p><b>رصيد المورد : </b>{{$Supplier->total}}</p>
+                                                                <p><b>{{ __('titles.current_balance') }} : </b>{{$Supplier->total}}</p>
                                                                 <p><b>{{ __('titles.phone') }} : </b>{{$Supplier->phone1}}</p>
                                                                 <p><b>{{ __('titles.mobile') }} : </b>{{$Supplier->phone2}}</p>
                                                             </div>
@@ -371,7 +371,7 @@
                                                             <p><b>{{$Client->person_name}}</b></p>
                                                         </div>
                                                         <div class="col-lg-6 dir-rtl">
-                                                            <p><b>{{ __('titles.cash_box_balance') }} : </b>5000</p>
+                                                            <p><b>{{ __('titles.current_balance') }} : </b>5000</p>
                                                             <p><b>{{ __('titles.phone') }} : </b>{{$Client->phone1}}</p>
                                                             <p><b>{{ __('titles.mobile') }} : </b>{{$Client->phone2}}</p>
                                                         </div>
@@ -446,12 +446,12 @@
             <div class="modal-body">
                 <img class="message-avatar" src="img/contact/1.jpg" alt="">
                 <h2>{{$EmployeeModal->person_name}}</h2>
-                <h4>محاسب قانوني</h4>
+               
                 <br />
                 <div class="message-content text-right">
                     <div class="row ">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 dir-rtl">
-                            <p><b>رصيد المورد : </b>{{$EmployeeModal->total}}</p>
+                            <p><b>{{ __('titles.current_balance') }}  : </b>{{$EmployeeModal->total}}</p>
                             <p><b>{{ __('titles.phone') }} : </b>{{$EmployeeModal->phone1}}</p>
                             <p><b>{{ __('titles.mobile') }} : </b>{{$EmployeeModal->phone2}}</p>
                             {{-- <p><b>{{ __('titles.job_date') }} : </b>01-01-2020</p>
@@ -499,7 +499,7 @@
                 <div class="message-content txt-right">
                     <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 dir-rtl">
-                                                    <p><b>رصيد المورد : </b>{{$SupplierModal->total}}</p>
+                                                    <p><b>{{ __('titles.current_balance') }}: </b>{{$SupplierModal->total}}</p>
                             <p><b>{{ __('titles.phone') }} : </b>{{$SupplierModal->phone1}}</p>
                             <p><b>{{ __('titles.mobile') }} : </b>{{$SupplierModal->phone2}}</p>
                         </div>
@@ -543,7 +543,7 @@
                 <div class="message-content txt-right">
                     <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 dir-rtl">
-                                                    <p><b>{{ __('titles.cash_box_balance') }} : </b>{5000}</p>
+                                                    <p><b>{{ __('titles.current_balance') }} : </b>{5000}</p>
                             <p><b>{{ __('titles.phone') }} : </b>02 2215 321</p>
                             <p><b>{{ __('titles.mobile') }} : </b>010 215 321</p>
                         </div>

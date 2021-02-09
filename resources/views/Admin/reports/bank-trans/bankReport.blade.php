@@ -197,52 +197,92 @@
             <hr>
 
             <div class="left">
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> {{ __('titles.date_from') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> {{ __('titles.date_from') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$from_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$from_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> {{ __('titles.date_from') }} </span>
+                        </div>
+                        
+                    @endif
+                       
                     </span>
                 </div>
 
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>{{ __('titles.date_to') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>{{ __('titles.date_to') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$to_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$to_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>{{ __('titles.date_to') }} </span>
+                        </div>
+                       
+                    @endif
+                       
                     </span>
                 </div>
             </div>
             <div class="right">
 
 
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>{{ __('titles.company') }} :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>{{ __('titles.company') }} </span>
                         </div>
                         <div class="off_name">
                             <span>
                             {{$rows->company_name}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                            {{$rows->company_name}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>{{ __('titles.company') }} </span>
+                        </div>
+                       
+                    @endif
+                        
                     </span>
                 </div>
                
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> {{ __('titles.current_balance') }}:</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> {{ __('titles.current_balance') }}</span>
                         </div>
                         <div class="off_name">
                         <?php
@@ -257,10 +297,30 @@
                             {{$currentBalance}} 
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                        <?php
+                       
+                            $currentBalance = App\Models\FinanTransaction::where('bank_id', $rows->bank_id)->sum('additive') - App\Models\FinanTransaction::where('bank_id', $rows->bank_id)->sum('subtractive');
+                          if(!$rows->bank_id){
+                            $currentBalance =0;
+                          }
+                          ?>
+                           
+                            <span>
+                            {{$currentBalance}} 
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> {{ __('titles.current_balance') }}</span>
+                        </div>
+                        
+                    @endif
+                        
                     </span>
                 </div>
             </div>
-            <div dir="rtl" class="rightTable">
+            <div  class="rightTable">
                 <table id="courseEval" style="width: 100%" border="1" @if(str_replace('_', '-', app()->getLocale())=='ar') class="dattable table table-striped thead-dark dir-rtl"  @else
     class="dattable table table-striped thead-dark dir-ltr"   @endif >
                     <thead>

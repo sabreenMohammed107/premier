@@ -28,7 +28,8 @@ class RegisterUsersController extends Controller
         $this->viewName = 'Admin.users.';
         $this->routeName = 'users.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
+
     }
     /**
      * Display a listing of the resource.
@@ -211,10 +212,10 @@ class RegisterUsersController extends Controller
             $user->delete();
         } catch (QueryException $q) {
 
-            return redirect()->back()->with('flash_danger', 'لايسمح بحذف هذا المستخدم');
+            return redirect()->back()->with('flash_danger', \Lang::get('titles.delete_msg_error'));
         }
 
-        return redirect()->route($this->routeName . 'index')->with('flash_success', 'نم حذف المستخدم بنجاح!');
+        return redirect()->route($this->routeName . 'index')->with('flash_success',  \Lang::get('titles.delete_msg'));
     }
 
 
@@ -229,7 +230,7 @@ class RegisterUsersController extends Controller
             $data = Role::whereIn('id', [100, 101, 110])->get();
         }
 
-        $output = '<option value="" selected="" disabled="">الصلاحيات</option>';
+        $output = '<option value="" selected="" disabled="">'.\Lang::get('titles.previlidge').'</option>';
         foreach ($data as $row) {
 
             $output .= '<option value="' . $row->id . '">' . $row->role_name . '</option>';
@@ -254,6 +255,6 @@ class RegisterUsersController extends Controller
             $row->company()->detach();
         }
 
-        return redirect()->back()->with('flash_success', 'تم التعديل بنجاح !');
+        return redirect()->back()->with('flash_success', \Lang::get('titles.update_msg'));
     }
 }

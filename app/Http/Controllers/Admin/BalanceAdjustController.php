@@ -25,7 +25,7 @@ class BalanceAdjustController extends Controller
 
         $this->viewName = 'Admin.balance-adjust.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message = \Lang::get('titles.saving_msg');
     }
 
 
@@ -53,8 +53,7 @@ class BalanceAdjustController extends Controller
 
 
 
-        $output = '<option value="" >المورد</option>
-               ';
+        $output = '<option value="" >'.\Lang::get('titles.select').'</option>';
         foreach ($suppliers as $row) {
 
             $output .= '<option value="' . $row->id . '">' . $row->person_name . '</option>';
@@ -72,8 +71,8 @@ class BalanceAdjustController extends Controller
 
 
 
-        $output = '<option value="" >العملاء</option>
-               ';
+        $output = '<option value="" >'.\Lang::get('titles.select').'</option>';
+              
         foreach ($clients as $row) {
 
             $output .= '<option value="' . $row->id . '">' . $row->person_name . '</option>';
@@ -91,15 +90,14 @@ class BalanceAdjustController extends Controller
 
 
         if ($person_id == 100) {
-            $output = '<option value="" >العملاء</option>
-        ';
+            $output = '<option value="" >'.\Lang::get('titles.select').'</option>';
+      
             foreach ($persons as $row) {
 
                 $output .= '<option value="' . $row->id . '">' . $row->person_name . '</option>';
             }
         } else {
-            $output = '<option value="" >المورد</option>
-        ';
+            $output = '<option value="" >'.\Lang::get('titles.select').'</option>';
             foreach ($persons as $row) {
 
                 $output .= '<option value="' . $row->id . '">' . $row->person_name . '</option>';

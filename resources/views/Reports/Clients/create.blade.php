@@ -1,7 +1,7 @@
 
 
     {{-- @extends('Layout.web') --}}
-    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? 'Layout.web' : 'Layout.company')
+    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? 'Layout.web' : 'Layout.company')
 
 
 
@@ -27,7 +27,7 @@
                 <div class="mg-b-15">
                     {{-- <button class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</button>
                     <button class="btn btn-primary waves-effect waves-light">{{ __('titles.save') }}</button> --}}
-                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
+                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</a>
 
                 </div>
             <form target="_blank" action="{{url('/Clients/Report/Fetch')}}" method="post">
@@ -39,8 +39,8 @@
                             </div>
                         </div>
                         <div class="sparkline13-graph">
-                            <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                                <div class="chosen-select-single mg-b-20" style="direction:rtl;">
+                            <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
+                                <div class="chosen-select-single mg-b-20 dir-rtl" >
                                     <button class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }}</button>
                                 </div>
                                 <div class="form-group-inner" style="margin-right:10px;">

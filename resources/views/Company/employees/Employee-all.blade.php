@@ -15,11 +15,7 @@
     <li>
     <span class="bread-blod">
 
-        @if(isset($Employee->person_name))
-        {{$Employee->person_name}}
-        @else
-        {{ __('titles.add') }}
-        @endif
+      
     </span>
     </li>
 </ul>
@@ -30,7 +26,7 @@
 		<!-- Single pro tab review Start-->
 		<div class="single-pro-review-area mt-t-30 mg-b-15">
 			<div class="container-fluid">
-                <a href="{{ url("/Company/Employees")}}" class="btn btn-primary waves-effect waves-light mg-b-15">رجــــــوع</a>
+                <a href="{{ url("/Company/Employees")}}" class="btn btn-primary waves-effect waves-light mg-b-15"> {{ __('titles.back') }}</a>
             @component('/Company/components/EmployeeForm')
             @slot('image')
             @isset($Employee->person_logo)
@@ -90,7 +86,7 @@
             @endslot
                     @if($type == 'View')
                         @slot('title')
-                            بيانات الموظف : {{$Employee->person_name}}
+                        {{ __('titles.employee_data') }} : {{$Employee->person_name}}
                         @endslot
                         @slot('disabled')
                             disabled

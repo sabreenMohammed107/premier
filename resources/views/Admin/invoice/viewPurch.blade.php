@@ -40,12 +40,25 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
 @section('crumb')
 
 <ul class="breadcome-menu">
+  
+@if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> الشركات<span class="bread-slash"> / </span>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> المشتريات </span>
+        <span class="bread-blod">  {{ __('titles.purchases') }} </span>
     </li>
+	@else
+   
+   
+    <li>
+        <span class="bread-blod">  {{ __('titles.purchases') }} /</span>
+    </li>
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 @endsection
 
@@ -60,7 +73,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                         <!--<div class="btn-back">
                             <a href="#">حــفـظ</a>
                         </div>-->
-                    <a href="{{route('invoice-cash')}}" class="btn btn-primary waves-effect waves-light">إلغاء</a>
+                    <a href="{{route('invoice-cash')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.back') }}</a>
 
                         <!--<div class="btn-cancel">
                             <a href="#">إلــغاء</a>
@@ -72,19 +85,19 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl">المشتريات</h1><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                            <h1 >{{ __('titles.purchases') }}</h1><br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <h3><span>شركة : </span> {{$Company->company_official_name}} </h3>
+                            <div class="chosen-select-single mg-b-20 dir-rtl" >
+                                <h3><span>{{ __('titles.company') }} : </span> {{$Company->company_official_name}} </h3>
                             </div>
                             <div class="form-group-inner" style="margin-right:10px;">
                                 <div class="row res-rtl"style="display: flex ;flex-direction: row-reverse ;">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15" style="direction:rtl">
-                                        <div class="row" style="margin-top:5px;">
+                                    <div class="row row-ltr" style="margin-top:5px;">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="text" disabled id="invoice_no" value="{{$Invoice->invoice_no}}" class="form-control" placeholder="">
@@ -92,11 +105,11 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="input-mask-title">
-                                                    <label><b>رقم الفاتورة</b></label>
+                                                    <label><b>{{ __('titles.bill_no') }}</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="date" disabled value="{{date('Y-m-d', strtotime($Invoice->inv_date))}}" id="inv_date" class="form-control" placeholder="">
@@ -104,71 +117,71 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <div class="input-mask-title">
-                                                    <label><b>تاريخ الفاتورة</b></label>
+                                                    <label><b>{{ __('titles.date') }}</b></label>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->approved == 1)
-                                                        معتمد
+                                                    {{ __('titles.confirm') }}
                                                     @else
-                                                        غير معتمد
+                                                    {{ __('titles.not_confirm') }} 
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">الحالة</label>
+                                                <label class="login2">{{ __('titles.status') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->service_type_id == 101)
-                                                    توريد
+                                                    {{ __('titles.supplying') }}
                                                     @else
-خدمة
+                                                    {{ __('titles.Services') }}                                                   
+
                                                     @endif
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">الخدمات</label>
+                                                <label class="login2">{{ __('titles.Services_type') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->outgoing_type_id == 100)
-سلع
-                                                    @elseif($Invoice->outgoing_type_id == 101)
-خدمات
+                                                    {{__('titles.commodity')}} 
+                                                     @elseif($Invoice->outgoing_type_id == 101)
+                                                    {{__('titles.Services')}}
                                                     @else
- ألات ومعدات
-                                                    @endif
+                                                    {{__('titles.machine_equipment')}}                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label class="login2">نوع المصروف</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->purchasing_type_id == 100)
-                                                        مستورد
+                                                    {{__('titles.imported')}} 
                                                     @else
-                                                        محلي
+                                                    {{__('titles.local')}} 
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">المدفوعات</label>
+                                                <label class="login2">{{__('titles.purshasing')}}</label>
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div id="type" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                                                             <input type="text" name="person_name" disabled value="{{$Invoice->person_name}}" id="other_text" class="form-control" placeholder="">
 
@@ -182,7 +195,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow mg-b-15">
-                                        <div class="row">
+                                    <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="input-mark-inner mg-b-22">
@@ -191,7 +204,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>الإجمالي</b></label>
+                                                        <label><b>{{__('titles.total')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -205,7 +218,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>الخصومات</b></label>
+                                                        <label><b>{{__('titles.discount')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,7 +232,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى ضريبه قيمه مضافه</b></label>
+                                                        <label><b>{{__('titles.total_vat_value')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -233,7 +246,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى ض تجاريه صناعيه</b></label>
+                                                        <label><b>{{__('titles.total_comm_industr_tax')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -247,7 +260,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>اجمالى بعد الخصم</b></label>
+                                                        <label><b>{{__('titles.total_price_post_discounts')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,7 +274,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>إجمالى الصافى</b></label>
+                                                        <label><b>{{__('titles.net_invoice_total')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,7 +289,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                     <div class="input-mask-title">
-                                                        <label><b>ملاحظات</b></label>
+                                                        <label><b>{{__('titles.notes')}}</b></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,13 +302,13 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             text-align:center !important;
                             }
                             </style>
-                            <h3 style="text-align:right">الأصناف</h3>
+                            <h3 style="text-align:right">{{__('titles.items')}}</h3>
                             {{-- <button id="add" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">إضافة صنف</button> --}}
                             <table class="table-striped" id="puchasetable"
                             data-locale="ar-SA"
                             data-pagination="true"
-                            data-pagination-pre-text="السابق"
-                            data-pagination-next-text="التالي"
+                            data-pagination-pre-text="{{__('titles.prev')}}"
+                            data-pagination-next-text="{{__('titles.next')}}"
                             data-show-export="true"
                             data-minimum-count-columns="2"
                             data-page-list="[10, 25, 50, 100, all]"
@@ -316,20 +329,19 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                 data-show-columns-toggle-all="true">
                             <thead>
                                 <tr>
-                                    <th data-field="index" data-sortable="true">#</th>
-                                    <th data-field="storeItem" data-sortable="true">مخزون</th>
-                                    <th data-field="item" data-sortable="true">البيان</th>
-                                    <th data-field="price" data-sortable="true">سعر الوحدة</th>
-                                    <th data-field="qty" data-sortable="true">الكمية</th>
-                                    <th data-field="total" data-sortable="true">الاجمالى</th>
-                                    <th data-field="discount" data-sortable="true">الخصومات</th>
-                                    <th data-field="totalAfterDiscount" data-sortable="true">اجمالى بعد الخصم</th>
-                                    <th data-field="exemption" data-sortable="true">اعفاء ضريبى</th>
-                                    <th data-field="vat" data-sortable="true">ض.القيمه المضافه</th>
-                                    <th data-field="cit" data-sortable="true">ض.أ.ت.ص</th>
-                                    <th data-field="net" data-sortable="true">صافى القيمه</th>
-                                    <th data-field="del" data-sortable="true">حذف</th>
-                                </tr>
+                                <th data-field="index" data-sortable="true">#</th>
+                                        <th data-field="storeItem" data-sortable="true">{{__('titles.stocked')}}</th>
+                                        <th data-field="item" data-sortable="true">{{__('titles.declaration')}}</th>
+                                        <th data-field="price" data-sortable="true">{{__('titles.item_price')}}</th>
+                                        <th data-field="qty" data-sortable="true">{{__('titles.qty')}}</th>
+                                        <th data-field="total" data-sortable="true">{{__('titles.total')}}</th>
+                                        <th data-field="discount" data-sortable="true">{{__('titles.discount')}}</th>
+                                        <th data-field="totalAfterDiscount" data-sortable="true">{{__('titles.total_price_post_discounts')}}</th>
+                                        <th data-field="exemption" data-sortable="true">{{__('titles.exemption')}}</th>
+                                        <th data-field="vat" data-sortable="true">{{__('titles.vat_value')}}</th>
+                                        <th data-field="cit" data-sortable="true">{{__('titles.comm_industr_prof_tax')}}</th>
+                                        <th data-field="net" data-sortable="true">{{__('titles.net_value')}}</th>
+                 </tr>
                             </thead>
                                 <tbody id="rows">
                                     @php
@@ -341,9 +353,9 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                         <td >
                                             <div class="bt-df-checkbox">
                                             @if ($Item->store_item == 1)
-                                                نعم
+                                            {{__('titles.yes')}}
                                             @else
-                                                لا
+                                            {{__('titles.no')}}
                                             @endif
                                             </div>
                                         </td>

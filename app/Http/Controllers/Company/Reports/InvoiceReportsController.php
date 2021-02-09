@@ -86,13 +86,19 @@ class InvoiceReportsController extends Controller
         $Company = Company::find($id);
         $data = [
             'Invoices' => $Invoices,
-            'Title' => 'تقرير المشتريات',
+           
+            'Title' =>  \Lang::get('titles.buy_report'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
-        $pdf = PDF::loadView('Reports.InvoiceReports.Purchasing.report', $data);
+        if(app()->getLocale() =='ar'){
+            $pdf = PDF::loadView('Reports.InvoiceReports.Purchasing.report', $data);
+        }else{
+            $pdf = PDF::loadView('Reports.InvoiceReports.Purchasing.reportEn', $data);
+        }
+      
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
@@ -171,13 +177,19 @@ class InvoiceReportsController extends Controller
         $Company = Company::find($id);
         $data = [
             'Invoices' => $Invoices,
-            'Title' => 'فاتورة مبيعات',
+          
+            'Title' =>  \Lang::get('titles.sales_report'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
-        $pdf = PDF::loadView('Reports.InvoiceReports.Sales.report', $data);
+        if(app()->getLocale() =='ar'){
+            $pdf = PDF::loadView('Reports.InvoiceReports.Sales.report', $data);
+        }else{
+            $pdf = PDF::loadView('Reports.InvoiceReports.Sales.reportEn', $data);
+        }
+      
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;

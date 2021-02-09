@@ -29,7 +29,7 @@ class BankReportController extends Controller
         $this->viewName = 'Admin.reports.bank-trans.';
         $this->routeName = 'Admin-bank-report.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.

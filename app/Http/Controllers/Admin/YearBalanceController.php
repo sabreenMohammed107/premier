@@ -25,7 +25,7 @@ class YearBalanceController extends Controller
 
         $this->viewName = 'Admin.year-balance.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     public function index()
     {
@@ -78,7 +78,7 @@ class YearBalanceController extends Controller
       
         if (!$month->can_change==0) {
 
-            $strr=' هناك شهور لم تغلق !';
+            $strr=\Lang::get('titles.closeMsg');
             $years = BalanceYear::where('company_id', $year->company_id)->with('company')->get();
             $company = BalanceYear::where('company_id', $year->company_id)->with('company')->orderBy("created_at", "Desc")->first();
 
@@ -202,7 +202,7 @@ public function openYearBalance(Request $request){
 } catch (\Throwable $th) {
     //throw $th;
     DB::rollBack();
-    $strr=' هناك شهور لم تغلق !';
+    $strr=\Lang::get('titles.closeMsg');
     $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
     $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
     return view($this->viewName . 'tableData', compact('years', 'company','strr'))->render();
@@ -233,7 +233,7 @@ public function cancelBalance(Request $request){
           
         }
     }else{
-        $strr=' هناك شهور مغلقة لا يمكن إلغاء الترصيد !';
+        $strr=\Lang::get('titles.not_closeMsg');
         $years = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->get();
         $company = BalanceYear::where('company_id',$yearNow->company_id)->with('company')->orderBy("created_at", "Desc")->first();
         return view($this->viewName . 'tableData', compact('years', 'company','strr'))->render();

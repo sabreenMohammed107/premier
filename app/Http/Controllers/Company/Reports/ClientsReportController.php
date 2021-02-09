@@ -42,16 +42,9 @@ class ClientsReportController extends Controller
         ->whereIn('finan_transactions.transaction_type_id', [104, 106, 108])
         ->groupBy('person_id');
 
-        $TotalPost = DB::table('invoices')
-        ->select(DB::raw('sum(ifnull(total_price_post_discounts,0)) as total_sales,invoices.person_id'))
-        ->where('invoice_type','=',1)
-        ->groupBy('person_id');
-
         $Supplier = DB::table('persons')
-        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_sales,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_sales,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
-        ->leftJoinSub($TotalPost, 'invoices',function($join){
-            $join->on('invoices.person_id','=','persons.id');
-        })
+        ->select(DB::raw('ifnull(total_pay,0) as total_pay,ifnull(total_rec,0) as total_rec,persons.id,ifnull(persons.phone1,0) as phone1,sum(ifnull(total_price_post_discounts,0)) as total_sales,persons.person_name, ifnull(persons.open_balance,0) as open_balance, sum(ifnull(total_price_post_discounts,0) + ifnull(persons.open_balance,0) + ifnull(total_pay,0) - ifnull(total_rec,0)) as current'))
+        ->leftJoin('invoices','invoices.person_id','=','persons.id')
         ->leftJoinSub($TotalPay,'finan_transactions',function($join){
             $join->on('finan_transactions.person_id', '=', 'persons.id');
         })
@@ -75,13 +68,18 @@ class ClientsReportController extends Controller
         $Company = Company::find($id);
         $data = [
             'Suppliers' => $Suppliers,
-            'Title' => 'تقرير ارصدة عملاء',
+          
+            'Title' =>   \Lang::get('titles.customer_balances_reports'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
-        $pdf = PDF::loadView('Reports.Clients.report', $data);
+        if(app()->getLocale() =='ar'){
+            $pdf = PDF::loadView('Reports.Clients.report', $data);
+        }else{
+            $pdf = PDF::loadView('Reports.Clients.reportEn', $data);
+        }
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;

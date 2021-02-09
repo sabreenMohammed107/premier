@@ -1,13 +1,13 @@
-<table class="table" id="table" style="direction:rtl">
+<table class="table dir-rtl" id="table" >
 	<thead>
 		<tr>
-			<th>الشهر</th>
-			<th>الترصيد السنوي</th>
-			<th>الفترة من</th>
-			<th>الفترة إلي</th>
-			<th>النوع</th>
-			<th>مغلقة</th>
-			<th>الإغلاق</th>
+			<th>{{ __('titles.month') }}</th>
+			<th>{{ __('titles.annual_balance') }}</th>
+			<th>{{ __('titles.date_from') }}</th>
+			<th>{{ __('titles.date_to') }}</th>
+			<th>{{ __('titles.type') }}</th>
+			<th>{{ __('titles.closing') }}</th>
+			<th>{{ __('titles.theclosing') }}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,11 +28,11 @@
 			<td>
 				<div class="product-buttons">
 					@if($row->can_change==1)
-					<button onclick="closeMonth({{$row->id}})" title="Trash">إغلاق</button>
+					<button onclick="closeMonth({{$row->id}})" title="Trash">{{ __('titles.theclosing') }}</button>
 					@elseif($row->can_change==0)
-					<button title="Trash" onclick="openMonth({{$row->id}})" class="pd-setting-ed">ألغاء الأغلاق</button>
+					<button title="Trash" onclick="openMonth({{$row->id}})" class="pd-setting-ed">{{ __('titles.exit_theclosing') }}</button>
 					@else
-					<button title="Trash" disabled class="btn btn-danger">ألغاء الأغلاق</button>
+					<button title="Trash" disabled class="btn btn-danger">{{ __('titles.exit_theclosing') }}</button>
 					@endif
 				</div>
 			</td>

@@ -5,12 +5,24 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+	
+
+	@if(str_replace('_', '-', app()->getLocale())=='ar')
 	<li>
-		<a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+		<a href="#"></a> {{ __('titles.home') }}<span class="bread-slash"> / </span>
 	</li>
 	<li>
-		<span class="bread-blod"> تسوية رصيد</span>
+		<span class="bread-blod"> {{ __('titles.balance_adjust') }} </span>
 	</li>
+	@else
+	<li>
+		<span class="bread-blod"> {{ __('titles.balance_adjust') }} </span>
+	</li>
+
+	<li>
+		<a href="#"> {{ __('titles.home') }} </a> 
+	</li>
+	@endif
 </ul>
 
 @endsection
@@ -27,20 +39,20 @@
 						@csrf
 						<div class="sparkline13-hd">
 							<div class="main-sparkline13-hd">
-								<button class="btn btn-primary waves-effect waves-light">حــفـظ</button>
-								<h1 style="direction:rtl">تسوية رصيد</h1><br />
+								<button class="btn btn-primary waves-effect waves-light dir-rtl">{{ __('titles.save') }}</button>
+								<h1 class="dir-rtl" >{{ __('titles.balance_adjust') }}</h1><br />
 							</div>
 						</div>
 						<div class="sparkline13-graph">
-							<div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
+							<div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
 								<div class="form-group-inner" style="margin-right:10px;">
-									<div class="row" style="text-align:right !important;direction:rtl !important">
+								<div class="row row-ltr" >
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
 										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 shadow">
-											<div class="row">
+										<div class="row row-ltr" >
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<select data-placeholder="Choose a Company..." class="dynamic chosen-select " tabindex="-1" id="compid">
-														<option value=""> الشركة</option>
+														<option value=""> {{ __('titles.company') }}</option>
 														@foreach($companies as $company)
 														<option value="{{$company->id}}">{{$company->company_official_name}}</option>
 
@@ -49,11 +61,11 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 													<div class="input-mask-title">
-														<label><b>الشركة</b></label>
+														<label><b>{{ __('titles.company') }}</b></label>
 													</div>
 												</div>
 											</div>
-											<div class="row">
+											<div class="row row-ltr" >
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="input-mark-inner mg-b-22">
 														<input type="date" name="transaction_date" class="form-control" placeholder="">
@@ -61,27 +73,27 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 													<div class="input-mask-title">
-														<label><b>التاريخ</b></label>
+														<label><b>{{ __('titles.date') }}</b></label>
 													</div>
 												</div>
 											</div>
-											<div class="row">
+											<div class="row row-ltr" >
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="bt-df-checkbox">
 														<input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="optionsRadios1">
-														<label><b> موردين </b></label>
+														<label><b> {{ __('titles.suppliers') }} </b></label>
 														<input class="" type="radio" value="100" id="optionsRadios2" name="optionsRadios1">
-														<label><b> عملاء </b></label>
+														<label><b> {{ __('titles.clients') }} </b></label>
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-													<label class="login2">النوع</label>
+													<label class="login2">{{ __('titles.type') }}</label>
 												</div>
 											</div>
-											<div class="row">
+											<div class="row row-ltr" >
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<select data-placeholder="Choose a supplier..." name="person_id"  onchange="getSelect()" class="form-control" id="sub" tabindex="-1">
-														<option value="">المورد</option>
+														<option value="">{{ __('titles.select') }}</option>
 
 													</select>
 
@@ -89,11 +101,11 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 													<div class="input-mask-title">
-														<label><b>الإسم</b></label>
+														<label><b>{{ __('titles.name') }}</b></label>
 													</div>
 												</div>
 											</div>
-											<div class="row" style="margin-top:5px;">
+											<div class="row row-ltr" style="margin-top:5px;">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="input-mark-inner mg-b-22">
 														<input type="text" readonly  id="currentBalance" name="currentBalance" class="form-control" placeholder="">
@@ -101,24 +113,24 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 													<div class="input-mask-title">
-														<label><b>الرصيد الحالى</b></label>
+														<label><b>{{ __('titles.current_balance') }}</b></label>
 													</div>
 												</div>
 											</div>
-											<div class="row">
+											<div class="row row-ltr" >
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="bt-df-checkbox">
 														<input class="radio-checked" type="radio" value="10" id="optionsRadios1" name="additv">
-														<label><b> زيادة </b></label>
+														<label><b> {{ __('titles.increase') }} </b></label>
 														<input class="" type="radio" checked="" value="20" id="optionsRadios2" name="additv">
-														<label><b> عجز </b></label>
+														<label><b> {{ __('titles.deficit') }} </b></label>
 													</div>
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-													<label class="login2">النوع</label>
+													<label class="login2">{{ __('titles.type') }}</label>
 												</div>
 											</div>
-											<div class="row" style="margin-top:5px;">
+											<div class="row row-ltr" style="margin-top:5px;">
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 													<div class="input-mark-inner mg-b-22">
 														<input type="number" name="amount" class="form-control" placeholder="">
@@ -126,7 +138,7 @@
 												</div>
 												<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 													<div class="input-mask-title">
-														<label><b>مبلغ التسوية</b></label>
+														<label><b>{{ __('titles.amount') }}</b></label>
 													</div>
 												</div>
 											</div>

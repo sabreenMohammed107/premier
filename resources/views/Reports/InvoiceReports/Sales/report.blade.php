@@ -224,7 +224,7 @@ td{
             </div>
             <div class="off_name">
                 <span>
-                {{$Invoice->service_type ?? {{ __('titles.not_done')}}
+                {{$Invoice->service_type ??  __('titles.not_done')}}
                 </span>
             </div>
         </span>

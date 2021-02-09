@@ -26,9 +26,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
                     <h4>{{ __('titles.employee_statment') }}</h4>
-                    <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+                    <div class="datatable-dashv1-list custom-datatable-overright" >
 
-                        <table class="table-striped" id="table" style="text-align: left;"
+                        <table class="table-striped dir-rtl" id="table" style="text-align: left;"
                         data-toggle="table"
                         data-pagination="true"
                         data-pagination-pre-text="{{ __('titles.prev') }}"

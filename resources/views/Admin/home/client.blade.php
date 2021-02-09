@@ -1,6 +1,6 @@
 <div class="breadcome-heading">
     <form role="search" class="sr-input-func">
-        <input type="text" id="searchClient" placeholder="...إبحث هنا" class="search-int form-control" style="text-align:right">
+        <input type="text" id="searchClient" placeholder="{{ __('titles.search') }}" class="search-int form-control" style="text-align:right">
         <a href="" onclick="clientSearch()"><i class="fa fa-search"></i></a>
     </form>
 </div>
@@ -15,29 +15,29 @@
                     <div class="profile-hdtc">
                         <img class="message-avatar" src="{{ asset('uploads/person/'.$row->person_logo)}}" alt="">
                     </div>
-                    <div class="message">
-                        <span class="message-date"><b>{{$row->person_name}} - {{$row->person_nick_name}}</b></span>
-                        <div class="message-content" style="text-align:right">
+                    <div class="message dir-rtl">
+                        <b>{{$row->person_name}} - {{$row->person_nick_name}}</b>
+                        <div class="message-content" >
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <p><b>الهاتف : </b>{{$row->phone1}}</p>
-                                    <p><b>موبايل : </b>{{$row->phone2}}</p>
+                                    <p><b>{{ __('titles.phone') }}1 : </b>{{$row->phone1}}</p>
+                                    <p><b>{{ __('titles.phone') }}2 : </b>{{$row->phone2}}</p>
                                     <?php
                                       $currentBalance = App\Models\FinanTransaction::where('person_id', $row->id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->id)->sum('subtractive');
                                     ?>
-                                    <p><b>رصيد الخزينة : </b>{{$currentBalance }}</p>
+                                    <p><b>{{ __('titles.current_balance') }}: </b>{{$currentBalance }}</p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <p><b>رقم التسجيل : </b> {{$row->registeration_no}}</p>
-                                    <p><b>الكود : </b>{{$row->id}}</p>
-                                    <p><b>الحالة : </b>مفعل</p>
+                                    <p><b>{{ __('titles.registeration_no') }}: </b> {{$row->registeration_no}}</p>
+                                    <p><b>{{ __('titles.code') }}  : </b>{{$row->id}}</p>
+                                    <p><b>{{ __('titles.status') }} : </b>{{ __('titles.active') }}</p>
                                 </div>
 
                                 <div class="col-lg-1"></div>
                             </div>
                         </div>
                         <div class="m-t-md mg-t-10">
-                            <a class="btn btn-xs btn-success" data-toggle="modal" data-target="#Emp{{$row->id}}"><i class="fa fa-eye"></i> عـرض </a>
+                            <a class="btn btn-xs btn-success" data-toggle="modal" data-target="#Emp{{$row->id}}"><i class="fa fa-eye"></i> {{ __('titles.show') }}  </a>
                         </div>
                     </div>
                 </div>
@@ -59,17 +59,17 @@
                 <div class="message-content" style="text-align:right">
                     <div class="row">
                     <div class="col-lg-6">
-                                    <p><b>الهاتف : </b>{{$row->phone1}}</p>
-                                    <p><b>موبايل : </b>{{$row->phone2}}</p>
+                                    <p><b>{{ __('titles.phone') }}1  : </b>{{$row->phone1}}</p>
+                                    <p><b>{{ __('titles.phone') }}2 : </b>{{$row->phone2}}</p>
                                     <?php
                                       $currentBalance = App\Models\FinanTransaction::where('person_id', $row->id)->sum('additive') - App\Models\FinanTransaction::where('person_id', $row->id)->sum('subtractive');
                                     ?>
-                                    <p><b>رصيد الخزينة : </b>{{$currentBalance }}</p>
+                                    <p><b>{{ __('titles.current_balance') }} : </b>{{$currentBalance }}</p>
                                 </div>
                                 <div class="col-lg-5">
-                                    <p><b>رقم التسجيل : </b> {{$row->registeration_no}}</p>
-                                    <p><b>الكود : </b>{{$row->id}}</p>
-                                    <p><b>الحالة : </b>مفعل</p>
+                                    <p><b>{{ __('titles.registeration_no') }} : </b> {{$row->registeration_no}}</p>
+                                    <p><b>{{ __('titles.code') }} : </b>{{$row->id}}</p>
+                                    <p><b>{{ __('titles.status') }} : </b>{{ __('titles.active') }}</p>
                                 </div>
 
                         <div class="col-lg-1"></div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="modal-footer info-md">
-                <a data-dismiss="modal" href="#">إلغــاء</a>
+                <a data-dismiss="modal" href="#">{{ __('titles.cancel') }}</a>
             </div>
         </div>
     </div>

@@ -33,6 +33,7 @@ return [
        'cash_box' => 'الخزينة',
        'cash_receipts' => 'مقبوضات نقدية',
        'cash_payments' => 'مدفوعات نقدية',
+       'payment'=>'مدفوعات',
        /*========================*/
        'company' => 'الشركة',
        'items_statment' => 'الأصناف',
@@ -150,7 +151,7 @@ return [
 /*============================= purchasing=========================
  */
 'purshasing'=>'مدفوعات',
-'supp_stock'=>'(حركة الموردين+حركة المخزون)',
+'supp_stock'=>'',
 'date'=>'التاريخ',
 'confirm'=>'معتمد',
 'permission_no'=>'رقم اذن الصرف',
@@ -173,7 +174,8 @@ return [
 'vat_value'=>'ض.القيمه المضافه',
 'comm_industr_prof_tax'=>'ض.أ.ت.ص',
 
-
+'approved'=>'معتمد',
+'not_approved'=>'غير معتمد',
 
 /*============================= Cash receipts=========================*/
 'receipts'=>'مقبوضات نقدية',
@@ -234,7 +236,7 @@ return [
 'date_to'=>'التاريخ الى ',
 'all'=>'الكل',
 
-
+'report'=>'تقرير',
 'bill'=>'فاتورة',
 'returned'=>'مرتجع',
 'bill_type'=>'نوع الفاتورة',
@@ -263,13 +265,51 @@ return [
 'credit'=>'دائن',
 'depit'=>'مدين',
    /*------table----------*/
-   'showing'=>'',
+   'showing'=>'عرض',
+   'confirmed_items'=>'الاعتماد المحاسبي ',
 
        /*------global Admin header----------*/
 
-       'home' => 'Home',
-       'reports' => 'Reports',
-       'confirmed_items'=>'الاعتماد المحاسبي ',
+       'home' => 'الرئيسية',
+       'reports' => 'تقارير',
+       'Balancing' => 'الترصيد',
+       'work_role' => 'قواعد العمل',
+       'balance_adjust' => 'تسوية أرصده',
+       'guid_item' => 'بند التوجية',
+       'guid_items' => 'بنود التوجية',
+       'users' => 'المستخدمين',
+       'restrictions' => 'قيود أليه',
+       'annual_balance'=>'ترصيد سنوي',
+       'month_balance'=>'ترصيد شهري',
+       'deficit'=>'عجز',
+       'increase'=>'زيادة',
+       'recived_permission'=>'اذن استلام',
+       /*------------------------------*/
+       'open_year'=>'السنة المفتوحة',
+       'opening'=>'مفتوحة',
+       'closing'=>'مغلقه',
+       'start_opening'=>'إفتتاحية',
+       'close_this_year'=>'إغلاق السنة الحالية',
+       'exit_close_year'=>'إلغاء إغلاق السنة',
+       'open_new_balance'=>' فتح + ترصيد جديد',
+       'exit_year_balance'=>'إلغاء ترصيد السنة',
+       /*--------------------------*/
+       'thevalue'=>'القيمة',
+       'restrictions'=>'القيود الاليه',
+       'years'=>' السنوات',
+       'months'=>' الشهور',
+       'guidance'=>' توجية',
+       'exit_guidance'=>'الغاء التوجية',
+       'month'=>' الشهر',
+       'theclosing'=>'الإغلاق',
+       'exit_theclosing'=>'إلغاء الإغلاق',
+       'previlidge'=>'صلاحية',
+       'user_full_name'=>'أسم المستخدم بالكامل',
+       'password'=>'كلمه المرور',
+'not_closeMsg'=>'هناك شهور مغلقة لا يمكن إلغاء الترصيد',
+'closeMsg'=>'هناك شهور لم تغلق',
+
+
        /*------global Admin header----------*/
 
 

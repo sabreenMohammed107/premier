@@ -12,25 +12,28 @@
 					<div class="hpanel">
 						<div class="panel-body" style="background-color:rgba(255,255,255,0.5) !important;border-radius: .5rem !important;">
 							<div class="">
-								<div class="header-top-menu tabl-d-n">
+
+								<div class=" tabl-d-n">
 									<ul class="nav navbar-nav mai-top-nav">
 										<li class="nav-item dropdown res-dis-nn">
 											@if(str_replace('_', '-', app()->getLocale())=='ar')
 											<a href="{{ URL::to('changeLang/ar') }}" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> عربي </a>
 											@else
 											<a href="{{ URL::to('changeLang/en') }}" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span class="angle-down-topmenu"><i class="fa fa-angle-down"></i></span> English </a>
-										@endif
-
-										<div role="menu" class="dropdown-menu animated zoomIn">
-											@if(str_replace('_', '-', app()->getLocale())=='ar')
-											<a href="{{ URL::to('changeLang/en') }}" class="dropdown-item" id="english">English</a>
-											@else
-											<a href="{{ URL::to('changeLang/ar') }}" class="dropdown-item" id="arabic">عربي</a>
 											@endif
-										</div>
+
+											<div role="menu" class="dropdown-menu animated zoomIn">
+												@if(str_replace('_', '-', app()->getLocale())=='ar')
+												<a href="{{ URL::to('changeLang/en') }}" class="dropdown-item" id="english">English</a>
+												@else
+												<a href="{{ URL::to('changeLang/ar') }}" class="dropdown-item" id="arabic">عربي</a>
+												@endif
+											</div>
 										</li>
 									</ul>
 								</div>
+
+
 								<div class="text-center m-b-md custom-login">
 									<img class="main-logo" src="{{ asset('webassets/img/logo/logo.png')}}" alt="test" />
 									<p>
@@ -38,7 +41,7 @@
 									</p>
 									<br />
 								</div>
-
+							
 								<form method="POST" action="{{ route('login') }}">
 									@csrf
 									<div class="form-group">
@@ -73,4 +76,5 @@
 	@include('Layout.footer')
 
 	@include('Layout.footerScripts')
+
 </body>

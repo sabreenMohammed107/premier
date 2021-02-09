@@ -26,7 +26,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap drp-lst">
                     <h4>{{ __('titles.supplier_statment') }}</h4>
-                    <div class="datatable-dashv1-list custom-datatable-overright"style="direction:rtl" >
+                    <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
                         <table class="table-striped" id="table"
                                     data-toggle="table"
                                     data-pagination="true"

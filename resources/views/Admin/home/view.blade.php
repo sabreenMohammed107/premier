@@ -5,12 +5,22 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+@if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-    <a href="{{url('/')}}">الرئيسية<span class="bread-slash"> / </span></a> 
+        <a href="{{url('/')}}"> {{ __('titles.home') }} <span class="bread-slash"> / </span></a> 
     </li>
     <li>
-        <span class="bread-blod">عرض الشركة</span>
+        <span class="bread-blod"> {{ __('titles.company') }} </span>
     </li>
+	@else
+   
+    <li>
+        <span class="bread-blod"> {{ __('titles.company') }} /</span>
+        <li>
+        <a href="{{url('/')}}"> {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 
 @endsection
@@ -20,15 +30,15 @@
 <!-- Single pro tab review Start-->
 <div class="single-pro-review-area mt-t-30 mg-b-15">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-ltr">
         <input type="hidden"  id="company_id" value="{{$companyrow->id}}">
 
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
-                    <ul id="myTabedu1" class="tab-review-design" style="direction:rtl">
-                        <li class="active"><a href="#description">الموظفين</a></li>
-                        <li><a href="#reviews"> الموردين</a></li>
-                        <li><a href="#INFORMATION">العملاء</a></li>
+                    <ul id="myTabedu1" class="tab-review-design dir-rtl" >
+                        <li class="active"><a href="#description">{{ __('titles.employees') }}</a></li>
+                        <li><a href="#reviews"> {{ __('titles.suppliers') }}</a></li>
+                        <li><a href="#INFORMATION">{{ __('titles.clients') }}</a></li>
                     </ul>
                     <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                         <div class="product-tab-list tab-pane fade active in" id="description">
@@ -48,14 +58,14 @@
                     <div class="profile-img">
                         <img src="{{ asset('uploads/companies/'.$companyrow->company_logo)}}" style="width: 100%;height:300px" alt="" />
                     </div>
-                    <div class="profile-details-hr" style="direction:rtl;">
-                        <div class="row mg-b-15">
+                    <div class="profile-details-hr dir-rtl">
+                        <div class="row row-ltr mg-b-15">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="skill-title">
-                                            <h2>البيانات الأساسية
-                                            <a class="btn btn-primary waves-effect waves-light" style="margin-right:40% ;" href="{{route('home.index')}}">إلغــاء</a>
+                                            <h2>{{ __('titles.basic_data') }}
+                                            <a class="btn btn-primary waves-effect waves-light" style="margin-right:40% ;" href="{{route('home.index')}}">{{ __('titles.cancel') }}</a>
                                             </h2>
                                             <hr />
                                         </div>
@@ -63,70 +73,70 @@
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>إسم الشركة:</b> {{$companyrow->company_official_name}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>رقم التسجيل:</b>{{$companyrow->registeration_no}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>رئيس مجلس الاداره:</b>{{$companyrow->chairman_person_name}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>الكيان القانونى:</b> {{$companyrow->legal_entity}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>رأس المال: </b>{{$companyrow->equity_capital}} </li>
-                                        <li><i class="fa fa-angle-left"></i> <b>الخزينة: </b>{{$companyrow->safe->safe_name ?? ''}} </li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.company_official_name') }}:</b> {{$companyrow->company_official_name}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.registeration_no') }}:</b>{{$companyrow->registeration_no}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.chairman_person_name') }}:</b>{{$companyrow->chairman_person_name}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.legal_entity') }}:</b> {{$companyrow->legal_entity}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.equity_capital') }}: </b>{{$companyrow->equity_capital}} </li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.cash_box') }}: </b>{{$companyrow->safe->safe_name ?? ''}} </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mg-b-15">
+                        <div class="row row-ltr mg-b-15">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="skill-title">
-                                            <h2>البيانات الضريبية</h2>
+                                        {{ __('titles.tax_data') }}
                                             <hr />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>خاضعه لضريبة القيمة المضافة:</b>
-                                        @if($companyrow->taxable ==1) نعم @else لا @endif </li>
-                                        <li><i class="fa fa-angle-left"></i> <b>مأموريه الضرائب:</b> {{$companyrow->tax_authority}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>رقم الملف الضريبى:</b> {{$companyrow->tax_card}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.taxable') }}:</b>
+                                        @if($companyrow->taxable ==1) {{ __('titles.yes') }} @else {{ __('titles.no') }} @endif </li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.tax_authority') }}:</b> {{$companyrow->tax_authority}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.tax_card') }}:</b> {{$companyrow->tax_card}}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mg-b-15">
+                        <div class="row row-ltr mg-b-15">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="skill-title">
-                                            <h2>بيانات الإتصال</h2>
+                                        {{ __('titles.phone_data') }}
                                             <hr />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>البريد الالكترونى:</b> {{$companyrow->email}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>موقع الكترونى:</b> {{$companyrow->website}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>موبايل التواصل:</b> {{$companyrow->contact_person_mobile}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>شخص للتواصل:</b> {{$companyrow->contact_person_name}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.email') }}:</b> {{$companyrow->email}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.website') }}:</b> {{$companyrow->website}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.contact_person_mobile') }}:</b> {{$companyrow->contact_person_mobile}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.contact_person_name') }}:</b> {{$companyrow->contact_person_name}}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mg-b-15">
+                        <div class="row row-ltr mg-b-15">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="skill-title">
-                                            <h2>بيانات الخزينة</h2>
+                                        <h2>{{ __('titles.safe_data') }}</h2>
                                             <hr />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$companyrow->safe->open_balance ?? ''}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.open_blance_amount') }}:</b> {{$companyrow->safe->open_balance ?? ''}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.open_balance_date') }}:</b>
                                             <?php
                                             $date = null;
                                             if ($companyrow->safe) {
@@ -138,20 +148,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mg-b-15">
+                        <div class="row row-ltr mg-b-15">
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="skill-title">
-                                            <h2>بيانات البنك</h2>
+                                        <h2> {{ __('titles.bank_data') }}</h2>
                                             <hr />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ex-pro">
                                     <ul>
-                                        <li><i class="fa fa-angle-left"></i> <b>الرصيد الافتتاحي:</b> {{$companyrow->bank->open_balance ?? ''}}</li>
-                                        <li><i class="fa fa-angle-left"></i> <b>تاريخ بداية الترصيد:</b> <?php
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.open_blance_amount') }}:</b> {{$companyrow->bank->open_balance ?? ''}}</li>
+                                        <li><i class="fa fa-angle-left"></i> <b>{{ __('titles.open_balance_date') }}:</b> <?php
                                                                                                             $bank_date = null;
                                                                                                             if ($companyrow->bank) {
                                                                                                                 $bank_date = date_create($companyrow->bank->balance_start_date);

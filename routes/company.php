@@ -122,7 +122,7 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
     });
 
 
-    Route::middleware(['HasCash','HasSafeAndBankData'])->group(function () {
+    Route::middleware(['HasCash'])->group(function () {
         /*
         |*********************** Cash Partition ****************************|
         |**************|Purchasing Partition| - |Sales Partition|***************|
@@ -162,7 +162,7 @@ Route::namespace('Company')->middleware('CompanyUser')->group(function () {
 
 
     });
-    Route::middleware(['HasCheques','HasSafeAndBankData'])->group(function () {
+    Route::middleware(['HasCheques'])->group(function () {
         /*
         |*********************** Cheques Partition ****************************|
         */

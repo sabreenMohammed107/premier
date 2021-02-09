@@ -25,7 +25,7 @@ class WorkRoleController extends Controller
         $this->viewName = 'Admin.work-role.';
         $this->routeName = 'work-role.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.

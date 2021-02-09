@@ -65,12 +65,12 @@ class InvoiceSalePurchController extends Controller
         if ($Invoice->person_id) {
             $Person = Person::find($Invoice->person_id);
             if ($Person->person_type_id == 101) {
-                $type = 'مورد';
+                $type =  \Lang::get('titles.suppliers');
             } else {
-                $type = 'موظف';
+                $type =  \Lang::get('titles.employees');
             }
         } else {
-            $type = 'أخرى';
+            $type =  \Lang::get('titles.other');
         }
         //Invoice items
         $InvoiceItems = DB::table('invoice_items')
@@ -138,12 +138,12 @@ class InvoiceSalePurchController extends Controller
         if ($Invoice->person_id) {
             $Person = Person::find($Invoice->person_id);
             if ($Person->person_type_id == 101) {
-                $type = 'مورد';
+                $type =  \Lang::get('titles.suppliers');
             } else {
-                $type = 'موظف';
+                $type =  \Lang::get('titles.employees');
             }
         } else {
-            $type = 'أخرى';
+            $type =  \Lang::get('titles.others');
         }
         //Invoice items
         $InvoiceItems = DB::table('invoice_items')

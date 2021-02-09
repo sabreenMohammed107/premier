@@ -102,13 +102,19 @@ class CashReportsController extends Controller
         $Company = Company::find($id);
         $data = [
             'Cashes' => $Cashes,
-            'Title' => 'تقرير المقبوضات النقدية',
+            'Title' => \Lang::get('titles.cash_receipts_reports'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
+          // for lang
+       if(app()->getLocale() =='ar'){
         $pdf = PDF::loadView('Reports.cashReports.Receipt.report', $data);
+       }else{
+        $pdf = PDF::loadView('Reports.cashReports.Receipt.reportEn', $data);
+       }
+       
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;
@@ -178,13 +184,18 @@ class CashReportsController extends Controller
         $Company = Company::find($id);
         $data = [
             'Cashes' => $Cashes,
-            'Title' => 'تقرير المدفوعات النقدية',
+            'Title' =>  \Lang::get('titles.cash_payments_reports'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
-        $pdf = PDF::loadView('Reports.cashReports.Payment.report', $data);
+        if(app()->getLocale() =='ar'){
+            $pdf = PDF::loadView('Reports.cashReports.Payment.report', $data);
+           }else{
+            $pdf = PDF::loadView('Reports.cashReports.Payment.reportEn', $data);
+           }
+       
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;

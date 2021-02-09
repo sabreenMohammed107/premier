@@ -16,7 +16,7 @@ class HasCheques
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 102 && Auth::user()->role_id != 106){
+        if(Auth::user()->role_id != 102){
             return redirect("/Company")->with('flash_info', " قسم المعاملات البنكية ليس تابع لصلاحياتك");
         }
         return $next($request);

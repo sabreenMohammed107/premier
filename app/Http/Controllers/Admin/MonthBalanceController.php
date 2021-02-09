@@ -22,7 +22,8 @@ class MonthBalanceController extends Controller
 
         $this->viewName = 'Admin.month-balance.';
 
-        $this->message = 'تم حفظ البيانات';
+      $this->message =  \Lang::get('titles.saving_msg');
+
     }
     public function index()
     {

@@ -5,12 +5,24 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+   
+
+    @if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.home') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> مقبوضات نقدية </span>
+        <span class="bread-blod"> {{ __('titles.cash_receipts') }}</span>
     </li>
+	@else
+  
+   
+    <li>
+        <span class="bread-blod"> {{ __('titles.cash_receipts') }} / </span>
+    </li>
+    <li> <a href="#"></a> {{ __('titles.home') }}
+    </li>
+	@endif
 </ul>
 
 @endsection
@@ -26,10 +38,6 @@
         color: white !important;
     }
 
-    #table td,
-    th {
-        text-align: right
-    }
 </style>
 <!-- Static Table Start -->
 <div class="data-table-area mg-b-15">
@@ -39,16 +47,16 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl">مقبوضات نقدية</h1>
+                        <div class="main-sparkline13-hd dir-rtl">
+                            <h1 >{{ __('titles.cash_receipts') }}</h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <label>الشركة</label>
+                        <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
+                            <div class="chosen-select-single mg-b-20" >
+                                <label>{{ __('titles.cash_receipts') }}</label>
                                 <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
-                                    <option value="">إختار الشركة</option>
+                                    <option value="">{{ __('titles.select') }}</option>
                                     @foreach($companies as $company)
                                     <option value="{{$company->id}}">{{$company->company_official_name}} </option>
 
@@ -56,18 +64,18 @@
                                 </select>
                             </div>
 
-                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                            <table class="table-striped dir-rtl" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
                                 <thead>
                                     <tr>
-                                        <th data-field="id">#</th>
-                                        <th data-field="name">التاريخ</th>
-                                        <th data-field="email">البيان</th>
-                                        <th data-field="phone">إذن إستلام</th>
-                                        <th>معيار تفصيلى </th>
-                                        <th>بند توجيه</th>
-                                        <th>معتمد</th>
-                                        <th data-field="price">المبلغ</th>
-                                        <th data-field="action">خيارات</th>
+                                    <th data-field="id" data-sortable="true">#</th>
+                                        <th data-field="name" data-sortable="true">{{ __('titles.date') }}</th>
+                                        <th data-field="email" data-sortable="true">{{ __('titles.declaration') }}</th>
+                                        <th data-field="phone" data-sortable="true">{{ __('titles.recived_permission') }}</th>
+                                        <th data-sortable="true">{{ __('titles.detailed_standard') }}</th>
+                                        <th data-sortable="true">{{ __('titles.guid_item') }}</th>
+                                        <th data-sortable="true"> {{ __('titles.confirm') }}</th>
+                                        <th data-field="price" data-sortable="true">{{ __('titles.amount') }}</th>
+                                        <th data-field="action">{{ __('titles.options') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody id="indexTable">
@@ -88,20 +96,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-color-modal bg-color-2">
-                <h4 class="modal-title" style="text-align:right">حذف بيانات المقبوضات النقدية</h4>
+                <h4 class="modal-title" style="text-align:right">{{ __('titles.delete_data') }}</h4>
                 <div class="modal-close-area modal-close-df">
                     <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
                 </div>
             </div>
             <div class="modal-body">
                 <span class="educate-icon educate-danger modal-check-pro information-icon-pro"> </span>
-                <h2>شركة عباد المعين</h2>
-                <h2>مقبوضات نقدية</h2>
-                <h4>هل تريد حذف بيانات المقبوضات النقدية ؟ </h4>
+               
+                <h2>{{ __('titles.cash_receipts') }}</h2>
+                <h4>{{ __('titles.delete_data_qest') }} </h4>
             </div>
             <div class="modal-footer info-md">
-                <a data-dismiss="modal" href="#">إلغــاء</a>
-                <a href="#">حـذف</a>
+                <a data-dismiss="modal" href="#">{{ __('titles.cancel') }}</a>
+                <a href="#">{{ __('titles.delete') }}</a>
             </div>
         </div>
     </div>

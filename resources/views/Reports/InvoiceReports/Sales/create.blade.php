@@ -1,7 +1,8 @@
 
 
     {{-- @extends('Layout.web') --}}
-    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? 'Layout.web' : 'Layout.company')
+    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? 'Layout.web' : 'Layout.company')
+
 
 
 
@@ -9,7 +10,7 @@
 
 <ul class="breadcome-menu">
     <li>
-        <a href="#"></a> {{ __('titles.report') }}<span class="bread-slash"> / </span>
+        <a href="#"></a> {{ __('titles.reports') }}<span class="bread-slash"> / </span>
     </li>
     <li>
         <span class="bread-blod"> {{ __('titles.sales') }}  </span>
@@ -27,7 +28,7 @@
                 <div class="mg-b-15">
                     {{-- <button class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</button>
                     <button class="btn btn-primary waves-effect waves-light">{{ __('titles.save') }}</button> --}}
-                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
+                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</a>
 
                 </div>
             <form action="{{url('/Invoice/Sales/Report/Fetch')}}" method="post">
@@ -133,7 +134,7 @@
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
                                                         <input class="radio-checked" type="radio" checked="" value="100" id="service_type_id" name="service_type_id">
-                                                        <label><b> {{ __('titles.Service') }}  </b></label>
+                                                        <label><b> {{ __('titles.Services') }}  </b></label>
                                                         <input class="" type="radio" value="101" id="optionsRadios2" name="service_type_id">
                                                         <label><b> {{ __('titles.supplying') }} </b></label>
                                                         <input class="" type="radio" value="" id="optionsRadios3" name="service_type_id">

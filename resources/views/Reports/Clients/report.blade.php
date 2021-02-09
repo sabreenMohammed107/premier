@@ -174,14 +174,14 @@ tbody tr td{
     <table dir="rtl" style="background-color: #021625;color:#fff;width:100%;">
         <thead>
             <tr>
-                <th>المسلسل</th>
-                <th>كود العميل</th>
-                <th>اسم العميل</th>
-                <th>الهاتف</th>
-                <th>اجمالي المشتريات</th>
-                <th>الرصيدالافتتاحي</th>
-                <th>الرصيد الحالي</th>
-                <th>اجمالي السداد</th>
+                <th>#</th>
+                <th>{{ __('titles.code') }}</th>
+                <th>{{ __('titles.name') }}</th>
+                <th>{{ __('titles.phone') }}</th>
+                <th>{{ __('titles.total_purchases') }}</th>
+                <th>{{ __('titles.open_blance_amount') }}</th>
+                <th>{{ __('titles.current_balance') }}</th>
+                <th>{{ __('titles.total_repayment') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -191,10 +191,10 @@ tbody tr td{
                     <td>{{$Supplier->id}}</td>
                     <td>{{$Supplier->person_name}}</td>
                     <td>{{$Supplier->phone1}}</td>
-                    <td>{{$Supplier->total_sales}}جم</td>
-                    <td>{{$Supplier->open_balance}}جم</td>
-                    <td>{{$Supplier->current}}جم</td>
-                    <td>{{$Supplier->total_rec - $Supplier->total_pay}}جم</td>
+                    <td>{{$Supplier->total_sales}}</td>
+                    <td>{{$Supplier->open_balance}}</td>
+                    <td>{{$Supplier->current}}</td>
+                    <td>{{$Supplier->total_pay}}</td>
                 </tr>
             @endforeach
         </tbody>

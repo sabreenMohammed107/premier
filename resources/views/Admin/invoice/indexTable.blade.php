@@ -10,9 +10,9 @@
     <td>{{$Invoice->serial}}</td>
     <td>
         @if ($Invoice->approved == 1)
-        معتمد
+        {{ __('titles.confirm') }}
         @else
-        غير معتمد
+        {{ __('titles.not_confirm') }}
         @endif
     </td>
     <td>{{$Invoice->net_invoice}}</td>

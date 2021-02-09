@@ -80,9 +80,9 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
     
-    'locales' => ['ar', 'ar', 'fr'],
+    'locales' => ['en', 'ar', 'fr'],
 
     /*
     |--------------------------------------------------------------------------
@@ -231,7 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
     ],
 

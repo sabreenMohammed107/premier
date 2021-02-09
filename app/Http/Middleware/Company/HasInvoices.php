@@ -16,7 +16,7 @@ class HasInvoices
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role_id != 103 && Auth::user()->role_id != 104 && Auth::user()->role_id != 106){
+        if(Auth::user()->role_id != 103 && Auth::user()->role_id != 104){
             return redirect("/Company")->with('flash_info', " قسم الفواتير ليس تابع لصلاحياتك");
         }
         return $next($request);

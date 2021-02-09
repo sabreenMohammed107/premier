@@ -5,13 +5,23 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+@if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> {{ __('titles.purchasing') }}<span class="bread-slash"> / </span>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> {{ __('titles.company') }}</span>
+        <a href="#"></a> {{ __('titles.cash_payments') }}<span class="bread-slash"> / </span>
     </li>
-
+	@else
+   
+    <li>
+        <a href="#"></a> {{ __('titles.cash_payments') }}<span class="bread-slash"> / </span>
+    </li>
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 
 @endsection
@@ -27,9 +37,10 @@
                         <a href="{{url('/Cash/Purchasing')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.back') }}</a>
                     </div>
                 </div>
-                <div class="product-status-wrap drp-lst">
-                    <h4 style="text-align:right">بيان المدفوعات</h4>
-                    <h3 style="text-align:right">{{$Company->company_official_name}}</h3>
+                <div class="product-status-wrap drp-lst dir-rtl">
+                <h4 >{{ __('titles.purchasing') }}</h4>
+                            <h3 >{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3><br />
+                       
                 </div>
                 <div class="product-payment-inner-st" style="padding-top:0px">
                     <div class="row">

@@ -27,9 +27,9 @@
 <div class="courses-area">
     <div class="container-fluid">
     <a href="{{url("/Company/Items/Add")}}" class="btn btn-primary waves-effect waves-light mg-b-15"> {{ __('titles.add') }}</a>
-        <div class="row mg-b-15 row-ltr txt-right" id="item" >
+        <div class="row mg-b-15 row-rtl" id="item" >
             @foreach ($Items as $Item)
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;float:right">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" style="padding:10px;">
                 <div class="courses-inner res-mg-b-30">
                     <div style="text-align: center;">
                         @if ($Item->item_image)

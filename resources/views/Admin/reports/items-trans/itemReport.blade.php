@@ -197,63 +197,116 @@
             <hr>
 
             <div class="left">
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> الفتره من :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> الفتره من </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$from_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$from_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> الفتره من </span>
+                        </div>
+                       
+                    @endif
+                       
                     </span>
                 </div>
 
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> الفترة الى :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> الفترة الى </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$to_date}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$to_date}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> الفترة الى </span>
+                        </div>
+                       
+                    @endif
+                       
                     </span>
                 </div>
             </div>
             <div class="right">
 
 
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>اسم الشركة :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>اسم الشركة </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$Company->company_official_name ?? ''}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$Company->company_official_name ?? ''}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>اسم الشركة </span>
+                        </div>
+                       
+                    @endif
+                       
                     </span>
                 </div>
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span>اسم المورد :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span>اسم المورد </span>
                         </div>
                         <div class="off_name">
                             <span>
                                 {{$rows->item_arabic_name ?? ''}}
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                            <span>
+                                {{$rows->item_arabic_name ?? ''}}
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span>اسم المورد </span>
+                        </div>
+                        
+                    @endif
+                       
                     </span>
                 </div>
-                <div dir="rtl" class="company">
+                <div  class="company">
                     <span>
-                        <div class="name">
-                            <span> الرصيد الحالى :</span>
+                    @if(str_replace('_', '-', app()->getLocale())=='ar')
+                    <div class="name">
+                            <span> الرصيد الحالى </span>
                         </div>
                         <div class="off_name">
                         <?php
@@ -267,11 +320,31 @@
                             {{$currentBalance}} 
                             </span>
                         </div>
+                    @else
+                    <div class="off_name">
+                        <?php
+                            $currentBalance = App\Models\FinanTransaction::where('item_id', $rows->item_id)->sum('additive') - App\Models\FinanTransaction::where('item_id', $rows->item_id)->sum('subtractive');
+                            if(!$rows->supplier_id){
+                                $currentBalance =0;
+                              }
+                           ?>
+                           
+                            <span>
+                            {{$currentBalance}} 
+                            </span>
+                        </div>
+                    <div class="name">
+                            <span> الرصيد الحالى </span>
+                        </div>
+                        
+                    @endif
+                       
                     </span>
                 </div>
             </div>
             <div dir="rtl" class="rightTable">
-                <table id="courseEval" style="width: 100%" border="1" class="dattable table table-striped thead-dark  ">
+                <table id="courseEval" style="width: 100%" border="1" @if(str_replace('_', '-', app()->getLocale())=='ar') class="dattable table table-striped thead-dark dir-rtl"  @else
+    class="dattable table table-striped thead-dark dir-ltr"   @endif>
                     <thead>
                         <tr>
 

@@ -29,7 +29,7 @@ class EmployeesReportController extends Controller
         $this->viewName = 'Admin.reports.employees-trans.';
         $this->routeName = 'Admin-employee-report.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.

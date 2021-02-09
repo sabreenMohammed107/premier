@@ -5,13 +5,23 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+@if(str_replace('_', '-', app()->getLocale())=='ar')
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
+    </li>
+    <li>
+        <a href="#"></a> {{ __('titles.receipts') }}<span class="bread-slash"> / </span>
+    </li>
+	@else
+   
     <li>
         <a href="#"></a> {{ __('titles.receipts') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod"> {{ __('titles.company') }}</span>
+        <a href="#"></a>  {{ __('titles.home') }}
     </li>
-
+   
+	@endif
 </ul>
 
 @endsection
@@ -30,9 +40,9 @@
                 </div>
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h4 style="text-align:right">بيان المقبوضات</h4>
-                            <h3 style="text-align:right">{{$Company->company_official_name}}</h3><br />
+                        <div class="main-sparkline13-hd dir-rtl">
+                        <h1 class="dir-rtl">{{ __('titles.receipts') }}</h1>
+                        <h3>{{$Company->company_official_name}} {{__('titles.supp_stock')}}</h3>                            <br />
                         </div>
                     </div>
                     <div class="sparkline13-graph">
@@ -76,7 +86,7 @@
                                         </div>
                                         <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input type="text" class="form-control" placeholder="{{$SafeCurrentBalance->current}}جم" readonly>
+                                                <input type="number" class="form-control" placeholder="120100" readonly>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                                 <label class="login2"><b>{{__('titles.current_balance')}}</b></label>
@@ -161,7 +171,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                <label class="login2">{{__('titles.type')}}</label>
+                                                <label class="login2">{{__('titles.confirming')}}</label>
                                             </div>
                                         </div>
                                         <div class="row row-ltr">
@@ -203,10 +213,7 @@
 @section('scripts')
 @if ($Person->person_type_id == 0)
 <script>
-    // $('.selectpicker').selectpicker('destroy');
-    jQuery(window).load(function () {
-        $('.dropdown.bootstrap-select.bs3').css({'display':'none'});
-    })
+    $('.selectpicker').selectpicker('destroy');
 </script>
 @endif
 <script>

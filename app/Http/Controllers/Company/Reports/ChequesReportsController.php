@@ -69,13 +69,18 @@ class ChequesReportsController extends Controller
         $Company = Company::find($id);
         $data = [
             'Cheques' => $Cheques,
-            'Title' => 'تقرير إذونات إستلام النقدية',
+           
+            'Title' =>  \Lang::get('titles.Permission_receive_cash'),
             'Today' => date('Y-m-d'),
             'Logo'  => $Company->company_logo,
             'Company' => $Company,
             'User'  =>  Auth::user(),
         ];
-        $pdf = PDF::loadView('Reports.Cheques.report', $data);
+        if(app()->getLocale() =='ar'){
+            $pdf = PDF::loadView('Reports.Cheques.report', $data);
+        }else{
+            $pdf = PDF::loadView('Reports.Cheques.reportEn', $data);
+        }
         $pdf->allow_charset_conversion = false;
         $pdf->autoScriptToLang = true;
         $pdf->autoLangToFont = true;

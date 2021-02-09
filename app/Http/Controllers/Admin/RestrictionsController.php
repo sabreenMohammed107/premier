@@ -22,7 +22,7 @@ class RestrictionsController extends Controller
 
         $this->viewName = 'Admin.restrictions.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     public function index()
     {
@@ -46,7 +46,7 @@ class RestrictionsController extends Controller
 
         $data =  BalanceYear::where('company_id', $value)->whereIn('year_type',[1,2])->get();
 
-        $output = '<option value="">إختر السنه</option>';
+        $output = '<option value="">'. \Lang::get('titles.select').'</option>';
         foreach ($data as $row) {
 
             $output .= '<option value="' . $row->id . '">' . $row->year . '</option>';
@@ -73,7 +73,7 @@ class RestrictionsController extends Controller
         })->orderBy("created_at", "Desc")->limit(12)
         ->get();
 
-        $output = '<option value="">إختر الشهر</option>';
+        $output = '<option value="">'. \Lang::get('titles.select').'</option>';
         foreach ($data as $row) {
 
             $output .= '<option value="' . $row->month_no . '">' . $row->month_no . '</option>';

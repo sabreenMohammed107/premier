@@ -330,11 +330,11 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                             text-align:center !important;
                             }
                             </style>
-                            <h3 style="text-align:right">{{__('titles.items')}}</h3>
+                            <h3 class="dir-rtl">{{__('titles.items')}}</h3>
 
                             <div ><input type="text" id="search" class="form-control" style="display: inline-block;width:200px" placeholder="{{__('titles.search')}}">
 
-                            <button id="add" style="float: left;" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">{{__('titles.add')}}{{__('titles.items')}}</button></div>
+                            <button id="add" style="float: left;" onclick="ajax_row('{{url('Invoice/Purchasing/AddRow')}}')" class="btn btn-primary waves-effect waves-light">{{__('titles.add')}} {{__('titles.items')}}</button></div>
                             <br>
                             <table class="table-striped dir-rtl" id="puchasetable"
                             data-locale="ar-SA"

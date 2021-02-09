@@ -97,8 +97,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="row row-ltr">                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="input-mark-inner mg-b-22">
                                                 <input type="date" disabled value="{{date('Y-m-d', strtotime($Invoice->inv_date))}}" id="inv_date" class="form-control" placeholder="">
                                                 </div>
@@ -109,8 +108,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <div class="row row-ltr">                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->approved == 1)
                                                     {{ __('titles.confirm') }} 
@@ -123,7 +121,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 <label class="login2">{{ __('titles.status') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr"> 
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->service_type_id == 101)
@@ -138,15 +136,15 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 <label class="login2">{{ __('titles.Services_type') }}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr"> 
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->outgoing_type_id == 100)
-سلع
+                                                    {{__('titles.commodity')}} 
                                                     @elseif($Invoice->outgoing_type_id == 101)
-خدمات
+                                                    {{__('titles.Services')}}
                                                     @else
- ألات ومعدات
+                                                    {{__('titles.machine_equipment')}} 
                                                     @endif
                                                 </div>
                                             </div>
@@ -154,7 +152,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                                 <label class="login2">{{__('titles.outgoings_type')}}</label>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                 <div class="bt-df-checkbox">
                                                     @if ($Invoice->purchasing_type_id == 100)
@@ -169,7 +167,7 @@ box-shadow: 0px 0px 11px 1px rgba(0,0,0,0.75);
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row row-ltr">
                                             <div id="type" class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                                                             <input type="text" name="person_name" disabled value="{{$Invoice->person_name}}" id="other_text" class="form-control" placeholder="">
 

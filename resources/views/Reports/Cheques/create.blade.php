@@ -1,7 +1,7 @@
 
 
     {{-- @extends('Layout.web') --}}
-    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? 'Layout.web' : 'Layout.company')
+    @extends(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? 'Layout.web' : 'Layout.company')
 
 
 
@@ -12,7 +12,7 @@
         <a href="#"></a> {{ __('titles.report') }}<span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod">{{ __('titles.Permission_receive_cash') }}</span>
+        <span class="bread-blod">{{ __('titles.Permission_receive_cheques') }}</span>
     </li>
 </ul>
 
@@ -25,9 +25,9 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="mg-b-15">
-                    {{-- <button class="btn btn-primary waves-effect waves-light">إلغــــاء</button>
+                    {{-- <button class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</button>
                     <button class="btn btn-primary waves-effect waves-light">حــفـــظ</button> --}}
-                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
+                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == null ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</a>
 
                 </div>
             <form action="{{url('/Cheques/Report/Fetch')}}" method="post">
@@ -35,16 +35,16 @@
                     <div class="sparkline13-list">
                         <div class="sparkline13-hd">
                             <div class="main-sparkline13-hd dir-rtl">
-                                <h4 >{{ __('titles.Permission_receive_cash') }}</h4>
+                                <h4 >{{ __('titles.Permission_receive_cheques') }}</h4>
                             </div>
                         </div>
                         <div class="sparkline13-graph">
-                            <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                                <div class="chosen-select-single mg-b-20" style="direction:rtl;">
+                            <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
+                                <div class="chosen-select-single mg-b-20 dir-rtl" >
                                     <button class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }}</button>
                                 </div>
                                 <div class="form-group-inner" style="margin-right:10px;">
-                                <div class="row row-ltr" style="margin-top:5px;">
+                                <div class="row res-rtl row-rtl">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
                                         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 shadow">
                                         <div class="row row-ltr" style="margin-top:5px;">

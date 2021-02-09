@@ -5,12 +5,25 @@
 @section('crumb')
 
 <ul class="breadcome-menu">
+   
+    @if(str_replace('_', '-', app()->getLocale())=='ar')
     <li>
-        <a href="#"></a> الرئيسية<span class="bread-slash"> / </span>
+        <a href="#"></a>  {{ __('titles.home') }} <span class="bread-slash"> / </span>
     </li>
     <li>
-        <span class="bread-blod">  مشتريات اجله </span>
+        <span class="bread-blod">  {{ __('titles.purchases') }} </span>
     </li>
+	@else
+   
+   
+    <li>
+        <span class="bread-blod">  {{ __('titles.purchases') }} /</span>
+    </li>
+    <li>
+        <a href="#"></a>  {{ __('titles.home') }}
+    </li>
+   
+	@endif
 </ul>
 
 @endsection
@@ -25,10 +38,7 @@
         color: white !important;
     }
 
-    #table td,
-    th {
-        text-align: right
-    }
+   
 </style>
 <!-- Static Table Start -->
 <div class="data-table-area mg-b-15">
@@ -38,16 +48,16 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="sparkline13-list">
                     <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1 style="direction:rtl"> مشتريات اجله</h1>
+                        <div class="main-sparkline13-hd dir-rtl">
+                            <h1 > {{ __('titles.purchases') }}</h1>
                         </div>
                     </div>
                     <div class="sparkline13-graph">
-                        <div class="datatable-dashv1-list custom-datatable-overright" style="direction:rtl">
-                            <div class="chosen-select-single mg-b-20" style="direction:rtl;">
-                                <label>الشركة</label>
+                        <div class="datatable-dashv1-list custom-datatable-overright dir-rtl" >
+                            <div class="chosen-select-single mg-b-20 dir-rtl" >
+                                <label>{{ __('titles.company') }}</label>
                                 <select data-placeholder="Choose a Country..." id="select_company" name="select_company" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
-                                    <option value="">إختار الشركة</option>
+                                    <option value="">{{ __('titles.select') }}</option>
                                     @foreach($companies as $company)
                                     <option value="{{$company->id}}">{{$company->company_official_name}} </option>
 
@@ -55,18 +65,19 @@
                                 </select>
                             </div>
 
-                            <table class="table-striped" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-toolbar="#toolbar" data-show-toggle="true" data-show-fullscreen="true" data-show-columns-toggle-all="true" data-show-export="true" data-minimum-count-columns="2" data-page-list="[10, 25, 50, 100, all]" data-click-to-select="true">
+                            <table class="table-striped dir-rtl" id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-resizable="true" data-cookie="true" data-toolbar="#toolbar" data-show-toggle="true" data-show-fullscreen="true" data-show-columns-toggle-all="true" data-show-export="true" data-minimum-count-columns="2" data-page-list="[10, 25, 50, 100, all]" data-click-to-select="true">
                                 <thead>
+                        
                                     <tr>
                                         <th data-field="hash" data-sortable="true">#</th>
-                                        <th data-field="date" data-sortable="true">التاريخ</th>
-                                        <th data-field="code" data-sortable="true">رقم الفاتوره</th>
-                                        <th data-field="approved" data-sortable="true">النوع</th>
-                                        <th data-field="net" data-sortable="true">الصافى</th>
-                                        <th data-field="outgoing" data-sortable="true">المصروف</th>
-                                        <th data-field="purchasing" data-sortable="true">الخدمات</th>
-                                        <th data-field="service" data-sortable="true">المدفوعات</th>
-                                        <th data-field="actions" data-sortable="false">خيارات</th>
+                                        <th data-field="date" data-sortable="true">{{ __('titles.date') }}</th>
+                                        <th data-field="code" data-sortable="true">{{ __('titles.bill_no') }}</th>
+                                        <th data-field="approved" data-sortable="true">{{ __('titles.type') }}</th>
+                                        <th data-field="net" data-sortable="true">{{ __('titles.net_value') }}</th>
+                                        <th data-field="outgoing" data-sortable="true">{{ __('titles.outgoings') }}</th>
+                                        <th data-field="purchasing" data-sortable="true">{{ __('titles.Services') }}</th>
+                                        <th data-field="service" data-sortable="true">{{ __('titles.payment') }}</th>
+                                        <th data-field="actions" data-sortable="false">{{ __('titles.options') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody id="indexTable">

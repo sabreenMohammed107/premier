@@ -25,7 +25,7 @@
                 <div class="mg-b-15">
                     {{-- <button class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</button>
                     <button class="btn btn-primary waves-effect waves-light">{{ __('titles.save') }}</button> --}}
-                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">إلغــــاء</a>
+                    <a href="{{url(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110 ? '/' : '/Company')}}" class="btn btn-primary waves-effect waves-light">{{ __('titles.cancel') }}</a>
 
                 </div>
                 <form action="{{url('/Cash/Purchasing/Report/Fetch')}}" method="post">
@@ -98,12 +98,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="0" id="optionsRadios1" name="approved">
-                                                        <label><b> غير معتمد </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="approved">
+                                                        <label><b> {{ __('titles.not_approved') }} </b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadios2" name="approved">
-                                                        <label><b> معتمد </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" id="optionsRadios3" value="" name="approved">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.approved') }} </b></label>
+                                                        <input class="" type="radio" id="optionsRadios3" value="" name="approved">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -113,12 +113,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="0" id="optionsRadios1" name="fund_source">
-                                                        <label><b> الخزينة </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="fund_source">
+                                                        <label><b> {{ __('titles.cash_box') }} </b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadios2" name="fund_source">
-                                                        <label><b> البنك </b></label>
-                                                        <input class="radio-checked" type="radio" value="" checked="" id="optionsRadios3" name="fund_source">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.bank') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="fund_source">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -128,12 +128,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="101" id="optionsRadios1" name="outgoing_type_id">
-                                                        <label><b> خدمات </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="outgoing_type_id">
+                                                        <label><b> {{ __('titles.Services') }} </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios2" name="outgoing_type_id">
-                                                        <label><b> سلعة </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="outgoing_type_id">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.commodity') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="outgoing_type_id">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -143,12 +143,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="0" id="optionsRadios1" name="confirm">
-                                                        <label><b> لم يتم </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="confirm">
+                                                        <label><b> {{ __('titles.not_confirm') }}</b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadios2" name="confirm">
-                                                        <label><b> تم </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="confirm">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.confirm') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="confirm">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -158,12 +158,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="100" id="service_type_id" name="service_type_id">
-                                                        <label><b> خدمة </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="100" id="service_type_id" name="service_type_id">
+                                                        <label><b> {{ __('titles.Services') }} </b></label>
                                                         <input class="" type="radio" value="101" id="optionsRadios2" name="service_type_id">
-                                                        <label><b> توريد </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="service_type_id">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.supplying') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="service_type_id">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -173,12 +173,12 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="101" id="optionsRadios1" name="purchasing_type_id">
-                                                        <label><b> محلي </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="101" id="optionsRadios1" name="purchasing_type_id">
+                                                        <label><b> {{ __('titles.local') }} </b></label>
                                                         <input class="" type="radio" value="100" id="optionsRadios2" name="purchasing_type_id">
-                                                        <label><b> مستورد </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="purchasing_type_id">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.imported') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="purchasing_type_id">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -188,20 +188,20 @@
                                             <div class="row row-ltr" style="margin-top:5px;">
                                                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <div class="bt-df-checkbox">
-                                                        <input class="" type="radio" value="0" id="optionsRadios1" name="guided_item_id">
-                                                        <label><b> لم يتم </b></label>
+                                                        <input class="radio-checked" type="radio" checked="" value="0" id="optionsRadios1" name="guided_item_id">
+                                                        <label><b> {{ __('titles.not_done') }} </b></label>
                                                         <input class="" type="radio" value="1" id="optionsRadios2" name="guided_item_id">
-                                                        <label><b> تم </b></label>
-                                                        <input class="radio-checked" checked="" type="radio" value="" id="optionsRadios3" name="guided_item_id">
-                                                        <label><b> الكل </b></label>
+                                                        <label><b> {{ __('titles.done') }} </b></label>
+                                                        <input class="" type="radio" value="" id="optionsRadios3" name="guided_item_id">
+                                                        <label><b> {{ __('titles.all') }} </b></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                                    <label class="login2">{{ __('titles.guided_items') }}</label>
+                                                    <label class="login2">{{ __('titles.guid_item') }}</label>
                                                 </div>
                                             </div>
                                             <div class="row row-ltr" style="margin-top:5px;">
-                                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                                     <select data-placeholder="Choose a Country..." name="person_id" id="persons" class="selectpicker" data-live-search="true" data-width="100%" tabindex="-1">
                                                         <option value="" selected disabled>Select</option>
                                                         @foreach ($Persons as $Person)
@@ -281,6 +281,7 @@
             data: {
                 compid: compid
             },
+           
             success: function(data) {
                 $('#persons').html(data);
                 $('#persons').selectpicker('refresh');

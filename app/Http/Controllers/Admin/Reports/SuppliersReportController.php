@@ -28,7 +28,7 @@ class SuppliersReportController extends Controller
         $this->viewName = 'Admin.reports.suppliers-trans.';
         $this->routeName = 'Admin-client-report.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.

@@ -31,17 +31,14 @@
                     <div class="sparkline13-graph">
 
 
-
                         <div class="datatable-dashv1-list custom-datatable-overright">
-                            <form action="@if(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110){{route('Admin-cashBox-report.store')}}
+                            <form id="form-id" action="@if(Auth::user()->role_id == 100 || Auth::user()->role_id == 101 || Auth::user()->role_id == 110){{route('Admin-cashBox-report.store')}}
                                 @else {{route('Company-cashBox-report.store')}} @endif" method="post" target="_blank">
                                 <div class="chosen-select-single mg-b-20 dir-rtl" >
 
                                     @csrf
                                     <input type="hidden" name="cashBox_ids[]" id="deto">
                                     <input type="hidden" name="companies_ids[]" id="comp">
-                                    <!-- <button onclick="saving()" type="submit" class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }}</button> -->
-                                    <!-- <button class="btn btn-primary waves-effect waves-light">عرض تقرير صفحات</button> -->
                                     <button onclick="saving()"name="action" value="savepdf" type="submit" class="btn btn-primary waves-effect waves-light">{{ __('titles.show_report') }}</button>
                                     <button onclick="saving()"name="action" value="saveExcel" type="submit" class="btn btn-primary waves-effect waves-light">{{ __('titles.show') }} Excel</button>
 

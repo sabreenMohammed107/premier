@@ -24,7 +24,7 @@ class GuideItemController extends Controller
         $this->viewName = 'Admin.guid-item.';
         $this->routeName = 'guid-item.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message = \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.
@@ -130,8 +130,8 @@ class GuideItemController extends Controller
           
         } catch (QueryException $q) {
 
-            return redirect()->back()->with('flash_danger', 'هذا الجدول مرتبط ببيانات أخرى');
+            return redirect()->back()->with('flash_danger', \Lang::get('titles.delete_msg_error'));
         }
-        return redirect()->route($this->routeName . 'index')->with('flash_success', 'تم الحذف بنجاح !');
+        return redirect()->route($this->routeName . 'index')->with('flash_success',  \Lang::get('titles.delete_msg'));
     }
 }

@@ -26,7 +26,7 @@ class SalePurchasingController extends Controller
         $this->viewName = 'Admin.cash-sale.';
         $this->routeName = 'cash-sale.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message = \Lang::get('titles.saving_msg');
     }
      /**
      * Display a listing of the resource.

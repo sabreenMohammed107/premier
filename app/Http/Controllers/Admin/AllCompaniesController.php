@@ -32,7 +32,7 @@ class AllCompaniesController extends Controller
         $this->viewName = 'Admin.home.';
         $this->routeName = 'home.';
 
-        $this->message = 'تم حفظ البيانات';
+        $this->message =  \Lang::get('titles.saving_msg');
     }
     /**
      * Display a listing of the resource.
@@ -41,13 +41,14 @@ class AllCompaniesController extends Controller
      */
     public function index()
     {
+       
         $user=Auth::user();
         $exception = $user->company->pluck('id')->toArray();
       
         $rows = Company::whereIn('id', $exception)->where('id', '!=', 100)->paginate(8);
         if(Auth::user()->role_id == 110){
-            $rows = Company::where('active', 1)->where('id','!=',100)->paginate(8);
-        }
+            $rows = Company::where('id', '!=', 100)->orderBy("created_at", "Desc")->paginate(8);
+        }  
         // 
          return view($this->viewName . 'index', compact('rows'));
     }
@@ -271,9 +272,9 @@ class AllCompaniesController extends Controller
             File::delete($file_name);
         } catch (QueryException $q) {
 
-            return redirect()->back()->with('flash_danger', 'هذا الجدول مرتبط ببيانات أخرى');
+            return redirect()->back()->with('flash_danger', \Lang::get('titles.delete_msg_error'));
         }
-        return redirect()->route($this->routeName . 'index')->with('flash_success', 'تم الحذف بنجاح !');
+        return redirect()->route($this->routeName . 'index')->with('flash_success',  \Lang::get('titles.delete_msg'));
     }
 
 
