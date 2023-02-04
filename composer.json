@@ -8,22 +8,23 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
-        "alkoumi/laravel-arabic-tafqeet": "^1.4",
+        "php": "^7.2||8.1.2",
+        "alkoumi/laravel-arabic-tafqeet": "dev-master",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.2",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^1.0",
+        "laravel/ui": "^3.0",
         "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
-        "facade/ignition": "^1.4",
+        "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0"
     },
     "config": {
         "optimize-autoloader": true,
@@ -37,12 +38,10 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
