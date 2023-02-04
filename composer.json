@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2||8.1.13",
+        "php": "^7.2||8.1.2",
         "alkoumi/laravel-arabic-tafqeet": "dev-master",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "doctrine/dbal": "^2.10",
@@ -16,7 +16,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
