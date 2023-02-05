@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use App\Exports\UsersExport;
 
-use Meneses\LaravelMpdf\Facades\LaravelMpdf as PDF;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf as PDF;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel as Excel;
 
